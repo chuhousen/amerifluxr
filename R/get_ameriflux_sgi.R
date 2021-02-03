@@ -14,8 +14,6 @@
 #'   \item GRP_CLIM_AVG.MAT - Long-term mean annual average air temperature (degree C)
 #'   \item GRP_CLIM_AVG.MAP - Long-term mean annual average precipitation (mm)
 #'   \item GRP_CLIM_AVG.CLIMATE_KOEPPEN - Koppen climate classification (free text)
-#'   \item URL - Site web site URL, maintained by site team (URL)
-#'   \item publish_years - Years with published AmeriFlux data (YYYY)
 #'   \item DATA_START - The starting year with published AmeriFlux data (YYYY)
 #'   \item DATA_END - The ending year with published AmeriFlux data (YYYY)
 #'   \item TEAM_MEMBER_PI1 - Site principal investigator #1 name (First/Given Last/Family)
@@ -52,9 +50,11 @@ get_ameriflux_sgi <- function() {
     ## web service returning a full site list with most-updated data available years in AmeriFlux BASE dataset
     data.yr.ameriflux <- jsonlite::fromJSON(httr::content(httr::POST(ameriflux.ws.datayear), as = "text"), flatten = TRUE)
 
-    sgi.ameriflux <- merge.data.frame(sgi.ameriflux, data.yr.ameriflux)
-    sgi.ameriflux$DATA_START <- sapply(sgi.ameriflux$publish_years, na.min)
-    sgi.ameriflux$DATA_END <- sapply(sgi.ameriflux$publish_years, na.max)
+    sgi.ameriflux <- sgi.ameriflux[order(sgi.ameriflux$SITE_ID), ]
+    data.yr.ameriflux <- data.yr.ameriflux[order(data.yr.ameriflux$SITE_ID), ]
+
+    sgi.ameriflux$DATA_START <- sapply(data.yr.ameriflux$publish_years, na.min)
+    sgi.ameriflux$DATA_END <- sapply(data.yr.ameriflux$publish_years, na.max)
 
     sgi.ameriflux$GRP_LOCATION.LOCATION_LAT <- as.numeric(sgi.ameriflux$GRP_LOCATION.LOCATION_LAT)
     sgi.ameriflux$GRP_LOCATION.LOCATION_LONG <- as.numeric(sgi.ameriflux$GRP_LOCATION.LOCATION_LONG)

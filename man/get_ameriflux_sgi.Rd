@@ -21,8 +21,6 @@ A data frame containing the following columns. See AmeriFlux BADM standard \url{
   \item GRP_CLIM_AVG.MAT - Long-term mean annual average air temperature (degree C)
   \item GRP_CLIM_AVG.MAP - Long-term mean annual average precipitation (mm)
   \item GRP_CLIM_AVG.CLIMATE_KOEPPEN - Koppen climate classification (free text)
-  \item URL - Site web site URL, maintained by site team (URL)
-  \item publish_years - Years with published AmeriFlux data (YYYY)
   \item DATA_START - The starting year with published AmeriFlux data (YYYY)
   \item DATA_END - The ending year with published AmeriFlux data (YYYY)
   \item TEAM_MEMBER_PI1 - Site principal investigator #1 name (First/Given Last/Family)
