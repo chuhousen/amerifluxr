@@ -1,2 +1,2 @@
 # amerifluxr
-This is a working repository for building a R library for querying, handling, and summarizing AmeriFlux data and metadata.  
+A programatic interface for querying, handling, and summarizing [AmeriFlux|https://ameriflux.lbl.gov/] data and metadata.  
