@@ -27,7 +27,8 @@ afx_server <- function(endpoint = "sitemap"){
     endpoint,
     "sitemap" = file.path(api_url, "SiteMapData/AmeriFlux"),
     "data" = file.path(api_url, "PublishYears/AmeriFlux"),
-    "info" = file.path(base_url, "BADM/Anc/SiteInfo/")
+    "info" = file.path(base_url, "BADM/Anc/SiteInfo/"),
+    "variables" = file.path(api_url, "fpinVarLimits")
   )
 
   # web service hosted on AmeriFlux website

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • amerifluxr</title>
+<title>Get FP (Flux-Processing) Standard Variable List — afx_variables • amerifluxr</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,10 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Get FP (Flux-Processing) Standard Variable List — afx_variables" />
+<meta property="og:description" content="This function obtains the latest AmeriFlux FP (Flux-Processing) standard variable list.
+ FP standard defines the variable names and units used for continuously sampled data within the AmeriFlux.
+ Also see AmeriFlux Data Variables page https://ameriflux.lbl.gov/data/aboutdata/data-variables/ for details." />
 
 
 
@@ -58,7 +61,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -105,66 +108,41 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Get FP (Flux-Processing) Standard Variable List</h1>
+    <small class="dont-index">Source: <a href='https://github.com/chuhousen/amerifluxr/blob/master/R/helper_functions.R'><code>R/helper_functions.R</code></a></small>
+    <div class="hidden name"><code>afx_variables.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>This function obtains the latest AmeriFlux FP (Flux-Processing) standard variable list.
+ FP standard defines the variable names and units used for continuously sampled data within the AmeriFlux.
+ Also see AmeriFlux Data Variables page <a href='https://ameriflux.lbl.gov/data/aboutdata/data-variables/'>https://ameriflux.lbl.gov/data/aboutdata/data-variables/</a> for details.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>afx_variables</span><span class='op'>(</span><span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="afx_data_coverage.html">afx_data_coverage()</a></code> </p>
-        </td>
-        <td><p>Returns a list of data coverage</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="afx_member_info.html">afx_member_info()</a></code> </p>
-        </td>
-        <td><p>Lists all site member info</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="afx_site_info.html">afx_site_info()</a></code> </p>
-        </td>
-        <td><p>Get AmeriFlux site general info</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="afx_sites.html">afx_sites()</a></code> </p>
-        </td>
-        <td><p>Lists Ameriflux sites</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="afx_variables.html">afx_variables()</a></code> </p>
-        </td>
-        <td><p>Get FP (Flux-Processing) Standard Variable List</p></td>
-      </tr>
-    </tbody>
-    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A data frame containing the following columns:</p><ul>
+<li><p>Name - Standard variable name</p></li>
+<li><p>Description - Description of the variable</p></li>
+<li><p>Units - Standard variable unit</p></li>
+<li><p>Min - Expected minimal value</p></li>
+<li><p>Max - Expected maximal value</p></li>
+</ul>
+
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## Not run:</span>
+<span class='co'># download the list of standard variable names and units</span>
+<span class='va'>FP_ls</span> <span class='op'>&lt;-</span> <span class='fu'>afx_variables</span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='co'>## End(Not run)</span>
+</div></pre>
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
