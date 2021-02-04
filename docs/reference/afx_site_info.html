@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • amerifluxr</title>
+<title>Get AmeriFlux site general info — afx_site_info • amerifluxr</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,9 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Get AmeriFlux site general info — afx_site_info" />
+<meta property="og:description" content="This function obtains the latest AmeriFlux site list and
+sites' general info through the AmeriFlux web service." />
 
 
 
@@ -58,7 +60,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -105,60 +107,50 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Get AmeriFlux site general info</h1>
+    <small class="dont-index">Source: <a href='https://github.com/chuhousen/amerifluxr/blob/master/R/afx_site_info.R'><code>R/afx_site_info.R</code></a></small>
+    <div class="hidden name"><code>afx_site_info.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>This function obtains the latest AmeriFlux site list and
+sites' general info through the AmeriFlux web service.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>afx_site_info</span><span class='op'>(</span>contact_info <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="afx_data_coverage.html">afx_data_coverage()</a></code> </p>
-        </td>
-        <td><p>Returns a list of data coverage</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="afx_member_info.html">afx_member_info()</a></code> </p>
-        </td>
-        <td><p>Lists all site member info</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="afx_site_info.html">afx_site_info()</a></code> </p>
-        </td>
-        <td><p>Get AmeriFlux site general info</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="afx_sites.html">afx_sites()</a></code> </p>
-        </td>
-        <td><p>Lists Ameriflux sites</p></td>
-      </tr>
-    </tbody>
-    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A data frame containing the following columns.
+See AmeriFlux BADM standard <a href='https://ameriflux.lbl.gov/data/badm/'>https://ameriflux.lbl.gov/data/badm/</a>
+for detailed explanation.</p><ul>
+<li><p>SITE_ID - Six character site identifier (CC-Sss)</p></li>
+<li><p>SITE_NAME - Site name (free text)</p></li>
+<li><p>URL_AMERIFLUX - Site web site URL, maintained by AmeriFlux (URL)</p></li>
+<li><p>TOWER_BEGAN - The starting year of flux measurement (YYYY)</p></li>
+<li><p>TOWER_END - The ending year of flux measurement (YYYY), NA if still active or unspecified</p></li>
+<li><p>IGBP - Vegetation type based on the IGBP definition (free text)</p></li>
+<li><p>GRP_LOCATION.LOCATION_LAT - Latitude of the site (decimal deg ref WGS84)</p></li>
+<li><p>GRP_LOCATION.LOCATION_LONG - Longitude of the site (decimal deg ref WGS84)</p></li>
+<li><p>GRP_LOCATION.LOCATION_ELEV - Elevation of the site above sea level (m)</p></li>
+<li><p>GRP_CLIM_AVG.MAT - Long-term mean annual average air temperature (degree C)</p></li>
+<li><p>GRP_CLIM_AVG.MAP - Long-term mean annual average precipitation (mm)</p></li>
+<li><p>GRP_CLIM_AVG.CLIMATE_KOEPPEN - Koppen climate classification (free text)</p></li>
+<li><p>DATA_START - The starting year with published AmeriFlux data (YYYY)</p></li>
+<li><p>DATA_END - The ending year with published AmeriFlux data (YYYY)</p></li>
+<li><p>TEAM_MEMBER_PI1 - Site principal investigator #1 name (First/Given Last/Family)</p></li>
+<li><p>TEAM_MEMBER_PI1_EMAIL - Site principal investigator #1 email (free text)</p></li>
+<li><p>TEAM_MEMBER_PI2 - Site principal investigator #2 name (First/Given Last/Family)</p></li>
+<li><p>TEAM_MEMBER_PI2_EMAIL - Site principal investigator #2 email (free text)</p></li>
+<li><p>TEAM_MEMBER_PI3 - Site principal investigator #3 name (First/Given Last/Family)</p></li>
+<li><p>TEAM_MEMBER_PI3_EMAIL - Site principal investigator #3 email (free text)</p></li>
+</ul>
+
+
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

@@ -1,5 +1,8 @@
 #' Get AmeriFlux site general info
 #'
+#' This combines the information of various other functions.
+#'
+#' @param contact_info include contact info (TRUE / FALSE)
 #' @description This function obtains the latest AmeriFlux site list and
 #' sites' general info through the AmeriFlux web service.
 #'
@@ -30,75 +33,43 @@
 #' }
 #' @export
 
-afx_sites <- function() {
+afx_site_info <- function(contact_info = FALSE){
 
-    # web service returning a full site list with basic site general info
-    sgi <- memoise::memoise(
-        jsonlite::fromJSON(
-          afx_server("sitemap"),
-          flatten = TRUE,
-          simplifyDataFrame = TRUE
-          )
-        )
-
-    # web service returning a full site list with
-    # most-updated data available years in AmeriFlux BASE dataset
-    data <- memoise::memoise(
-        jsonlite::fromJSON(
-          afx_server("data"),
-          flatten = TRUE
-          )
-        )
-
-    # order the data
-    sgi <- sgi[order(sgi$SITE_ID), ]
-    data <- data[order(data$SITE_ID), ]
+    # grab meta-data, data is memoised
+    # second calls should be fast (as from memory)
+    sites <- afx_sites()
+    data <- afx_data_coverage()
 
     # find start and end of data series
-    sgi$DATA_START <- sapply(
+    sites$DATA_START <- sapply(
       data$publish_years,
       na.min
       )
 
-    sgi$DATA_END <- sapply(
+    sites$DATA_END <- sapply(
       data$publish_years,
       na.max
       )
 
     # convert strings to numeric
-    sgi$GRP_LOCATION.LOCATION_LAT <- as.numeric(sgi$GRP_LOCATION.LOCATION_LAT)
-    sgi$GRP_LOCATION.LOCATION_LONG <- as.numeric(sgi$GRP_LOCATION.LOCATION_LONG)
+    # NOTE: you might want to rename variables
+    sites$GRP_LOCATION.LOCATION_LAT <- as.numeric(sites$GRP_LOCATION.LOCATION_LAT)
+    sites$GRP_LOCATION.LOCATION_LONG <- as.numeric(sites$GRP_LOCATION.LOCATION_LONG)
 
-    member_info <- apply(sgi, 1, function(x){
+    # grab contact info
+    # THIS IS SLOOOOW, from this side of the ocean anyway
+    # generally to be avoided (made optional)
+    if(contact_info){
+      member_info <- apply(sites, 1, function(x){
 
-        # web service returning complete site general
-        # info for a single site
-        member <- memoise::memoise(jsonlite::fromJSON(
-          paste0(afx_server("info"),
-                 x['SITE_ID']), flatten = TRUE))
+          # web service returning complete site general
+          # info for a single site
+          member <- afx_member_info(site_id = x['SITE_ID'])
 
-        # get number of team members
-        member_role <-
-          lapply(member$values$GRP_TEAM_MEMBER, function(x){
+          # PROCESSING TBD
+      })
+    }
 
-            if(x['TEAM_MEMBER_ROLE'] == 'PI'){
-
-              # return data frame
-              return(
-                data.frame(
-                  TEAM_MEMBER_NAME = x['TEAM_MEMBER_NAME'],
-                  TEAM_MEMBER_EMAIL = x['TEAM_MEMBER_EMAIL']
-                )
-              )
-            } else {
-              return(NULL)
-            }
-          })
-
-      # return member role
-      return(member_role)
-
-    })
-
-    return(sgi)
+    # return site info
+    return(sites)
 }
