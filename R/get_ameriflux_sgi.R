@@ -31,72 +31,72 @@
 #'
 #' ## End(Not run)
 get_ameriflux_sgi <- function() {
-
+    
     # web service hosted on AmeriFlux website
     ameriflux.ws.sitemap <- "https://ameriflux-data.lbl.gov/AmeriFlux/SiteSearch.svc/SiteMapData/AmeriFlux"
     ameriflux.ws.datayear <- "https://ameriflux-data.lbl.gov/AmeriFlux/SiteSearch.svc/PublishYears/AmeriFlux"
     ameriflux.ws.siteinfo <- "https://ameriflux-data.lbl.gov/BADM/Anc/SiteInfo/"
-
+    
     na.max <- function(x) {
         ifelse(sum(!is.na(x)) > 0, max(x, na.rm = TRUE), NA)
     }
     na.min <- function(x) {
         ifelse(sum(!is.na(x)) > 0, min(x, na.rm = TRUE), NA)
     }
-
+    
     ## web service returning a full site list with basic site general info
     sgi.ameriflux <- jsonlite::fromJSON(httr::content(httr::POST(ameriflux.ws.sitemap), as = "text"), flatten = TRUE)
-
+    
     ## web service returning a full site list with most-updated data available years in AmeriFlux BASE dataset
     data.yr.ameriflux <- jsonlite::fromJSON(httr::content(httr::POST(ameriflux.ws.datayear), as = "text"), flatten = TRUE)
-
+    
     sgi.ameriflux <- sgi.ameriflux[order(sgi.ameriflux$SITE_ID), ]
     data.yr.ameriflux <- data.yr.ameriflux[order(data.yr.ameriflux$SITE_ID), ]
-
+    
     sgi.ameriflux$DATA_START <- sapply(data.yr.ameriflux$publish_years, na.min)
     sgi.ameriflux$DATA_END <- sapply(data.yr.ameriflux$publish_years, na.max)
-
+    
     sgi.ameriflux$GRP_LOCATION.LOCATION_LAT <- as.numeric(sgi.ameriflux$GRP_LOCATION.LOCATION_LAT)
     sgi.ameriflux$GRP_LOCATION.LOCATION_LONG <- as.numeric(sgi.ameriflux$GRP_LOCATION.LOCATION_LONG)
-
+    
     sgi.ameriflux$TEAM_MEMBER_PI1 <- NA
     sgi.ameriflux$TEAM_MEMBER_PI1_EMAIL <- NA
     sgi.ameriflux$TEAM_MEMBER_PI2 <- NA
     sgi.ameriflux$TEAM_MEMBER_PI2_EMAIL <- NA
     sgi.ameriflux$TEAM_MEMBER_PI3 <- NA
     sgi.ameriflux$TEAM_MEMBER_PI3_EMAIL <- NA
-
+    
     for (j1 in seq_len(nrow(sgi.ameriflux))) {
-
+        
         target.site <- sgi.ameriflux$SITE_ID[j1]
-
+        
         ## web service returning complete site general info for a single site
-        sgi.site.member <- jsonlite::fromJSON(httr::content(httr::GET(paste(ameriflux.ws.siteinfo,
-                                                                            target.site, sep = "")), as = "text"), flatten = T)[[2]][2][[1]]
-
+        sgi.site.member <- jsonlite::fromJSON(httr::content(httr::GET(paste(ameriflux.ws.siteinfo, target.site, sep = "")), 
+            as = "text"), flatten = T)[[2]][2][[1]]
+        
         get.pi <- NULL
         for (j2 in seq_len(length(sgi.site.member))) {
             if (length(which(names(sgi.site.member[[j2]]) == "TEAM_MEMBER_ROLE")) > 0) {
-                if (sgi.site.member[[j2]]$TEAM_MEMBER_ROLE == "PI")
+                if (sgi.site.member[[j2]]$TEAM_MEMBER_ROLE == "PI") 
                   get.pi <- c(get.pi, j2)
             }
         }
-
-        if (!is.null(get.pi)){
-          sgi.ameriflux$TEAM_MEMBER_PI1[j1] <- sgi.site.member[[get.pi[1]]]$TEAM_MEMBER_NAME
-          sgi.ameriflux$TEAM_MEMBER_PI1_EMAIL[j1] <- sgi.site.member[[get.pi[1]]]$TEAM_MEMBER_EMAIL
+        
+        if (!is.null(get.pi)) {
+            sgi.ameriflux$TEAM_MEMBER_PI1[j1] <- sgi.site.member[[get.pi[1]]]$TEAM_MEMBER_NAME
+            sgi.ameriflux$TEAM_MEMBER_PI1_EMAIL[j1] <- sgi.site.member[[get.pi[1]]]$TEAM_MEMBER_EMAIL
         }
-
-        if (length(get.pi) > 1){
-          sgi.ameriflux$TEAM_MEMBER_PI2[j1] <- sgi.site.member[[get.pi[2]]]$TEAM_MEMBER_NAME
-          sgi.ameriflux$TEAM_MEMBER_PI2_EMAIL[j1] <- sgi.site.member[[get.pi[2]]]$TEAM_MEMBER_EMAIL
+        
+        if (length(get.pi) > 1) {
+            sgi.ameriflux$TEAM_MEMBER_PI2[j1] <- sgi.site.member[[get.pi[2]]]$TEAM_MEMBER_NAME
+            sgi.ameriflux$TEAM_MEMBER_PI2_EMAIL[j1] <- sgi.site.member[[get.pi[2]]]$TEAM_MEMBER_EMAIL
         }
-
-        if (length(get.pi) > 2){
-          sgi.ameriflux$TEAM_MEMBER_PI3[j1] <- sgi.site.member[[get.pi[3]]]$TEAM_MEMBER_NAME
-          sgi.ameriflux$TEAM_MEMBER_PI3_EMAIL[j1] <- sgi.site.member[[get.pi[3]]]$TEAM_MEMBER_EMAIL
+        
+        if (length(get.pi) > 2) {
+            sgi.ameriflux$TEAM_MEMBER_PI3[j1] <- sgi.site.member[[get.pi[3]]]$TEAM_MEMBER_NAME
+            sgi.ameriflux$TEAM_MEMBER_PI3_EMAIL[j1] <- sgi.site.member[[get.pi[3]]]$TEAM_MEMBER_EMAIL
         }
-
+        
     }
     return(sgi.ameriflux)
 }
