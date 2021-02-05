@@ -6,6 +6,7 @@
 ^data-raw$
 ^manuscript$
 ^R-old$
+^data-original$
 
 # R-markdown files in the root folder.
 #^LICENSE$
