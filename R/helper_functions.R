@@ -6,10 +6,10 @@
 #' @return
 #' @export
 
-afx_sites <- memoise::memoise(function(){
+amf_sites <- memoise::memoise(function(){
   # web service returning a full site list with basic site general info
   df <- jsonlite::fromJSON(
-    afx_server("sitemap"),
+    amf_server("sitemap"),
     flatten = TRUE,
     simplifyDataFrame = TRUE
   )
@@ -32,10 +32,10 @@ afx_sites <- memoise::memoise(function(){
 #' @return
 #' @export
 
-afx_member_info <- memoise::memoise(function(site_id){
+amf_member_info <- memoise::memoise(function(site_id){
   # grab member info
   df <- jsonlite::fromJSON(
-    paste0(afx_server("info"),
+    paste0(amf_server("info"),
            site_id), flatten = TRUE)
 
   # return data
@@ -50,12 +50,12 @@ afx_member_info <- memoise::memoise(function(site_id){
 #' @return
 #' @export
 
-afx_data_coverage <- memoise::memoise(function(){
+amf_data_coverage <- memoise::memoise(function(){
 
   # web service returning a full site list with
   # most-updated data available years in AmeriFlux BASE dataset
   df <- jsonlite::fromJSON(
-    afx_server("data"),
+    amf_server("data"),
     flatten = TRUE
   )
 
@@ -83,13 +83,13 @@ afx_data_coverage <- memoise::memoise(function(){
 #' @examples
 #' ## Not run:
 #' # download the list of standard variable names and units
-#' FP_ls <- afx_variables()
+#' FP_ls <- amf_variables()
 #'
 #' ## End(Not run)
-afx_variables <- function(){
+amf_variables <- function(){
 
   # get a list of FP (Flux-Processing) standard variables
-  variables <- jsonlite::fromJSON(afx_server("variables"),  flatten=TRUE)
+  variables <- jsonlite::fromJSON(amf_server("variables"),  flatten=TRUE)
 
   variables$Min <- as.numeric(as.character(variables$Min))
   variables$Max <- as.numeric(as.character(variables$Max))

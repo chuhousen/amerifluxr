@@ -33,12 +33,12 @@
 #' }
 #' @export
 
-afx_site_info <- function(contact_info = FALSE){
+amf_site_info <- function(contact_info = FALSE){
 
     # grab meta-data, data is memoised
     # second calls should be fast (as from memory)
-    sites <- afx_sites()
-    data <- afx_data_coverage()
+    sites <- amf_sites()
+    data <- amf_data_coverage()
 
     # find start and end of data series
     sites$DATA_START <- sapply(
@@ -64,7 +64,7 @@ afx_site_info <- function(contact_info = FALSE){
 
           # web service returning complete site general
           # info for a single site
-          member <- afx_member_info(site_id = x['SITE_ID'])
+          member <- amf_member_info(site_id = x['SITE_ID'])
 
           # PROCESSING TBD
       })

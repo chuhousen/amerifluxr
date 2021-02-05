@@ -16,7 +16,7 @@ na.min <- function(x) {
 # These functions are not exported and "blind"
 # but are accessible through :::
 
-afx_server <- function(endpoint = "sitemap"){
+amf_server <- function(endpoint = "sitemap"){
 
   # base urls
   base_url <- "https://ameriflux-data.lbl.gov"
