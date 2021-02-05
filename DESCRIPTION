@@ -7,7 +7,8 @@ Authors@R: c(
                family = "Chu",
                given = "Housen",
                email = "hchu@lbl.gov",
-               role = c("aut","cre")),
+               role = c("aut","cre"),
+               comment = c(ORCID = "0000-0002-8131-4938")),
               person(
                family = "Hufkens",
                given = "Koen",
