@@ -27,5 +27,6 @@ Depends:
 Imports:
     httr,
     jsonlite,
-    memoise
+    memoise,
+    RCurl
 RoxygenNote: 7.1.1

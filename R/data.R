@@ -28,6 +28,21 @@
 #'   \item{V_SIGMA}{Standard deviation of lateral velocity fluctuations (m s-1)}
 #'   \item{U_SIGMA}{Standard deviation of along-wind velocity fluctuations (m s-1)}
 #'   \item{T_SONIC}{Sonic temperature (deg C)}
+#'   \item{T_SONIC_SIGMA}{Standard deviation of sonic temperature (deg C)}
+#'   \item{PA}{Atmospheric pressure (kPa)}
+#'   \item{RH}{Relative humidity (%)}
+#'   \item{TA}{Air temperature (deg C)}
+#'   \item{TS_1_1_1}{Soil temperature at horizontal location #1 (deg C)}
+#'   \item{TS_2_1_1}{Soil temperature at horizontal location #2 (deg C)}
+#'   \item{WTD}{Water table depth (m)}
+#'   \item{SWC}{Soil water content (%)}
+#'   \item{NETRAD}{Net radiation (W m-2)}
+#'   \item{PPFD_IN}{Photosynthetic photon flux density, incoming (µmolPhoton m-2 s-1)}
+#'   \item{SW_IN}{Shortwave radiation, incoming (W m-2)}
+#'   \item{SW_OUT}{Shortwave radiation, outgoing (W m-2)}
+#'   \item{LW_IN}{Longwave radiation, incoming (W m-2)}
+#'   \item{LW_OUT}{Longwave radiation, outgoing (W m-2)}
+#'   \item{P}{Rainfall (mm)}
 #'   ...
 #' }
 #' @source \url{https://ameriflux.lbl.gov/}
