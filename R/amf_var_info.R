@@ -26,12 +26,8 @@
 
 amf_var_info <- function(out_dir = tempdir()) {
 
-  # Endpoint of measurement height data
-  url1 <- "ftp://ftp.fluxdata.org/.ameriflux_downloads/measurement_height/"
-  url2 <- "https://ftp.fluxdata.org/.ameriflux_downloads/measurement_height/"
-
   # Get a list of hosted data files
-  filenames <- RCurl::getURL(url1, ftp.use.epsv = FALSE, dirlistonly = TRUE)
+  filenames <- RCurl::getURL(amf_server("var_info"), ftp.use.epsv = FALSE, dirlistonly = TRUE)
   filenames <- paste0(strsplit(filenames, "\r*\n")[[1]])
   filenames <- filenames[which(nchar(filenames) == 35)]
 
@@ -44,7 +40,7 @@ amf_var_info <- function(out_dir = tempdir()) {
     latest <- filenames[which(time_ls == max(time_ls))]
 
     # download data to designated output directory
-    utils::download.file(paste0(url2, "/", latest), file.path(out_dir, latest))
+    utils::download.file(paste0(amf_server("var_info"), "/", latest), file.path(out_dir, latest))
 
     var_info <- utils::read.csv(file.path(out_dir, latest), header = T, na.strings = c(""))
     var_info$Height <- as.numeric(as.character(var_info$Height))
