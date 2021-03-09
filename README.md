@@ -6,7 +6,7 @@ An R programmatic interface for querying, handling, and summarizing AmeriFlux (h
 - Users who handle data from multiple sources, e.g., AmeriFlux, PhenoCam, MODIS...
 
 ## A tentative workflow (task list)
-- [*] List the sites, with basic site general info     
+- [x] List the sites, with basic site general info     
 - [ ] See if and how much data & metadata are available
       - [*] Flux/met data (BASE) year availability (site-year level)
       - [ ] Flux/met data variable availability (variable-year level)
