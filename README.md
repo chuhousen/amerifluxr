@@ -25,9 +25,9 @@ An R programmatic interface for querying, handling, and summarizing AmeriFlux (h
 - Do data visualization & any further processing 
   - Diurnal-seasonal plot
   - Some of this might be done using other packages
-    - *REddyProc* handles u*-filtering, gap-filling, partitioning, and certain time-series plots 
-    - *FluxnetLSM* converts data into NetCDF, gap-filling
-    - *openair* creates windrose, time-series plots
+    - **REddyProc** handles u*-filtering, gap-filling, partitioning, and certain time-series plots 
+    - **FluxnetLSM** converts data into NetCDF, gap-filling
+    - **openair** creates windrose, time-series plots
 - List target sites’ contacts & DOI
   - Parse and subset info from BIF
 
