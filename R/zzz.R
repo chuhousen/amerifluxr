@@ -11,6 +11,14 @@ na.min <- function(x) {
   ifelse(any(!is.na(x)), min(x, na.rm = TRUE), NA)
 }
 
+
+## used to parse numbers within string
+Numextract <- function(string) {
+  unlist(regmatches(string, gregexpr(
+    "[[:digit:]]+\\.*[[:digit:]]*", string
+  )))
+}
+
 # Return Ameriflux server endpoints
 #
 # These functions are not exported and "blind"

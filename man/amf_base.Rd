@@ -5,7 +5,7 @@
 \alias{amf_base}
 \title{BASE data example}
 \format{
-
+A data frame with 52608 rows and 36 variables
 }
 \source{
 \url{https://ameriflux.lbl.gov/}
@@ -18,5 +18,8 @@ Continuous flux/met data (i.e., AmeriFlux BASE data product) for the
 US-CRT site, as an example for demonstration. Also see AmeriFlux webpage
 \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/#base} for
 variable definitions and details.
+}
+\details{
+
 }
 \keyword{datasets}

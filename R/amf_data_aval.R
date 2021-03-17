@@ -36,7 +36,8 @@ amf_data_aval <- function(site_set = NULL){
     # get latest data variable availability
     data_aval <- utils::read.csv(amf_server("data_variable"),
                                  header = T,
-                                 skip = 1)
+                                 skip = 1,
+                                 stringsAsFactors = FALSE)
 
     # subset interested sites
     if(!is.null(site_set)){

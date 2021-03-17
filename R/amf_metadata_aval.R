@@ -36,7 +36,8 @@ amf_metadata_aval <- function(site_set = NULL, group_only = TRUE){
     # get latest data variable availability
     metadata_aval <- utils::read.csv(amf_server(target_level),
                                  header = T,
-                                 skip = 1)
+                                 skip = 1,
+                                 stringsAsFactors = FALSE)
 
     # subset interested sites
     if(!is.null(site_set)){

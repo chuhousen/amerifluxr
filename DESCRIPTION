@@ -28,9 +28,12 @@ Imports:
     httr,
     jsonlite,
     memoise,
-    RCurl
+    RCurl,
+    readxl
 RoxygenNote: 7.1.1
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    data.table,
+    pander
 VignetteBuilder: knitr

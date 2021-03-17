@@ -24,3 +24,5 @@
 ^\.httr-oauth$
 ^.*-logo\..*$
 ^codemeta\.json$
+^doc$
+^Meta$
