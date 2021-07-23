@@ -43,3 +43,11 @@ sites' general info through the AmeriFlux web service.
 \details{
 This combines the information of various other functions.
 }
+\examples{
+#' ## Not run:
+# obtain the basic general info for all sites
+site <- amf_site_info()
+
+## End(Not run)
+
+}

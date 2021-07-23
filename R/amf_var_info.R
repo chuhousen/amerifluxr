@@ -5,7 +5,7 @@
 #'
 #' @param out_dir output directory  (default = tempdir())
 #'
-#' @return A data frame of measurement height data for all vaiable AmeriFlux sites
+#' @return A data frame of measurement height data for all avaiable AmeriFlux sites
 #' #' \itemize{
 #'   \item Site_ID - Six character site identifier (CC-Sss)
 #'   \item Variable - Variable name of the data included in the BASE file
@@ -42,7 +42,7 @@ amf_var_info <- function(out_dir = tempdir()) {
     # download data to designated output directory
     utils::download.file(paste0(amf_server("var_info"), "/", latest), file.path(out_dir, latest))
 
-    var_info <- utils::read.csv(file.path(out_dir, latest), header = T, na.strings = c(""))
+    var_info <- utils::read.csv(file.path(out_dir, latest), header = T, na.strings = c(""), stringsAsFactors = FALSE)
     var_info$Height <- as.numeric(as.character(var_info$Height))
 
     ## clean for a bug in earlier version

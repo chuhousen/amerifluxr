@@ -16,23 +16,23 @@ An R programmatic interface for querying, handling, and summarizing AmeriFlux (h
 - [x] Download data & metadata
   - BASE & BIF downloads are done separately through AmeriFlux UI (https://ameriflux.lbl.gov/data/download-data/)
   - [x] Access measurement height data product through R
-- [ ] Parse data & metadata
-  - [ ] BASE: read data files
-    - [ ] parse timestamps
-    - [ ] parse variable names/qualifiers 
-    - [ ] get variable default units
-  - [ ] BIF: read files
-    - [ ] parse variable groups 
-- [ ] Clean & summarize data
-  - [ ] Clean out-range data in BASE, based on physical range limit
+- [x] Parse data & metadata
+  - [x] BASE: read data files
+    - [x] Parse timestamps
+    - [x] Parse variable names/qualifiers 
+    - [x] Get variable default units
+  - [x] BIF: read files
+    - [x] Parse variable groups 
+    - List target sites’ contacts & DOI
+- [x] Clean & summarize data
+  - [x] Clean out-range data in BASE, based on physical range limit
 - [ ] Do data visualization & any further processing 
   - [ ] Diurnal-seasonal plot
+  - [ ] Variable availability plot
   - Some of this might be done using other packages
     - **REddyProc** handles u*-filtering, gap-filling, partitioning, and certain time-series plots 
     - **FluxnetLSM** converts data into NetCDF, gap-filling
     - **openair** creates windrose, time-series plots
-- [ ] List target sites’ contacts & DOI
-  - [ ] Parse and subset info from BIF
 
 ## working group
 - Housen Chu (Berkeley National Lab)

@@ -32,7 +32,13 @@
 #'   \item TEAM_MEMBER_PI3_EMAIL - Site principal investigator #3 email (free text)
 #' }
 #' @export
-
+#' @examples
+#' #' ## Not run:
+#' # obtain the basic general info for all sites
+#' site <- amf_site_info()
+#'
+#' ## End(Not run)
+#'
 amf_site_info <- function(contact_info = FALSE){
 
     # grab meta-data, data is memoised
