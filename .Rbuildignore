@@ -26,3 +26,5 @@
 ^codemeta\.json$
 ^doc$
 ^Meta$
+^miscellaneous$
+^data-summary$
