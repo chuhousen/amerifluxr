@@ -33,12 +33,11 @@
 #' }
 #' @export
 #' @examples
-#' #' ## Not run:
+#' \dontrun{
 #' # obtain the basic general info for all sites
 #' site <- amf_site_info()
-#'
-#' ## End(Not run)
-#'
+#'}
+
 amf_site_info <- function(contact_info = FALSE){
 
     # grab meta-data, data is memoised
@@ -59,8 +58,10 @@ amf_site_info <- function(contact_info = FALSE){
 
     # convert strings to numeric
     # NOTE: you might want to rename variables
-    sites$GRP_LOCATION.LOCATION_LAT <- as.numeric(sites$GRP_LOCATION.LOCATION_LAT)
-    sites$GRP_LOCATION.LOCATION_LONG <- as.numeric(sites$GRP_LOCATION.LOCATION_LONG)
+    sites$GRP_LOCATION.LOCATION_LAT <-
+      as.numeric(sites$GRP_LOCATION.LOCATION_LAT)
+    sites$GRP_LOCATION.LOCATION_LONG <-
+      as.numeric(sites$GRP_LOCATION.LOCATION_LONG)
 
     # grab contact info
     # THIS IS SLOOOOW, from this side of the ocean anyway

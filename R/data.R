@@ -55,7 +55,8 @@
 #' list what is measured at the site (this list may include chamber, gradient
 #' or other eddy covariance measurements that are a superset of the data
 #' available in AmeriFlux). Also see AmeriFlux webpage
-#' \url{https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/} for details.
+#' \url{https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/}
+#' for details.
 #'
 #' \itemize{
 #'   \item{SITE_ID}{6 digit AmeriFlux site ID (CC-Sss)}
