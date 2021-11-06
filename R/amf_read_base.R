@@ -1,16 +1,22 @@
 #' Read AmeriFlux BASE data product
 #'
-#' @description This function read in the BASE data file downloaded from AmeriFlux.
-#' See AmeriFlux web page \url{https://ameriflux.lbl.gov/data/data-processing-pipelines/base-publish/} for details about
-#' BASE data product. Use \code{\link{amf_variables}} to get a list of standard variable names and units.
+#' @description This function read in the BASE data file downloaded
+#' from AmeriFlux. See AmeriFlux web page
+#' \url{https://ameriflux.lbl.gov/data/data-processing-pipelines/base-publish/}
+#' for details about BASE data product. Use \code{\link{amf_variables}}
+#' to get a list of standard variable names and units.
 #'
-#' @param file a BASE data file, either in a zipped file or a comma-separate value (csv) file
+#' @param file a BASE data file, either in a zipped file or a comma-separate
+#'  value (csv) file
 #' @param unzip whether to unzip. Set TRUE if reading from a zipped file
-#' @param parse_timestamp whether to parse the timestamp. Set TRUE to parse and add timekeeping columns.
+#' @param parse_timestamp whether to parse the timestamp. Set TRUE to parse
+#'  and add timekeeping columns.
 #'
-#' @return A data frame containing data. See AmeriFlux website \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/}
-#' for details about file format, variable definition, units, and convention. If parse_timestamp = TRUE, the following six
-#' time-keeping columns are added in the returned data frame:
+#' @return A data frame containing data. See AmeriFlux website
+#'  \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/}
+#' for details about file format, variable definition, units, and convention.
+#' If parse_timestamp = TRUE, the following six time-keeping columns are
+#' added in the returned data frame:
 #' \itemize{
 #'   \item YEAR - Year (YYYY)
 #'   \item MONTH - Month (MM)
@@ -23,7 +29,7 @@
 #' @export
 #'
 #' @examples
-#' ## Not run:
+#' \dontrun{
 #' # read the BASE from a zip file, using the example data file
 #' base <- amf_read_base(file = system.file("extdata",
 #'                                          "AMF_US-CRT_BASE-BADM_2-5.zip",
@@ -37,11 +43,12 @@
 #'                                           package = "amerifluxr"),
 #'                       unzip = FALSE,
 #'                       parse_timestamp = FALSE)
-#' ## End(Not run)
-#'
-amf_read_base <- function(file,
-                          unzip = TRUE,
-                          parse_timestamp = FALSE){
+#'}
+
+amf_read_base <- function(
+  file,
+  unzip = TRUE,
+  parse_timestamp = FALSE) {
 
   # stop if missing file parameter
   if (missing(file)) {
@@ -81,7 +88,9 @@ amf_read_base <- function(file,
 
   } else{
     case_ls <-
-      basename(file)[which(substr(basename(file) , start = 12, stop = 15) == "BASE")]
+      basename(file)[
+        which(substr(basename(file) , start = 12, stop = 15) == "BASE")
+        ]
 
     if (length(case_ls) != 1) {
       stop('Can not find BASE file...')
@@ -103,7 +112,7 @@ amf_read_base <- function(file,
     }
   }
 
-  #######################################################################################################
+  ##############################################################################
   # Parse TIMESTAMP
   if (parse_timestamp) {
 
@@ -119,13 +128,19 @@ amf_read_base <- function(file,
                    format = "%Y%m%d%H%M",
                    tz = "UTC")
         TIMESTAMP <-
-          strptime(TIMESTAMP + 0.5 * hr * 60, format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
+          strptime(TIMESTAMP + 0.5 * hr * 60,
+                   format = "%Y-%m-%d %H:%M:%S",
+                   tz = "UTC")
 
       } else if (length(which(colnames(data1) == "TIMESTAMP_END")) == 1) {
         TIMESTAMP <-
-          strptime(data1$TIMESTAMP_END, format = "%Y%m%d%H%M", tz = "UTC")
+          strptime(data1$TIMESTAMP_END,
+                   format = "%Y%m%d%H%M",
+                   tz = "UTC")
         TIMESTAMP <-
-          strptime(TIMESTAMP - 0.5 * hr * 60, format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
+          strptime(TIMESTAMP - 0.5 * hr * 60,
+                   format = "%Y-%m-%d %H:%M:%S",
+                   tz = "UTC")
 
       } else{
         stop("Can not find TIMESTAMP columns...")
@@ -157,5 +172,3 @@ amf_read_base <- function(file,
  return(data1)
 
 }
-
-

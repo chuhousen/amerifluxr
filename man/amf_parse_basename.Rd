@@ -9,9 +9,11 @@ amf_parse_basename(var_name, FP_ls = NULL, gapfill_postfix = "_PI_F")
 \arguments{
 \item{var_name}{A vector of variable names (character) to be parsed}
 
-\item{FP_ls}{A vector of standard variable names. If not specified, use \code{\link{amf_variables}} to get the latest list.}
+\item{FP_ls}{A vector of standard variable names. If not specified,
+use \code{\link{amf_variables}} to get the latest list.}
 
-\item{gapfill_postfix}{Expected suffixes appended to variable being gap-filled. The default is "_PI_F".}
+\item{gapfill_postfix}{Expected suffixes appended to variable being
+gap-filled. The default is "_PI_F".}
 }
 \value{
 A data frame containing the parsed results for all variables in var_name:
@@ -40,11 +42,13 @@ A data frame containing the parsed results for all variables in var_name:
 }
 }
 \description{
-This function parse variable names and qualifiers of AmeriFlux BASE data product. See AmeriFlux web page
-\url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/} about the details of variable naming and qualifiers.
+This function parse variable names and qualifiers of AmeriFlux
+BASE data product. See AmeriFlux web page
+\url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/} about the
+details of variable naming and qualifiers.
 }
 \examples{
-## Not run:
+\dontrun{
 # read the BASE from a csv file
 base <- amf_read_base(file = system.file("extdata",
                                          "AMF_US-CRT_BASE_HH_2-5.csv",
@@ -54,9 +58,7 @@ base <- amf_read_base(file = system.file("extdata",
 
 # parse variable names/qualifiers
 basename_decode <- amf_parse_basename(var_name = colnames(base))
-
-## End(Not run)
-
+}
 }
 \seealso{
 amf_read_base, amf_variables, amf_data_aval, amf_var_info

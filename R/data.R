@@ -1,3 +1,4 @@
+
 #' BASE data example
 #'
 #' Continuous flux/met data (i.e., AmeriFlux BASE data product) for the
@@ -29,12 +30,12 @@
 #'   \item{T_SONIC}{Sonic temperature (deg C)}
 #'   \item{T_SONIC_SIGMA}{Standard deviation of sonic temperature (deg C)}
 #'   \item{PA}{Atmospheric pressure (kPa)}
-#'   \item{RH}{Relative humidity (%)}
+#'   \item{RH}{Relative humidity (\%)}
 #'   \item{TA}{Air temperature (deg C)}
 #'   \item{TS_1_1_1}{Soil temperature at horizontal location #1 (deg C)}
 #'   \item{TS_2_1_1}{Soil temperature at horizontal location #2 (deg C)}
 #'   \item{WTD}{Water table depth (m)}
-#'   \item{SWC}{Soil water content (%)}
+#'   \item{SWC}{Soil water content (\%)}
 #'   \item{NETRAD}{Net radiation (W m-2)}
 #'   \item{PPFD_IN}{Photosynthetic photon flux density, incoming (µmolPhoton m-2 s-1)}
 #'   \item{SW_IN}{Shortwave radiation, incoming (W m-2)}
@@ -55,7 +56,8 @@
 #' list what is measured at the site (this list may include chamber, gradient
 #' or other eddy covariance measurements that are a superset of the data
 #' available in AmeriFlux). Also see AmeriFlux webpage
-#' \url{https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/} for details.
+#' \url{https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/}
+#' for details.
 #'
 #' \itemize{
 #'   \item{SITE_ID}{6 digit AmeriFlux site ID (CC-Sss)}

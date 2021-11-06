@@ -1,9 +1,11 @@
 #' Extract BADM data for a specific BADM group
 #'
-#' @description This function extracts BADM data for a specific BADM group from the imported BADM (BIF) file.
-#' Use function \code{\link{amf_read_bif}} to import BADM (BIF) file.
-#' @param bif_data A data frame consists of 5 columns: SITE_ID, GROUP_ID, VARIABLE_GROUP, VARIABLE, DATAVALUE, imported
-#' from function \code{\link{amf_read_bif}}.
+#' @description This function extracts BADM data for a specific BADM group
+#' from the imported BADM (BIF) file. Use function \code{\link{amf_read_bif}}
+#' to import BADM (BIF) file.
+#' @param bif_data A data frame consists of 5 columns: SITE_ID, GROUP_ID,
+#' VARIABLE_GROUP, VARIABLE, DATAVALUE, imported from function
+#' \code{\link{amf_read_bif}}.
 #' @param select_group A string, selected from VARIABLE_GROUP
 #'
 #' @seealso amf_read_bif
@@ -17,7 +19,7 @@
 #' @export
 #'
 #' @examples
-#' ## Not run:
+#' \dontrun{
 #' # read the BADM BIF file, using an example data file
 #' bif <- amf_read_bif(file = system.file("extdata",
 #'                                        "AMF_AA-Flx_BIF_20201218.xlsx",
@@ -29,9 +31,8 @@
 #' # extract the selected VARIALBE_GROUP
 #' amf_extract_badm(bif_data = bif, select_group = "GRP_FLUX_MEASUREMENTS")
 #' amf_extract_badm(bif_data = bif, select_group = "GRP_IGBP")
-#'
-#' ## End(Not run)
-#'
+#'}
+
 amf_extract_badm <- function(bif_data,
                              select_group) {
 
@@ -92,7 +93,8 @@ amf_extract_badm <- function(bif_data,
     for (j in seq_len(length(var_ls))) {
 
       bif_work_tmp <-
-        bif_work[bif_work$VARIABLE == paste(var_ls[j]), c("GROUP_ID", "DATAVALUE")]
+        bif_work[bif_work$VARIABLE == paste(var_ls[j]),
+                 c("GROUP_ID", "DATAVALUE")]
 
       bif_out <- merge.data.frame(bif_out,
                                   bif_work_tmp,

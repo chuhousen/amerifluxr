@@ -7,7 +7,7 @@
 amf_data_coverage()
 }
 \value{
-
+Ameriflux data coverage
 }
 \description{
 Ameriflux data coverage statistics

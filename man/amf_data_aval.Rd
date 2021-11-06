@@ -7,10 +7,12 @@
 amf_data_aval(site_set = NULL)
 }
 \arguments{
-\item{site_set}{a vector of character specifying the target AmeriFlux Site ID (CC-Sss). If not specified, it returns all sites.}
+\item{site_set}{a vector of character specifying the target AmeriFlux Site ID
+(CC-Sss). If not specified, it returns all sites.}
 }
 \value{
-A data frame of data variable availability (per year) for selected AmeriFlux sites.
+A data frame of data variable availability (per year)
+ for selected AmeriFlux sites.
 \itemize{
   \item Site_ID - Six character site identifier (CC-Sss)
   \item VARIABLE - Variable name of the data included in the BASE file
@@ -23,17 +25,18 @@ A data frame of data variable availability (per year) for selected AmeriFlux sit
   }
 }
 \description{
-This function obtains the data variable availability for all or selected AmeriFlux sites.
-See AmeriFlux page \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/} for details about the variable naming.
+This function obtains the data variable availability for all or
+selected AmeriFlux sites. See AmeriFlux page
+\url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/} for details
+about the variable naming.
 }
 \examples{
-#' ## Not run:
+\dontrun{
 # obtain the data variable availability for all sites
 data_aval <- amf_data_aval()
 
 # obtain the data variable availability for selected sites
 data_aval <- amf_data_aval(site_set = c("US-CRT","US-WPT"))
 
-## End(Not run)
-
+}
 }

@@ -3,7 +3,7 @@
 #'
 #' Lists available site (names) and meta-data
 #'
-#' @return
+#' @return list of ameriflux sites
 #' @export
 
 amf_sites <- memoise::memoise(function(){
@@ -29,7 +29,7 @@ amf_sites <- memoise::memoise(function(){
 #'
 #' @param site_id Ameriflux site id
 #'
-#' @return
+#' @return Ameriflux site ids
 #' @export
 
 amf_member_info <- memoise::memoise(function(site_id){
@@ -47,7 +47,7 @@ amf_member_info <- memoise::memoise(function(site_id){
 #'
 #' Ameriflux data coverage statistics
 #'
-#' @return
+#' @return Ameriflux data coverage
 #' @export
 
 amf_data_coverage <- memoise::memoise(function(){
@@ -67,9 +67,13 @@ amf_data_coverage <- memoise::memoise(function(){
 })
 
 #' Get FP (Flux-Processing) Standard Variable List
-#' @description This function obtains the latest AmeriFlux FP (Flux-Processing) standard variable list.
-#'  FP standard defines the variable names and units used for continuously sampled data within the AmeriFlux.
-#'  Also see AmeriFlux Data Variables page \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/} for details.
+#'
+#' @description This function obtains the latest AmeriFlux FP (Flux-Processing)
+#' standard variable list. FP standard defines the variable names and units used
+#' for continuously sampled data within the AmeriFlux. Also see AmeriFlux Data
+#' Variables page \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/}
+#' for details.
+#'
 #' @return A data frame containing the following columns:
 #' \itemize{
 #'   \item Name - Standard variable name
@@ -81,11 +85,11 @@ amf_data_coverage <- memoise::memoise(function(){
 #' @export
 #'
 #' @examples
-#' ## Not run:
+#' \dontrun{
 #' # download the list of standard variable names and units
 #' FP_ls <- amf_variables()
-#'
-#' ## End(Not run)
+#'}
+
 amf_variables <- function(){
 
   # get a list of FP (Flux-Processing) standard variables

@@ -7,8 +7,9 @@
 amf_extract_badm(bif_data, select_group)
 }
 \arguments{
-\item{bif_data}{A data frame consists of 5 columns: SITE_ID, GROUP_ID, VARIABLE_GROUP, VARIABLE, DATAVALUE, imported
-from function \code{\link{amf_read_bif}}.}
+\item{bif_data}{A data frame consists of 5 columns: SITE_ID, GROUP_ID,
+VARIABLE_GROUP, VARIABLE, DATAVALUE, imported from function
+\code{\link{amf_read_bif}}.}
 
 \item{select_group}{A string, selected from VARIABLE_GROUP}
 }
@@ -22,11 +23,12 @@ A data frame of re-structured BADM data with the following columns:
 }
 }
 \description{
-This function extracts BADM data for a specific BADM group from the imported BADM (BIF) file.
-Use function \code{\link{amf_read_bif}} to import BADM (BIF) file.
+This function extracts BADM data for a specific BADM group
+from the imported BADM (BIF) file. Use function \code{\link{amf_read_bif}}
+to import BADM (BIF) file.
 }
 \examples{
-## Not run:
+\dontrun{
 # read the BADM BIF file, using an example data file
 bif <- amf_read_bif(file = system.file("extdata",
                                        "AMF_AA-Flx_BIF_20201218.xlsx",
@@ -38,9 +40,7 @@ unique(bif$VARIABLE_GROUP)
 # extract the selected VARIALBE_GROUP
 amf_extract_badm(bif_data = bif, select_group = "GRP_FLUX_MEASUREMENTS")
 amf_extract_badm(bif_data = bif, select_group = "GRP_IGBP")
-
-## End(Not run)
-
+}
 }
 \seealso{
 amf_read_bif

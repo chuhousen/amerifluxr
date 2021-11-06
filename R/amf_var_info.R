@@ -1,7 +1,8 @@
 #' Get variable information
 #'
-#' @description This function obtains the measurement height metadata for the AmeriFlux BASE data product.
-#' See AmeriFlux page \url{https://ameriflux.lbl.gov/data/measurement-height/} for details.
+#' @description This function obtains the measurement height metadata for the
+#' AmeriFlux BASE data product. See AmeriFlux page
+#' \url{https://ameriflux.lbl.gov/data/measurement-height/} for details.
 #'
 #' @param out_dir output directory  (default = tempdir())
 #'
@@ -18,16 +19,20 @@
 #'   }
 #' @export
 #' @examples
-#' ## Not run:
+#' \dontrun{
 #' # download the measurement height data for all sites
 #' var_info <- amf_var_info()
-#'
-#' ## End(Not run)
+#'}
 
 amf_var_info <- function(out_dir = tempdir()) {
 
   # Get a list of hosted data files
-  filenames <- RCurl::getURL(amf_server("var_info"), ftp.use.epsv = FALSE, dirlistonly = TRUE)
+  filenames <- RCurl::getURL(
+    amf_server("var_info"),
+    ftp.use.epsv = FALSE,
+    dirlistonly = TRUE
+    )
+
   filenames <- paste0(strsplit(filenames, "\r*\n")[[1]])
   filenames <- filenames[which(nchar(filenames) == 35)]
 
@@ -40,9 +45,16 @@ amf_var_info <- function(out_dir = tempdir()) {
     latest <- filenames[which(time_ls == max(time_ls))]
 
     # download data to designated output directory
-    utils::download.file(paste0(amf_server("var_info"), "/", latest), file.path(out_dir, latest))
+    utils::download.file(
+      paste0(amf_server("var_info"), "/", latest),
+      file.path(out_dir, latest)
+      )
 
-    var_info <- utils::read.csv(file.path(out_dir, latest), header = T, na.strings = c(""), stringsAsFactors = FALSE)
+    var_info <- utils::read.csv(
+      file.path(out_dir, latest), header = T,
+      na.strings = c(""),
+      stringsAsFactors = FALSE
+      )
     var_info$Height <- as.numeric(as.character(var_info$Height))
 
     ## clean for a bug in earlier version
