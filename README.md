@@ -1,3 +1,5 @@
+[![R-CMD-check](https://github.com/chuhousen/amerifluxr/workflows/R-CMD-check/badge.svg)](https://github.com/chuhousen/amerifluxr/actions)
+
 # amerifluxr
 An R programmatic interface for querying, handling, and summarizing AmeriFlux (https://ameriflux.lbl.gov/) data and metadata.  
 
