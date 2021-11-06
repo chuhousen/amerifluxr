@@ -1,6 +1,6 @@
 Package: amerifluxr
 Type: Package
-Title: Interface to Ameriflux data services
+Title: Interface to Ameriflux Data Services
 Version: 0.1.0
 Authors@R: c(
              person(
