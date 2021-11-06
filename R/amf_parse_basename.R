@@ -97,15 +97,17 @@ amf_parse_basename <- function(var_name,
 
   #####################################################################
   ## locate gap-filled variables
-  basename_decode$is_gapfill <- grepl(gapfill_postfix,
+  basename_decode$is_gapfill <- grepl(paste0("(", gapfill_postfix, "$|", gapfill_postfix, "_)"),
                                       basename_decode$variable_name,
                                       perl = TRUE)
-  basename_decode$working_names <- sub(gapfill_postfix,
-                                       "",
-                                       basename_decode$variable_name)
   basename_decode$qualifier_gf <- ifelse(basename_decode$is_gapfill,
                                          gapfill_postfix,
                                          NA)
+  basename_decode$working_names <- ifelse(basename_decode$is_gapfill,
+                                          sub(gapfill_postfix,
+                                              "",
+                                              basename_decode$variable_name),
+                                          basename_decode$variable_name)
 
   ## locate PI provided (_PI) variables
   basename_decode$is_PI_provide <- grepl("_PI",

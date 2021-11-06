@@ -4,10 +4,7 @@
 \alias{amf_site_info}
 \title{Get AmeriFlux site general info}
 \usage{
-amf_site_info(contact_info = FALSE)
-}
-\arguments{
-\item{contact_info}{include contact info (TRUE / FALSE)}
+amf_site_info()
 }
 \value{
 A data frame containing the following columns.
@@ -26,14 +23,12 @@ for detailed explanation.
   \item GRP_CLIM_AVG.MAT - Long-term mean annual average air temperature (degree C)
   \item GRP_CLIM_AVG.MAP - Long-term mean annual average precipitation (mm)
   \item GRP_CLIM_AVG.CLIMATE_KOEPPEN - Koppen climate classification (free text)
-  \item DATA_START - The starting year with published AmeriFlux data (YYYY)
-  \item DATA_END - The ending year with published AmeriFlux data (YYYY)
-  \item TEAM_MEMBER_PI1 - Site principal investigator #1 name (First/Given Last/Family)
-  \item TEAM_MEMBER_PI1_EMAIL - Site principal investigator #1 email (free text)
-  \item TEAM_MEMBER_PI2 - Site principal investigator #2 name (First/Given Last/Family)
-  \item TEAM_MEMBER_PI2_EMAIL - Site principal investigator #2 email (free text)
-  \item TEAM_MEMBER_PI3 - Site principal investigator #3 name (First/Given Last/Family)
-  \item TEAM_MEMBER_PI3_EMAIL - Site principal investigator #3 email (free text)
+  \item DATA_START_CCBY4 - The starting year with published AmeriFlux BASE data under CCBY4.0 policy (YYYY)
+  \item DATA_END_CCBY4 - The ending year with published AmeriFlux BASE data under CCBY4.0 policy (YYYY)
+  \item DATA_START_LEGACY - The starting year with published AmeriFlux BASE data under LEGACY policy (YYYY)
+  \item DATA_END_LEGACY - The ending year with published AmeriFlux BASE data under LEGACY policy (YYYY)
+  \item DATA_START - The starting year with published AmeriFlux BASE data (YYYY)
+  \item DATA_END - The ending year with published AmeriFlux BASE data (YYYY)
 }
 }
 \description{
