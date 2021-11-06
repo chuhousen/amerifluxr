@@ -7,16 +7,20 @@
 amf_read_base(file, unzip = TRUE, parse_timestamp = FALSE)
 }
 \arguments{
-\item{file}{a BASE data file, either in a zipped file or a comma-separate value (csv) file}
+\item{file}{a BASE data file, either in a zipped file or a comma-separate
+value (csv) file}
 
 \item{unzip}{whether to unzip. Set TRUE if reading from a zipped file}
 
-\item{parse_timestamp}{whether to parse the timestamp. Set TRUE to parse and add timekeeping columns.}
+\item{parse_timestamp}{whether to parse the timestamp. Set TRUE to parse
+and add timekeeping columns.}
 }
 \value{
-A data frame containing data. See AmeriFlux website \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/}
-for details about file format, variable definition, units, and convention. If parse_timestamp = TRUE, the following six
-time-keeping columns are added in the returned data frame:
+A data frame containing data. See AmeriFlux website
+ \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/}
+for details about file format, variable definition, units, and convention.
+If parse_timestamp = TRUE, the following six time-keeping columns are
+added in the returned data frame:
 \itemize{
   \item YEAR - Year (YYYY)
   \item MONTH - Month (MM)
@@ -27,12 +31,14 @@ time-keeping columns are added in the returned data frame:
 }
 }
 \description{
-This function read in the BASE data file downloaded from AmeriFlux.
-See AmeriFlux web page \url{https://ameriflux.lbl.gov/data/data-processing-pipelines/base-publish/} for details about
-BASE data product. Use \code{\link{amf_variables}} to get a list of standard variable names and units.
+This function read in the BASE data file downloaded
+from AmeriFlux. See AmeriFlux web page
+\url{https://ameriflux.lbl.gov/data/data-processing-pipelines/base-publish/}
+for details about BASE data product. Use \code{\link{amf_variables}}
+to get a list of standard variable names and units.
 }
 \examples{
-## Not run:
+\dontrun{
 # read the BASE from a zip file, using the example data file
 base <- amf_read_base(file = system.file("extdata",
                                          "AMF_US-CRT_BASE-BADM_2-5.zip",
@@ -46,8 +52,7 @@ base <- amf_read_base(file = system.file("extdata",
                                           package = "amerifluxr"),
                       unzip = FALSE,
                       parse_timestamp = FALSE)
-## End(Not run)
-
+}
 }
 \seealso{
 amf_variables

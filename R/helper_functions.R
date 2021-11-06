@@ -3,7 +3,7 @@
 #'
 #' Lists available site (names) and meta-data
 #'
-#' @return
+#' @return list of ameriflux sites
 #' @export
 
 amf_sites <- memoise::memoise(function(){
@@ -29,7 +29,7 @@ amf_sites <- memoise::memoise(function(){
 #'
 #' @param site_id Ameriflux site id
 #'
-#' @return
+#' @return Ameriflux site ids
 #' @export
 
 amf_member_info <- memoise::memoise(function(site_id){
@@ -47,7 +47,7 @@ amf_member_info <- memoise::memoise(function(site_id){
 #'
 #' Ameriflux data coverage statistics
 #'
-#' @return
+#' @return Ameriflux data coverage
 #' @export
 
 amf_data_coverage <- memoise::memoise(function(){

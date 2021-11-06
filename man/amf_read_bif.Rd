@@ -10,7 +10,8 @@ amf_read_bif(file)
 \item{file}{a BADM data file}
 }
 \value{
-A data frame containing the following 5 columns. See AmeriFlux website
+A data frame containing the following 5 columns.
+See AmeriFlux website
  \url{https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/} for details.
 \itemize{
   \item SITE_ID - Six character site identifier (CC-Sss)
@@ -21,15 +22,14 @@ A data frame containing the following 5 columns. See AmeriFlux website
 }
 }
 \description{
-This function read in the BADM data file formatted in BADM Interchange Format (BIF).
+This function read in the BADM data file formatted in BADM
+Interchange Format (BIF).
 }
 \examples{
-## Not run:
+\dontrun{
 # read the BADM BIF file, using an example data file
 bif <- amf_read_bif(file = system.file("extdata",
                                        "AMF_AA-Flx_BIF_20201218.xlsx",
                                         package = "amerifluxr"))
-
-## End(Not run)
-
+}
 }

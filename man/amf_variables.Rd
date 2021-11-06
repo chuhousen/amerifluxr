@@ -17,14 +17,15 @@ A data frame containing the following columns:
   }
 }
 \description{
-This function obtains the latest AmeriFlux FP (Flux-Processing) standard variable list.
- FP standard defines the variable names and units used for continuously sampled data within the AmeriFlux.
- Also see AmeriFlux Data Variables page \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/} for details.
+This function obtains the latest AmeriFlux FP (Flux-Processing)
+standard variable list. FP standard defines the variable names and units used
+for continuously sampled data within the AmeriFlux. Also see AmeriFlux Data
+Variables page \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/}
+for details.
 }
 \examples{
-## Not run:
+\dontrun{
 # download the list of standard variable names and units
 FP_ls <- amf_variables()
-
-## End(Not run)
+}
 }

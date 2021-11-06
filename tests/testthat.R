@@ -1,4 +1,1 @@
-library(testthat)
-library(amerifluxr)
-
-test_check("amerifluxr")
+testthat::test_check("amerifluxr")

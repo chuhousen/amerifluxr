@@ -23,13 +23,13 @@ A data frame of measurement height data for all avaiable AmeriFlux sites
   }
 }
 \description{
-This function obtains the measurement height metadata for the AmeriFlux BASE data product.
-See AmeriFlux page \url{https://ameriflux.lbl.gov/data/measurement-height/} for details.
+This function obtains the measurement height metadata for the
+AmeriFlux BASE data product. See AmeriFlux page
+\url{https://ameriflux.lbl.gov/data/measurement-height/} for details.
 }
 \examples{
-## Not run:
+\dontrun{
 # download the measurement height data for all sites
 var_info <- amf_var_info()
-
-## End(Not run)
+}
 }

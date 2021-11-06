@@ -10,7 +10,7 @@ amf_member_info(site_id)
 \item{site_id}{Ameriflux site id}
 }
 \value{
-
+Ameriflux site ids
 }
 \description{
 This function actually lists ALL site info
