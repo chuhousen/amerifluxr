@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>License • amerifluxr</title>
+<title>BASE data example — amf_base • amerifluxr</title>
 
 
 <!-- jquery -->
@@ -18,8 +18,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
 <!-- bootstrap-toc -->
-<link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script>
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
@@ -33,13 +33,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
 
 
 
-<meta property="og:title" content="License" />
+<meta property="og:title" content="BASE data example — amf_base" />
+<meta property="og:description" content="Continuous flux/met data (i.e., AmeriFlux BASE data product) for the
+US-CRT site, as an example for demonstration. Also see AmeriFlux webpage
+https://ameriflux.lbl.gov/data/aboutdata/data-variables/#base for
+variable definitions and details." />
 
 
 
@@ -58,7 +62,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-title-body">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -70,7 +74,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">amerifluxr</a>
+        <a class="navbar-link" href="../index.html">amerifluxr</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
@@ -78,13 +82,13 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
+  <a href="../index.html">
     <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -94,10 +98,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="articles/data_import.html">Data Import</a>
+      <a href="../articles/data_import.html">Data Import</a>
     </li>
     <li>
-      <a href="articles/site_selection.html">Site selection</a>
+      <a href="../articles/site_selection.html">Site selection</a>
     </li>
   </ul>
 </li>
@@ -120,66 +124,79 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>License</h1>
+    <h1>BASE data example</h1>
+    <small class="dont-index">Source: <a href='https://github.com/chuhousen/amerifluxr/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>amf_base.Rd</code></div>
     </div>
 
-<pre>amerifluxr Copyright (c) 2021, The Regents of the University of California,
-through Lawrence Berkeley National Laboratory (subject to receipt of
-any required approvals from the U.S. Dept. of Energy) and Koen Hufkens. 
-All rights reserved.
+    <div class="ref-description">
+    <p>Continuous flux/met data (i.e., AmeriFlux BASE data product) for the
+US-CRT site, as an example for demonstration. Also see AmeriFlux webpage
+<a href='https://ameriflux.lbl.gov/data/aboutdata/data-variables/#base'>https://ameriflux.lbl.gov/data/aboutdata/data-variables/#base</a> for
+variable definitions and details.</p>
+    </div>
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
-(1) Redistributions of source code must retain the above copyright notice,
-this list of conditions and the following disclaimer.
-
-(2) Redistributions in binary form must reproduce the above copyright
-notice, this list of conditions and the following disclaimer in the
-documentation and/or other materials provided with the distribution.
-
-(3) Neither the name of the University of California, Lawrence Berkeley
-National Laboratory, U.S. Dept. of Energy, nor the name of the contributors 
-may be used to endorse or promote products derived from this software 
-without specific prior written permission.
+    <pre class="usage"><span class='va'>amf_base</span></pre>
 
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
-LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-You are under no obligation whatsoever to provide any bug fixes, patches,
-or upgrades to the features, functionality or performance of the source
-code ("Enhancements") to anyone; however, if you choose to make your
-Enhancements available either publicly, or directly to Lawrence Berkeley
-National Laboratory, without imposing a separate written license agreement
-for such Enhancements, then you hereby grant the following license: a
-non-exclusive, royalty-free perpetual license to install, use, modify,
-prepare derivative works, incorporate into other computer software,
-distribute, and sublicense such enhancements or derivative works thereof,
-in binary and source code form.
-</pre>
+    <p>A data frame with 52608 rows and 36 variables</p>
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p><a href='https://ameriflux.lbl.gov/'>https://ameriflux.lbl.gov/</a></p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    
+<ul>
+<li><p>TIMESTAMP_STARTISO timestamp start of averaging period (YYYYMMDDHHMM)</p></li>
+<li><p>TIMESTAMP_ENDISO timestamp end of averaging period (YYYYMMDDHHMM)</p></li>
+<li><p>CO2Carbon Dioxide (CO2) mole fraction in wet air (µmolCO2 mol-1)</p></li>
+<li><p>H2OWater (H2O) vapor in mole fraction of wet air (mmolH2O mol-1)</p></li>
+<li><p>FCCarbon Dioxide (CO2) turbulent flux (µmolCO2 m-2 s-1)</p></li>
+<li><p>NEE_PINet Ecosystem Exchange (µmolCO2 m-2 s-1)</p></li>
+<li><p>CH4Methane (CH4) mole fraction in wet air (nmolCH4 mol-1)</p></li>
+<li><p>FCH4Methane (CH4) turbulent flux (nmolCH4 m-2 s-1)</p></li>
+<li><p>HSensible heat turbulent flux (W m-2)</p></li>
+<li><p>LELatent heat turbulent flux (W m-2)</p></li>
+<li><p>G_1_1_1Soil heat flux at horizontal location #1 (W m-2)</p></li>
+<li><p>G_2_1_1Soil heat flux at horizontal location #2 (W m-2)</p></li>
+<li><p>WDWind direction (Decimal degrees)</p></li>
+<li><p>WSWind speed (m s-1)</p></li>
+<li><p>USTARFriction velocity (m s-1)</p></li>
+<li><p>ZLdata value</p></li>
+<li><p>MO_LENGTHMonin-Obukhov Stability parameter (nondimensional)</p></li>
+<li><p>W_SIGMAStandard deviation of vertical velocity fluctuations (m s-1)</p></li>
+<li><p>V_SIGMAStandard deviation of lateral velocity fluctuations (m s-1)</p></li>
+<li><p>U_SIGMAStandard deviation of along-wind velocity fluctuations (m s-1)</p></li>
+<li><p>T_SONICSonic temperature (deg C)</p></li>
+<li><p>T_SONIC_SIGMAStandard deviation of sonic temperature (deg C)</p></li>
+<li><p>PAAtmospheric pressure (kPa)</p></li>
+<li><p>RHRelative humidity (%)</p></li>
+<li><p>TAAir temperature (deg C)</p></li>
+<li><p>TS_1_1_1Soil temperature at horizontal location #1 (deg C)</p></li>
+<li><p>TS_2_1_1Soil temperature at horizontal location #2 (deg C)</p></li>
+<li><p>WTDWater table depth (m)</p></li>
+<li><p>SWCSoil water content (%)</p></li>
+<li><p>NETRADNet radiation (W m-2)</p></li>
+<li><p>PPFD_INPhotosynthetic photon flux density, incoming (µmolPhoton m-2 s-1)</p></li>
+<li><p>SW_INShortwave radiation, incoming (W m-2)</p></li>
+<li><p>SW_OUTShortwave radiation, outgoing (W m-2)</p></li>
+<li><p>LW_INLongwave radiation, incoming (W m-2)</p></li>
+<li><p>LW_OUTLongwave radiation, outgoing (W m-2)</p></li>
+<li><p>PRainfall (mm)</p></li>
+</ul>
+
 
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
-
 
 
       <footer>

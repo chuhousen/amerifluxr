@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • amerifluxr</title>
+<title>Extract BADM data for a specific BADM group — amf_extract_badm • amerifluxr</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,10 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Extract BADM data for a specific BADM group — amf_extract_badm" />
+<meta property="og:description" content="This function extracts BADM data for a specific BADM group
+from the imported BADM (BIF) file. Use function amf_read_bif
+to import BADM (BIF) file." />
 
 
 
@@ -58,7 +61,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -120,126 +123,65 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Extract BADM data for a specific BADM group</h1>
+    <small class="dont-index">Source: <a href='https://github.com/chuhousen/amerifluxr/blob/master/R/amf_extract_badm.R'><code>R/amf_extract_badm.R</code></a></small>
+    <div class="hidden name"><code>amf_extract_badm.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>This function extracts BADM data for a specific BADM group
+from the imported BADM (BIF) file. Use function <code><a href='amf_read_bif.html'>amf_read_bif</a></code>
+to import BADM (BIF) file.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>amf_extract_badm</span><span class='op'>(</span><span class='va'>bif_data</span>, <span class='va'>select_group</span><span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="amf_base.html">amf_base</a></code> </p>
-        </td>
-        <td><p>BASE data example</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="amf_bif.html">amf_bif</a></code> </p>
-        </td>
-        <td><p>BADM data example</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="amf_data_aval.html">amf_data_aval()</a></code> </p>
-        </td>
-        <td><p>Get data variable availability</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="amf_data_coverage.html">amf_data_coverage()</a></code> </p>
-        </td>
-        <td><p>Returns a list of data coverage</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="amf_extract_badm.html">amf_extract_badm()</a></code> </p>
-        </td>
-        <td><p>Extract BADM data for a specific BADM group</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="amf_filter_base.html">amf_filter_base()</a></code> </p>
-        </td>
-        <td><p>Filter AmeriFlux BASE data product based on physical range</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="amf_member_info.html">amf_member_info()</a></code> </p>
-        </td>
-        <td><p>Lists all site member info</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="amf_metadata_aval.html">amf_metadata_aval()</a></code> </p>
-        </td>
-        <td><p>Get metadata availability</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="amf_parse_basename.html">amf_parse_basename()</a></code> </p>
-        </td>
-        <td><p>Parse variable name and qualifier in the AmeriFlux BASE data product</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="amf_read_base.html">amf_read_base()</a></code> </p>
-        </td>
-        <td><p>Read AmeriFlux BASE data product</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="amf_read_bif.html">amf_read_bif()</a></code> </p>
-        </td>
-        <td><p>Read AmeriFlux BADM data product</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="amf_site_info.html">amf_site_info()</a></code> </p>
-        </td>
-        <td><p>Get AmeriFlux site general info</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="amf_sites.html">amf_sites()</a></code> </p>
-        </td>
-        <td><p>Lists Ameriflux sites</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="amf_var_info.html">amf_var_info()</a></code> </p>
-        </td>
-        <td><p>Get variable information</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="amf_variables.html">amf_variables()</a></code> </p>
-        </td>
-        <td><p>Get FP (Flux-Processing) Standard Variable List</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>bif_data</th>
+      <td><p>A data frame consists of 5 columns: SITE_ID, GROUP_ID,
+VARIABLE_GROUP, VARIABLE, DATAVALUE, imported from function
+<code><a href='amf_read_bif.html'>amf_read_bif</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>select_group</th>
+      <td><p>A string, selected from VARIABLE_GROUP</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A data frame of re-structured BADM data with the following columns:</p><ul>
+<li><p>GROUP_ID - A unique identifier for data belonging to the same instance of a reported variable group</p></li>
+<li><p>SITE_ID - Six character site identifier (CC-Sss)</p></li>
+<li><p>VALUE - Values for all available VARIABLEs in the selected group</p></li>
+<li><p>...</p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>amf_read_bif</p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='co'># read the BADM BIF file, using an example data file</span>
+<span class='va'>bif</span> <span class='op'>&lt;-</span> <span class='fu'><a href='amf_read_bif.html'>amf_read_bif</a></span><span class='op'>(</span>file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>,
+                                       <span class='st'>"AMF_AA-Flx_BIF_20201218.xlsx"</span>,
+                                        package <span class='op'>=</span> <span class='st'>"amerifluxr"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># get a list of valid VARIALBE_GROUP</span>
+<span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>bif</span><span class='op'>$</span><span class='va'>VARIABLE_GROUP</span><span class='op'>)</span>
+
+<span class='co'># extract the selected VARIALBE_GROUP</span>
+<span class='fu'>amf_extract_badm</span><span class='op'>(</span>bif_data <span class='op'>=</span> <span class='va'>bif</span>, select_group <span class='op'>=</span> <span class='st'>"GRP_FLUX_MEASUREMENTS"</span><span class='op'>)</span>
+<span class='fu'>amf_extract_badm</span><span class='op'>(</span>bif_data <span class='op'>=</span> <span class='va'>bif</span>, select_group <span class='op'>=</span> <span class='st'>"GRP_IGBP"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
