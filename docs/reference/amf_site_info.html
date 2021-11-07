@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>License • amerifluxr</title>
+<title>Get AmeriFlux site general info — amf_site_info • amerifluxr</title>
 
 
 <!-- jquery -->
@@ -18,8 +18,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
 <!-- bootstrap-toc -->
-<link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script>
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
@@ -33,13 +33,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
 
 
 
-<meta property="og:title" content="License" />
+<meta property="og:title" content="Get AmeriFlux site general info — amf_site_info" />
+<meta property="og:description" content="This function obtains the latest AmeriFlux site list and
+sites' general info through the AmeriFlux web service." />
 
 
 
@@ -58,7 +60,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-title-body">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -70,7 +72,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">amerifluxr</a>
+        <a class="navbar-link" href="../index.html">amerifluxr</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
@@ -78,13 +80,13 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
+  <a href="../index.html">
     <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -94,10 +96,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="articles/data_import.html">Data Import</a>
+      <a href="../articles/data_import.html">Data Import</a>
     </li>
     <li>
-      <a href="articles/site_selection.html">Site selection</a>
+      <a href="../articles/site_selection.html">Site selection</a>
     </li>
   </ul>
 </li>
@@ -120,66 +122,73 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>License</h1>
+    <h1>Get AmeriFlux site general info</h1>
+    <small class="dont-index">Source: <a href='https://github.com/chuhousen/amerifluxr/blob/master/R/amf_site_info.R'><code>R/amf_site_info.R</code></a></small>
+    <div class="hidden name"><code>amf_site_info.Rd</code></div>
     </div>
 
-<pre>amerifluxr Copyright (c) 2021, The Regents of the University of California,
-through Lawrence Berkeley National Laboratory (subject to receipt of
-any required approvals from the U.S. Dept. of Energy) and Koen Hufkens. 
-All rights reserved.
+    <div class="ref-description">
+    <p>This function obtains the latest AmeriFlux site list and
+sites' general info through the AmeriFlux web service.</p>
+    </div>
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
+    <pre class="usage"><span class='fu'>amf_site_info</span><span class='op'>(</span>contact_info <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
-(1) Redistributions of source code must retain the above copyright notice,
-this list of conditions and the following disclaimer.
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>contact_info</th>
+      <td><p>include contact info (TRUE / FALSE)</p></td>
+    </tr>
+    </table>
 
-(2) Redistributions in binary form must reproduce the above copyright
-notice, this list of conditions and the following disclaimer in the
-documentation and/or other materials provided with the distribution.
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-(3) Neither the name of the University of California, Lawrence Berkeley
-National Laboratory, U.S. Dept. of Energy, nor the name of the contributors 
-may be used to endorse or promote products derived from this software 
-without specific prior written permission.
+    <p>A data frame containing the following columns.
+See AmeriFlux BADM standard <a href='https://ameriflux.lbl.gov/data/badm/'>https://ameriflux.lbl.gov/data/badm/</a>
+for detailed explanation.</p><ul>
+<li><p>SITE_ID - Six character site identifier (CC-Sss)</p></li>
+<li><p>SITE_NAME - Site name (free text)</p></li>
+<li><p>URL_AMERIFLUX - Site web site URL, maintained by AmeriFlux (URL)</p></li>
+<li><p>TOWER_BEGAN - The starting year of flux measurement (YYYY)</p></li>
+<li><p>TOWER_END - The ending year of flux measurement (YYYY), NA if still active or unspecified</p></li>
+<li><p>IGBP - Vegetation type based on the IGBP definition (free text)</p></li>
+<li><p>GRP_LOCATION.LOCATION_LAT - Latitude of the site (decimal deg ref WGS84)</p></li>
+<li><p>GRP_LOCATION.LOCATION_LONG - Longitude of the site (decimal deg ref WGS84)</p></li>
+<li><p>GRP_LOCATION.LOCATION_ELEV - Elevation of the site above sea level (m)</p></li>
+<li><p>GRP_CLIM_AVG.MAT - Long-term mean annual average air temperature (degree C)</p></li>
+<li><p>GRP_CLIM_AVG.MAP - Long-term mean annual average precipitation (mm)</p></li>
+<li><p>GRP_CLIM_AVG.CLIMATE_KOEPPEN - Koppen climate classification (free text)</p></li>
+<li><p>DATA_START - The starting year with published AmeriFlux data (YYYY)</p></li>
+<li><p>DATA_END - The ending year with published AmeriFlux data (YYYY)</p></li>
+<li><p>TEAM_MEMBER_PI1 - Site principal investigator #1 name (First/Given Last/Family)</p></li>
+<li><p>TEAM_MEMBER_PI1_EMAIL - Site principal investigator #1 email (free text)</p></li>
+<li><p>TEAM_MEMBER_PI2 - Site principal investigator #2 name (First/Given Last/Family)</p></li>
+<li><p>TEAM_MEMBER_PI2_EMAIL - Site principal investigator #2 email (free text)</p></li>
+<li><p>TEAM_MEMBER_PI3 - Site principal investigator #3 name (First/Given Last/Family)</p></li>
+<li><p>TEAM_MEMBER_PI3_EMAIL - Site principal investigator #3 email (free text)</p></li>
+</ul>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
-LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.
+    <p>This combines the information of various other functions.</p>
 
-You are under no obligation whatsoever to provide any bug fixes, patches,
-or upgrades to the features, functionality or performance of the source
-code ("Enhancements") to anyone; however, if you choose to make your
-Enhancements available either publicly, or directly to Lawrence Berkeley
-National Laboratory, without imposing a separate written license agreement
-for such Enhancements, then you hereby grant the following license: a
-non-exclusive, royalty-free perpetual license to install, use, modify,
-prepare derivative works, incorporate into other computer software,
-distribute, and sublicense such enhancements or derivative works thereof,
-in binary and source code form.
-</pre>
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='co'># obtain the basic general info for all sites</span>
+<span class='va'>site</span> <span class='op'>&lt;-</span> <span class='fu'>amf_site_info</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
-
 
 
       <footer>
