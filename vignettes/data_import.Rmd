@@ -27,7 +27,7 @@ Both data and metadata can be downloaded through the [AmeriFlux data portal] (ht
 
 While downloading BASE data product, users can also choose to download additional metadata files (aka. BADM data product) for all AmeriFlux sites. If so, a single Excel file (e.g., AMF_AA-Flx_BIF_YYYYMMDD.xlsx, AMF_AA-Net_BIF_YYYYMMDD.xlsx) will be provided in the download.
 
-For this vignette, we will use following example data files.
+For this vignette, we will use following example data files [files are truncated to limit package size, for demonstration purpopses only].
 
 ```{r echo=TRUE}
 # An example of BASE zipped files downloaded for US-CRT site
@@ -44,7 +44,7 @@ system.file("extdata", "AMF_AA-Flx_BIF_20201218.xlsx", package = "amerifluxr")
 # BASE data product
 ## Import BASE data product
 
-The amd_read_base() can be used to import BASE file, either from a zipped file or an unzipped comma-separated file. The parse_timestamp parameter can be used if additional time-keeping columns (e.g., year, month, day, hour) are desired.   
+The amd_read_base() can be used to import BASE file, either from a zipped file or an unzipped comma-separated file. The parse_timestamp parameter can be used if additional time-keeping columns (e.g., year, month, day, hour) are desired. 
 
 ```{r results = "asis"}
 # read the BASE from a zip file, without additional parsed time-keeping columns
