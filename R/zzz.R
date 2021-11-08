@@ -27,7 +27,6 @@ Numextract <- function(string) {
 amf_server <- function(endpoint = "sitemap"){
 
   # base urls
-<<<<<<< HEAD
   base_url <- "https://amfcdn.lbl.gov/"
   api_url <- file.path(base_url, "api/v1")
   base_url_old <- "https://ameriflux-data.lbl.gov/"
@@ -37,18 +36,6 @@ amf_server <- function(endpoint = "sitemap"){
   # temporary github link for intermediate data summary, currently point to a temporary public repo
   #  need to update when main repository becomes public
   git_base_url <- "https://raw.githubusercontent.com/chuhousen/amerifluxr/master/data-summary"
-=======
-  base_url <- "https://ameriflux-data.lbl.gov"
-  api_url <- file.path(base_url,"AmeriFlux/SiteSearch.svc")
-  var_info_url <-
-    "ftp://ftp.fluxdata.org/.ameriflux_downloads/measurement_height/"
-
-  # temporary github link for intermediate data summary,
-  # currently point to a temporary public repo
-  # need to update when main repository becomes public
-  git_base_url <-
-    "https://raw.githubusercontent.com/chuhousen/amerifluxr_data_tmp/main"
->>>>>>> f59a5c1fd15ebef7bc102e1b234d75d7012b48f5
 
   # what to return
   url <- switch(

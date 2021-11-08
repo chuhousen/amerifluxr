@@ -21,8 +21,6 @@ amf_sites <- memoise::memoise(function(){
   return(df)
 })
 
-<<<<<<< HEAD
-=======
 
 #' Lists all site member info
 #'
@@ -45,21 +43,11 @@ amf_member_info <- memoise::memoise(function(site_id){
 })
 
 
->>>>>>> f59a5c1fd15ebef7bc102e1b234d75d7012b48f5
 #' Returns a list of data coverage
 #'
 #' Ameriflux data coverage statistics
 #'
-<<<<<<< HEAD
-#' @param data_product Ameriflux data product. Only "BASE-BADM" data product is supported in current version,
-#' and will be expanded for others in the future.
-#' @param data_policy Specify data use policy, either "CCBY4.0" and "LEGACY". See AmeriFlux website
-#'  \url{https://ameriflux.lbl.gov/data/data-policy/} for details.
-#'
-#' @return
-=======
 #' @return Ameriflux data coverage
->>>>>>> f59a5c1fd15ebef7bc102e1b234d75d7012b48f5
 #' @export
 
 amf_data_coverage <- memoise::memoise(function(data_product = "BASE-BADM",
