@@ -21,7 +21,8 @@ amf_download_base(
 
 \item{user_email}{AmeriFlux account user email (character)}
 
-\item{site_id}{A vector of character specifying the AmeriFlux Site ID (CC-Sss)}
+\item{site_id}{A vector of character specifying the AmeriFlux
+Site ID (CC-Sss)}
 
 \item{data_product}{AmeriFlux data product. Currently, only "BASE-BADM" is
 supported and used as default.}
@@ -61,7 +62,7 @@ and \url{https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/}.
 \dontrun{
 ## Download a single site, under CCBY4.0 policy
 amf_download_base(user_id = "test",
- user_email = "test@mail.com",
+ user_email = "test _at_ mail.com",
  site_id = "US-CRT",
  data_product = "BASE-BADM",
  data_policy = "CCBY4.0",
@@ -73,7 +74,7 @@ amf_download_base(user_id = "test",
 #  When finished, return a list of downloaded files
 #  in your local drive.
 file.ls <- amf_download_base(user_id = "test",
- user_email = "test@mail.com",
+ user_email = "test _at_ mail.com",
  site_id = c("US-CRT", "US-WPT", "US-Oho"),
  data_product = "BASE-BADM",
  data_policy = "LEGACY",

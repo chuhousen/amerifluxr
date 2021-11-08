@@ -10,7 +10,8 @@
 #'
 #' @param user_id AmeriFlux account username (character)
 #' @param user_email AmeriFlux account user email (character)
-#' @param site_id A vector of character specifying the AmeriFlux Site ID (CC-Sss)
+#' @param site_id A vector of character specifying the AmeriFlux
+#'  Site ID (CC-Sss)
 #' @param data_product AmeriFlux data product. Currently, only "BASE-BADM" is
 #' supported and used as default.
 #' @param data_policy "CCBY4.0" or "LEGACY". AmeriFlux data are shared under two
@@ -35,7 +36,7 @@
 #' \dontrun{
 #' ## Download a single site, under CCBY4.0 policy
 #' amf_download_base(user_id = "test",
-#'  user_email = "test@mail.com",
+#'  user_email = "test _at_ mail.com",
 #'  site_id = "US-CRT",
 #'  data_product = "BASE-BADM",
 #'  data_policy = "CCBY4.0",
@@ -47,7 +48,7 @@
 #' #  When finished, return a list of downloaded files
 #' #  in your local drive.
 #' file.ls <- amf_download_base(user_id = "test",
-#'  user_email = "test@mail.com",
+#'  user_email = "test _at_ mail.com",
 #'  site_id = c("US-CRT", "US-WPT", "US-Oho"),
 #'  data_product = "BASE-BADM",
 #'  data_policy = "LEGACY",
@@ -56,15 +57,18 @@
 #'  out_dir = tempdir())
 #'}
 #'
-amf_download_base <- function(user_id,
-                              user_email,
-                              site_id,
-                              data_product = "BASE-BADM",
-                              data_policy,
-                              intended_use,
-                              intended_use_text,
-                              out_dir = tempdir(),
-                              verbose = TRUE) {
+amf_download_base <- function(
+  user_id,
+  user_email,
+  site_id,
+  data_product = "BASE-BADM",
+  data_policy,
+  intended_use,
+  intended_use_text,
+  out_dir = tempdir(),
+  verbose = TRUE
+  ) {
+
   ## obtain formal intended use category
   intended_use_cat <- function(intended_use) {
     intended_use_verbse <- switch(
@@ -90,8 +94,7 @@ amf_download_base <- function(user_id,
         U.S. Department of Energy Office of Science.\n")
     cat("Please acknowledge you read and agree to the AmeriFlux CC-BY-4.0
         Data Policy (https://ameriflux.lbl.gov/data/data-policy/#data-use).")
-    agree_policy <- readline(prompt =
-                               "[Yes/No]")
+    agree_policy <- readline(prompt = "[Yes/No]")
 
   } else if (data_policy == "LEGACY") {
     cat("Data shared under the AmeriFlux CC-BY-4.0 License follow the
@@ -102,8 +105,7 @@ amf_download_base <- function(user_id,
         U.S. Department of Energy Office of Science.\n")
     cat("Please acknowledge that you read and agree to the AmeriFlux Legacy
         Data Policy (https://ameriflux.lbl.gov/data/data-policy/#data-use).")
-    agree_policy <- readline(prompt =
-                               "[Yes/No]")
+    agree_policy <- readline(prompt = "[Yes/No]")
 
   } else {
     stop("Need to specify a data policy before proceed")
@@ -158,7 +160,7 @@ amf_download_base <- function(user_id,
       link <- httr::content(result)
       ftplink <- NULL
       if (length(link$data_urls) > 0) {
-        for (i in 1:length(link$data_urls)) {
+        for (i in seq_len(length(link$data_urls))) {
           ftplink <- c(ftplink,
                        link$data_urls[[i]]$url)
         }
@@ -173,7 +175,8 @@ amf_download_base <- function(user_id,
       outfname <- strsplit(ftplink, c("/"))
       outfname <- sapply(outfname,  utils::tail, n = 1)
       outfname <-
-        substr(outfname, 1, sapply(outfname, regexpr, pattern = "?=", fixed = T) - 1)
+        substr(outfname, 1,
+               sapply(outfname, regexpr, pattern = "?=", fixed = TRUE) - 1)
 
       ## check if any site_id has no data
       if (length(outfname) < length(site_id)) {
@@ -184,7 +187,7 @@ amf_download_base <- function(user_id,
 
       ## download sequentially
       output_zip_file <- file.path(out_dir, outfname)
-      for (ii in 1:length(ftplink)) {
+      for (ii in seq_len(length(ftplink))) {
         utils::download.file(ftplink[ii],
                              output_zip_file[ii],
                              mode = "wb",
