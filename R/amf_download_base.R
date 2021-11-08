@@ -86,7 +86,7 @@ amf_download_base <- function(
   if (data_policy == "CCBY4.0") {
     cat("Data shared under the AmeriFlux Legacy Data Policy follow
         the attribution guidelines:\n")
-    cat("(1) Provide a citation to each site’s data product that includes
+    cat("(1) Provide a citation to each site data product that includes
         the data-product DOI and/or recommended publication.\n")
     cat("(2) Acknowledge funding for site support if it was provided in
         the data download information.\n")
@@ -99,7 +99,7 @@ amf_download_base <- function(
   } else if (data_policy == "LEGACY") {
     cat("Data shared under the AmeriFlux CC-BY-4.0 License follow the
         attribution guidelines:\n")
-    cat("(1) Provide a citation to each site’s data product that includes
+    cat("(1) Provide a citation to each site data product that includes
         the data-product DOI.\n")
     cat("(2) Acknowledge funding for supporting AmeriFlux data portal:
         U.S. Department of Energy Office of Science.\n")
