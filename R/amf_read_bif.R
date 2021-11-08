@@ -40,7 +40,7 @@ amf_read_bif <- function(file) {
   # read in BIF excel file
   bif_data <- readxl::read_excel(file,
                                  sheet = 1,
-                                 col_names = T,
+                                 col_names = TRUE,
                                  na = "-9999")
 
   bif_data$GROUP_ID <- as.character(bif_data$GROUP_ID)

@@ -29,7 +29,10 @@
 #' group_only = FALSE)
 #'}
 
-amf_metadata_aval <- function(site_set = NULL, group_only = TRUE){
+amf_metadata_aval <- function(
+  site_set = NULL,
+  group_only = TRUE
+  ){
 
   # determine the level of granularity
   target_level <- ifelse(group_only, "bif_group", "bif_variable")
@@ -39,7 +42,7 @@ amf_metadata_aval <- function(site_set = NULL, group_only = TRUE){
 
     # get latest data variable availability
     metadata_aval <- utils::read.csv(amf_server(target_level),
-                                 header = T,
+                                 header = TRUE,
                                  skip = 1,
                                  stringsAsFactors = FALSE)
 
