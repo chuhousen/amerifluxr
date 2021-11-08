@@ -6,13 +6,6 @@
 \usage{
 amf_data_coverage(data_product = "BASE-BADM", data_policy = "CCBY4.0")
 }
-\arguments{
-\item{data_product}{Ameriflux data product. Only "BASE-BADM" data product is supported in current version,
-and will be expanded for others in the future.}
-
-\item{data_policy}{Specify data use policy, either "CCBY4.0" and "LEGACY". See AmeriFlux website
-\url{https://ameriflux.lbl.gov/data/data-policy/} for details.}
-}
 \value{
 Ameriflux data coverage
 }

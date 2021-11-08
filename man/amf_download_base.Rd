@@ -21,18 +21,23 @@ amf_download_base(
 
 \item{user_email}{AmeriFlux account user email (character)}
 
-\item{site_id}{A vector of character specifying the target AmeriFlux Site ID (CC-Sss)}
+\item{site_id}{A vector of character specifying the AmeriFlux Site ID (CC-Sss)}
 
-\item{data_product}{AmeriFlux data product. Currently, only "BASE-BADM" is supported and used as default.}
+\item{data_product}{AmeriFlux data product. Currently, only "BASE-BADM" is
+supported and used as default.}
 
-\item{data_policy}{"CCBY4.0" or "LEGACY". AmeriFlux data are shared under two tiers of licenses as chosen by site's PI.
-See \url{https://ameriflux.lbl.gov/data/data-policy/#data-use} for data use guidelines under each license. Note: Data use policy
+\item{data_policy}{"CCBY4.0" or "LEGACY". AmeriFlux data are shared under two
+tiers of licenses as chosen by site's PI. See
+\url{https://ameriflux.lbl.gov/data/data-policy/#data-use} for data use
+guidelines under each license. Note: Data use policy
 selected affects which sites’ data are available for download.}
 
-\item{intended_use}{The intended use category. Currently, it needs to be one of the followings: "synthesis", "model", "remote_sensing",
-"other_research", "education", or "other"}
+\item{intended_use}{The intended use category. Currently, it needs to be one
+of the followings: "synthesis", "model", "remote_sensing", "other_research",
+ "education", or "other"}
 
-\item{intended_use_text}{Enter a brief description of intended use. This will be recorded in the data download log and emailed to
+\item{intended_use_text}{Enter a brief description of intended use. This will
+be recorded in the data download log and emailed to
 site's PI (free text).}
 
 \item{out_dir}{Output directory for downloaded data}
@@ -43,9 +48,12 @@ site's PI (free text).}
 A vector of download filenames on the local drive
 }
 \description{
-This function allows downloading AmeriFlux BASE and BADM data files. Note: Access to AmeriFlux data requires creating
-an AmeriFlux account first. Register an account through the link \url{https://ameriflux-data.lbl.gov/Pages/RequestAccount.aspx}.
-For details about BASE and BADM data files, see AmeriFlux web pages \url{https://ameriflux.lbl.gov/data/data-processing-pipelines/base-publish/}
+This function allows downloading AmeriFlux BASE and BADM data
+ files. Note: Access to AmeriFlux data requires creating an AmeriFlux account
+  first. Register an account through the link
+  \url{https://ameriflux-data.lbl.gov/Pages/RequestAccount.aspx}.
+For details about BASE and BADM data files, see AmeriFlux web pages
+ \url{https://ameriflux.lbl.gov/data/data-processing-pipelines/base-publish/}
 and \url{https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/}.
 }
 \examples{
