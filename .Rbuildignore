@@ -11,7 +11,7 @@
 # R-markdown files in the root folder.
 #^LICENSE$
 ^LICENSE\.md$
-^CONDUCT\.md$
+^CODE_OF_CONDUCT\.md$
 ^NEWS\.md$
 ^README\.md$
 ^contact\.md$
