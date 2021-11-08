@@ -33,8 +33,10 @@
 #' amf_extract_badm(bif_data = bif, select_group = "GRP_IGBP")
 #'}
 
-amf_extract_badm <- function(bif_data,
-                             select_group) {
+amf_extract_badm <- function(
+  bif_data,
+  select_group
+  ) {
 
   # stop if missing bif_data parameter
   if (missing(bif_data)) {
@@ -98,7 +100,7 @@ amf_extract_badm <- function(bif_data,
 
       bif_out <- merge.data.frame(bif_out,
                                   bif_work_tmp,
-                                  by = "GROUP_ID", all = T)
+                                  by = "GROUP_ID", all = TRUE)
 
       colnames(bif_out)[ncol(bif_out)] <- paste(var_ls[j])
     }

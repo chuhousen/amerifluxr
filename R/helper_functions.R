@@ -47,14 +47,19 @@ amf_member_info <- memoise::memoise(function(site_id){
 #'
 #' Ameriflux data coverage statistics
 #'
-#' @param data_product Data product (string). Currently, only "BASE-BADM" is supported.
-#' @param data_policy Data policy (string). Currently, "CCBY4.0" and "LEGACY" are supported.
+#' @param data_product Data product (string).
+#'  Currently, only "BASE-BADM" is supported.
+#' @param data_policy Data policy (string).
+#'  Currently, "CCBY4.0" and "LEGACY" are supported.
 #'
 #' @return Ameriflux data coverage
 #' @export
 
-amf_data_coverage <- memoise::memoise(function(data_product = "BASE-BADM",
-                                               data_policy = "CCBY4.0"){
+amf_data_coverage <- memoise::memoise(
+  function(
+    data_product = "BASE-BADM",
+    data_policy = "CCBY4.0"
+    ){
 
   # web service returning a full site list with
   # most-updated data available years in AmeriFlux BASE dataset
@@ -108,6 +113,3 @@ amf_variables <- function(){
 
   return(variables)
 }
-
-
-
