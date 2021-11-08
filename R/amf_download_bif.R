@@ -34,7 +34,7 @@
 #' \dontrun{
 #' ## Download all sites with BASE data, under CCBY4.0 policy
 #' amf_download_bif(user_id = "test",
-#'   user_email = "test@mail.com",
+#'   user_email = "test@@mail.com",
 #'   data_policy = "CCBY4.0",
 #'   intended_use = "other",
 #'   intended_use_text = "testing download",
@@ -43,7 +43,7 @@
 #'
 #' ## Download all registered sites, under LEGACY policy
 #' amf_download_bif(user_id = "test",
-#'   user_email = "test@mail.com",
+#'   user_email = "test@@mail.com",
 #'   data_policy = "LEGACY",
 #'   intended_use = "other",
 #'   intended_use_text = "testing download",

@@ -35,7 +35,7 @@
 #' \dontrun{
 #' ## Download a single site, under CCBY4.0 policy
 #' amf_download_base(user_id = "test",
-#'  user_email = "test@mail.com",
+#'  user_email = "test@@mail.com",
 #'  site_id = "US-CRT",
 #'  data_product = "BASE-BADM",
 #'  data_policy = "CCBY4.0",
@@ -47,7 +47,7 @@
 #' #  When finished, return a list of downloaded files
 #' #  in your local drive.
 #' file.ls <- amf_download_base(user_id = "test",
-#'  user_email = "test@mail.com",
+#'  user_email = "test@@mail.com",
 #'  site_id = c("US-CRT", "US-WPT", "US-Oho"),
 #'  data_product = "BASE-BADM",
 #'  data_policy = "LEGACY",
@@ -80,28 +80,19 @@ amf_download_base <- function(user_id,
   }
 
   if (data_policy == "CCBY4.0") {
-    cat("Data shared under the AmeriFlux Legacy Data Policy follow
-        the attribution guidelines:\n")
-    cat("(1) Provide a citation to each site’s data product that includes
-        the data-product DOI and/or recommended publication.\n")
-    cat("(2) Acknowledge funding for site support if it was provided in
-        the data download information.\n")
-    cat("(3) Acknowledge funding for supporting AmeriFlux data portal:
-        U.S. Department of Energy Office of Science.\n")
-    cat("Please acknowledge you read and agree to the AmeriFlux CC-BY-4.0
-        Data Policy (https://ameriflux.lbl.gov/data/data-policy/#data-use).")
+    cat("Data shared under the AmeriFlux Legacy Data Policy follow the attribution guidelines:\n")
+    cat("(1) Provide a citation to each site data product that includes the data-product DOI and/or recommended publication.\n")
+    cat("(2) Acknowledge funding for site support if it was provided in the data download information.\n")
+    cat("(3) Acknowledge funding for supporting AmeriFlux data portal: U.S. Department of Energy Office of Science.\n")
+    cat("Please acknowledge you read and agree to the AmeriFlux CC-BY-4.0 Data Policy (https://ameriflux.lbl.gov/data/data-policy/#data-use).")
     agree_policy <- readline(prompt =
                                "[Yes/No]")
 
   } else if (data_policy == "LEGACY") {
-    cat("Data shared under the AmeriFlux CC-BY-4.0 License follow the
-        attribution guidelines:\n")
-    cat("(1) Provide a citation to each site’s data product that includes
-        the data-product DOI.\n")
-    cat("(2) Acknowledge funding for supporting AmeriFlux data portal:
-        U.S. Department of Energy Office of Science.\n")
-    cat("Please acknowledge that you read and agree to the AmeriFlux Legacy
-        Data Policy (https://ameriflux.lbl.gov/data/data-policy/#data-use).")
+    cat("Data shared under the AmeriFlux CC-BY-4.0 License follow the attribution guidelines:\n")
+    cat("(1) Provide a citation to each site data product that includes the data-product DOI.\n")
+    cat("(2) Acknowledge funding for supporting AmeriFlux data portal: U.S. Department of Energy Office of Science.\n")
+    cat("Please acknowledge that you read and agree to the AmeriFlux Legacy Data Policy (https://ameriflux.lbl.gov/data/data-policy/#data-use).")
     agree_policy <- readline(prompt =
                                "[Yes/No]")
 
