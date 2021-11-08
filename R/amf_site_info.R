@@ -35,7 +35,7 @@
 #' site <- amf_site_info()
 #'
 #' ## End(Not run)
-#'
+#' }
 amf_site_info <- function(){
 
     # grab meta-data, data is memoised
