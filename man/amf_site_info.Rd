@@ -39,10 +39,8 @@ sites' general info through the AmeriFlux web service.
 This combines the information of various other functions.
 }
 \examples{
-#' ## Not run:
+\dontrun{
 # obtain the basic general info for all sites
 site <- amf_site_info()
-
-## End(Not run)
-
+}
 }

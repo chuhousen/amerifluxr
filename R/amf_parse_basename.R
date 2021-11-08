@@ -1,10 +1,15 @@
 #' Parse variable name and qualifier in the AmeriFlux BASE data product
 #'
-#' @description This function parse variable names and qualifiers of AmeriFlux BASE data product. See AmeriFlux web page
-#' \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/} about the details of variable naming and qualifiers.
+#' @description This function parse variable names and qualifiers of AmeriFlux
+#' BASE data product. See AmeriFlux web page
+#' \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/} about the
+#' details of variable naming and qualifiers.
+#'
 #' @param var_name A vector of variable names (character) to be parsed
-#' @param FP_ls A vector of standard variable names. If not specified, use \code{\link{amf_variables}} to get the latest list.
-#' @param gapfill_postfix Expected suffixes appended to variable being gap-filled. The default is "_PI_F".
+#' @param FP_ls A vector of standard variable names. If not specified,
+#'  use \code{\link{amf_variables}} to get the latest list.
+#' @param gapfill_postfix Expected suffixes appended to variable being
+#'  gap-filled. The default is "_PI_F".
 #'
 #' @return A data frame containing the parsed results for all variables in var_name:
 #' \itemize{
@@ -33,7 +38,7 @@
 #' @export
 #' @seealso amf_read_base, amf_variables, amf_data_aval, amf_var_info
 #' @examples
-#' ## Not run:
+#' \dontrun{
 #' # read the BASE from a csv file
 #' base <- amf_read_base(file = system.file("extdata",
 #'                                          "AMF_US-CRT_BASE_HH_2-5.csv",
@@ -43,12 +48,13 @@
 #'
 #' # parse variable names/qualifiers
 #' basename_decode <- amf_parse_basename(var_name = colnames(base))
-#'
-#' ## End(Not run)
-#'
-amf_parse_basename <- function(var_name,
-                               FP_ls = NULL,
-                               gapfill_postfix = "_PI_F") {
+#'}
+
+amf_parse_basename <- function(
+  var_name,
+  FP_ls = NULL,
+  gapfill_postfix = "_PI_F"
+  ) {
 
   # stop if missing var_name parameter
   if (missing(var_name)) {
@@ -71,29 +77,31 @@ amf_parse_basename <- function(var_name,
   }
 
   # a data frame for parsing results
-  basename_decode <- data.frame(variable_name = var_name,   # original variable name
-                                working_names = NA,         # working variable name, dropped in output
-                                basename = NA,              # associated basename, w/o qualifier
-                                qualifier_gf = NA,          # qualifier associated with gap-filling
-                                qualifier_pi = NA,          # qualifier associated with PI version, excluding gap-filling
-                                qualifier_pos = NA,         # qualifier associated with position
-                                qualifier_ag = NA,          # qualifier associated with layer-aggregation, e.g., _N, _SD
-                                layer_index = NA,           # layer index provided, if any
-                                H_index = NA,               # H index provided, if any
-                                V_index = NA,               # V index provided, if any
-                                R_index = NA,               # R index provided, if any
-                                is_correct_basename = NA,   # is the parsed basename recognized in FP-Standard
-                                is_pi_provide = NA,         # is this a PI provided variable e.g., _PI
-                                is_gapfill = NA,            # is this a gap-filled variable, _PF_F or _F
-                                is_fetch = NA,              # is this a fetch quantile variable, e.g., FETCH_70...FETCH_90
-                                is_layer_aggregated = NA,   # is this a layer-integrated var, i.e., _#
-                                is_layer_SD = NA,           # is this a standard deviation of layer-integrated var, i.e., spatial variability
-                                is_layer_number = NA,       # is this a number of samples of layer-integrated var, i.e., spatial variability
-                                is_replicate_aggregated = NA,  # is this a replicate-averaged var, i.e., _<H>_<V>_A
-                                is_replicate_SD = NA,       # is this a standard deviation of replicate-averaged var, i.e., _<H>_<V>_A_SD
-                                is_replicate_number = NA,   # is this a number of samples of replicate-averaged var, i.e., _<H>_<V>_A_N
-                                is_quadruplet = NA,         # is this a quadruplet, i.e., _<H>_<V>_<R>
-                                stringsAsFactors = FALSE)
+  basename_decode <- data.frame(
+    variable_name = var_name,   # original variable name
+    working_names = NA,         # working variable name, dropped in output
+    basename = NA,              # associated basename, w/o qualifier
+    qualifier_gf = NA,          # qualifier associated with gap-filling
+    qualifier_pi = NA,          # qualifier associated with PI version, excluding gap-filling
+    qualifier_pos = NA,         # qualifier associated with position
+    qualifier_ag = NA,          # qualifier associated with layer-aggregation, e.g., _N, _SD
+    layer_index = NA,           # layer index provided, if any
+    H_index = NA,               # H index provided, if any
+    V_index = NA,               # V index provided, if any
+    R_index = NA,               # R index provided, if any
+    is_correct_basename = NA,   # is the parsed basename recognized in FP-Standard
+    is_pi_provide = NA,         # is this a PI provided variable e.g., _PI
+    is_gapfill = NA,            # is this a gap-filled variable, _PF_F or _F
+    is_fetch = NA,              # is this a fetch quantile variable, e.g., FETCH_70...FETCH_90
+    is_layer_aggregated = NA,   # is this a layer-integrated var, i.e., _#
+    is_layer_SD = NA,           # is this a standard deviation of layer-integrated var, i.e., spatial variability
+    is_layer_number = NA,       # is this a number of samples of layer-integrated var, i.e., spatial variability
+    is_replicate_aggregated = NA,  # is this a replicate-averaged var, i.e., _<H>_<V>_A
+    is_replicate_SD = NA,       # is this a standard deviation of replicate-averaged var, i.e., _<H>_<V>_A_SD
+    is_replicate_number = NA,   # is this a number of samples of replicate-averaged var, i.e., _<H>_<V>_A_N
+    is_quadruplet = NA,         # is this a quadruplet, i.e., _<H>_<V>_<R>
+    stringsAsFactors = FALSE
+    )
 
   #####################################################################
   ## locate gap-filled variables
@@ -128,21 +136,24 @@ amf_parse_basename <- function(var_name,
   #######################################################################
   #### work on quadruplet _H_V_R
   ## locate quadruplet _H_V_R
-  basename_decode$is_quadruplet <- (!basename_decode$is_fetch &
-                                      grepl("_[[:digit:]]+_[[:digit:]]+_[[:digit:]]+",
-                                            basename_decode$working_names,
-                                            perl = TRUE)) | grepl(
-                                              "FETCH_[[:digit:]]+_[[:digit:]]+_[[:digit:]]+_[[:digit:]]+",
-                                              basename_decode$working_names,
-                                              perl = TRUE)
+  basename_decode$is_quadruplet <- (
+    !basename_decode$is_fetch &
+      grepl("_[[:digit:]]+_[[:digit:]]+_[[:digit:]]+",
+            basename_decode$working_names,
+            perl = TRUE)) | grepl(
+              "FETCH_[[:digit:]]+_[[:digit:]]+_[[:digit:]]+_[[:digit:]]+",
+              basename_decode$working_names,
+              perl = TRUE)
 
-  basename_decode$qualifier_pos <- ifelse(basename_decode$is_quadruplet,
-                                          substr(basename_decode$working_names,
-                                                 start = regexpr("_[[:digit:]]+_[[:digit:]]+_[[:digit:]]+",
-                                                                 basename_decode$working_names,
-                                                                 perl = TRUE) + ifelse(basename_decode$is_fetch, 3, 0),
-                                                 stop = nchar(basename_decode$working_names)),
-                                          basename_decode$qualifier_pos)
+  basename_decode$qualifier_pos <- ifelse(
+    basename_decode$is_quadruplet,
+    substr(basename_decode$working_names,
+           start = regexpr(
+             "_[[:digit:]]+_[[:digit:]]+_[[:digit:]]+",
+             basename_decode$working_names,
+             perl = TRUE) + ifelse(basename_decode$is_fetch, 3, 0),
+           stop = nchar(basename_decode$working_names)),
+    basename_decode$qualifier_pos)
 
   # parse position qualifier
   for (i1 in seq_len(nrow(basename_decode))) {
@@ -159,15 +170,17 @@ amf_parse_basename <- function(var_name,
                                            basename_decode$working_names,
                                            perl = TRUE)
 
-  basename_decode$qualifier_pos <- ifelse(basename_decode$is_replicate_SD,
-                                          substr(basename_decode$working_names,
-                                                 start = regexpr("_[[:digit:]]+_[[:digit:]]+_A_SD",
-                                                                 basename_decode$working_names,
-                                                                 perl = TRUE),
-                                                 stop = regexpr("_SD",
-                                                                basename_decode$working_names,
-                                                                perl = TRUE) - 1),
-                                          basename_decode$qualifier_pos)
+  basename_decode$qualifier_pos <- ifelse(
+    basename_decode$is_replicate_SD,
+    substr(basename_decode$working_names,
+           start = regexpr("_[[:digit:]]+_[[:digit:]]+_A_SD",
+                           basename_decode$working_names,
+                           perl = TRUE),
+           stop = regexpr("_SD",
+                          basename_decode$working_names,
+                          perl = TRUE) - 1),
+    basename_decode$qualifier_pos)
+
   # parse position qualifier
   for (i2 in seq_len(nrow(basename_decode))) {
     if (basename_decode$is_replicate_SD[i2]) {
@@ -178,19 +191,22 @@ amf_parse_basename <- function(var_name,
   }
 
   ## locate replicate aggregated N
-  basename_decode$is_replicate_number <- grepl("_[[:digit:]]+_[[:digit:]]+_A_N",
-                                               basename_decode$working_names,
-                                               perl = TRUE)
+  basename_decode$is_replicate_number <- grepl(
+    "_[[:digit:]]+_[[:digit:]]+_A_N",
+    basename_decode$working_names,
+    perl = TRUE)
 
-  basename_decode$qualifier_pos <- ifelse(basename_decode$is_replicate_number,
-                                          substr(basename_decode$working_names,
-                                                 start = regexpr("_[[:digit:]]+_[[:digit:]]+_A_N",
-                                                                 basename_decode$working_names,
-                                                                 perl = TRUE),
-                                                 stop = regexpr("_N",
-                                                                basename_decode$working_names,
-                                                                perl = TRUE) - 1),
-                                          basename_decode$qualifier_pos)
+  basename_decode$qualifier_pos <- ifelse(
+    basename_decode$is_replicate_number,
+    substr(basename_decode$working_names,
+           start = regexpr("_[[:digit:]]+_[[:digit:]]+_A_N",
+                           basename_decode$working_names,
+                           perl = TRUE),
+           stop = regexpr("_N",
+                          basename_decode$working_names,
+                          perl = TRUE) - 1),
+    basename_decode$qualifier_pos)
+
   # parse position qualifier
   for (i3 in seq_len(nrow(basename_decode))) {
     if (basename_decode$is_replicate_number[i3]) {
@@ -201,19 +217,22 @@ amf_parse_basename <- function(var_name,
   }
 
   ## find replicate aggregated
-  basename_decode$is_replicate_aggregated <- (grepl("_[[:digit:]]+_[[:digit:]]+_A",
-                                                 basename_decode$working_names,
-                                                 perl = TRUE) &
-                                             !basename_decode$is_replicate_number &
-                                             !basename_decode$is_replicate_SD)
+  basename_decode$is_replicate_aggregated <- (
+    grepl("_[[:digit:]]+_[[:digit:]]+_A",
+          basename_decode$working_names,
+          perl = TRUE) &
+      !basename_decode$is_replicate_number &
+      !basename_decode$is_replicate_SD)
 
-  basename_decode$qualifier_pos <- ifelse(basename_decode$is_replicate_aggregated,
-                                          substr(basename_decode$working_names,
-                                                 start = regexpr("_[[:digit:]]+_[[:digit:]]+_A",
-                                                                 basename_decode$working_names,
-                                                                 perl = TRUE),
-                                                 stop = nchar(basename_decode$working_names)),
-                                          basename_decode$qualifier_pos)
+  basename_decode$qualifier_pos <- ifelse(
+    basename_decode$is_replicate_aggregated,
+    substr(basename_decode$working_names,
+           start = regexpr("_[[:digit:]]+_[[:digit:]]+_A",
+                           basename_decode$working_names,
+                           perl = TRUE),
+           stop = nchar(basename_decode$working_names)),
+    basename_decode$qualifier_pos)
+
   for (i4 in seq_len(nrow(basename_decode))) {
     if (basename_decode$is_replicate_aggregated[i4]) {
       basename_decode[i4, c("H_index", "V_index", "R_index")] <-
@@ -221,22 +240,24 @@ amf_parse_basename <- function(var_name,
     }
   }
 
-  ##################################################################################################
+  ##############################################################################
   #### work on layer aggregated variable, _#, _#_SD, _#_N
   ## locate layer aggregated SD
   basename_decode$is_layer_SD <- grepl("_[[:digit:]]+_SD",
                                        basename_decode$working_names,
                                        perl = TRUE)
 
-  basename_decode$qualifier_pos <- ifelse(basename_decode$is_layer_SD,
-                                          substr(basename_decode$working_names,
-                                                 start = regexpr("_[[:digit:]]+_SD",
-                                                                 basename_decode$working_names,
-                                                                 perl = TRUE),
-                                                 stop = regexpr("_SD",
-                                                                basename_decode$working_names,
-                                                                perl = TRUE) - 1),
-                                          basename_decode$qualifier_pos)
+  basename_decode$qualifier_pos <- ifelse(
+    basename_decode$is_layer_SD,
+    substr(basename_decode$working_names,
+           start = regexpr("_[[:digit:]]+_SD",
+                           basename_decode$working_names,
+                           perl = TRUE),
+           stop = regexpr("_SD",
+                          basename_decode$working_names,
+                          perl = TRUE) - 1),
+    basename_decode$qualifier_pos)
+
   # parse qualifier
   for (i5 in seq_len(nrow(basename_decode))) {
     if (basename_decode$is_layer_SD[i5]) {
@@ -251,15 +272,17 @@ amf_parse_basename <- function(var_name,
                                            basename_decode$working_names,
                                            perl = TRUE)
 
-  basename_decode$qualifier_pos <- ifelse(basename_decode$is_layer_number,
-                                          substr(basename_decode$working_names,
-                                                 start = regexpr("_[[:digit:]]+_N",
-                                                                 basename_decode$working_names,
-                                                                 perl = TRUE),
-                                                 stop = regexpr("_N",
-                                                                basename_decode$working_names,
-                                                                perl = TRUE) - 1),
-                                          basename_decode$qualifier_pos)
+  basename_decode$qualifier_pos <- ifelse(
+    basename_decode$is_layer_number,
+    substr(basename_decode$working_names,
+           start = regexpr("_[[:digit:]]+_N",
+                           basename_decode$working_names,
+                           perl = TRUE),
+           stop = regexpr("_N",
+                          basename_decode$working_names,
+                          perl = TRUE) - 1),
+    basename_decode$qualifier_pos)
+
   # parse position qualifier
   for (i6 in seq_len(nrow(basename_decode))) {
     if (basename_decode$is_layer_number[i6]) {
@@ -270,16 +293,17 @@ amf_parse_basename <- function(var_name,
   }
 
   ## locate layer aggregated variables
-  basename_decode$is_layer_aggregated <- (grepl("_[[:digit:]]+",
-                                               basename_decode$working_names,
-                                               perl = TRUE) &
-                                           !basename_decode$is_fetch &
-                                           !basename_decode$is_quadruplet &
-                                           !basename_decode$is_replicate_aggregated &
-                                           !basename_decode$is_replicate_number &
-                                           !basename_decode$is_replicate_SD &
-                                           !basename_decode$is_layer_SD &
-                                           !basename_decode$is_layer_number
+  basename_decode$is_layer_aggregated <- (
+    grepl("_[[:digit:]]+",
+          basename_decode$working_names,
+          perl = TRUE) &
+      !basename_decode$is_fetch &
+      !basename_decode$is_quadruplet &
+      !basename_decode$is_replicate_aggregated &
+      !basename_decode$is_replicate_number &
+      !basename_decode$is_replicate_SD &
+      !basename_decode$is_layer_SD &
+      !basename_decode$is_layer_number
   ) | (grepl("FETCH_[[:digit:]]+_[[:digit:]]+",
              basename_decode$working_names,
              perl = TRUE) &
@@ -291,13 +315,14 @@ amf_parse_basename <- function(var_name,
          !basename_decode$is_layer_SD &
          !basename_decode$is_layer_number)
 
-  basename_decode$qualifier_pos <- ifelse(basename_decode$is_layer_aggregated,
-                                          substr(basename_decode$working_names,
-                                                 start = regexpr("_[[:digit:]]+",
-                                                                 basename_decode$working_names,
-                                                                 perl = TRUE) + ifelse(basename_decode$is_fetch, 3, 0),
-                                                 stop = nchar(basename_decode$working_names)),
-                                          basename_decode$qualifier_pos)
+  basename_decode$qualifier_pos <- ifelse(
+    basename_decode$is_layer_aggregated,
+    substr(basename_decode$working_names,
+           start = regexpr("_[[:digit:]]+",
+                           basename_decode$working_names,
+                           perl = TRUE) + ifelse(basename_decode$is_fetch, 3, 0),
+           stop = nchar(basename_decode$working_names)),
+    basename_decode$qualifier_pos)
 
   # parse position qualifier
   for (i7 in seq_len(nrow(basename_decode))) {
@@ -307,20 +332,22 @@ amf_parse_basename <- function(var_name,
     }
   }
 
-  ############################################################################################
+  ##############################################################################
   ## parse basename, w/o all qualifiers
   basename_decode$basename <- basename_decode$working_names
   for (i8 in seq_len(nrow(basename_decode))) {
     if (!is.na(basename_decode$qualifier_pos[i8])) {
-      basename_decode$basename[i8] <- sub(basename_decode$qualifier_pos[i8],
-                                          "",
-                                          basename_decode$working_names[i8])
+      basename_decode$basename[i8] <- sub(
+        basename_decode$qualifier_pos[i8],
+        "",
+        basename_decode$working_names[i8])
     }
     if (!is.na(basename_decode$qualifier_ag[i8])) {
-      basename_decode$basename[i8] <- sub(paste0(basename_decode$qualifier_pos[i8],
-                                                 basename_decode$qualifier_ag[i8]),
-                                          "",
-                                          basename_decode$working_names[i8])
+      basename_decode$basename[i8] <- sub(
+        paste0(basename_decode$qualifier_pos[i8],
+               basename_decode$qualifier_ag[i8]),
+        "",
+        basename_decode$working_names[i8])
     }
   }
 
@@ -333,14 +360,12 @@ amf_parse_basename <- function(var_name,
   }
 
   ## re-order to follow input order
-  basename_decode <- merge.data.frame(x = data.frame(variable_name = var_name,
-                                                     stringsAsFactors = FALSE),
-                                      y = basename_decode[, -which(colnames(basename_decode) == "working_names")],
-                                      by = "variable_name",
-                                      sort = FALSE)
+  basename_decode <- merge.data.frame(
+    x = data.frame(variable_name = var_name,
+                   stringsAsFactors = FALSE),
+    y = basename_decode[, -which(colnames(basename_decode) == "working_names")],
+    by = "variable_name",
+    sort = FALSE)
 
   return(basename_decode)
 }
-
-
-

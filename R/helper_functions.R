@@ -3,7 +3,7 @@
 #'
 #' Lists available site (names) and meta-data
 #'
-#' @return
+#' @return list of ameriflux sites
 #' @export
 
 amf_sites <- memoise::memoise(function(){
@@ -21,16 +21,45 @@ amf_sites <- memoise::memoise(function(){
   return(df)
 })
 
+<<<<<<< HEAD
+=======
+
+#' Lists all site member info
+#'
+#' This function actually lists ALL site info
+#' of which only a fraction is used during processing
+#'
+#' @param site_id Ameriflux site id
+#'
+#' @return Ameriflux site ids
+#' @export
+
+amf_member_info <- memoise::memoise(function(site_id){
+  # grab member info
+  df <- jsonlite::fromJSON(
+    paste0(amf_server("info"),
+           site_id), flatten = TRUE)
+
+  # return data
+  return(df)
+})
+
+
+>>>>>>> f59a5c1fd15ebef7bc102e1b234d75d7012b48f5
 #' Returns a list of data coverage
 #'
 #' Ameriflux data coverage statistics
 #'
+<<<<<<< HEAD
 #' @param data_product Ameriflux data product. Only "BASE-BADM" data product is supported in current version,
 #' and will be expanded for others in the future.
 #' @param data_policy Specify data use policy, either "CCBY4.0" and "LEGACY". See AmeriFlux website
 #'  \url{https://ameriflux.lbl.gov/data/data-policy/} for details.
 #'
 #' @return
+=======
+#' @return Ameriflux data coverage
+>>>>>>> f59a5c1fd15ebef7bc102e1b234d75d7012b48f5
 #' @export
 
 amf_data_coverage <- memoise::memoise(function(data_product = "BASE-BADM",
@@ -51,9 +80,13 @@ amf_data_coverage <- memoise::memoise(function(data_product = "BASE-BADM",
 })
 
 #' Get FP (Flux-Processing) Standard Variable List
-#' @description This function obtains the latest AmeriFlux FP (Flux-Processing) standard variable list.
-#'  FP standard defines the variable names and units used for continuously sampled data within the AmeriFlux.
-#'  Also see AmeriFlux Data Variables page \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/} for details.
+#'
+#' @description This function obtains the latest AmeriFlux FP (Flux-Processing)
+#' standard variable list. FP standard defines the variable names and units used
+#' for continuously sampled data within the AmeriFlux. Also see AmeriFlux Data
+#' Variables page \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/}
+#' for details.
+#'
 #' @return A data frame containing the following columns:
 #' \itemize{
 #'   \item Name - Standard variable name
@@ -65,11 +98,11 @@ amf_data_coverage <- memoise::memoise(function(data_product = "BASE-BADM",
 #' @export
 #'
 #' @examples
-#' ## Not run:
+#' \dontrun{
 #' # download the list of standard variable names and units
 #' FP_ls <- amf_variables()
-#'
-#' ## End(Not run)
+#'}
+
 amf_variables <- function(){
 
   # get a list of FP (Flux-Processing) standard variables

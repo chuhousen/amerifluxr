@@ -19,7 +19,8 @@ relevant publications and references for the site. The BADM files also
 list what is measured at the site (this list may include chamber, gradient
 or other eddy covariance measurements that are a superset of the data
 available in AmeriFlux). Also see AmeriFlux webpage
-\url{https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/} for details.
+\url{https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/}
+for details.
 }
 \details{
 \itemize{

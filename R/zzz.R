@@ -27,6 +27,7 @@ Numextract <- function(string) {
 amf_server <- function(endpoint = "sitemap"){
 
   # base urls
+<<<<<<< HEAD
   base_url <- "https://amfcdn.lbl.gov/"
   api_url <- file.path(base_url, "api/v1")
   base_url_old <- "https://ameriflux-data.lbl.gov/"
@@ -36,6 +37,18 @@ amf_server <- function(endpoint = "sitemap"){
   # temporary github link for intermediate data summary, currently point to a temporary public repo
   #  need to update when main repository becomes public
   git_base_url <- "https://raw.githubusercontent.com/chuhousen/amerifluxr/master/data-summary"
+=======
+  base_url <- "https://ameriflux-data.lbl.gov"
+  api_url <- file.path(base_url,"AmeriFlux/SiteSearch.svc")
+  var_info_url <-
+    "ftp://ftp.fluxdata.org/.ameriflux_downloads/measurement_height/"
+
+  # temporary github link for intermediate data summary,
+  # currently point to a temporary public repo
+  # need to update when main repository becomes public
+  git_base_url <-
+    "https://raw.githubusercontent.com/chuhousen/amerifluxr_data_tmp/main"
+>>>>>>> f59a5c1fd15ebef7bc102e1b234d75d7012b48f5
 
   # what to return
   url <- switch(
@@ -45,9 +58,15 @@ amf_server <- function(endpoint = "sitemap"){
     "data_download" = file.path(api_url, "data_download/"),
     "variables" = file.path(api_url_old, "fpinVarLimits"),
     "var_info" = var_info_url,
-    "data_variable" = file.path(git_base_url, "AMF_AA-Flx_BASE-VARIABLE-AVAILABILITY_LATEST.csv"),
-    "bif_group" = file.path(git_base_url, "AMF_AA-Net_BIF-VARIABLE-GROUP-AVAILABILITY_LATEST.csv"),
-    "bif_variable" = file.path(git_base_url, "AMF_AA-Net_BIF-VARIABLE-AVAILABILITY_LATEST.csv")
+    "data_variable" = file.path(
+      git_base_url,
+      "AMF_AA-Flx_BASE-VARIABLE-AVAILABILITY_LATEST.csv"),
+    "bif_group" = file.path(
+      git_base_url,
+      "AMF_AA-Net_BIF-VARIABLE-GROUP-AVAILABILITY_LATEST.csv"),
+    "bif_variable" = file.path(
+      git_base_url,
+      "AMF_AA-Net_BIF-VARIABLE-AVAILABILITY_LATEST.csv")
   )
 
   # web service hosted on AmeriFlux website

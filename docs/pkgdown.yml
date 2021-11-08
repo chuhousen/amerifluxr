@@ -1,6 +1,8 @@
-pandoc: '2.5'
+pandoc: 2.14.0.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
-articles: {}
-last_built: 2021-02-04T23:32Z
+articles:
+  data_import: data_import.html
+  site_selection: site_selection.html
+last_built: 2021-11-07T09:33Z
 

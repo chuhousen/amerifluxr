@@ -7,7 +7,7 @@
 amf_sites()
 }
 \value{
-
+list of ameriflux sites
 }
 \description{
 Lists available site (names) and meta-data

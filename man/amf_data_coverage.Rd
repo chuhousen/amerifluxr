@@ -14,7 +14,7 @@ and will be expanded for others in the future.}
 \url{https://ameriflux.lbl.gov/data/data-policy/} for details.}
 }
 \value{
-
+Ameriflux data coverage
 }
 \description{
 Ameriflux data coverage statistics

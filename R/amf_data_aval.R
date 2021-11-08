@@ -1,11 +1,15 @@
 #' Get data variable availability
 #'
-#' @description This function obtains the data variable availability for all or selected AmeriFlux sites.
-#' See AmeriFlux page \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/} for details about the variable naming.
+#' @description This function obtains the data variable availability for all or
+#' selected AmeriFlux sites. See AmeriFlux page
+#' \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/} for details
+#' about the variable naming.
 #'
-#' @param site_set a vector of character specifying the target AmeriFlux Site ID (CC-Sss). If not specified, it returns all sites.
+#' @param site_set a vector of character specifying the target AmeriFlux Site ID
+#'  (CC-Sss). If not specified, it returns all sites.
 #'
-#' @return A data frame of data variable availability (per year) for selected AmeriFlux sites.
+#' @return A data frame of data variable availability (per year)
+#'  for selected AmeriFlux sites.
 #' \itemize{
 #'   \item Site_ID - Six character site identifier (CC-Sss)
 #'   \item VARIABLE - Variable name of the data included in the BASE file
@@ -19,15 +23,15 @@
 #' @export
 #'
 #' @examples
-#' #' ## Not run:
+#' \dontrun{
 #' # obtain the data variable availability for all sites
 #' data_aval <- amf_data_aval()
 #'
 #' # obtain the data variable availability for selected sites
 #' data_aval <- amf_data_aval(site_set = c("US-CRT","US-WPT"))
 #'
-#' ## End(Not run)
-#'
+#' }
+
 amf_data_aval <- function(site_set = NULL){
 
     # check if the file exists
