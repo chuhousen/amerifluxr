@@ -33,16 +33,10 @@
 #' \dontrun{
 #' # obtain the basic general info for all sites
 #' site <- amf_site_info()
-<<<<<<< HEAD
 #'
 #' ## End(Not run)
 #'
 amf_site_info <- function(){
-=======
-#'}
-
-amf_site_info <- function(contact_info = FALSE){
->>>>>>> f59a5c1fd15ebef7bc102e1b234d75d7012b48f5
 
     # grab meta-data, data is memoised
     # second calls should be fast (as from memory)

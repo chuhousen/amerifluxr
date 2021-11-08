@@ -15,7 +15,8 @@
 #'   \item Instrument_Model - Instrument model used to collect the data variable
 #'   \item Instrument_Model2 - A second instrument model used to collect the data variable
 #'   \item Comment - Additional information provided by the site team
-#'   \item BASE_Version - The most recent BASE data product version number for which the information applies
+#'   \item BASE_Version - The most recent BASE data product version number for which the
+#'    information applies
 #'   }
 #' @export
 #' @examples

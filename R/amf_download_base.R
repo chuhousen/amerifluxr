@@ -1,20 +1,28 @@
 #' Download AmeriFlux BASE data product through web service
 #'
-#' @description This function allows downloading AmeriFlux BASE and BADM data files. Note: Access to AmeriFlux data requires creating
-#' an AmeriFlux account first. Register an account through the link \url{https://ameriflux-data.lbl.gov/Pages/RequestAccount.aspx}.
-#' For details about BASE and BADM data files, see AmeriFlux web pages \url{https://ameriflux.lbl.gov/data/data-processing-pipelines/base-publish/}
+#' @description This function allows downloading AmeriFlux BASE and BADM data
+#'  files. Note: Access to AmeriFlux data requires creating an AmeriFlux account
+#'   first. Register an account through the link
+#'   \url{https://ameriflux-data.lbl.gov/Pages/RequestAccount.aspx}.
+#' For details about BASE and BADM data files, see AmeriFlux web pages
+#'  \url{https://ameriflux.lbl.gov/data/data-processing-pipelines/base-publish/}
 #' and \url{https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/}.
 #'
 #' @param user_id AmeriFlux account username (character)
 #' @param user_email AmeriFlux account user email (character)
-#' @param site_id A vector of character specifying the target AmeriFlux Site ID (CC-Sss)
-#' @param data_product AmeriFlux data product. Currently, only "BASE-BADM" is supported and used as default.
-#' @param data_policy "CCBY4.0" or "LEGACY". AmeriFlux data are shared under two tiers of licenses as chosen by site's PI.
-#' See \url{https://ameriflux.lbl.gov/data/data-policy/#data-use} for data use guidelines under each license. Note: Data use policy
+#' @param site_id A vector of character specifying the AmeriFlux Site ID (CC-Sss)
+#' @param data_product AmeriFlux data product. Currently, only "BASE-BADM" is
+#' supported and used as default.
+#' @param data_policy "CCBY4.0" or "LEGACY". AmeriFlux data are shared under two
+#' tiers of licenses as chosen by site's PI. See
+#' \url{https://ameriflux.lbl.gov/data/data-policy/#data-use} for data use
+#' guidelines under each license. Note: Data use policy
 #' selected affects which sites’ data are available for download.
-#' @param intended_use The intended use category. Currently, it needs to be one of the followings: "synthesis", "model", "remote_sensing",
-#' "other_research", "education", or "other"
-#' @param intended_use_text Enter a brief description of intended use. This will be recorded in the data download log and emailed to
+#' @param intended_use The intended use category. Currently, it needs to be one
+#'  of the followings: "synthesis", "model", "remote_sensing", "other_research",
+#'   "education", or "other"
+#' @param intended_use_text Enter a brief description of intended use. This will
+#' be recorded in the data download log and emailed to
 #' site's PI (free text).
 #' @param out_dir Output directory for downloaded data
 #' @param verbose Show feedback on download progress (TRUE/FALSE)
@@ -72,19 +80,28 @@ amf_download_base <- function(user_id,
   }
 
   if (data_policy == "CCBY4.0") {
-    cat("Data shared under the AmeriFlux Legacy Data Policy follow the attribution guidelines:\n")
-    cat("(1) Provide a citation to each site’s data product that includes the data-product DOI and/or recommended publication.\n")
-    cat("(2) Acknowledge funding for site support if it was provided in the data download information.\n")
-    cat("(3) Acknowledge funding for supporting AmeriFlux data portal: U.S. Department of Energy Office of Science.\n")
-    cat("Please acknowledge you read and agree to the AmeriFlux CC-BY-4.0 Data Policy (https://ameriflux.lbl.gov/data/data-policy/#data-use).")
+    cat("Data shared under the AmeriFlux Legacy Data Policy follow
+        the attribution guidelines:\n")
+    cat("(1) Provide a citation to each site’s data product that includes
+        the data-product DOI and/or recommended publication.\n")
+    cat("(2) Acknowledge funding for site support if it was provided in
+        the data download information.\n")
+    cat("(3) Acknowledge funding for supporting AmeriFlux data portal:
+        U.S. Department of Energy Office of Science.\n")
+    cat("Please acknowledge you read and agree to the AmeriFlux CC-BY-4.0
+        Data Policy (https://ameriflux.lbl.gov/data/data-policy/#data-use).")
     agree_policy <- readline(prompt =
                                "[Yes/No]")
 
   } else if (data_policy == "LEGACY") {
-    cat("Data shared under the AmeriFlux CC-BY-4.0 License follow the attribution guidelines:\n")
-    cat("(1) Provide a citation to each site’s data product that includes the data-product DOI.\n")
-    cat("(2) Acknowledge funding for supporting AmeriFlux data portal: U.S. Department of Energy Office of Science.\n")
-    cat("Please acknowledge that you read and agree to the AmeriFlux Legacy Data Policy (https://ameriflux.lbl.gov/data/data-policy/#data-use).")
+    cat("Data shared under the AmeriFlux CC-BY-4.0 License follow the
+        attribution guidelines:\n")
+    cat("(1) Provide a citation to each site’s data product that includes
+        the data-product DOI.\n")
+    cat("(2) Acknowledge funding for supporting AmeriFlux data portal:
+        U.S. Department of Energy Office of Science.\n")
+    cat("Please acknowledge that you read and agree to the AmeriFlux Legacy
+        Data Policy (https://ameriflux.lbl.gov/data/data-policy/#data-use).")
     agree_policy <- readline(prompt =
                                "[Yes/No]")
 
@@ -155,7 +172,8 @@ amf_download_base <- function(user_id,
       # get zip file names
       outfname <- strsplit(ftplink, c("/"))
       outfname <- sapply(outfname,  utils::tail, n = 1)
-      outfname <- substr(outfname, 1, sapply(outfname, regexpr, pattern = "?=", fixed = T) - 1)
+      outfname <-
+        substr(outfname, 1, sapply(outfname, regexpr, pattern = "?=", fixed = T) - 1)
 
       ## check if any site_id has no data
       if (length(outfname) < length(site_id)) {
@@ -176,7 +194,10 @@ amf_download_base <- function(user_id,
       ## check if downloaded files exist
       miss_download <- which(!sapply(output_zip_file, file.exists))
       if (length(miss_download) > 0) {
-        warning(paste("Cannot download", output_zip_file[miss_download], "from", ftplink[miss_download]))
+        warning(paste("Cannot download",
+                      output_zip_file[miss_download],
+                      "from",
+                      ftplink[miss_download]))
       }
 
       message(paste())
