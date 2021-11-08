@@ -21,41 +21,25 @@ amf_sites <- memoise::memoise(function(){
   return(df)
 })
 
-
-#' Lists all site member info
-#'
-#' This function actually lists ALL site info
-#' of which only a fraction is used during processing
-#'
-#' @param site_id Ameriflux site id
-#'
-#' @return
-#' @export
-
-amf_member_info <- memoise::memoise(function(site_id){
-  # grab member info
-  df <- jsonlite::fromJSON(
-    paste0(amf_server("info"),
-           site_id), flatten = TRUE)
-
-  # return data
-  return(df)
-})
-
-
 #' Returns a list of data coverage
 #'
 #' Ameriflux data coverage statistics
 #'
+#' @param data_product Ameriflux data product. Only "BASE-BADM" data product is supported in current version,
+#' and will be expanded for others in the future.
+#' @param data_policy Specify data use policy, either "CCBY4.0" and "LEGACY". See AmeriFlux website
+#'  \url{https://ameriflux.lbl.gov/data/data-policy/} for details.
+#'
 #' @return
 #' @export
 
-amf_data_coverage <- memoise::memoise(function(){
+amf_data_coverage <- memoise::memoise(function(data_product = "BASE-BADM",
+                                               data_policy = "CCBY4.0"){
 
   # web service returning a full site list with
   # most-updated data available years in AmeriFlux BASE dataset
   df <- jsonlite::fromJSON(
-    amf_server("data"),
+    paste0(amf_server("data_year"), "/", data_product, "/", data_policy),
     flatten = TRUE
   )
 
@@ -90,6 +74,10 @@ amf_variables <- function(){
 
   # get a list of FP (Flux-Processing) standard variables
   variables <- jsonlite::fromJSON(amf_server("variables"),  flatten=TRUE)
+
+  variables <- rbind.data.frame(variables,
+                                c("TIMESTAMP_START", "YYYYMMDDHHMM", NA, NA),
+                                c("TIMESTAMP_END", "YYYYMMDDHHMM", NA, NA))
 
   variables$Min <- as.numeric(as.character(variables$Min))
   variables$Max <- as.numeric(as.character(variables$Max))

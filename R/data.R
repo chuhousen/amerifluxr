@@ -5,8 +5,7 @@
 #' \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/#base} for
 #' variable definitions and details.
 #'
-#' @format A data frame with 52608 rows and 36 variables:
-#' \describe{
+#' \itemize{
 #'   \item{TIMESTAMP_START}{ISO timestamp start of averaging period (YYYYMMDDHHMM)}
 #'   \item{TIMESTAMP_END}{ISO timestamp end of averaging period (YYYYMMDDHHMM)}
 #'   \item{CO2}{Carbon Dioxide (CO2) mole fraction in wet air (µmolCO2 mol-1)}
@@ -28,11 +27,26 @@
 #'   \item{V_SIGMA}{Standard deviation of lateral velocity fluctuations (m s-1)}
 #'   \item{U_SIGMA}{Standard deviation of along-wind velocity fluctuations (m s-1)}
 #'   \item{T_SONIC}{Sonic temperature (deg C)}
-#'   ...
+#'   \item{T_SONIC_SIGMA}{Standard deviation of sonic temperature (deg C)}
+#'   \item{PA}{Atmospheric pressure (kPa)}
+#'   \item{RH}{Relative humidity (%)}
+#'   \item{TA}{Air temperature (deg C)}
+#'   \item{TS_1_1_1}{Soil temperature at horizontal location #1 (deg C)}
+#'   \item{TS_2_1_1}{Soil temperature at horizontal location #2 (deg C)}
+#'   \item{WTD}{Water table depth (m)}
+#'   \item{SWC}{Soil water content (%)}
+#'   \item{NETRAD}{Net radiation (W m-2)}
+#'   \item{PPFD_IN}{Photosynthetic photon flux density, incoming (µmolPhoton m-2 s-1)}
+#'   \item{SW_IN}{Shortwave radiation, incoming (W m-2)}
+#'   \item{SW_OUT}{Shortwave radiation, outgoing (W m-2)}
+#'   \item{LW_IN}{Longwave radiation, incoming (W m-2)}
+#'   \item{LW_OUT}{Longwave radiation, outgoing (W m-2)}
+#'   \item{P}{Rainfall (mm)}
 #' }
+#'
+#' @format A data frame with 52608 rows and 36 variables
 #' @source \url{https://ameriflux.lbl.gov/}
 "amf_base"
-
 
 #' BADM data example
 #'
@@ -43,16 +57,15 @@
 #' available in AmeriFlux). Also see AmeriFlux webpage
 #' \url{https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/} for details.
 #'
-#' @format A data frame with 443 rows and 5 variables:
-#' \describe{
+#' \itemize{
 #'   \item{SITE_ID}{6 digit AmeriFlux site ID (CC-Sss)}
 #'   \item{GROUP_ID}{A unique identifier for data entries belonging to the same instance of a reported variable group}
 #'   \item{VARIABLE_GROUP}{Define a set of variables that are reported together}
 #'   \item{VARIABLE}{Variable names}
 #'   \item{DATAVALUE}{Data value}
-#'   ...
 #' }
+#'
+#' @format A data frame with 443 rows and 5 variables
 #' @source \url{https://ameriflux.lbl.gov/}
 "amf_bif"
-
 

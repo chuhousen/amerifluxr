@@ -27,5 +27,13 @@ Depends:
 Imports:
     httr,
     jsonlite,
-    memoise
+    memoise,
+    RCurl,
+    readxl
 RoxygenNote: 7.1.1
+Suggests: 
+    knitr,
+    rmarkdown,
+    data.table,
+    pander
+VignetteBuilder: knitr
