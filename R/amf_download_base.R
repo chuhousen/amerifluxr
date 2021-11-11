@@ -84,27 +84,46 @@ amf_download_base <- function(
   }
 
   if (data_policy == "CCBY4.0") {
-    cat("Data shared under the AmeriFlux Legacy Data Policy follow
-        the attribution guidelines:\n")
-    cat("(1) Provide a citation to each site data product that includes
-        the data-product DOI and/or recommended publication.\n")
-    cat("(2) Acknowledge funding for site support if it was provided in
-        the data download information.\n")
-    cat("(3) Acknowledge funding for supporting AmeriFlux data portal:
-        U.S. Department of Energy Office of Science.\n")
-    cat("Please acknowledge you read and agree to the AmeriFlux CC-BY-4.0
-        Data Policy (https://ameriflux.lbl.gov/data/data-policy/#data-use).")
+    cat("Data use guidlines for AmeriFlux Legacy Data Policy:\n",
+        fill = TRUE)
+    cat(
+      "Provide a citation to each site data product that includes the data-product DOI and/or recommended publication.\n",
+      fill = TRUE,
+      labels = "(1)"
+    )
+    cat(
+      "Acknowledge funding for site support if it was provided in the data download information.\n",
+      fill = TRUE,
+      labels = "(2)"
+    )
+    cat(
+      "Acknowledge funding for supporting AmeriFlux data portal: U.S. Department of Energy Office of Science.\n",
+      fill = TRUE,
+      labels = "(3)"
+    )
+    cat(
+      "Please acknowledge you read and agree to the AmeriFlux CC-BY-4.0 Data Policy.",
+      fill = TRUE
+    )
     agree_policy <- readline(prompt = "[Yes/No]")
 
   } else if (data_policy == "LEGACY") {
-    cat("Data shared under the AmeriFlux CC-BY-4.0 License follow the
-        attribution guidelines:\n")
-    cat("(1) Provide a citation to each site data product that includes
-        the data-product DOI.\n")
-    cat("(2) Acknowledge funding for supporting AmeriFlux data portal:
-        U.S. Department of Energy Office of Science.\n")
-    cat("Please acknowledge that you read and agree to the AmeriFlux Legacy
-        Data Policy (https://ameriflux.lbl.gov/data/data-policy/#data-use).")
+    cat("Data use guidelines for AmeriFlux CC-BY-4.0 License:\n",
+        fill = TRUE)
+    cat(
+      "Provide a citation to each site data product that includes the data-product DOI.\n",
+      fill = TRUE,
+      labels = "(1)"
+    )
+    cat(
+      "Acknowledge funding for supporting AmeriFlux data portal: U.S. Department of Energy Office of Science.\n",
+      fill = TRUE,
+      labels = "(2)"
+    )
+    cat(
+      "Please acknowledge that you read and agree to the AmeriFlux Legacy Data Policy.",
+      fill = TRUE
+    )
     agree_policy <- readline(prompt = "[Yes/No]")
 
   } else {
@@ -171,18 +190,19 @@ amf_download_base <- function(
         stop(paste0("Cannot find data from ", site_id))
       }
 
+      # avoid downloading fluxnet_bif for now
+      if(site_id == "AA-Flx" &
+         data_policy == "CCBY4.0" &
+         length(ftplink) > 1){
+        ftplink <- ftplink[-grep("FLUXNET-BIF", ftplink)]
+      }
+
       # get zip file names
       outfname <- strsplit(ftplink, c("/"))
       outfname <- sapply(outfname,  utils::tail, n = 1)
       outfname <-
         substr(outfname, 1,
                sapply(outfname, regexpr, pattern = "?=", fixed = TRUE) - 1)
-
-      # avoid downloading fluxnet_bif for now
-      if(site_id %in% c("AA-Flx", "AA-Net")&
-         data_policy == "CCBY4.0"){
-        outfname <- outfname[-grep("FLUXNET-BIF", outfname)]
-      }
 
       ## check if any site_id has no data
       if (length(outfname) < length(site_id)) {
