@@ -50,6 +50,8 @@ creating an AmeriFlux account first. Register an account through the
 [link](https://ameriflux-data.lbl.gov/Pages/RequestAccount.aspx).
 For details about BADM data files, see AmeriFlux 
 [web page](https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/).
+The downloaded file is a Excel file (e.g., AMF_<SITES>_BIF_LEGACY_<VERSION>.xlsx, 
+SITES = AA-Net (all registered sites) or AA-Flx (all sites with data available)).
 
 ``` r
 amf_download_bif(user_id = "my_user",
@@ -77,8 +79,13 @@ amf_download_bif(user_id = "my_user",
 ### Download single-site flux/met data
 
 The following downloads AmeriFlux flux/met data (aka BASE data product)
-from a single site. For details about BASE data files, see AmeriFlux [BASE data](https://ameriflux.lbl.gov/data/data-processing-pipelines/base-publish/)
-page.
+from a single site. For details about BASE data files, see AmeriFlux
+[BASE data](https://ameriflux.lbl.gov/data/data-processing-pipelines/base-publish/)
+page. Note: The downloaded file is a zipped file (e.g., AMF_<SITE_ID>_BASE-BADM_<VERSION>.zip),
+which contains a BASE data file (e.g., AMF_<SITE_ID>_BASE_<RESOLUTION>_<VERSION>.csv, 
+RESOLUTION = HH (half-hourly) or HR (hourly)) and a BADM data file (e.g., 
+AMF_<SITE_ID>_BIF_<VERSION>.xlsx). The BADM data file is a subset of all-site
+BADM downloaded through amf_download_bif().
 
 ``` r
 amf_download_base(user_id = "my_user",
@@ -108,6 +115,7 @@ amf_download_base(user_id = "my_user",
 ### Download multiple-site flux/met data
 
 The following downloads AmeriFlux flux/met data from multiple sites. 
+The downloaded files are organized by sites, with one zipped file for each site.
 
 ``` r
 amf_download_base(user_id = "my_user",
