@@ -44,24 +44,32 @@ site <- amf_site_info()
 
 ### Download all-site metadata
 
-To download all AmeriFlux sites' metadata (i.e., BADM data product)
-in a single file, use the following. Note: Access to AmeriFlux data requires
-creating an AmeriFlux account first. Register an account through the
+Access to AmeriFlux data requires creating an AmeriFlux account first.
+Register an account through the
 [link](https://ameriflux-data.lbl.gov/Pages/RequestAccount.aspx).
+
+The following downloads a single file containing all AmeriFlux sites'
+metadata (i.e., BADM data product) for sites under the CC-BY-4.0 data 
+use policy. The downloaded file is a Excel file saved to tempdir()
+(e.g., AMF\_\{SITES\}\_BIF\_\{POLICY\}\_\{VERSION\}\.xlsx, SITES
+= AA-Net (all registered sites) or AA-Flx (all sites with flux/met 
+data available); POLICY = CCBY4 (shared under AmeriFlux CC-BY-4.0 
+data use policy) or LEGACY (shared under AmeriFlux LEGACY data use
+policy)). 
+
 For details about BADM data files, see AmeriFlux 
 [web page](https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/).
-The downloaded file is a Excel file (e.g., AMF_<SITES>_BIF_LEGACY_<VERSION>.xlsx, 
-SITES = AA-Net (all registered sites) or AA-Flx (all sites with data available)).
+
 
 ``` r
-amf_download_bif(user_id = "my_user",
-                 user_email = "my_email@mail.com",
-                 data_policy = "CCBY4.0",
-                 intended_use = "synthesis",
-                 intended_use_text = "obtain AmeriFlux sites' geolocation, IGBP, and climate classification",
-                 out_dir = tempdir(),
-                 verbose = TRUE,
-                 site_w_data = TRUE)
+floc1 <- amf_download_bif(user_id = "my_user",
+                          user_email = "my_email@mail.com",
+                          data_policy = "CCBY4.0",
+                          intended_use = "synthesis",
+                          intended_use_text = "obtain AmeriFlux sites' geolocation, IGBP, and climate classification",
+                          out_dir = tempdir(),
+                          verbose = TRUE,
+                          site_w_data = TRUE)
 ```
 
 | Parameter          | Description                                                                                                                     |
@@ -75,28 +83,38 @@ amf_download_bif(user_id = "my_user",
 | verbose            | Show feedback on download progress                                                                                              |
 | site_w_data        | Logical, download all registered sites (FALSE) or only sites with available BASE data (TRUE)                                    |
 
+The amf_download_bif() returns the full file path to the downloaded file,
+which can be used to read the file into R.
+
+``` r
+bif <- amf_read_bif(file = floc1)
+
+```
 
 ### Download single-site flux/met data
 
 The following downloads AmeriFlux flux/met data (aka BASE data product)
 from a single site. For details about BASE data files, see AmeriFlux
 [BASE data](https://ameriflux.lbl.gov/data/data-processing-pipelines/base-publish/)
-page. Note: The downloaded file is a zipped file (e.g., AMF_<SITE_ID>_BASE-BADM_<VERSION>.zip),
-which contains a BASE data file (e.g., AMF_<SITE_ID>_BASE_<RESOLUTION>_<VERSION>.csv, 
+page. 
+
+The downloaded file is a zipped file saved in tempdir()
+(e.g., AMF\_\{SITE_ID\}\_BASE-BADM\_\{VERSION\}\.zip), which contains a BASE data 
+file (e.g., AMF\_\{SITE_ID\}\_BASE\_\{RESOLUTION\}\_\{VERSION\}\.csv, 
 RESOLUTION = HH (half-hourly) or HR (hourly)) and a BADM data file (e.g., 
-AMF_<SITE_ID>_BIF_<VERSION>.xlsx). The BADM data file is a subset of all-site
-BADM downloaded through amf_download_bif().
+AMF\_\{SITE_ID\}\_BIF\_\{VERSION\}\.xlsx). The BADM data file is a site subset of 
+the all-site BADM downloaded through amf_download_bif().
 
 ``` r
-amf_download_base(user_id = "my_user",
-                  user_email = "my_email@mail.com",
-                  site_id = "US-CRT",
-                  data_product = "BASE-BADM",
-                  data_policy = "CCBY4.0",
-                  intended_use = "remote_sensing",
-                  intended_use_text = "validate the model of GPP estimation",
-                  verbose = TRUE,
-                  out_dir = tempdir())
+floc2 <- amf_download_base(user_id = "my_user",
+                           user_email = "my_email@mail.com",
+                           site_id = "US-CRT",
+                           data_product = "BASE-BADM",
+                           data_policy = "CCBY4.0",
+                           intended_use = "remote_sensing",
+                           intended_use_text = "validate the model of GPP estimation",
+                           verbose = TRUE,
+                           out_dir = tempdir())
 
 ```
 
@@ -112,10 +130,26 @@ amf_download_base(user_id = "my_user",
 | out_dir            | Output directory for downloaded data, default to tempdir()                                                                      |
 | verbose            | Show feedback on download progress                                                                                              |
 
+The amf_download_base() returns the full file path to the downloaded file,
+which can be used to read the file into R.
+
+``` r
+base <- amf_read_base(file = floc2,
+                      unzip = TRUE,
+                      parse_timestamp = TRUE)
+```
+| Parameter          | Description                                                                                                                     |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| file               | file path                                                                                                                       |
+| unzip              | logical, whether to unzip. Set TRUE if reading from a zipped file                                                               |
+| parse_timestamp    | logical, whether to parse the timestamp                                                                                         |
+
+
 ### Download multiple-site flux/met data
 
 The following downloads AmeriFlux flux/met data from multiple sites. 
-The downloaded files are organized by sites, with one zipped file for each site.
+The downloaded files are organized by sites, with one zipped file for
+each site, similar to single-site download.
 
 ``` r
 amf_download_base(user_id = "my_user",
@@ -124,7 +158,7 @@ amf_download_base(user_id = "my_user",
                   data_product = "BASE-BADM",
                   data_policy = "CCBY4.0",
                   intended_use = "model",
-                  intended_use_text = "Data-driven modeling, data be used for training models and cross-validation",
+                  intended_use_text = "Data-driven modeling, for training models and cross-validation",
                   verbose = TRUE,
                   out_dir = tempdir())
 
@@ -147,7 +181,8 @@ Coming up soon.
 
 We thank the AmeriFlux site teams for sharing their data and 
 metadata with the network. Funding for these flux sites is 
-acknowledged in the site data DOI on [AmeriFlux website](https://ameriflux.lbl.gov/).
+acknowledged in the site data DOI on 
+[AmeriFlux website](https://ameriflux.lbl.gov/).
 This package was supported in part by funding provided to the
 AmeriFlux Management Project by the U.S. Department of Energy’s
 Office of Science under Contract No. DE-AC0205CH11231.
