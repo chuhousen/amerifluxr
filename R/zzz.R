@@ -33,8 +33,7 @@ amf_server <- function(endpoint = "sitemap"){
   api_url_old <- file.path(base_url_old, "AmeriFlux/SiteSearch.svc")
   var_info_url <- "ftp://ftp.fluxdata.org/.ameriflux_downloads/measurement_height/"
 
-  # temporary github link for intermediate data summary, currently point to a temporary public repo
-  #  need to update when main repository becomes public
+  # github link for intermediate data summary
   git_base_url <- "https://raw.githubusercontent.com/chuhousen/amerifluxr/master/data-summary"
 
   # what to return
