@@ -21,7 +21,7 @@ library(data.table)
 library(pander)
 ```
 
-amerifluxr is a programmatic interface to the [AmeriFlux] (https://ameriflux.lbl.gov/). This vignette demonstrates examples to query a list of target sites based on sites' general information and availability of metadata and data.    
+amerifluxr is a programmatic interface to the [AmeriFlux](https://ameriflux.lbl.gov/). This vignette demonstrates examples to query a list of target sites based on sites' general information and availability of metadata and data.    
 
 ## Get a site list with general info
 
@@ -57,7 +57,7 @@ pander::pandoc.table(crop_ls[c(1:10), ])
 
 ## Get metadata availability
 
-In some cases, users may want to know if certain types of metadata are available for the selected sites. The amf_metadata_aval() function provides a quick summary of metadata availability before actually downloading the data & metadata through AmeriFlux. By default, amf_metadata_aval() returns a full site list with the available entries (i.e., counts) for all BADM groups. Check AmeriFlux webpage (https://ameriflux.lbl.gov/data/badm/badm-basics/) for definitions of BADM groups.     
+In some cases, users may want to know if certain types of metadata are available for the selected sites. The amf_metadata_aval() function provides a quick summary of metadata availability before actually downloading the data & metadata through AmeriFlux. By default, amf_metadata_aval() returns a full site list with the available entries (i.e., counts) for all BADM groups. Check [AmeriFlux webpage](https://ameriflux.lbl.gov/data/badm/badm-basics/) for definitions of BADM groups.     
 
 ```{r results = "asis"}
 metadata_aval <- data.table::as.data.table(amf_metadata_aval())
@@ -83,7 +83,7 @@ data_aval <- data.table::as.data.table(amf_data_aval(site_set = crop_ls2$SITE_ID
 pander::pandoc.table(data_aval[c(1:10), ])
 ```
 
-The variable availability can be used to subset sites that have certain variables in specific years. The BASENAME column in the variable availability indicates the variable's base name (i.e., ignoring position qualifier), and can be used to get a coarse-level variable availability. See AmeriFlux website (https://ameriflux.lbl.gov/data/aboutdata/data-variables/) for definitions of base names and qualifiers.
+The variable availability can be used to subset sites that have certain variables in specific years. The BASENAME column in the variable availability indicates the variable's base name (i.e., ignoring position qualifier), and can be used to get a coarse-level variable availability. See [AmeriFlux website](https://ameriflux.lbl.gov/data/aboutdata/data-variables/) for definitions of base names and qualifiers.
 
 ```{r results = "asis"}
 # down-select cropland & grassland sites based on the available wind speed (WS) and 

@@ -47,13 +47,13 @@ amf_server <- function(endpoint = "sitemap"){
     "var_info" = var_info_url,
     "data_variable" = file.path(
       git_base_url,
-      "AMF_AA-Flx_BASE-VARIABLE-AVAILABILITY_LATEST.csv"),
+      "AMF_AA-Flx_BASE_VARIABLE-AVAILABILITY_LATEST.csv"),
     "bif_group" = file.path(
       git_base_url,
-      "AMF_AA-Net_BIF-VARIABLE-GROUP-AVAILABILITY_LATEST.csv"),
+      "AMF_AA-Net_BIF_LEGACY_VARIABLE-GROUP-AVAILABILITY_LATEST.csv"),
     "bif_variable" = file.path(
       git_base_url,
-      "AMF_AA-Net_BIF-VARIABLE-AVAILABILITY_LATEST.csv")
+      "AMF_AA-Net_BIF_LEGACY_VARIABLE-AVAILABILITY_LATEST.csv")
   )
 
   # web service hosted on AmeriFlux website

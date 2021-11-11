@@ -19,13 +19,17 @@ library(amerifluxr)
 library(pander)
 ```
 
-amerifluxr is a programmatic interface to the [AmeriFlux] (https://ameriflux.lbl.gov/). This vignette demonstrates examples to import data and metadata downloaded from AmeriFlux, and to parse and clean data for further use. A [companion vignette for site slection](site_selection.html) before download is available as well.
+amerifluxr is a programmatic interface to the [AmeriFlux](https://ameriflux.lbl.gov/). This vignette demonstrates examples to import data and metadata downloaded from AmeriFlux, and to parse and clean data for further use. A [companion vignette for site slection](site_selection.html) is available as well.
 
 ## Download data
 
-Both data and metadata can be downloaded through the [AmeriFlux data portal] (https://ameriflux.lbl.gov/data/download-data/). Users will need to create a personal AmeriFlux account first. Once logged in, users can select a list of sites to download using the Site ID (CC-Sss). Check site_selection for site selection. The flux/met data products (aka. BASE data product) are organized by sites, with one zipped file (e.g., CC-Sss_BASE-BADM_#-#.zip) for each site.   
+AmeriFlux data and metadata can be downloaded using amf_download_base() and amf_download_bif(). See [README](https://github.com/chuhousen/amerifluxr) for data download examples. Users will need to create a personal AmeriFlux account [here](https://ameriflux-data.lbl.gov/Pages/RequestAccount.aspx) before download. 
 
-While downloading BASE data product, users can also choose to download additional metadata files (aka. BADM data product) for all AmeriFlux sites. If so, a single Excel file (e.g., AMF_AA-Flx_BIF_YYYYMMDD.xlsx, AMF_AA-Net_BIF_YYYYMMDD.xlsx) will be provided in the download.
+Briefly, amf_download_base() downloads single or multiple sites' data and metadata in site-specific zipped files (e.g., AMF_<SITE_ID>_BASE-BADM_<VERSION>.zip), which contains a BASE data file (e.g., AMF_<SITE_ID>_BASE_<RESOLUTION>_<VERSION>.csv, 
+RESOLUTION = HH (half-hourly) or HR (hourly)) and a single site's BADM data file (e.g., AMF_<SITE_ID>_BIF_<VERSION>.xlsx).
+
+amf_download_bif() downloads all-site metadata in a single Excel file (e.g., AMF_<SITES>_BIF_LEGACY_<VERSION>.xlsx, 
+SITES = AA-Net (all registered sites) or AA-Flx (all sites with data available)).
 
 For this vignette, we will use following example data files [files are truncated to limit package size, for demonstration purpopses only].
 
@@ -70,7 +74,7 @@ pander::pandoc.table(base2[c(1:3), c(1:10)])
 
 ## Parse and interpret BASE data product
 
-The detailed explanation of BASE data format and variables can be found on [AmeriFlux website] (https://ameriflux.lbl.gov/data/aboutdata/data-variables/). In short, TIMESTAMP_START and TIMESTAMP_END (i.e., YYYYMMDDHHMM 12 digits) refer to the starting and ending time of each reporting interval (i.e., rows). All other variables use the format of <base name>_<qualifier>, e.g., FC_1, CO2_1_1_1. Base names indicate fundamental quantities that are either measured or calculated / derived. Qualifiers are suffixes appended to variable base names that provide additional information (e.g., gap-filling, position) about the variable. In some cases, qualifiers are omitted if only one variable is provided for a site.
+The detailed explanation of BASE data format and variables can be found on [AmeriFlux website](https://ameriflux.lbl.gov/data/aboutdata/data-variables/). In short, TIMESTAMP_START and TIMESTAMP_END (i.e., YYYYMMDDHHMM 12 digits) refer to the starting and ending time of each reporting interval (i.e., rows). All other variables use the format of <base name>_<qualifier>, e.g., FC_1, CO2_1_1_1. Base names indicate fundamental quantities that are either measured or calculated / derived. Qualifiers are suffixes appended to variable base names that provide additional information (e.g., gap-filling, position) about the variable. In some cases, qualifiers are omitted if only one variable is provided for a site.
 
 The amf_variable() can be used to retrieve the latest list of base names and default units. For sites that don't have many variables and less-complicated qualifiers, the users should be able to interpret the variables and their qualifiers. The amf_variable() also returns the expected maximal and minimal values based on physically plausible ranges or network-wide  reported values.   
 
