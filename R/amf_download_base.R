@@ -178,6 +178,12 @@ amf_download_base <- function(
         substr(outfname, 1,
                sapply(outfname, regexpr, pattern = "?=", fixed = TRUE) - 1)
 
+      # avoid downloading fluxnet_bif for now
+      if(site_id %in% c("AA-Flx", "AA-Net")&
+         data_policy == "CCBY4.0"){
+        outfname <- outfname[-grep("FLUXNET-BIF", outfname)]
+      }
+
       ## check if any site_id has no data
       if (length(outfname) < length(site_id)) {
         miss_site_id <-
