@@ -49,17 +49,19 @@ amf_metadata_aval <- function(site_set = NULL,
     if (!is.null(site_set)) {
       check_id <- amf_check_site_id(site_set)
 
-      # check if site_set are valid site ID
-      if (any(!check_id)) {
+      # check if any or all site_set not valid site ID
+      if (any(!check_id) & !all(!check_id)) {
         warning(paste(
           paste(site_set[which(!check_id)], collapse = ", "),
           "not valid AmeriFlux Site ID"
         ))
         site_set <- site_set[which(check_id)]
-      }
+        metadata_aval <-
+          metadata_aval[metadata_aval$SITE_ID %in% site_set,]
 
-      if (length(site_set) > 0) {
-        metadata_aval <- metadata_aval[metadata_aval$SITE_ID %in% site_set, ]
+      } else if (!any(!check_id)) {
+        metadata_aval <-
+          metadata_aval[metadata_aval$SITE_ID %in% site_set,]
 
       } else{
         stop("Download failed, no valid Site ID in site_set")

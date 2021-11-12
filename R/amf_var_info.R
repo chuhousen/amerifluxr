@@ -5,6 +5,7 @@
 #' \url{https://ameriflux.lbl.gov/data/measurement-height/} for details.
 #'
 #' @param out_dir output directory  (default = tempdir())
+#' @param verbose Show feedback on download progress (TRUE/FALSE)
 #'
 #' @return A data frame of measurement height data for all avaiable AmeriFlux sites
 #' #' \itemize{
@@ -25,7 +26,8 @@
 #' var_info <- amf_var_info()
 #'}
 
-amf_var_info <- function(out_dir = tempdir()) {
+amf_var_info <- function(out_dir = tempdir(),
+                         verbose = TRUE) {
 
   # Get a list of hosted data files
   filenames <- RCurl::getURL(
@@ -48,7 +50,8 @@ amf_var_info <- function(out_dir = tempdir()) {
     # download data to designated output directory
     utils::download.file(
       paste0(amf_server("var_info"), "/", latest),
-      file.path(out_dir, latest)
+      file.path(out_dir, latest),
+      quiet = !verbose
       )
 
     var_info <- utils::read.csv(

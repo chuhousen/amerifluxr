@@ -4,10 +4,12 @@
 \alias{amf_var_info}
 \title{Get variable information}
 \usage{
-amf_var_info(out_dir = tempdir())
+amf_var_info(out_dir = tempdir(), verbose = TRUE)
 }
 \arguments{
 \item{out_dir}{output directory  (default = tempdir())}
+
+\item{verbose}{Show feedback on download progress (TRUE/FALSE)}
 }
 \value{
 A data frame of measurement height data for all avaiable AmeriFlux sites

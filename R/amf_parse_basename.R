@@ -76,6 +76,10 @@ amf_parse_basename <- function(
     stop('FP_ls not recognized...')
   }
 
+  if (!length(FP_ls) > 1) {
+    stop('FP_ls not recognized...')
+  }
+
   # a data frame for parsing results
   basename_decode <- data.frame(
     variable_name = var_name,   # original variable name
