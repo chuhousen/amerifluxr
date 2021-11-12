@@ -1,31 +1,39 @@
-#' Download AmeriFlux BASE data product through web service
+#' Download AmeriFlux BASE data product
 #'
-#' @description This function allows downloading AmeriFlux BASE and BADM data
-#'  files. Note: Access to AmeriFlux data requires creating an AmeriFlux account
-#'   first. Register an account through the link
+#' @description This function downloads AmeriFlux BASE and BADM data files.
+#'  Note: Access to AmeriFlux data requires creating an AmeriFlux account
+#'  first. Register an account through the link
 #'   \url{https://ameriflux-data.lbl.gov/Pages/RequestAccount.aspx}.
+#'
 #' For details about BASE and BADM data files, see AmeriFlux web pages
 #'  \url{https://ameriflux.lbl.gov/data/data-processing-pipelines/base-publish/}
 #' and \url{https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/}.
 #'
 #' @param user_id AmeriFlux account username (character)
 #' @param user_email AmeriFlux account user email (character)
-#' @param site_id A vector of character specifying the AmeriFlux
+#' @param site_id A scalar or vector of character specifying the AmeriFlux
 #'  Site ID (CC-Sss)
 #' @param data_product AmeriFlux data product. Currently, only "BASE-BADM" is
-#' supported and used as default.
-#' @param data_policy "CCBY4.0" or "LEGACY". AmeriFlux data are shared under two
-#' tiers of licenses as chosen by site's PI. See
+#' supported and used as default. (character)
+#' @param data_policy "CCBY4.0" or "LEGACY" (character). AmeriFlux data
+#'  are shared under two tiers of licenses as chosen by site's  PI. See
 #' \url{https://ameriflux.lbl.gov/data/data-policy/#data-use} for data use
 #' guidelines under each license. Note: Data use policy
 #' selected affects which sites’ data are available for download.
 #' @param intended_use The intended use category. Currently, it needs to be one
-#'  of the followings: "synthesis", "model", "remote_sensing", "other_research",
-#'   "education", or "other"
+#'  of the followings:
+#'  \itemize{
+#'    \item "synthesis" (i.e., Multi-site synthesis)
+#'    \item "model" (i.e., Land model/Earth system model)
+#'    \item "remote_sensing" (i.e., Remote sensing research)
+#'    \item "other_research" (i.e., Other research)
+#'   "\item "education" (i.e., Education (Teacher or Student))
+#'    \item "other"
+#'  }
 #' @param intended_use_text Enter a brief description of intended use. This will
 #' be recorded in the data download log and emailed to
 #' site's PI (free text).
-#' @param out_dir Output directory for downloaded data
+#' @param out_dir Output directory for downloaded data, default tempdir()
 #' @param verbose Show feedback on download progress (TRUE/FALSE)
 #'
 #' @return A vector of download filenames on the local drive
@@ -71,7 +79,7 @@ amf_download_base <- function(user_id,
     intended_use_verbse <- switch(
       intended_use,
       synthesis = "Research - Multi-site synthesis",
-      remote_sensing = "Research - Remotesensing",
+      remote_sensing = "Research - Remote sensing",
       model = "Research - Land model/Earth system model",
       other_research = "Research - Other",
       education = "Education (Teacher or Student)",

@@ -4,15 +4,16 @@
 #' all or selected AmeriFlux sites. See AmeriFlux page
 #' \url{https://ameriflux.lbl.gov/data/badm/} for details about the BADM.
 #'
-#' @param site_set a vector of character specifying the target AmeriFlux Site ID
-#'  (CC-Sss). If not specified, it returns all sites.
+#' @param site_set a scalar or vector of character specifying the target AmeriFlux
+#'  Site ID (CC-Sss). If not specified, it returns all sites.
 #' @param group_only logical. Should it return availability for BADM variable
-#'  groups or variables?
+#'  groups or variables? BADM Groups contain Variables that describe related
+#'  metadata or an observation with related metadata.
 #'
 #' @return A data frame of data variable availability (per year) for selected
-#'  AmeriFlux sites. The first column contains the full site list. The remaining
+#'  AmeriFlux sites. The first column contains the SITE ID. The remaining
 #'  columns contains the number of entries for a variable or a variable group,
-#'  with column names specifying the variable or group names.
+#'  with column names specifying the BADM variable or group names.
 #' \itemize{
 #'   \item Site_ID - Six character site identifier (CC-Sss)
 #'   \item ...
