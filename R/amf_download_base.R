@@ -57,18 +57,15 @@
 #'  out_dir = tempdir())
 #'}
 #'
-amf_download_base <- function(
-  user_id,
-  user_email,
-  site_id,
-  data_product = "BASE-BADM",
-  data_policy,
-  intended_use,
-  intended_use_text,
-  out_dir = tempdir(),
-  verbose = TRUE
-  ) {
-
+amf_download_base <- function(user_id,
+                              user_email,
+                              site_id,
+                              data_product = "BASE-BADM",
+                              data_policy,
+                              intended_use,
+                              intended_use_text,
+                              out_dir = tempdir(),
+                              verbose = TRUE) {
   ## obtain formal intended use category
   intended_use_cat <- function(intended_use) {
     intended_use_verbse <- switch(
@@ -87,30 +84,38 @@ amf_download_base <- function(
     cat("Data use guidlines for AmeriFlux CC-BY-4.0 Data Policy:\n",
         fill = TRUE)
     cat(
-      paste0("Data user is free to Share (copy and redistribute ",
-             "the material in any medium or format) and/or Adapt ",
-             "(remix, transform, and build upon the material) ",
-             "for any purpose."),
+      paste0(
+        "Data user is free to Share (copy and redistribute ",
+        "the material in any medium or format) and/or Adapt ",
+        "(remix, transform, and build upon the material) ",
+        "for any purpose."
+      ),
       fill = TRUE,
       labels = "(1)"
     )
     cat(
-      paste0("Provide a citation to each site data product ",
-      "that includes the data-product DOI and/or recommended ",
-      "publication."),
+      paste0(
+        "Provide a citation to each site data product ",
+        "that includes the data-product DOI and/or recommended ",
+        "publication."
+      ),
       fill = TRUE,
       labels = "(2)"
     )
     cat(
-      paste0("Acknowledge funding for supporting AmeriFlux ",
-             "data portal: U.S. Department of Energy Office ",
-             "of Science.\n"),
+      paste0(
+        "Acknowledge funding for supporting AmeriFlux ",
+        "data portal: U.S. Department of Energy Office ",
+        "of Science.\n"
+      ),
       fill = TRUE,
       labels = "(3)"
     )
     cat(
-      paste0("Please acknowledge you read and agree to the ",
-             "AmeriFlux CC-BY-4.0 Data Policy.\n"),
+      paste0(
+        "Please acknowledge you read and agree to the ",
+        "AmeriFlux CC-BY-4.0 Data Policy.\n"
+      ),
       fill = TRUE
     )
     agree_policy <- readline(prompt = "[Yes/No]")
@@ -119,36 +124,46 @@ amf_download_base <- function(
     cat("Data use guidelines for AmeriFlux LEGACY License:\n",
         fill = TRUE)
     cat(
-      paste0("When you start in-depth analysis that may ",
-             "result in a publication, contact the data ",
-             "contributors directly, so that they have the ",
-             "opportunity to contribute substantively and ",
-             "become a co-author."),
+      paste0(
+        "When you start in-depth analysis that may ",
+        "result in a publication, contact the data ",
+        "contributors directly, so that they have the ",
+        "opportunity to contribute substantively and ",
+        "become a co-author."
+      ),
       fill = TRUE,
       labels = "(1)"
     )
     cat(
-      paste0("Provide a citation to each site data product that",
-             " includes the data-product DOI."),
+      paste0(
+        "Provide a citation to each site data product that",
+        " includes the data-product DOI."
+      ),
       fill = TRUE,
       labels = "(2)"
     )
     cat(
-      paste0("Acknowledge funding for site support if it was ",
-             "provided in the data download information."),
+      paste0(
+        "Acknowledge funding for site support if it was ",
+        "provided in the data download information."
+      ),
       fill = TRUE,
       labels = "(3)"
     )
     cat(
-      paste0("Acknowledge funding for supporting AmeriFlux ",
-             "data portal: U.S. Department of Energy Office ",
-             "of Science.\n"),
+      paste0(
+        "Acknowledge funding for supporting AmeriFlux ",
+        "data portal: U.S. Department of Energy Office ",
+        "of Science.\n"
+      ),
       fill = TRUE,
       labels = "(4)"
     )
     cat(
-      paste0("Please acknowledge that you read and agree to ",
-             "the AmeriFlux Legacy Data Policy.\n"),
+      paste0(
+        "Please acknowledge that you read and agree to ",
+        "the AmeriFlux Legacy Data Policy.\n"
+      ),
       fill = TRUE
     )
     agree_policy <- readline(prompt = "[Yes/No]")
@@ -159,109 +174,128 @@ amf_download_base <- function(
 
   if (agree_policy %in% c("Yes", "yes", "YES", "y", "Y")) {
 
-    ## set it for download testing
+    #############################################################
+    #  inform API this is a download test
     #  this is used only while code developments, to be removed
     is_test <- TRUE
+    #############################################################
 
-    ## prepare a list of site id for json query
-    if (length(site_id) > 1) {
-      site_id_txt <- paste0(site_id, collapse = "\", \"")
-    } else{
-      site_id_txt <- site_id
+    # check if site_id are valid site ID
+    check_id <- amf_check_site_id(site_id)
+
+    if (any(!check_id)) {
+      warning(paste(
+        paste(site_id[which(!check_id)], collapse = ", "),
+        "not valid AmeriFlux Site ID"
+      ))
+      site_id <- site_id[which(check_id)]
     }
 
-    ## payload for download web service
-    json_query <-
-      paste0(
-        "{\"user_id\":\"",
-        user_id,
-        "\",\"user_email\":\"",
-        user_email,
-        "\",\"data_product\":\"",
-        data_product,
-        "\",\"data_policy\":\"",
-        data_policy,
-        "\",\"site_ids\":[\"",
-        site_id_txt,
-        "\"],\"intended_use\":\"",
-        intended_use_cat(intended_use = intended_use),
-        "\",\"description\":\"",
-        paste0("[amerifluxr download] ", intended_use_text),
-        "\",\"is_test\":\"",
-        ifelse(is_test, "true", ""),
-        "\"}"
-      )
+    if (length(site_id) > 0) {
+      ## prepare a list of site id for json query
+      if (length(site_id) > 1) {
+        site_id_txt <- paste0(site_id, collapse = "\", \"")
+      } else{
+        site_id_txt <- site_id
+      }
 
-    result <-
-      httr::POST(
-        amf_server("data_download"),
-        body = json_query,
-        encode = "json",
-        httr::add_headers(`Content-Type` = "application/json")
-      )
+      ## payload for download web service
+      json_query <-
+        paste0(
+          "{\"user_id\":\"",
+          user_id,
+          "\",\"user_email\":\"",
+          user_email,
+          "\",\"data_product\":\"",
+          data_product,
+          "\",\"data_policy\":\"",
+          data_policy,
+          "\",\"site_ids\":[\"",
+          site_id_txt,
+          "\"],\"intended_use\":\"",
+          intended_use_cat(intended_use = intended_use),
+          "\",\"description\":\"",
+          paste0("[amerifluxr download] ", intended_use_text),
+          "\",\"is_test\":\"",
+          ifelse(is_test, "true", ""),
+          "\"}"
+        )
 
-    # check if FTP returns correctly
-    if (result$status_code == 200) {
-      ## get a list of fpt url
-      link <- httr::content(result)
-      ftplink <- NULL
-      if (length(link$data_urls) > 0) {
-        for (i in seq_len(length(link$data_urls))) {
-          ftplink <- c(ftplink,
-                       link$data_urls[[i]]$url)
+      result <-
+        httr::POST(
+          amf_server("data_download"),
+          body = json_query,
+          encode = "json",
+          httr::add_headers(`Content-Type` = "application/json")
+        )
+
+      # check if FTP returns correctly
+      if (result$status_code == 200) {
+        ## get a list of fpt url
+        link <- httr::content(result)
+        ftplink <- NULL
+        if (length(link$data_urls) > 0) {
+          for (i in seq_len(length(link$data_urls))) {
+            ftplink <- c(ftplink,
+                         link$data_urls[[i]]$url)
+          }
         }
-      }
 
-      ## check if any site_id has no data
-      if (is.null(ftplink)) {
-        stop(paste0("Cannot find data from ", site_id))
-      }
-
-      # avoid downloading fluxnet_bif for now
-      if(length(site_id) == 1){
-        if(site_id == "AA-Flx" &
-           data_policy == "CCBY4.0" &
-           length(ftplink) > 1){
-          ftplink <- ftplink[-grep("FLUXNET-BIF", ftplink)]
+        ## check if any site_id has no data
+        if (is.null(ftplink)) {
+          stop(paste0("Cannot find data from ", site_id))
         }
+
+        # avoid downloading fluxnet_bif for now
+        if (length(site_id) == 1) {
+          if (site_id == "AA-Flx" &
+              data_policy == "CCBY4.0" &
+              length(ftplink) > 1) {
+            ftplink <- ftplink[-grep("FLUXNET-BIF", ftplink)]
+          }
+        }
+
+        # get zip file names
+        outfname <- strsplit(ftplink, c("/"))
+        outfname <- sapply(outfname,  utils::tail, n = 1)
+        outfname <-
+          substr(outfname,
+                 1,
+                 sapply(outfname, regexpr, pattern = "?=", fixed = TRUE) - 1)
+
+        ## check if any site_id has no data
+        if (length(outfname) < length(site_id)) {
+          miss_site_id <-
+            site_id[which(!site_id %in% substr(outfname, 5, 10))]
+          warning(paste0("Cannot find data from ", miss_site_id))
+        }
+
+        ## download sequentially
+        output_zip_file <- file.path(out_dir, outfname)
+        for (ii in seq_len(length(ftplink))) {
+          utils::download.file(ftplink[ii],
+                               output_zip_file[ii],
+                               mode = "wb",
+                               quiet = !verbose)
+        }
+
+        ## check if downloaded files exist
+        miss_download <- which(!sapply(output_zip_file, file.exists))
+        if (length(miss_download) > 0) {
+          warning(paste("Cannot download",
+                        output_zip_file[miss_download],
+                        "from",
+                        ftplink[miss_download]))
+        }
+
+      } else{
+        stop("Data download fails, timeout or server error...")
+
+        output_zip_file <- NULL
       }
-
-      # get zip file names
-      outfname <- strsplit(ftplink, c("/"))
-      outfname <- sapply(outfname,  utils::tail, n = 1)
-      outfname <-
-        substr(outfname, 1,
-               sapply(outfname, regexpr, pattern = "?=", fixed = TRUE) - 1)
-
-      ## check if any site_id has no data
-      if (length(outfname) < length(site_id)) {
-        miss_site_id <-
-          site_id[which(!site_id %in% substr(outfname, 5, 10))]
-        warning(paste0("Cannot find data from ", miss_site_id))
-      }
-
-      ## download sequentially
-      output_zip_file <- file.path(out_dir, outfname)
-      for (ii in seq_len(length(ftplink))) {
-        utils::download.file(ftplink[ii],
-                             output_zip_file[ii],
-                             mode = "wb",
-                             quiet = !verbose)
-      }
-
-      ## check if downloaded files exist
-      miss_download <- which(!sapply(output_zip_file, file.exists))
-      if (length(miss_download) > 0) {
-        warning(paste("Cannot download",
-                      output_zip_file[miss_download],
-                      "from",
-                      ftplink[miss_download]))
-      }
-
-      message(paste())
 
     } else{
-      stop("Data download fails, timeout or server error...")
+      stop("Download failed, no valid Site ID in site_id")
 
       output_zip_file <- NULL
     }
@@ -269,6 +303,7 @@ amf_download_base <- function(
   } else {
     stop("Need to acknowledge data policy before proceed")
 
+    output_zip_file <- NULL
   }
   return(output_zip_file)
 }

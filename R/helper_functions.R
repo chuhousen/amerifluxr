@@ -22,26 +22,28 @@ amf_sites <- memoise::memoise(function(){
 })
 
 
-#' Lists all site member info
+#' Check valid Ameriflux site ID
 #'
-#' This function actually lists ALL site info
-#' of which only a fraction is used during processing
+#' Check if the character is a valid AmeriFlux site ID (CC-Sss)
 #'
-#' @param site_id Ameriflux site id
+#' @param x vector or scalar of characters
 #'
-#' @return Ameriflux site ids
+#' @return logical vector or scalar
 #' @export
 
-amf_member_info <- memoise::memoise(function(site_id){
-  # grab member info
+amf_check_site_id <- memoise::memoise(function(x){
+  # web service returning a full site list with basic site general info
   df <- jsonlite::fromJSON(
-    paste0(amf_server("info"),
-           site_id), flatten = TRUE)
+    amf_server("sitemap"),
+    flatten = TRUE,
+    simplifyDataFrame = TRUE
+  )[, "SITE_ID"]
+
+  chk_id <- x %in% df
 
   # return data
-  return(df)
+  return(chk_id)
 })
-
 
 #' Returns a list of data coverage
 #'
