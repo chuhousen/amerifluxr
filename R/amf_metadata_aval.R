@@ -29,32 +29,45 @@
 #' group_only = FALSE)
 #'}
 
-amf_metadata_aval <- function(
-  site_set = NULL,
-  group_only = TRUE
-  ){
-
+amf_metadata_aval <- function(site_set = NULL,
+                              group_only = TRUE) {
   # determine the level of granularity
   target_level <- ifelse(group_only, "bif_group", "bif_variable")
 
   # check if the file exists
-  if(httr::HEAD(amf_server())$status_code == 200){
-
+  if (httr::HEAD(amf_server())$status_code == 200) {
     # get latest data variable availability
-    metadata_aval <- utils::read.csv(amf_server(target_level),
-                                 header = TRUE,
-                                 skip = 1,
-                                 stringsAsFactors = FALSE)
+    metadata_aval <- utils::read.csv(
+      amf_server(target_level),
+      header = TRUE,
+      skip = 1,
+      stringsAsFactors = FALSE
+    )
 
     # subset interested sites
-    if(!is.null(site_set)){
+    if (!is.null(site_set)) {
+      check_id <- amf_check_site_id(site_set)
 
-      metadata_aval <- metadata_aval[metadata_aval$SITE_ID %in% site_set,]
+      # check if site_set are valid site ID
+      if (any(!check_id)) {
+        warning(paste(
+          paste(site_set[which(!check_id)], collapse = ", "),
+          "not valid AmeriFlux Site ID"
+        ))
+        site_set <- site_set[which(check_id)]
+      }
 
+      if (length(site_set) > 0) {
+        metadata_aval <- metadata_aval[metadata_aval$SITE_ID %in% site_set, ]
+
+      } else{
+        stop("Download failed, no valid Site ID in site_set")
+
+        metadata_aval <- NULL
+      }
     }
 
-  }else{
-
+  } else{
     stop("Download failed, timeout or server error...")
 
     metadata_aval <- NULL

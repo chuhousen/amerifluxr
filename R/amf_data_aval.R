@@ -32,26 +32,41 @@
 #'
 #' }
 
-amf_data_aval <- function(site_set = NULL){
-
-    # check if the file exists
-  if(httr::HEAD(amf_server("data_variable"))$status_code == 200){
-
+amf_data_aval <- function(site_set = NULL) {
+  # check if the file exists
+  if (httr::HEAD(amf_server("data_variable"))$status_code == 200) {
     # get latest data variable availability
-    data_aval <- utils::read.csv(amf_server("data_variable"),
-                                 header = T,
-                                 skip = 1,
-                                 stringsAsFactors = FALSE)
+    data_aval <- utils::read.csv(
+      amf_server("data_variable"),
+      header = T,
+      skip = 1,
+      stringsAsFactors = FALSE
+    )
 
     # subset interested sites
-    if(!is.null(site_set)){
+    if (!is.null(site_set)) {
+      check_id <- amf_check_site_id(site_set)
 
-      data_aval <- data_aval[data_aval$SITE_ID %in% site_set,]
+      # check if site_set are valid site ID
+      if (any(!check_id)) {
+        warning(paste(
+          paste(site_set[which(!check_id)], collapse = ", "),
+          "not valid AmeriFlux Site ID"
+        ))
+        site_set <- site_set[which(check_id)]
+      }
 
+      if (length(site_set) > 0) {
+        data_aval <- data_aval[data_aval$SITE_ID %in% site_set,]
+
+      } else{
+        stop("Download failed, no valid Site ID in site_set")
+
+        data_aval <- NULL
+      }
     }
 
-  }else{
-
+  } else{
     stop("Download failed, timeout or server error...")
 
     data_aval <- NULL
