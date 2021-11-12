@@ -1,4 +1,4 @@
-#' Parse variable name and qualifier in the AmeriFlux BASE data product
+#' Parse BASE data variable name and qualifier
 #'
 #' @description This function parse variable names and qualifiers of AmeriFlux
 #' BASE data product. See AmeriFlux web page

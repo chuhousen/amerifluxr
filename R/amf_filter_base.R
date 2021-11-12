@@ -1,23 +1,31 @@
-#' Filter AmeriFlux BASE data product based on physical range
+#' Filter AmeriFlux BASE data product based on plausible range
 #'
 #' @description The function filters BASE data product based on the expected
-#' physical ranges specified for each variable. See AmeriFlux web site
+#' plausible ranges specified for each variable. See AmeriFlux web site
 #' \url{https://ameriflux.lbl.gov/data/data-processing-pipelines/data-qaqc/physical-range-module/}
 #' for description of physical ranges.
 #'
 #' @param data_in A data frame containing BASE data, e.g.,
 #'  import from \code{\link{amf_read_base}}.
-#' @param limit_ls A data frame with at least three columns, i.e., Name, Min,
-#'  Max, denoting the base name, expected lower and upper ranges of each
-#'  variable. If not specified, use \code{\link{amf_variables}} by default.
-#' @param basename_decode A data frame with at least two columns, i.e.,
-#'  variable_name, basename, denoting the actual variable name and
-#'  base name of each variable in data_in. If not specified,
-#'  use \code{\link{amf_parse_basename}} by default.
+#' @param limit_ls A data frame with at least three columns:
+#' \itemize{
+#'   \item Name: variable base name
+#'   \item Min: expected lower bound
+#'   \item Max: expected upper bound
+#'  }
+#'  If not specified, use \code{\link{amf_variables}} by default.
+#' @param basename_decode A data frame with at least two columns:
+#' #' \itemize{
+#'   \item variable_name: actual variable name
+#'   \item basename: variable base name
+#'  }
+#'  If not specified, use \code{\link{amf_parse_basename}} by default.
 #' @param loose_filter A number in ratio (0-1) used to adjust the physical range
 #' for filtering. Set it to 0 if not used. The default is 0.05.
+#'
 #' @return A data frame similar to data_in, with out-of-range data points
 #'  being filtered out
+#'
 #' @export
 #' @seealso amf_read_base, amf_var_info, amf_parse_basename
 #' @examples

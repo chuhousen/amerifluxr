@@ -48,8 +48,8 @@ pander::pandoc.table(sites_dt[!is.na(DATA_START), .N, by = "IGBP"])
 # get a list of cropland and grassland sites with available data, located within 30-50 degree N in latitude
 crop_ls <- sites_dt[IGBP %in% c("CRO", "GRA") &
                                            !is.na(DATA_START) &
-                                           GRP_LOCATION.LOCATION_LAT > 30 &
-                                           GRP_LOCATION.LOCATION_LAT < 50,
+                                           LOCATION_LAT > 30 &
+                                           LOCATION_LAT < 50,
                                          .(SITE_ID, SITE_NAME, DATA_START, DATA_END)]
 pander::pandoc.table(crop_ls[c(1:10), ])
 

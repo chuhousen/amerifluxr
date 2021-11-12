@@ -2,7 +2,7 @@
 % Please edit documentation in R/amf_parse_basename.R
 \name{amf_parse_basename}
 \alias{amf_parse_basename}
-\title{Parse variable name and qualifier in the AmeriFlux BASE data product}
+\title{Parse BASE data variable name and qualifier}
 \usage{
 amf_parse_basename(var_name, FP_ls = NULL, gapfill_postfix = "_PI_F")
 }
