@@ -86,9 +86,5 @@ amf_download_bif(user_id = "test",
 
 }
 \seealso{
-<<<<<<< HEAD
 amf_download_base
-=======
-\code{\link{amf_download_base()}}
->>>>>>> d5c3cc5b2df838a7d507f96464b166d70c933eb9
 }
