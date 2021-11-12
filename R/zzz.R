@@ -40,6 +40,7 @@ amf_server <- function(endpoint = "sitemap"){
   url <- switch(
     endpoint,
     "sitemap" = file.path(api_url, "site_display/AmeriFlux"),
+    "site_ccby4" = file.path(api_url, "site_availability/AmeriFlux/BIF/CCBY4.0"),
     "data_year" = file.path(api_url, "data_availability/AmeriFlux/"),
     "data_download" = file.path(api_url, "data_download/"),
     "variables" = file.path(api_url_old, "fpinVarLimits"),

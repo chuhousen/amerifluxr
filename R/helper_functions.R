@@ -14,8 +14,30 @@ amf_sites <- memoise::memoise(function(){
     simplifyDataFrame = TRUE
   )
 
+  # merge info of data policy
+  site.ccby4 <- jsonlite::fromJSON(
+    amf_server("site_ccby4"),
+    flatten = TRUE,
+    simplifyDataFrame = TRUE
+  )[, 1]
+
+  df$DATA_POLICY <- "LEGACY"
+  df$DATA_POLICY[which(df$SITE_ID %in% site.ccby4)] <- "CCBY4.0"
+
   # order by site id
-  df <- df[order(df$SITE_ID), ]
+  df <- df[order(df$SITE_ID),]
+
+  # rename columns
+  colnames(df)[which(names(df) == "GRP_LOCATION.LOCATION_LAT")] <-
+    "LOCATION_LAT"
+  colnames(df)[which(names(df) == "GRP_LOCATION.LOCATION_LONG")] <-
+    "LOCATION_LONG"
+  colnames(df)[which(names(df) == "GRP_LOCATION.LOCATION_ELEV")] <-
+    "LOCATION_ELEV"
+  colnames(df)[which(names(df) == "GRP_CLIM_AVG.MAT")] <- "MAT"
+  colnames(df)[which(names(df) == "GRP_CLIM_AVG.MAP")] <- "MAP"
+  colnames(df)[which(names(df) == "GRP_CLIM_AVG.CLIMATE_KOEPPEN")] <-
+    "CLIMATE_KOEPPEN"
 
   # return data
   return(df)
@@ -65,10 +87,9 @@ amf_data_coverage <- memoise::memoise(
 
   # web service returning a full site list with
   # most-updated data available years in AmeriFlux BASE dataset
-  df <- jsonlite::fromJSON(
-    paste0(amf_server("data_year"), "/", data_product, "/", data_policy),
-    flatten = TRUE
-  )
+    df <-
+      jsonlite::fromJSON(paste0(amf_server("data_year"), "/", data_product, "/", data_policy),
+                         flatten = TRUE)
 
   # order by site id
   df <- df[order(df$SITE_ID), ]

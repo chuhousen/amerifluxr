@@ -2,7 +2,7 @@
 % Please edit documentation in R/amf_download_base.R
 \name{amf_download_base}
 \alias{amf_download_base}
-\title{Download AmeriFlux BASE data product through web service}
+\title{Download AmeriFlux BASE data product}
 \usage{
 amf_download_base(
   user_id,
@@ -21,27 +21,34 @@ amf_download_base(
 
 \item{user_email}{AmeriFlux account user email (character)}
 
-\item{site_id}{A vector of character specifying the AmeriFlux
+\item{site_id}{A scalar or vector of character specifying the AmeriFlux
 Site ID (CC-Sss)}
 
 \item{data_product}{AmeriFlux data product. Currently, only "BASE-BADM" is
-supported and used as default.}
+supported and used as default. (character)}
 
-\item{data_policy}{"CCBY4.0" or "LEGACY". AmeriFlux data are shared under two
-tiers of licenses as chosen by site's PI. See
+\item{data_policy}{"CCBY4.0" or "LEGACY" (character). AmeriFlux data
+ are shared under two tiers of licenses as chosen by site's  PI. See
 \url{https://ameriflux.lbl.gov/data/data-policy/#data-use} for data use
 guidelines under each license. Note: Data use policy
 selected affects which sites’ data are available for download.}
 
 \item{intended_use}{The intended use category. Currently, it needs to be one
-of the followings: "synthesis", "model", "remote_sensing", "other_research",
- "education", or "other"}
+of the followings:
+\itemize{
+  \item "synthesis" (i.e., Multi-site synthesis)
+  \item "model" (i.e., Land model/Earth system model)
+  \item "remote_sensing" (i.e., Remote sensing research)
+  \item "other_research" (i.e., Other research)
+ "\item "education" (i.e., Education (Teacher or Student))
+  \item "other"
+}}
 
 \item{intended_use_text}{Enter a brief description of intended use. This will
 be recorded in the data download log and emailed to
 site's PI (free text).}
 
-\item{out_dir}{Output directory for downloaded data}
+\item{out_dir}{Output directory for downloaded data, default tempdir()}
 
 \item{verbose}{Show feedback on download progress (TRUE/FALSE)}
 }
@@ -49,10 +56,11 @@ site's PI (free text).}
 A vector of download filenames on the local drive
 }
 \description{
-This function allows downloading AmeriFlux BASE and BADM data
- files. Note: Access to AmeriFlux data requires creating an AmeriFlux account
-  first. Register an account through the link
+This function downloads AmeriFlux BASE and BADM data files.
+ Note: Access to AmeriFlux data requires creating an AmeriFlux account
+ first. Register an account through the link
   \url{https://ameriflux-data.lbl.gov/Pages/RequestAccount.aspx}.
+
 For details about BASE and BADM data files, see AmeriFlux web pages
  \url{https://ameriflux.lbl.gov/data/data-processing-pipelines/base-publish/}
 and \url{https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/}.

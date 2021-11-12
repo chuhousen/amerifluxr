@@ -1,14 +1,14 @@
-#' Get data variable availability
+#' Get BASE data variable availability
 #'
-#' @description This function obtains the data variable availability for all or
+#' @description This function obtains the BASE data availability for all or
 #' selected AmeriFlux sites. See AmeriFlux page
 #' \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/} for details
 #' about the variable naming.
 #'
-#' @param site_set a vector of character specifying the target AmeriFlux Site ID
-#'  (CC-Sss). If not specified, it returns all sites.
+#' @param site_set a scalar or vector of character specifying the target
+#' AmeriFlux Site ID (CC-Sss). If not specified, it returns all sites.
 #'
-#' @return A data frame of data variable availability (per year)
+#' @return A data frame of variable-specific data availability (per year)
 #'  for selected AmeriFlux sites.
 #' \itemize{
 #'   \item Site_ID - Six character site identifier (CC-Sss)

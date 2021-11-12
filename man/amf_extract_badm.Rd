@@ -2,7 +2,7 @@
 % Please edit documentation in R/amf_extract_badm.R
 \name{amf_extract_badm}
 \alias{amf_extract_badm}
-\title{Extract BADM data for a specific BADM group}
+\title{Extract BADM data of a specific BADM group}
 \usage{
 amf_extract_badm(bif_data, select_group)
 }
@@ -11,7 +11,7 @@ amf_extract_badm(bif_data, select_group)
 VARIABLE_GROUP, VARIABLE, DATAVALUE, imported from function
 \code{\link{amf_read_bif}}.}
 
-\item{select_group}{A string, selected from VARIABLE_GROUP}
+\item{select_group}{A string, selected from VARIABLE_GROUP in the bif_data}
 }
 \value{
 A data frame of re-structured BADM data with the following columns:
@@ -23,7 +23,7 @@ A data frame of re-structured BADM data with the following columns:
 }
 }
 \description{
-This function extracts BADM data for a specific BADM group
+This function extracts BADM data of a specific BADM group
 from the imported BADM (BIF) file. Use function \code{\link{amf_read_bif}}
 to import BADM (BIF) file.
 }
