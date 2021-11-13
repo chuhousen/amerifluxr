@@ -32,7 +32,7 @@ library("amerifluxr")
 ```
 ## Use
 
-### Obtain a full list of AmeriFlux sites with general info
+### Obtain an AmeriFlux site list 
 
 This function obtains the latest AmeriFlux site list and
 sites' general info through the AmeriFlux web service.
@@ -71,6 +71,7 @@ floc1 <- amf_download_bif(user_id = "my_user",
                           verbose = TRUE,
                           site_w_data = TRUE)
 ```
+
 
 | Parameter          | Description                                                                                                                     |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -118,6 +119,7 @@ floc2 <- amf_download_base(user_id = "my_user",
 
 ```
 
+
 | Parameter          | Description                                                                                                                     |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
 | user_id            | AmeriFlux account username                                                                                                      |
@@ -138,6 +140,7 @@ base <- amf_read_base(file = floc2,
                       unzip = TRUE,
                       parse_timestamp = TRUE)
 ```
+
 
 | Parameter          | Description                                                                                                                     |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
