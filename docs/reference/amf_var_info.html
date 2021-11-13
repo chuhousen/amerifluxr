@@ -8,6 +8,13 @@
 
 <title>Get variable information — amf_var_info • amerifluxr</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -43,6 +50,7 @@
 <meta property="og:description" content="This function obtains the measurement height metadata for the
 AmeriFlux BASE data product. See AmeriFlux page
 https://ameriflux.lbl.gov/data/measurement-height/ for details." />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -136,7 +144,7 @@ AmeriFlux BASE data product. See AmeriFlux page
 <a href='https://ameriflux.lbl.gov/data/measurement-height/'>https://ameriflux.lbl.gov/data/measurement-height/</a> for details.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>amf_var_info</span><span class='op'>(</span>out_dir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>amf_var_info</span><span class='op'>(</span>out_dir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -144,6 +152,10 @@ AmeriFlux BASE data product. See AmeriFlux page
     <tr>
       <th>out_dir</th>
       <td><p>output directory  (default = tempdir())</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Show feedback on download progress (TRUE/FALSE)</p></td>
     </tr>
     </table>
 
@@ -158,16 +170,17 @@ AmeriFlux BASE data product. See AmeriFlux page
 <li><p>Instrument_Model - Instrument model used to collect the data variable</p></li>
 <li><p>Instrument_Model2 - A second instrument model used to collect the data variable</p></li>
 <li><p>Comment - Additional information provided by the site team</p></li>
-<li><p>BASE_Version - The most recent BASE data product version number for which the information applies</p></li>
+<li><p>BASE_Version - The most recent BASE data product version number for which the
+   information applies</p></li>
 </ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># download the measurement height data for all sites</span>
-<span class='va'>var_info</span> <span class='op'>&lt;-</span> <span class='fu'>amf_var_info</span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># download the measurement height data for all sites</span></span>
+<span class='r-in'><span class='va'>var_info</span> <span class='op'>&lt;-</span> <span class='fu'>amf_var_info</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

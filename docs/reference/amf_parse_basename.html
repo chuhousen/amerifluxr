@@ -6,8 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Parse variable name and qualifier in the AmeriFlux BASE data product — amf_parse_basename • amerifluxr</title>
+<title>Parse BASE data variable name and qualifier — amf_parse_basename • amerifluxr</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -39,11 +46,12 @@
 
 
 
-<meta property="og:title" content="Parse variable name and qualifier in the AmeriFlux BASE data product — amf_parse_basename" />
+<meta property="og:title" content="Parse BASE data variable name and qualifier — amf_parse_basename" />
 <meta property="og:description" content="This function parse variable names and qualifiers of AmeriFlux
 BASE data product. See AmeriFlux web page
 https://ameriflux.lbl.gov/data/aboutdata/data-variables/ about the
 details of variable naming and qualifiers." />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -126,7 +134,7 @@ details of variable naming and qualifiers." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Parse variable name and qualifier in the AmeriFlux BASE data product</h1>
+    <h1>Parse BASE data variable name and qualifier</h1>
     <small class="dont-index">Source: <a href='https://github.com/chuhousen/amerifluxr/blob/master/R/amf_parse_basename.R'><code>R/amf_parse_basename.R</code></a></small>
     <div class="hidden name"><code>amf_parse_basename.Rd</code></div>
     </div>
@@ -190,18 +198,18 @@ gap-filled. The default is "_PI_F".</p></td>
     <div class='dont-index'><p>amf_read_base, amf_variables, amf_data_aval, amf_var_info</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># read the BASE from a csv file</span>
-<span class='va'>base</span> <span class='op'>&lt;-</span> <span class='fu'><a href='amf_read_base.html'>amf_read_base</a></span><span class='op'>(</span>file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>,
-                                         <span class='st'>"AMF_US-CRT_BASE_HH_2-5.csv"</span>,
-                                          package <span class='op'>=</span> <span class='st'>"amerifluxr"</span><span class='op'>)</span>,
-                      unzip <span class='op'>=</span> <span class='cn'>FALSE</span>,
-                      parse_timestamp <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='co'># parse variable names/qualifiers</span>
-<span class='va'>basename_decode</span> <span class='op'>&lt;-</span> <span class='fu'>amf_parse_basename</span><span class='op'>(</span>var_name <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>base</span><span class='op'>)</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># read the BASE from a csv file</span></span>
+<span class='r-in'><span class='va'>base</span> <span class='op'>&lt;-</span> <span class='fu'><a href='amf_read_base.html'>amf_read_base</a></span><span class='op'>(</span>file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>,</span>
+<span class='r-in'>                                         <span class='st'>"AMF_US-CRT_BASE_HH_2-5.csv"</span>,</span>
+<span class='r-in'>                                          package <span class='op'>=</span> <span class='st'>"amerifluxr"</span><span class='op'>)</span>,</span>
+<span class='r-in'>                      unzip <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
+<span class='r-in'>                      parse_timestamp <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># parse variable names/qualifiers</span></span>
+<span class='r-in'><span class='va'>basename_decode</span> <span class='op'>&lt;-</span> <span class='fu'>amf_parse_basename</span><span class='op'>(</span>var_name <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>base</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

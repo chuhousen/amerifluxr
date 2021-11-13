@@ -6,6 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Site selection • amerifluxr</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -13,6 +19,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Site selection">
 <meta property="og:description" content="amerifluxr">
+<meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -79,7 +86,7 @@
 
       
 
-      </header><script src="site_selection_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><script src="site_selection_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Site selection</h1>
@@ -96,8 +103,8 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/chuhousen/amerifluxr">amerifluxr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rapporter.github.io/pander/">pander</a></span><span class="op">)</span></code></pre></div>
-<p>amerifluxr is a programmatic interface to the [AmeriFlux] (<a href="https://ameriflux.lbl.gov/" class="uri">https://ameriflux.lbl.gov/</a>). This vignette demonstrates examples to query a list of target sites based on sites’ general information and availability of metadata and data.</p>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://rapporter.github.io/pander">pander</a></span><span class="op">)</span></code></pre></div>
+<p>amerifluxr is a programmatic interface to the <a href="https://ameriflux.lbl.gov/">AmeriFlux</a>. This vignette demonstrates examples to query a list of target sites based on sites’ general information and availability of metadata and data.</p>
 <div id="get-a-site-list-with-general-info" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-a-site-list-with-general-info" class="anchor"></a>Get a site list with general info</h2>
@@ -112,53 +119,38 @@
 <caption>Table continues below</caption>
 <colgroup>
 <col width="13%">
-<col width="40%">
+<col width="39%">
+<col width="16%">
+<col width="20%">
+<col width="9%">
 </colgroup>
 <thead><tr class="header">
 <th align="center">SITE_ID</th>
 <th align="center">SITE_NAME</th>
+<th align="center">COUNTRY</th>
+<th align="center">STATE</th>
+<th align="center">IGBP</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td align="center">AR-CCa</td>
 <td align="center">Carlos Casares agriculture</td>
+<td align="center">Argentina</td>
+<td align="center">Buenos Aires</td>
+<td align="center">CRO</td>
 </tr>
 <tr class="even">
 <td align="center">AR-CCg</td>
 <td align="center">Carlos Casares grassland</td>
+<td align="center">Argentina</td>
+<td align="center">Buenos Aires</td>
+<td align="center">GRA</td>
 </tr>
 <tr class="odd">
 <td align="center">AR-TF1</td>
 <td align="center">Rio Moat bog</td>
-</tr>
-</tbody>
-</table>
-<table class="table">
-<caption>Table continues below</caption>
-<colgroup>
-<col width="69%">
-<col width="19%">
-<col width="9%">
-</colgroup>
-<thead><tr class="header">
-<th align="center">URL_AMERIFLUX</th>
-<th align="center">TOWER_BEGAN</th>
-<th align="center">IGBP</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="center"><a href="https://ameriflux.lbl.gov/sites/siteinfo/AR-CCa" class="uri">https://ameriflux.lbl.gov/sites/siteinfo/AR-CCa</a></td>
-<td align="center">2012</td>
-<td align="center">CRO</td>
-</tr>
-<tr class="even">
-<td align="center"><a href="https://ameriflux.lbl.gov/sites/siteinfo/AR-CCg" class="uri">https://ameriflux.lbl.gov/sites/siteinfo/AR-CCg</a></td>
-<td align="center">2018</td>
-<td align="center">GRA</td>
-</tr>
-<tr class="odd">
-<td align="center"><a href="https://ameriflux.lbl.gov/sites/siteinfo/AR-TF1" class="uri">https://ameriflux.lbl.gov/sites/siteinfo/AR-TF1</a></td>
-<td align="center">2016</td>
+<td align="center">Argentina</td>
+<td align="center">NA</td>
 <td align="center">WET</td>
 </tr>
 </tbody>
@@ -166,58 +158,73 @@
 <table class="table">
 <caption>Table continues below</caption>
 <colgroup>
-<col width="16%">
-<col width="38%">
-<col width="40%">
+<col width="18%">
+<col width="65%">
+<col width="15%">
 </colgroup>
 <thead><tr class="header">
+<th align="center">TOWER_BEGAN</th>
+<th align="center">URL_AMERIFLUX</th>
 <th align="center">TOWER_END</th>
-<th align="center">GRP_LOCATION.LOCATION_LAT</th>
-<th align="center">GRP_LOCATION.LOCATION_LONG</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td align="center">2012</td>
+<td align="center"><a href="https://ameriflux.lbl.gov/sites/siteinfo/AR-CCa" class="uri">https://ameriflux.lbl.gov/sites/siteinfo/AR-CCa</a></td>
 <td align="center">NA</td>
-<td align="center">-35.62</td>
-<td align="center">-61.32</td>
 </tr>
 <tr class="even">
+<td align="center">2018</td>
+<td align="center"><a href="https://ameriflux.lbl.gov/sites/siteinfo/AR-CCg" class="uri">https://ameriflux.lbl.gov/sites/siteinfo/AR-CCg</a></td>
 <td align="center">NA</td>
-<td align="center">-35.92</td>
-<td align="center">-61.19</td>
 </tr>
 <tr class="odd">
+<td align="center">2016</td>
+<td align="center"><a href="https://ameriflux.lbl.gov/sites/siteinfo/AR-TF1" class="uri">https://ameriflux.lbl.gov/sites/siteinfo/AR-TF1</a></td>
 <td align="center">2018</td>
-<td align="center">-54.97</td>
-<td align="center">-66.73</td>
 </tr>
 </tbody>
 </table>
 <table class="table">
 <caption>Table continues below</caption>
 <colgroup>
-<col width="40%">
-<col width="26%">
-<col width="26%">
+<col width="18%">
+<col width="20%">
+<col width="20%">
+<col width="22%">
+<col width="8%">
+<col width="8%">
 </colgroup>
 <thead><tr class="header">
-<th align="center">GRP_LOCATION.LOCATION_ELEV</th>
-<th align="center">GRP_CLIM_AVG.MAT</th>
-<th align="center">GRP_CLIM_AVG.MAP</th>
+<th align="center">LOCATION_LAT</th>
+<th align="center">LOCATION_LONG</th>
+<th align="center">LOCATION_ELEV</th>
+<th align="center">CLIMATE_KOEPPEN</th>
+<th align="center">MAT</th>
+<th align="center">MAP</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td align="center">-35.62</td>
+<td align="center">-61.32</td>
 <td align="center">83</td>
+<td align="center">Cfa</td>
 <td align="center">16.1</td>
 <td align="center">1060</td>
 </tr>
 <tr class="even">
+<td align="center">-35.92</td>
+<td align="center">-61.19</td>
 <td align="center">84</td>
+<td align="center">Cfa</td>
 <td align="center">16.1</td>
 <td align="center">1060</td>
 </tr>
 <tr class="odd">
+<td align="center">-54.97</td>
+<td align="center">-66.73</td>
 <td align="center">40</td>
+<td align="center">NA</td>
 <td align="center">NA</td>
 <td align="center">NA</td>
 </tr>
@@ -225,28 +232,28 @@
 </table>
 <table class="table">
 <colgroup>
-<col width="43%">
+<col width="19%">
 <col width="18%">
 <col width="18%">
 </colgroup>
 <thead><tr class="header">
-<th align="center">GRP_CLIM_AVG.CLIMATE_KOEPPEN</th>
+<th align="center">DATA_POLICY</th>
 <th align="center">DATA_START</th>
 <th align="center">DATA_END</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="center">Cfa</td>
+<td align="center">LEGACY</td>
 <td align="center">NA</td>
 <td align="center">NA</td>
 </tr>
 <tr class="even">
-<td align="center">Cfa</td>
+<td align="center">LEGACY</td>
 <td align="center">NA</td>
 <td align="center">NA</td>
 </tr>
 <tr class="odd">
-<td align="center">NA</td>
+<td align="center">CCBY4.0</td>
 <td align="center">2016</td>
 <td align="center">2018</td>
 </tr>
@@ -268,11 +275,11 @@
 <tbody>
 <tr class="odd">
 <td align="center">CRO</td>
-<td align="center">108</td>
+<td align="center">109</td>
 </tr>
 <tr class="even">
 <td align="center">GRA</td>
-<td align="center">77</td>
+<td align="center">78</td>
 </tr>
 <tr class="odd">
 <td align="center">WET</td>
@@ -288,11 +295,11 @@
 </tr>
 <tr class="even">
 <td align="center">WSA</td>
-<td align="center">8</td>
+<td align="center">9</td>
 </tr>
 <tr class="odd">
 <td align="center">ENF</td>
-<td align="center">98</td>
+<td align="center">99</td>
 </tr>
 <tr class="even">
 <td align="center">DBF</td>
@@ -304,7 +311,7 @@
 </tr>
 <tr class="even">
 <td align="center">OSH</td>
-<td align="center">40</td>
+<td align="center">38</td>
 </tr>
 <tr class="odd">
 <td align="center">WAT</td>
@@ -360,7 +367,7 @@
 </tr>
 <tr class="odd">
 <td align="center">WSA</td>
-<td align="center">5</td>
+<td align="center">7</td>
 </tr>
 <tr class="even">
 <td align="center">EBF</td>
@@ -368,7 +375,7 @@
 </tr>
 <tr class="odd">
 <td align="center">ENF</td>
-<td align="center">92</td>
+<td align="center">93</td>
 </tr>
 <tr class="even">
 <td align="center">DBF</td>
@@ -380,15 +387,15 @@
 </tr>
 <tr class="even">
 <td align="center">CRO</td>
-<td align="center">60</td>
+<td align="center">63</td>
 </tr>
 <tr class="odd">
 <td align="center">GRA</td>
-<td align="center">60</td>
+<td align="center">61</td>
 </tr>
 <tr class="even">
 <td align="center">OSH</td>
-<td align="center">33</td>
+<td align="center">31</td>
 </tr>
 <tr class="odd">
 <td align="center">CSH</td>
@@ -423,10 +430,10 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># get a list of cropland and grassland sites with available data, located within 30-50 degree N in latitude</span>
-<span class="va">crop_ls</span> <span class="op">&lt;-</span> <span class="va">sites_dt</span><span class="op">[</span><span class="va">IGBP</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CRO"</span>, <span class="st">"GRA"</span><span class="op">)</span> <span class="op">&amp;</span>
+<span class="va">crop_ls</span> <span class="op">&lt;-</span> <span class="va">sites_dt</span><span class="op">[</span><span class="va">IGBP</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CRO"</span>, <span class="st">"GRA"</span><span class="op">)</span> <span class="op">&amp;</span>
                                            <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">DATA_START</span><span class="op">)</span> <span class="op">&amp;</span>
-                                           <span class="va">GRP_LOCATION.LOCATION_LAT</span> <span class="op">&gt;</span> <span class="fl">30</span> <span class="op">&amp;</span>
-                                           <span class="va">GRP_LOCATION.LOCATION_LAT</span> <span class="op">&lt;</span> <span class="fl">50</span>,
+                                           <span class="va">LOCATION_LAT</span> <span class="op">&gt;</span> <span class="fl">30</span> <span class="op">&amp;</span>
+                                           <span class="va">LOCATION_LAT</span> <span class="op">&lt;</span> <span class="fl">50</span>,
                                          <span class="fu">.</span><span class="op">(</span><span class="va">SITE_ID</span>, <span class="va">SITE_NAME</span>, <span class="va">DATA_START</span>, <span class="va">DATA_END</span><span class="op">)</span><span class="op">]</span>
 <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">crop_ls</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -509,7 +516,7 @@
 <div id="get-metadata-availability" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-metadata-availability" class="anchor"></a>Get metadata availability</h2>
-<p>In some cases, users may want to know if certain types of metadata are available for the selected sites. The amf_metadata_aval() function provides a quick summary of metadata availability before actually downloading the data &amp; metadata through AmeriFlux. By default, amf_metadata_aval() returns a full site list with the available entries (i.e., counts) for all BADM groups. Check AmeriFlux webpage (<a href="https://ameriflux.lbl.gov/data/badm/badm-basics/" class="uri">https://ameriflux.lbl.gov/data/badm/badm-basics/</a>) for definitions of BADM groups.</p>
+<p>In some cases, users may want to know if certain types of metadata are available for the selected sites. The amf_metadata_aval() function provides a quick summary of metadata availability before actually downloading the data &amp; metadata through AmeriFlux. By default, amf_metadata_aval() returns a full site list with the available entries (i.e., counts) for all BADM groups. Check <a href="https://ameriflux.lbl.gov/data/badm/badm-basics/">AmeriFlux webpage</a> for definitions of BADM groups.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">metadata_aval</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html">as.data.table</a></span><span class="op">(</span><span class="fu"><a href="../reference/amf_metadata_aval.html">amf_metadata_aval</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">metadata_aval</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></code></pre></div>
@@ -517,38 +524,38 @@
 <caption>Table continues below</caption>
 <colgroup>
 <col width="12%">
-<col width="17%">
-<col width="12%">
 <col width="27%">
-<col width="29%">
+<col width="18%">
+<col width="17%">
+<col width="24%">
 </colgroup>
 <thead><tr class="header">
 <th align="center">SITE_ID</th>
+<th align="center">GRP_ACKNOWLEDGEMENT</th>
+<th align="center">GRP_CLIM_AVG</th>
 <th align="center">GRP_COUNTRY</th>
-<th align="center">GRP_DOI</th>
-<th align="center">GRP_DOI_CONTRIBUTOR</th>
-<th align="center">GRP_DOI_ORGANIZATION</th>
+<th align="center">GRP_DOM_DIST_MGMT</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="center">AR-TF1</td>
+<td align="center">AR-CCa</td>
 <td align="center">1</td>
 <td align="center">1</td>
 <td align="center">1</td>
-<td align="center">2</td>
+<td align="center">1</td>
 </tr>
 <tr class="even">
-<td align="center">AR-TF2</td>
+<td align="center">AR-CCg</td>
 <td align="center">1</td>
 <td align="center">1</td>
 <td align="center">1</td>
 <td align="center">2</td>
 </tr>
 <tr class="odd">
-<td align="center">BR-CMT</td>
+<td align="center">AR-TF1</td>
+<td align="center">0</td>
+<td align="center">0</td>
 <td align="center">1</td>
-<td align="center">0</td>
-<td align="center">0</td>
 <td align="center">0</td>
 </tr>
 </tbody>
@@ -570,14 +577,14 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="center">3</td>
+<td align="center">2</td>
 <td align="center">1</td>
 <td align="center">1</td>
 <td align="center">1</td>
 <td align="center">1</td>
 </tr>
 <tr class="even">
-<td align="center">3</td>
+<td align="center">2</td>
 <td align="center">1</td>
 <td align="center">1</td>
 <td align="center">1</td>
@@ -1206,11 +1213,11 @@
 </tr>
 </tbody>
 </table>
-<p>The variable availability can be used to subset sites that have certain variables in specific years. The BASENAME column in the variable availability indicates the variable’s base name (i.e., ignoring position qualifier), and can be used to get a coarse-level variable availability. See AmeriFlux website (<a href="https://ameriflux.lbl.gov/data/aboutdata/data-variables/" class="uri">https://ameriflux.lbl.gov/data/aboutdata/data-variables/</a>) for definitions of base names and qualifiers.</p>
+<p>The variable availability can be used to subset sites that have certain variables in specific years. The BASENAME column in the variable availability indicates the variable’s base name (i.e., ignoring position qualifier), and can be used to get a coarse-level variable availability. See <a href="https://ameriflux.lbl.gov/data/aboutdata/data-variables/">AmeriFlux website</a> for definitions of base names and qualifiers.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># down-select cropland &amp; grassland sites based on the available wind speed (WS) and </span>
 <span class="co"># friction velocity (USTAR) data in 2015-2018</span>
-<span class="va">data_aval_sub</span> <span class="op">&lt;-</span> <span class="va">data_aval</span><span class="op">[</span><span class="va">data_aval</span><span class="op">$</span><span class="va">BASENAME</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WS"</span>,<span class="st">"USTAR"</span><span class="op">)</span>,
+<span class="va">data_aval_sub</span> <span class="op">&lt;-</span> <span class="va">data_aval</span><span class="op">[</span><span class="va">data_aval</span><span class="op">$</span><span class="va">BASENAME</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WS"</span>,<span class="st">"USTAR"</span><span class="op">)</span>,
                            <span class="fu">.</span><span class="op">(</span><span class="va">SITE_ID</span>, <span class="va">BASENAME</span>, <span class="va">Y2015</span>, <span class="va">Y2016</span>, <span class="va">Y2017</span>, <span class="va">Y2018</span><span class="op">)</span><span class="op">]</span>
 
 <span class="co"># calculate mean availability of WS and USTAR in each site and each year</span>
@@ -1248,8 +1255,8 @@
 <td align="center">US-Bi1</td>
 <td align="center">0</td>
 <td align="center">0.3851</td>
-<td align="center">0.9725</td>
-<td align="center">0.9836</td>
+<td align="center">0.9999</td>
+<td align="center">1</td>
 </tr>
 <tr class="odd">
 <td align="center">US-Bi2</td>
@@ -1327,7 +1334,7 @@
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># down-select cropland &amp; grassland sites based on the available wind speed (WS) data,</span>
 <span class="co">#  mean availability of WS during 2015-2018</span>
-<span class="va">data_aval_sub2</span> <span class="op">&lt;-</span> <span class="va">data_aval</span><span class="op">[</span><span class="va">data_aval</span><span class="op">$</span><span class="va">BASENAME</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WS"</span><span class="op">)</span>,
+<span class="va">data_aval_sub2</span> <span class="op">&lt;-</span> <span class="va">data_aval</span><span class="op">[</span><span class="va">data_aval</span><span class="op">$</span><span class="va">BASENAME</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WS"</span><span class="op">)</span>,
                             <span class="fu">.</span><span class="op">(</span><span class="va">SITE_ID</span>, <span class="va">VARIABLE</span>, Y2015_2018 <span class="op">=</span> <span class="op">(</span><span class="va">Y2015</span> <span class="op">+</span> <span class="va">Y2016</span> <span class="op">+</span> <span class="va">Y2017</span> <span class="op">+</span> <span class="va">Y2018</span><span class="op">)</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span><span class="op">]</span>
 
 <span class="co"># calculate number of WS variables per site, for sites that have any WS data during 2015-2018</span>

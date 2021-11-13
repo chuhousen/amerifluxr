@@ -6,8 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Filter AmeriFlux BASE data product based on physical range — amf_filter_base • amerifluxr</title>
+<title>Filter AmeriFlux BASE data product based on plausible range — amf_filter_base • amerifluxr</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -39,11 +46,12 @@
 
 
 
-<meta property="og:title" content="Filter AmeriFlux BASE data product based on physical range — amf_filter_base" />
+<meta property="og:title" content="Filter AmeriFlux BASE data product based on plausible range — amf_filter_base" />
 <meta property="og:description" content="The function filters BASE data product based on the expected
-physical ranges specified for each variable. See AmeriFlux web site
+plausible ranges specified for each variable. See AmeriFlux web site
 https://ameriflux.lbl.gov/data/data-processing-pipelines/data-qaqc/physical-range-module/
 for description of physical ranges." />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -126,14 +134,14 @@ for description of physical ranges." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Filter AmeriFlux BASE data product based on physical range</h1>
+    <h1>Filter AmeriFlux BASE data product based on plausible range</h1>
     <small class="dont-index">Source: <a href='https://github.com/chuhousen/amerifluxr/blob/master/R/amf_filter_base.R'><code>R/amf_filter_base.R</code></a></small>
     <div class="hidden name"><code>amf_filter_base.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>The function filters BASE data product based on the expected
-physical ranges specified for each variable. See AmeriFlux web site
+plausible ranges specified for each variable. See AmeriFlux web site
 <a href='https://ameriflux.lbl.gov/data/data-processing-pipelines/data-qaqc/physical-range-module/'>https://ameriflux.lbl.gov/data/data-processing-pipelines/data-qaqc/physical-range-module/</a>
 for description of physical ranges.</p>
     </div>
@@ -155,16 +163,19 @@ import from <code><a href='amf_read_base.html'>amf_read_base</a></code>.</p></td
     </tr>
     <tr>
       <th>limit_ls</th>
-      <td><p>A data frame with at least three columns, i.e., Name, Min,
-Max, denoting the base name, expected lower and upper ranges of each
-variable. If not specified, use <code><a href='amf_variables.html'>amf_variables</a></code> by default.</p></td>
+      <td><p>A data frame with at least three columns:</p><ul>
+<li><p>Name: variable base name</p></li>
+<li><p>Min: expected lower bound</p></li>
+<li><p>Max: expected upper bound</p></li>
+</ul><p>If not specified, use <code><a href='amf_variables.html'>amf_variables</a></code> by default.</p></td>
     </tr>
     <tr>
       <th>basename_decode</th>
-      <td><p>A data frame with at least two columns, i.e.,
-variable_name, basename, denoting the actual variable name and
-base name of each variable in data_in. If not specified,
-use <code><a href='amf_parse_basename.html'>amf_parse_basename</a></code> by default.</p></td>
+      <td><p>A data frame with at least two columns:
+#'</p><ul>
+<li><p>variable_name: actual variable name</p></li>
+<li><p>basename: variable base name</p></li>
+</ul><p>If not specified, use <code><a href='amf_parse_basename.html'>amf_parse_basename</a></code> by default.</p></td>
     </tr>
     <tr>
       <th>loose_filter</th>
@@ -182,21 +193,21 @@ for filtering. Set it to 0 if not used. The default is 0.05.</p></td>
     <div class='dont-index'><p>amf_read_base, amf_var_info, amf_parse_basename</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># read the BASE from a csv file</span>
-<span class='va'>base</span> <span class='op'>&lt;-</span> <span class='fu'><a href='amf_read_base.html'>amf_read_base</a></span><span class='op'>(</span>file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>,
-                                         <span class='st'>"AMF_US-CRT_BASE_HH_2-5.csv"</span>,
-                                          package <span class='op'>=</span> <span class='st'>"amerifluxr"</span><span class='op'>)</span>,
-                      unzip <span class='op'>=</span> <span class='cn'>FALSE</span>,
-                      parse_timestamp <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='co'># filter data, using default physical range +/- 5% buffer</span>
-<span class='va'>base_f</span> <span class='op'>&lt;-</span> <span class='fu'>amf_filter_base</span><span class='op'>(</span>data_in <span class='op'>=</span> <span class='va'>base</span><span class='op'>)</span>
-
-<span class='co'># filter data, using default physical range without buffer</span>
-<span class='va'>base_f</span> <span class='op'>&lt;-</span> <span class='fu'>amf_filter_base</span><span class='op'>(</span>data_in <span class='op'>=</span> <span class='va'>base</span>, loose_filter <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># read the BASE from a csv file</span></span>
+<span class='r-in'><span class='va'>base</span> <span class='op'>&lt;-</span> <span class='fu'><a href='amf_read_base.html'>amf_read_base</a></span><span class='op'>(</span>file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>,</span>
+<span class='r-in'>                                         <span class='st'>"AMF_US-CRT_BASE_HH_2-5.csv"</span>,</span>
+<span class='r-in'>                                          package <span class='op'>=</span> <span class='st'>"amerifluxr"</span><span class='op'>)</span>,</span>
+<span class='r-in'>                      unzip <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
+<span class='r-in'>                      parse_timestamp <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># filter data, using default physical range +/- 5% buffer</span></span>
+<span class='r-in'><span class='va'>base_f</span> <span class='op'>&lt;-</span> <span class='fu'>amf_filter_base</span><span class='op'>(</span>data_in <span class='op'>=</span> <span class='va'>base</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># filter data, using default physical range without buffer</span></span>
+<span class='r-in'><span class='va'>base_f</span> <span class='op'>&lt;-</span> <span class='fu'>amf_filter_base</span><span class='op'>(</span>data_in <span class='op'>=</span> <span class='va'>base</span>, loose_filter <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
