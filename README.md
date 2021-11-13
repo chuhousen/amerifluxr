@@ -138,6 +138,7 @@ base <- amf_read_base(file = floc2,
                       unzip = TRUE,
                       parse_timestamp = TRUE)
 ```
+
 | Parameter          | Description                                                                                                                     |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
 | file               | file path                                                                                                                       |
