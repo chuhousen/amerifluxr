@@ -17,7 +17,7 @@ Authors@R: c(
                comment = c(ORCID = "0000-0002-5070-8109")))
 Description: Programmatic interface to the Ameriflux database (<https://ameriflux.lbl.gov/>).
     Provides query and data summary tools.
-License: MIT + file LICENSE
+License: BSD_3_clause + file LICENSE
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/chuhousen/amerifluxr
