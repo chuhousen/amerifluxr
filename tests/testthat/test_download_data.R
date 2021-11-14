@@ -4,14 +4,14 @@ test_that("check donwload data function", {
   skip_on_cran()
 
   ## get secret log-in user name and email
-  user <- system("echo $MY_USER", intern = TRUE)
-  email <- system("echo $MY_EMAIL", intern = TRUE)
-  if (user == "" | user == "$MY_USER") {
-    user <- Sys.getenv("MY_USER")
-    email <- Sys.getenv("MY_EMAIL")
+  user <- system("echo $USER", intern = TRUE)
+  email <- system("echo $EMAIL", intern = TRUE)
+  if (user == "" | user == "$USER") {
+    user <- Sys.getenv("USER")
+    email <- Sys.getenv("EMAIL")
   }
 
-  if (user != "" & user != "$MY_USER") {
+  if (user != "" & user != "$USER") {
     ## test error when invalid input in policy agreement
     local({
       # override the menu function to force expected choice
