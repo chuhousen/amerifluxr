@@ -38,6 +38,5 @@ Suggests:
     pander,
     testthat,
     covr,
-    qpdf,
-    mockr
+    qpdf
 VignetteBuilder: knitr

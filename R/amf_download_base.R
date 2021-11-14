@@ -88,12 +88,6 @@ amf_download_base <- function(user_id,
     return(intended_use_verbse)
   }
 
-  if(is.null(intended_use_cat(intended_use = intended_use))){
-    stop("Invalid intended_use input...")
-    output_zip_file <- NULL
-
-  }
-
   if (data_policy == "CCBY4.0") {
     cat("Data use guidlines for AmeriFlux CC-BY-4.0 Data Policy:\n",
         fill = TRUE)
@@ -125,11 +119,14 @@ amf_download_base <- function(user_id,
       fill = TRUE,
       labels = "(3)"
     )
-    prompt <- paste0(
-      "Please acknowledge you read and agree to the ",
-      "AmeriFlux CC-BY-4.0 Data Policy."
+    cat(
+      paste0(
+        "Please acknowledge you read and agree to the ",
+        "AmeriFlux CC-BY-4.0 Data Policy.\n"
+      ),
+      fill = TRUE
     )
-    agree_policy <- utils::menu(c("YES", "NO"), title = prompt) == 1
+    agree_policy <- readline(prompt = "[Yes/No]")
 
   } else if (data_policy == "LEGACY") {
     cat("Data use guidelines for AmeriFlux LEGACY License:\n",
@@ -170,17 +167,20 @@ amf_download_base <- function(user_id,
       fill = TRUE,
       labels = "(4)"
     )
-    prompt <- paste0(
-      "Please acknowledge you read and agree to the ",
-      "AmeriFlux LEGACY Data Policy."
+    cat(
+      paste0(
+        "Please acknowledge that you read and agree to ",
+        "the AmeriFlux Legacy Data Policy.\n"
+      ),
+      fill = TRUE
     )
-    agree_policy <- utils::menu(c("YES", "NO"), title = prompt) == 1
+    agree_policy <- readline(prompt = "[Yes/No]")
 
   } else {
     stop("Need to specify a data policy before proceed")
   }
 
-  if (agree_policy) {
+  if (agree_policy %in% c("Yes", "yes", "YES", "y", "Y")) {
 
     #############################################################
     #  inform API this is a download test
@@ -191,25 +191,12 @@ amf_download_base <- function(user_id,
     # check if site_id are valid site ID
     check_id <- amf_check_site_id(site_id)
 
-    ## for multiple site ids
-    if(length(site_id) > 1){
-      if (any(!check_id)) {
-        warning(paste(
-          paste(site_id[which(!check_id)], collapse = ", "),
-          "not valid AmeriFlux Site ID"
-        ))
-        site_id <- site_id[which(check_id)]
-
-      }
-    } else if (length(site_id) == 1){
-      ## for single site id, need to work exception for AA-Flx, AA-Net
-      if (check_id | site_id == "AA-Flx" | site_id == "AA-Net") {
-        site_id <- site_id
-
-      }else{
-        site_id <- NULL
-
-      }
+    if (any(!check_id)) {
+      warning(paste(
+        paste(site_id[which(!check_id)], collapse = ", "),
+        "not valid AmeriFlux Site ID"
+      ))
+      site_id <- site_id[which(check_id)]
     }
 
     if (length(site_id) > 0) {
