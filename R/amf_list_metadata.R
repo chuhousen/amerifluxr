@@ -23,14 +23,14 @@
 #' @examples
 #' \dontrun{
 #' # obtain the metadata availability for all sites, at variable group levels
-#' metadata_aval <- amf_metadata_aval()
+#' metadata_aval <- amf_list_metadata()
 #'
 #' # obtain the metadata availability for selected sites, at variable levels
-#' metadata_aval <- amf_metadata_aval(site_set = c("US-CRT","US-WPT"),
+#' metadata_aval <- amf_list_metadata(site_set = c("US-CRT","US-WPT"),
 #' group_only = FALSE)
 #'}
 
-amf_metadata_aval <- function(site_set = NULL,
+amf_list_metadata <- function(site_set = NULL,
                               group_only = TRUE) {
   # determine the level of granularity
   target_level <- ifelse(group_only, "bif_group", "bif_variable")
