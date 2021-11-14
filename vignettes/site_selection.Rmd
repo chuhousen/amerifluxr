@@ -57,17 +57,17 @@ pander::pandoc.table(crop_ls[c(1:10), ])
 
 ## Get metadata availability
 
-In some cases, users may want to know if certain types of metadata are available for the selected sites. The amf_metadata_aval() function provides a quick summary of metadata availability before actually downloading the data & metadata through AmeriFlux. By default, amf_metadata_aval() returns a full site list with the available entries (i.e., counts) for all BADM groups. Check [AmeriFlux webpage](https://ameriflux.lbl.gov/data/badm/badm-basics/) for definitions of BADM groups.     
+In some cases, users may want to know if certain types of metadata are available for the selected sites. The amf_list_metadata() function provides a quick summary of metadata availability before actually downloading the data & metadata through AmeriFlux. By default, amf_list_metadata() returns a full site list with the available entries (i.e., counts) for all BADM groups. Check [AmeriFlux webpage](https://ameriflux.lbl.gov/data/badm/badm-basics/) for definitions of BADM groups.     
 
 ```{r results = "asis"}
-metadata_aval <- data.table::as.data.table(amf_metadata_aval())
+metadata_aval <- data.table::as.data.table(amf_list_metadata())
 pander::pandoc.table(metadata_aval[c(1:3), c(1:10)])
 ```
 
-The site_set parameter of the amf_metadata_aval() can be used to subset the sites of interest.
+The site_set parameter of the amf_list_metadata() can be used to subset the sites of interest.
 
 ```{r results = "asis"}
-metadata_aval_sub <- as.data.table(amf_metadata_aval(site_set = crop_ls$SITE_ID))
+metadata_aval_sub <- as.data.table(amf_list_metadata(site_set = crop_ls$SITE_ID))
 
 # down-select cropland & grassland sites based on the interested BADM group, e.g., canopy height (GRP_HEIGHTC)
 crop_ls2 <- metadata_aval_sub[GRP_HEIGHTC > 0, .(SITE_ID, GRP_HEIGHTC)][order(-GRP_HEIGHTC)]
@@ -76,10 +76,10 @@ pander::pandoc.table(crop_ls2[c(1:10), ])
 
 ## Get data availability
 
-In addition, users can use amf_data_aval() function to query the availability of specific variables in the data. The amf_data_aval() functions provide a quick summary of variable availability (per site/year) before downloading the data through AmeriFlux. By default, amf_data_aval() returns a full site list of variable availability (per year) for all variables. The site_set parameter of amf_data_aval() can be used to subset the sites of interest. 
+In addition, users can use amf_list_data() function to query the availability of specific variables in the data. The amf_list_data() functions provide a quick summary of variable availability (per site/year) before downloading the data through AmeriFlux. By default, amf_list_data() returns a full site list of variable availability (per year) for all variables. The site_set parameter of amf_list_data() can be used to subset the sites of interest. 
 
 ```{r results = "asis"}
-data_aval <- data.table::as.data.table(amf_data_aval(site_set = crop_ls2$SITE_ID))
+data_aval <- data.table::as.data.table(amf_list_data(site_set = crop_ls2$SITE_ID))
 pander::pandoc.table(data_aval[c(1:10), ])
 ```
 

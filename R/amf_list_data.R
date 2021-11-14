@@ -25,14 +25,14 @@
 #' @examples
 #' \dontrun{
 #' # obtain the data variable availability for all sites
-#' data_aval <- amf_data_aval()
+#' data_aval <- amf_list_data()
 #'
 #' # obtain the data variable availability for selected sites
-#' data_aval <- amf_data_aval(site_set = c("US-CRT","US-WPT"))
+#' data_aval <- amf_list_data(site_set = c("US-CRT","US-WPT"))
 #'
 #' }
 
-amf_data_aval <- function(site_set = NULL) {
+amf_list_data <- function(site_set = NULL) {
   # check if the file exists
   if (httr::HEAD(amf_server("data_variable"))$status_code == 200) {
     # get latest data variable availability

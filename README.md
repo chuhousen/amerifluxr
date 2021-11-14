@@ -179,7 +179,7 @@ downloaded from AmeriFlux, and parse and clean data for further use.
 
 ## Citation
 
-Coming up soon.
+Chu, Housen, and Hufkens, Koen. "amerifluxr v1.0.0." Computer software. May 10, 2021. https://github.com/chuhousen/amerifluxr. https://doi.org/10.11578/dc.20210730.2.
 
 ## Acknowledgements
 
