@@ -169,11 +169,11 @@ amf_download_base(user_id = "my_user",
 ```
 ### Additional functionalities
 
-* [Site Selection Vignette](site_selection.html)  demonstrates examples to query a list
+* [Site Selection Vignette](articles/site_selection.html)  demonstrates examples to query a list
 of target sites based on sites' general information and availability
 of metadata and data. 
 
-* [Data Import Vignette](site_selection.html) demonstrates examples to import data and metadata
+* [Data Import Vignette](articles/data_import.html) demonstrates examples to import data and metadata
 downloaded from AmeriFlux, and parse and clean data for further use. 
 
 
