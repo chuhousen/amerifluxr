@@ -25,9 +25,7 @@ amerifluxr is a programmatic interface to the
 [AmeriFlux](https://ameriflux.lbl.gov/). This vignette
 demonstrates examples to query a list of target sites 
 based on sites' general information and availability 
-of metadata and data. See 
-[README](https://chuhousen.github.io/amerifluxr/index.html#use) 
-for data download examples. A companion vignette for 
+of metadata and data. A companion vignette for 
 [Data import](data_import.html) is available as well.     
 
 ## Get a site list with general info
@@ -218,7 +216,6 @@ pander::pandoc.table(crop_ls4_aval <- data_aval[data_aval$SITE_ID %in% crop_ls4$
 
 Once having a target site list, users can download
 these sites' data and metadata using the site IDs. 
-See [README]
-(https://chuhousen.github.io/amerifluxr/index.html#use)
-for data download examples.
+See [Data import](data_import.html) for data 
+download and import examples.
 
