@@ -54,7 +54,7 @@ use policy. The downloaded file is a Excel file saved to tempdir()
 (e.g., AMF\_\{SITES\}\_BIF\_\{POLICY\}\_\{VERSION\}\.xlsx, SITES
 = AA-Net (all registered sites) or AA-Flx (all sites with flux/met 
 data available); POLICY = CCBY4 (shared under AmeriFlux CC-BY-4.0 
-data use policy) or LEGACY (shared under AmeriFlux LEGACY data use
+data use policy) or LEGACY (shared under AmeriFlux Legacy data use
 policy)). 
 
 For details about BADM data files, see AmeriFlux 
@@ -169,11 +169,11 @@ amf_download_base(user_id = "my_user",
 ```
 ### Additional functionalities
 
-**Site Selection Vignette** demonstrates examples to query a list
+* [Site Selection Vignette](site_selection.html)  demonstrates examples to query a list
 of target sites based on sites' general information and availability
 of metadata and data. 
 
-**Data Import Vignette** demonstrates examples to import data and metadata
+* [Data Import Vignette](site_selection.html) demonstrates examples to import data and metadata
 downloaded from AmeriFlux, and parse and clean data for further use. 
 
 

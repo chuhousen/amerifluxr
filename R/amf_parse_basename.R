@@ -122,13 +122,13 @@ amf_parse_basename <- function(
                                           basename_decode$variable_name)
 
   ## locate PI provided (_PI) variables
-  basename_decode$is_PI_provide <- grepl("_PI",
+  basename_decode$is_pi_provide <- grepl("_PI",
                                          basename_decode$working_names,
                                          perl = TRUE)
   basename_decode$working_names <- sub("_PI",
                                        "",
                                        basename_decode$working_names)
-  basename_decode$qualifier_pi <- ifelse(basename_decode$is_PI_provide,
+  basename_decode$qualifier_pi <- ifelse(basename_decode$is_pi_provide,
                                          "_PI",
                                          NA)
 

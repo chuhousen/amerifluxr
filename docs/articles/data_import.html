@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">amerifluxr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -102,34 +102,31 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/chuhousen/amerifluxr">amerifluxr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://rapporter.github.io/pander">pander</a></span><span class="op">)</span></code></pre></div>
-<p>amerifluxr is a programmatic interface to the <a href="https://ameriflux.lbl.gov/">AmeriFlux</a>. This vignette demonstrates examples to import data and metadata downloaded from AmeriFlux, and to parse and clean data for further use. A <a href="site_selection.html">companion vignette for site slection</a> is available as well.</p>
+<p>amerifluxr is a programmatic interface to the <a href="https://ameriflux.lbl.gov/">AmeriFlux</a>. This vignette demonstrates examples to import data and metadata downloaded from AmeriFlux, and to parse and clean data for further use. A companion vignette for <a href="site_selection.html">site selection</a> is available as well.</p>
 <div id="download-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#download-data" class="anchor"></a>Download data</h2>
-<p>AmeriFlux data and metadata can be downloaded using amf_download_base() and amf_download_bif(). See <a href="https://github.com/chuhousen/amerifluxr">README</a> for data download examples. Users will need to create a personal AmeriFlux account <a href="https://ameriflux-data.lbl.gov/Pages/RequestAccount.aspx">here</a> before download.</p>
-<p>Briefly, amf_download_base() downloads single or multiple sites’ data and metadata in site-specific zipped files (e.g., AMF_<site_id><em>BASE-BADM</em><version>.zip), which contains a BASE data file (e.g., AMF_<site_id><em>BASE</em><resolution><em><version>.csv, RESOLUTION = HH (half-hourly) or HR (hourly)) and a single site’s BADM data file (e.g., AMF</version></em><site_id><em>BIF</em><version>.xlsx).</version></site_id></resolution></site_id></version></site_id></p>
-<p>amf_download_bif() downloads all-site metadata in a single Excel file (e.g., AMF_<sites><em>BIF_LEGACY</em><version>.xlsx, SITES = AA-Net (all registered sites) or AA-Flx (all sites with data available)).</version></sites></p>
-<p>For this vignette, we will use following example data files [files are truncated to limit package size, for demonstration purpopses only].</p>
+<p>AmeriFlux data and metadata can be downloaded using amf_download_base() and amf_download_bif(). See <a href="index.html#use">README</a> for data download examples. Users will need to create a personal AmeriFlux account <a href="https://ameriflux-data.lbl.gov/Pages/RequestAccount.aspx">here</a> before download.</p>
+<p>Briefly, amf_download_base() downloads data and metadata in site-specific zipped files (i.e., AMF_{SITE_ID}_BASE-BADM_{VERSION}.zip), which contains a site’s data file (i.e., AMF_{SITE_ID}_BASE_{RESOLUTIO}_{VERSION}.csv, BASE refers to flux/met data; RESOLUTION = HH (half-hourly) or HR (hourly)) and a site’s metadata file (i.e., AMF_{SITE_ID}_BIF_{VERSION}.xlsx, BIF refers to metadata).</p>
+<p>amf_download_bif() allows downloading all-sites’ metadata in a single Excel file (e.g., AMF_{SITES}_BIF_{DATA_POLICY}_{VERSION}.xlsx, SITES = AA-Net (all registered sites) or AA-Flx (all sites with data available); DATA_POLICY = CCBY4 (AmeriFlux CC-BY-4.0 data use policy) or LEGACY (AmeriFlux Legacy data use policy)).</p>
+<p>For this vignette, we will use following example data files [files are truncated to limit package size, for demonstration purposes only].</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># An example of BASE zipped files downloaded for US-CRT site</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"AMF_US-CRT_BASE-BADM_2-5.zip"</span>, package <span class="op">=</span> <span class="st">"amerifluxr"</span><span class="op">)</span>
-<span class="co">#&gt; [1] "C:/Users/HChu/Documents/R/win-library/4.1/amerifluxr/extdata/AMF_US-CRT_BASE-BADM_2-5.zip"</span>
 
 <span class="co"># An example of unzipped BASE files from the above zipped file</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"AMF_US-CRT_BASE_HH_2-5.csv"</span>, package <span class="op">=</span> <span class="st">"amerifluxr"</span><span class="op">)</span>
-<span class="co">#&gt; [1] "C:/Users/HChu/Documents/R/win-library/4.1/amerifluxr/extdata/AMF_US-CRT_BASE_HH_2-5.csv"</span>
 
 <span class="co"># An example of all sites' BADM data</span>
-<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"AMF_AA-Flx_BIF_20201218.xlsx"</span>, package <span class="op">=</span> <span class="st">"amerifluxr"</span><span class="op">)</span>
-<span class="co">#&gt; [1] "C:/Users/HChu/Documents/R/win-library/4.1/amerifluxr/extdata/AMF_AA-Flx_BIF_20201218.xlsx"</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"AMF_AA-Flx_BIF_CCBY4_20201218.xlsx"</span>, package <span class="op">=</span> <span class="st">"amerifluxr"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="base-data-product" class="section level1">
 <h1 class="hasAnchor">
 <a href="#base-data-product" class="anchor"></a>BASE data product</h1>
-<div id="import-base-data-product" class="section level2">
+<div id="import-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#import-base-data-product" class="anchor"></a>Import BASE data product</h2>
-<p>The amd_read_base() can be used to import BASE file, either from a zipped file or an unzipped comma-separated file. The parse_timestamp parameter can be used if additional time-keeping columns (e.g., year, month, day, hour) are desired.</p>
+<a href="#import-data" class="anchor"></a>Import data</h2>
+<p>The amd_read_base() imports a BASE file, either from a zipped file or an unzipped comma-separated file (.csv). The parse_timestamp parameter can be used if additional time-keeping columns (e.g., year, month, day, hour) are desired.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read the BASE from a zip file, without additional parsed time-keeping columns</span>
 <span class="va">base1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/amf_read_base.html">amf_read_base</a></span><span class="op">(</span>
@@ -455,23 +452,26 @@
 </tbody>
 </table>
 </div>
-<div id="parse-and-interpret-base-data-product" class="section level2">
+<div id="parse-and-interpret-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#parse-and-interpret-base-data-product" class="anchor"></a>Parse and interpret BASE data product</h2>
-<p>The detailed explanation of BASE data format and variables can be found on <a href="https://ameriflux.lbl.gov/data/aboutdata/data-variables/">AmeriFlux website</a>. In short, TIMESTAMP_START and TIMESTAMP_END (i.e., YYYYMMDDHHMM 12 digits) refer to the starting and ending time of each reporting interval (i.e., rows). All other variables use the format of <base name>_<qualifier>, e.g., FC_1, CO2_1_1_1. Base names indicate fundamental quantities that are either measured or calculated / derived. Qualifiers are suffixes appended to variable base names that provide additional information (e.g., gap-filling, position) about the variable. In some cases, qualifiers are omitted if only one variable is provided for a site.</qualifier></p>
-<p>The amf_variable() can be used to retrieve the latest list of base names and default units. For sites that don’t have many variables and less-complicated qualifiers, the users should be able to interpret the variables and their qualifiers. The amf_variable() also returns the expected maximal and minimal values based on physically plausible ranges or network-wide reported values.</p>
+<a href="#parse-and-interpret-data" class="anchor"></a>Parse and interpret data</h2>
+<p>The details of the BASE data product’s format and variable definitions can be found on <a href="https://ameriflux.lbl.gov/data/aboutdata/data-variables/">AmeriFlux website</a>. In short, the BASE data product contains flux, meteorological, and soil observations that are reported at regular intervals of time, generally half-hourly or hourly, for a certain time period. <strong>TIMESTAMP_START</strong> and <strong>TIMESTAMP_END</strong> columns (i.e., YYYYMMDDHHMM 12 digits) denote the starting and ending time of each reporting interval (i.e., row).</p>
+<p>All other variables use the format of {base name}_{qualifier}, e.g., FC_1, CO2_1_1_1. Base names indicate fundamental quantities that are either measured or calculated / derived. Qualifiers are suffixes appended to variable base names that provide additional information (e.g., gap-filling, position) about the variable. In some cases, qualifiers are omitted if only one variable is provided for a site.</p>
+<p>The amf_variable() retrieves the latest list of base names and default units. For sites that have relatively fewer variables and less complicated qualifiers, the users could easily interpret variables and qualifiers. The amf_variable() also returns the expected maximal and minimal values based on physically plausible ranges or network reported values.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># get a list of latest base names and units. </span>
 <span class="va">FP_ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/amf_variables.html">amf_variables</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">FP_ls</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
+<span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">FP_ls</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">11</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <colgroup>
-<col width="26%">
-<col width="29%">
-<col width="8%">
+<col width="12%">
+<col width="25%">
+<col width="25%">
+<col width="9%">
 <col width="11%">
 </colgroup>
 <thead><tr class="header">
+<th align="center"> </th>
 <th align="center">Name</th>
 <th align="center">Units</th>
 <th align="center">Min</th>
@@ -479,68 +479,78 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="center">ALB</td>
+<td align="center"><strong>11</strong></td>
+<td align="center">D_SNOW</td>
+<td align="center">cm</td>
+<td align="center">0</td>
+<td align="center">500</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>12</strong></td>
+<td align="center">DBH</td>
+<td align="center">cm</td>
+<td align="center">0</td>
+<td align="center">500</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>13</strong></td>
+<td align="center">DO</td>
+<td align="center">Âµmol L-1</td>
+<td align="center">0</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>14</strong></td>
+<td align="center">FAPAR</td>
 <td align="center">%</td>
 <td align="center">0</td>
 <td align="center">100</td>
 </tr>
+<tr class="odd">
+<td align="center"><strong>15</strong></td>
+<td align="center">FC</td>
+<td align="center">ÂµmolCO2 m-2 s-1</td>
+<td align="center">-100</td>
+<td align="center">100</td>
+</tr>
 <tr class="even">
-<td align="center">APAR</td>
-<td align="center">ÂµmolPhoton m-2 s-1</td>
+<td align="center"><strong>16</strong></td>
+<td align="center">FC_SSITC_TEST</td>
+<td align="center">nondimensional</td>
 <td align="center">0</td>
-<td align="center">2300</td>
+<td align="center">2</td>
 </tr>
 <tr class="odd">
-<td align="center">CH4</td>
-<td align="center">nmolCH4 mol-1</td>
-<td align="center">0</td>
-<td align="center">15000</td>
+<td align="center"><strong>17</strong></td>
+<td align="center">FCH4</td>
+<td align="center">nmolCH4 m-2 s-1</td>
+<td align="center">-500</td>
+<td align="center">4000</td>
 </tr>
 <tr class="even">
-<td align="center">CH4_MIXING_RATIO</td>
-<td align="center">nmolCH4 mol-1</td>
+<td align="center"><strong>18</strong></td>
+<td align="center">FCH4_SSITC_TEST</td>
+<td align="center">nondimensional</td>
 <td align="center">0</td>
-<td align="center">15000</td>
+<td align="center">2</td>
 </tr>
 <tr class="odd">
-<td align="center">CO</td>
-<td align="center">nmolCO mol-1</td>
-<td align="center">0</td>
-<td align="center">NA</td>
-</tr>
-<tr class="even">
-<td align="center">CO2</td>
-<td align="center">ÂµmolCO2 mol-1</td>
-<td align="center">150</td>
-<td align="center">1200</td>
-</tr>
-<tr class="odd">
-<td align="center">CO2_MIXING_RATIO</td>
-<td align="center">ÂµmolCO2 mol-1</td>
-<td align="center">150</td>
-<td align="center">1200</td>
-</tr>
-<tr class="even">
-<td align="center">CO2_SIGMA</td>
-<td align="center">ÂµmolCO2 mol-1</td>
-<td align="center">0</td>
-<td align="center">150</td>
-</tr>
-<tr class="odd">
-<td align="center">CO2C13</td>
-<td align="center">â€° (permil)</td>
-<td align="center">NA</td>
-<td align="center">-6</td>
-</tr>
-<tr class="even">
-<td align="center">COND_WATER</td>
-<td align="center">ÂµS cm-1</td>
+<td align="center"><strong>19</strong></td>
+<td align="center">FETCH_70</td>
+<td align="center">m</td>
 <td align="center">0</td>
 <td align="center">10000</td>
 </tr>
+<tr class="even">
+<td align="center"><strong>20</strong></td>
+<td align="center">FETCH_80</td>
+<td align="center">m</td>
+<td align="center">0</td>
+<td align="center">12000</td>
+</tr>
 </tbody>
 </table>
-<p>Alternatively, the amf_parse_basename() can be use to programmatically parse the the variable names into base names and qualifiers. This function can be helpful for sites with many and often complicated qualifiers, as a prerequisite for handling data from many sites. The function returns a data frame with information about each variable’s base name and qualifier, whether a variable is gap-filled, layer-aggregated, or replicate aggregated.</p>
+<p>Alternatively, the amf_parse_basename() can programmatically parse the the variable names into base names and qualifiers. This function can be helpful for sites with many variables and relatively complicated qualifiers, as a prerequisite for handling data from many sites. The function returns a data frame with information about each variable’s base name, qualifier, and whether a variable is gap-filled, layer-aggregated, or replicate aggregated.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># parse the variable name</span>
 <span class="va">basename_decode</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/amf_parse_basename.html">amf_parse_basename</a></span><span class="op">(</span>var_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">base1</span><span class="op">)</span><span class="op">)</span>
@@ -713,7 +723,7 @@
 <td align="center"><strong>1</strong></td>
 <td align="center">NA</td>
 <td align="center">TRUE</td>
-<td align="center">NA</td>
+<td align="center">FALSE</td>
 <td align="center">FALSE</td>
 <td align="center">FALSE</td>
 </tr>
@@ -721,7 +731,7 @@
 <td align="center"><strong>2</strong></td>
 <td align="center">NA</td>
 <td align="center">TRUE</td>
-<td align="center">NA</td>
+<td align="center">FALSE</td>
 <td align="center">FALSE</td>
 <td align="center">FALSE</td>
 </tr>
@@ -729,7 +739,7 @@
 <td align="center"><strong>3</strong></td>
 <td align="center">NA</td>
 <td align="center">TRUE</td>
-<td align="center">NA</td>
+<td align="center">FALSE</td>
 <td align="center">FALSE</td>
 <td align="center">FALSE</td>
 </tr>
@@ -737,7 +747,7 @@
 <td align="center"><strong>4</strong></td>
 <td align="center">NA</td>
 <td align="center">TRUE</td>
-<td align="center">NA</td>
+<td align="center">FALSE</td>
 <td align="center">FALSE</td>
 <td align="center">FALSE</td>
 </tr>
@@ -745,7 +755,7 @@
 <td align="center"><strong>6</strong></td>
 <td align="center">NA</td>
 <td align="center">TRUE</td>
-<td align="center">NA</td>
+<td align="center">TRUE</td>
 <td align="center">FALSE</td>
 <td align="center">FALSE</td>
 </tr>
@@ -753,7 +763,7 @@
 <td align="center"><strong>11</strong></td>
 <td align="center">1</td>
 <td align="center">TRUE</td>
-<td align="center">NA</td>
+<td align="center">FALSE</td>
 <td align="center">FALSE</td>
 <td align="center">FALSE</td>
 </tr>
@@ -761,7 +771,7 @@
 <td align="center"><strong>12</strong></td>
 <td align="center">1</td>
 <td align="center">TRUE</td>
-<td align="center">NA</td>
+<td align="center">FALSE</td>
 <td align="center">FALSE</td>
 <td align="center">FALSE</td>
 </tr>
@@ -889,48 +899,39 @@
 <colgroup>
 <col width="12%">
 <col width="22%">
-<col width="22%">
 </colgroup>
 <thead><tr class="header">
 <th align="center"> </th>
 <th align="center">is_quadruplet</th>
-<th align="center">is_PI_provide</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td align="center"><strong>1</strong></td>
 <td align="center">FALSE</td>
-<td align="center">FALSE</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>2</strong></td>
-<td align="center">FALSE</td>
 <td align="center">FALSE</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>3</strong></td>
 <td align="center">FALSE</td>
-<td align="center">FALSE</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>4</strong></td>
-<td align="center">FALSE</td>
 <td align="center">FALSE</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>6</strong></td>
 <td align="center">FALSE</td>
-<td align="center">TRUE</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>11</strong></td>
 <td align="center">TRUE</td>
-<td align="center">FALSE</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>12</strong></td>
 <td align="center">TRUE</td>
-<td align="center">FALSE</td>
 </tr>
 </tbody>
 </table>
@@ -938,7 +939,7 @@
 <div id="data-filtering" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data-filtering" class="anchor"></a>Data filtering</h2>
-<p>While all BASE data products are quality-checked before release, the data may not be filtered for all outliers. The amf_filter_base() can be use to filter the data based on the expected physically ranges (i.e., obtained through amf_variables()). By default, a ±5% buffer is applied to account for possible edge values near the lower and upper bounds, which are commonly observed for radiation variables, relative humidity, and snow depth.</p>
+<p>While BASE data products are quality-checked before release, the data may not be filtered for all outliers. The amf_filter_base() can be use to filter the data based on the expected physically ranges (i.e., obtained through amf_variables()). By default, a ±5% buffer is applied to account for possible edge values near the lower and upper bounds, which are commonly observed for certain variables like radiation, relative humidity, and snow depth.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># filter data, using default physical range +/- 5% buffer</span>
 <span class="va">base_f</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/amf_filter_base.html">amf_filter_base</a></span><span class="op">(</span>data_in <span class="op">=</span> <span class="va">base1</span><span class="op">)</span></code></pre></div>
@@ -946,7 +947,7 @@
 <div id="measurement-height-information" class="section level2">
 <h2 class="hasAnchor">
 <a href="#measurement-height-information" class="anchor"></a>Measurement height information</h2>
-<p>Measurement Height information contains height/depth and instrument model information for AmeriFlux BASE data products. The info can be downloaded directly using the amf_var_info() function. The function returns a data frame for all available sites, and can subset using the “Site_ID” column. The “Height” column refers to the distance from the ground surface in meters. Positive values are heights, and negative values are depths. See the <a href="https://ameriflux.lbl.gov/data/measurement-height/">web page</a> for explanation.</p>
+<p>Measurement height information contains height/depth and instrument model information of the BASE data products. The info can be downloaded directly using the amf_var_info() function. The function returns a data frame for all available sites, and can be subset using the “Site_ID” column. The “Height” column refers to the distance from the ground surface in meters. Positive values are heights, and negative values are depths. See the <a href="https://ameriflux.lbl.gov/data/measurement-height/">web page</a> for explanation.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># obtain the latest measurement height information</span>
 <span class="va">var_info</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/amf_var_info.html">amf_var_info</a></span><span class="op">(</span><span class="op">)</span>
@@ -1139,12 +1140,12 @@
 <div id="import-badm-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#import-badm-data" class="anchor"></a>Import BADM data</h2>
-<p>Biological, Ancillary, Disturbance, and Metadata (BADM) are non-continuous information that describe and complement continuous flux and meteorological (Flux/Met) data. BADM include general site description, metadata about the sensors and their setup, maintenance and disturbance events, and biological and ecological data that characterize a site’s ecosystem. See <a href="https://ameriflux.lbl.gov/data/badm/badm-basics/">link</a> for details.</p>
+<p>Biological, Ancillary, Disturbance, and Metadata (BADM) are non-continuous information that describe and complement continuous flux and meteorological data (e.g., BASE data product). BADM include general site description, metadata about the sensors and their setup, maintenance and disturbance events, and biological and ecological data that characterize a site’s ecosystem. See <a href="https://ameriflux.lbl.gov/data/badm/badm-basics/">link</a> for details.</p>
 <p>The amf_read_bif() can be used to import the BADM data file. The function returns a data frame for all available sites, and can subset using the “SITE_ID” column.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read the BADM BIF file, using an example data file</span>
 <span class="va">bif</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/amf_read_bif.html">amf_read_bif</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,
-                                      <span class="st">"AMF_AA-Flx_BIF_20201218.xlsx"</span>,
+                                      <span class="st">"AMF_AA-Flx_BIF_CCBY4_20201218.xlsx"</span>,
                                        package <span class="op">=</span> <span class="st">"amerifluxr"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># subset by target Site ID</span>
@@ -1326,8 +1327,8 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">bif</span><span class="op">$</span><span class="va">VARIABLE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>[1] 59</p>
-<p>As shown above, BADM data contain information from a variety of variable groups. Browse the available variable groups <a href="https://ameriflux.lbl.gov/data/badm/badm-standards/">here</a>.</p>
-<p>To get the BADM data for a certain variable group, use amf_extract_badm() function.</p>
+<p>As shown above, BADM data contain information from a variety of variable groups (i.e., GRP_{BADM_GROUPS}). Browse the definitions of all available variable groups <a href="https://ameriflux.lbl.gov/data/badm/badm-standards/">here</a>.</p>
+<p>To get the BADM data for a certain variable group, use amf_extract_badm() function. The function also renders the data format (i.e., display all variables by columns) for human readability.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># extract the FLUX_MEASUREMENTS group</span>
 <span class="va">bif_flux</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/amf_extract_badm.html">amf_extract_badm</a></span><span class="op">(</span>bif_data <span class="op">=</span> <span class="va">bif</span>, select_group <span class="op">=</span> <span class="st">"GRP_FLUX_MEASUREMENTS"</span><span class="op">)</span>
@@ -1680,7 +1681,7 @@
 <span class="co"># plot time series of canopy height</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">bif_hc</span><span class="op">$</span><span class="va">TIMESTAMP</span>, <span class="va">bif_hc</span><span class="op">$</span><span class="va">HEIGHTC</span>, xlab <span class="op">=</span> <span class="st">"TIMESTAMP"</span>, ylab <span class="op">=</span> <span class="st">"canopy height (m)"</span><span class="op">)</span></code></pre></div>
 <p><img src="data_import_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
-<p>Also useful, the contacts of the site members and data DOI can be obtained from the BADM data.</p>
+<p>Also useful, the contacts of the site members and data DOI can be obtained from the BADM data. The AmeriFlux <a href="https://ameriflux.lbl.gov/data/data-policy/">data policy</a> requires proper attribution (e.g., data DOI). In some case, for example, using data shared under Legacy Data Policy for publication, data users are required to contact data contributors directly, so that they have the opportunity to contribute substantively and become a co-author.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># get a list of contacts</span>
 <span class="va">bif_contact</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/amf_extract_badm.html">amf_extract_badm</a></span><span class="op">(</span>bif_data <span class="op">=</span> <span class="va">bif</span>, select_group <span class="op">=</span> <span class="st">"GRP_TEAM_MEMBER"</span><span class="op">)</span>

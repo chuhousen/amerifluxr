@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">amerifluxr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -104,11 +104,12 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/chuhousen/amerifluxr">amerifluxr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://rapporter.github.io/pander">pander</a></span><span class="op">)</span></code></pre></div>
-<p>amerifluxr is a programmatic interface to the <a href="https://ameriflux.lbl.gov/">AmeriFlux</a>. This vignette demonstrates examples to query a list of target sites based on sites’ general information and availability of metadata and data.</p>
+<p>amerifluxr is a programmatic interface to the <a href="https://ameriflux.lbl.gov/">AmeriFlux</a>. This vignette demonstrates examples to query a list of target sites based on sites’ general information and availability of metadata and data. See <a href="index.html#use">README</a> for data download examples. A companion vignette for <a href="data_import.html">Data import</a> is available as well.</p>
 <div id="get-a-site-list-with-general-info" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-a-site-list-with-general-info" class="anchor"></a>Get a site list with general info</h2>
 <p>A full list of AmeriFlux sites with general info can be obtained using the amf_site_info() function. Convert the site list to a data.table for easier manipulation.</p>
+<p>See <a href="https://ameriflux.lbl.gov/data/badm/badm-basics/">link</a> for variable definition.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># get a full list of sites with general info</span>
 <span class="va">sites</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/amf_site_info.html">amf_site_info</a></span><span class="op">(</span><span class="op">)</span>
@@ -429,7 +430,8 @@
 </table>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="co"># get a list of cropland and grassland sites with available data, located within 30-50 degree N in latitude</span>
+<span class="co"># get a list of cropland and grassland sites with available data</span>
+<span class="co">#  located within 30-50 degree N in latitude</span>
 <span class="va">crop_ls</span> <span class="op">&lt;-</span> <span class="va">sites_dt</span><span class="op">[</span><span class="va">IGBP</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CRO"</span>, <span class="st">"GRA"</span><span class="op">)</span> <span class="op">&amp;</span>
                                            <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">DATA_START</span><span class="op">)</span> <span class="op">&amp;</span>
                                            <span class="va">LOCATION_LAT</span> <span class="op">&gt;</span> <span class="fl">30</span> <span class="op">&amp;</span>
@@ -516,7 +518,8 @@
 <div id="get-metadata-availability" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-metadata-availability" class="anchor"></a>Get metadata availability</h2>
-<p>In some cases, users may want to know if certain types of metadata are available for the selected sites. The amf_list_metadata() function provides a quick summary of metadata availability before actually downloading the data &amp; metadata through AmeriFlux. By default, amf_list_metadata() returns a full site list with the available entries (i.e., counts) for all BADM groups. Check <a href="https://ameriflux.lbl.gov/data/badm/badm-basics/">AmeriFlux webpage</a> for definitions of BADM groups.</p>
+<p>In some cases, users may want to know if certain types of metadata are available for the selected sites. The amf_list_metadata() function provides a quick summary of metadata availability before actually downloading the data and metadata.</p>
+<p>By default, amf_list_metadata() returns a full site list with the available entries (i.e., counts) for all BADM groups. Check <a href="https://ameriflux.lbl.gov/data/badm/badm-basics/">AmeriFlux webpage</a> for definitions of all BADM groups.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">metadata_aval</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html">as.data.table</a></span><span class="op">(</span><span class="fu"><a href="../reference/amf_list_metadata.html">amf_list_metadata</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">metadata_aval</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></code></pre></div>
@@ -603,7 +606,8 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">metadata_aval_sub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html">as.data.table</a></span><span class="op">(</span><span class="fu"><a href="../reference/amf_list_metadata.html">amf_list_metadata</a></span><span class="op">(</span>site_set <span class="op">=</span> <span class="va">crop_ls</span><span class="op">$</span><span class="va">SITE_ID</span><span class="op">)</span><span class="op">)</span>
 
-<span class="co"># down-select cropland &amp; grassland sites based on the interested BADM group, e.g., canopy height (GRP_HEIGHTC)</span>
+<span class="co"># down-select cropland &amp; grassland sites by interested BADM group,</span>
+<span class="co">#  e.g., canopy height (GRP_HEIGHTC)</span>
 <span class="va">crop_ls2</span> <span class="op">&lt;-</span> <span class="va">metadata_aval_sub</span><span class="op">[</span><span class="va">GRP_HEIGHTC</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="fu">.</span><span class="op">(</span><span class="va">SITE_ID</span>, <span class="va">GRP_HEIGHTC</span><span class="op">)</span><span class="op">]</span><span class="op">[</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="va">GRP_HEIGHTC</span><span class="op">)</span><span class="op">]</span>
 <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">crop_ls2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -662,7 +666,8 @@
 <div id="get-data-availability" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-data-availability" class="anchor"></a>Get data availability</h2>
-<p>In addition, users can use amf_list_data() function to query the availability of specific variables in the data. The amf_list_data() functions provide a quick summary of variable availability (per site/year) before downloading the data through AmeriFlux. By default, amf_list_data() returns a full site list of variable availability (per year) for all variables. The site_set parameter of amf_list_data() can be used to subset the sites of interest.</p>
+<p>In addition, users can use amf_list_data() to query the availability of specific variables in the data (i.e., flux/met data, so-called BASE data product). The amf_list_data() provides a quick summary of variable availability (per site/year) before downloading the data.</p>
+<p>By default, amf_list_data() returns a full site list of variable availability (data percentages per year) for all variables. The site_set parameter of amf_list_data() can be used to subset the sites of interest.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data_aval</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html">as.data.table</a></span><span class="op">(</span><span class="fu"><a href="../reference/amf_list_data.html">amf_list_data</a></span><span class="op">(</span>site_set <span class="op">=</span> <span class="va">crop_ls2</span><span class="op">$</span><span class="va">SITE_ID</span><span class="op">)</span><span class="op">)</span>
 <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">data_aval</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
@@ -1213,10 +1218,11 @@
 </tr>
 </tbody>
 </table>
-<p>The variable availability can be used to subset sites that have certain variables in specific years. The BASENAME column in the variable availability indicates the variable’s base name (i.e., ignoring position qualifier), and can be used to get a coarse-level variable availability. See <a href="https://ameriflux.lbl.gov/data/aboutdata/data-variables/">AmeriFlux website</a> for definitions of base names and qualifiers.</p>
+<p>The variable availability can be used to subset sites that have certain variables in specific years. The BASENAME column indicates the variable’s base name (i.e., ignoring position qualifier), and can be used to get a coarse-level variable availability.</p>
+<p>See <a href="https://ameriflux.lbl.gov/data/aboutdata/data-variables/">AmeriFlux website</a> for definitions of base names and qualifiers.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># down-select cropland &amp; grassland sites based on the available wind speed (WS) and </span>
-<span class="co"># friction velocity (USTAR) data in 2015-2018</span>
+<span class="co"># friction velocity (USTAR) data in 2015-2018, regardless their qualifiers</span>
 <span class="va">data_aval_sub</span> <span class="op">&lt;-</span> <span class="va">data_aval</span><span class="op">[</span><span class="va">data_aval</span><span class="op">$</span><span class="va">BASENAME</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WS"</span>,<span class="st">"USTAR"</span><span class="op">)</span>,
                            <span class="fu">.</span><span class="op">(</span><span class="va">SITE_ID</span>, <span class="va">BASENAME</span>, <span class="va">Y2015</span>, <span class="va">Y2016</span>, <span class="va">Y2017</span>, <span class="va">Y2018</span><span class="op">)</span><span class="op">]</span>
 
@@ -1225,8 +1231,9 @@
                                by <span class="op">=</span> <span class="fu">.</span><span class="op">(</span><span class="va">SITE_ID</span><span class="op">)</span>,
                                .SDcols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Y2015"</span>, <span class="st">"Y2016"</span>, <span class="st">"Y2017"</span>, <span class="st">"Y2018"</span><span class="op">)</span><span class="op">]</span>
 
-<span class="co"># sub-select sites that have WS and USTAR data during any periods of 2015-2018</span>
-<span class="va">crop_ls3</span> <span class="op">&lt;-</span> <span class="va">data_aval_sub</span><span class="op">[</span><span class="op">(</span><span class="va">Y2015</span> <span class="op">+</span> <span class="va">Y2016</span> <span class="op">+</span> <span class="va">Y2017</span> <span class="op">+</span> <span class="va">Y2018</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span>
+<span class="co"># sub-select sites that have WS and USTAR data for &gt; 75%</span>
+<span class="co">#  during 2015-2018</span>
+<span class="va">crop_ls3</span> <span class="op">&lt;-</span> <span class="va">data_aval_sub</span><span class="op">[</span><span class="op">(</span><span class="va">Y2015</span> <span class="op">+</span> <span class="va">Y2016</span> <span class="op">+</span> <span class="va">Y2017</span> <span class="op">+</span> <span class="va">Y2018</span><span class="op">)</span> <span class="op">/</span> <span class="fl">4</span> <span class="op">&gt;</span> <span class="fl">0.75</span><span class="op">]</span>
 <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">crop_ls3</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <colgroup>
@@ -1252,20 +1259,6 @@
 <td align="center">0.9826</td>
 </tr>
 <tr class="even">
-<td align="center">US-Bi1</td>
-<td align="center">0</td>
-<td align="center">0.3851</td>
-<td align="center">0.9999</td>
-<td align="center">1</td>
-</tr>
-<tr class="odd">
-<td align="center">US-Bi2</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0.6472</td>
-<td align="center">0.9943</td>
-</tr>
-<tr class="even">
 <td align="center">US-IB2</td>
 <td align="center">0.9258</td>
 <td align="center">0.9971</td>
@@ -1287,32 +1280,18 @@
 <td align="center">0.7442</td>
 </tr>
 <tr class="odd">
-<td align="center">US-Ne3</td>
-<td align="center">0.65</td>
-<td align="center">0.7643</td>
-<td align="center">0.7759</td>
-<td align="center">0.7739</td>
-</tr>
-<tr class="even">
 <td align="center">US-SRG</td>
 <td align="center">0.9669</td>
 <td align="center">0.9851</td>
 <td align="center">0.9775</td>
 <td align="center">0.9997</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="center">US-Tw3</td>
 <td align="center">0.9689</td>
 <td align="center">0.9569</td>
 <td align="center">0.9763</td>
 <td align="center">0.4005</td>
-</tr>
-<tr class="even">
-<td align="center">US-Twt</td>
-<td align="center">0.9957</td>
-<td align="center">0.966</td>
-<td align="center">0.2345</td>
-<td align="center">0</td>
 </tr>
 <tr class="odd">
 <td align="center">US-Var</td>
@@ -1330,14 +1309,15 @@
 </tr>
 </tbody>
 </table>
-<p>Last, sometimes users would look for sites with multiple measurements of similar variables (e.g., multilevel wind speed). The VARIABLE column in the variable availability can be used to get a fine-level variable availability.</p>
+<p>Last, sometimes users would look for sites with multiple measurements of similar variables (e.g., multilevel wind speed, soil temperature). The VARIABLE column in the variable availability can be used to get a fine-level variable availability.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># down-select cropland &amp; grassland sites based on the available wind speed (WS) data,</span>
+<code class="sourceCode R"><span class="co"># down-select cropland &amp; grassland sites by available wind speed (WS) data,</span>
 <span class="co">#  mean availability of WS during 2015-2018</span>
 <span class="va">data_aval_sub2</span> <span class="op">&lt;-</span> <span class="va">data_aval</span><span class="op">[</span><span class="va">data_aval</span><span class="op">$</span><span class="va">BASENAME</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WS"</span><span class="op">)</span>,
                             <span class="fu">.</span><span class="op">(</span><span class="va">SITE_ID</span>, <span class="va">VARIABLE</span>, Y2015_2018 <span class="op">=</span> <span class="op">(</span><span class="va">Y2015</span> <span class="op">+</span> <span class="va">Y2016</span> <span class="op">+</span> <span class="va">Y2017</span> <span class="op">+</span> <span class="va">Y2018</span><span class="op">)</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span><span class="op">]</span>
 
-<span class="co"># calculate number of WS variables per site, for sites that have any WS data during 2015-2018</span>
+<span class="co"># calculate number of WS variables per site, for sites that </span>
+<span class="co">#  have any WS data during 2015-2018</span>
 <span class="va">data_aval_sub2</span> <span class="op">&lt;-</span> <span class="va">data_aval_sub2</span><span class="op">[</span><span class="va">Y2015_2018</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="fu">.</span><span class="op">(</span><span class="va">.N</span>, Y2015_2018 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Y2015_2018</span><span class="op">)</span><span class="op">)</span>, <span class="fu">.</span><span class="op">(</span><span class="va">SITE_ID</span><span class="op">)</span><span class="op">]</span>
 <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">crop_ls4</span> <span class="op">&lt;-</span> <span class="va">data_aval_sub2</span><span class="op">[</span><span class="va">N</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <table class="table">
