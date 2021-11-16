@@ -1,7 +1,7 @@
 Package: amerifluxr
 Type: Package
-Title: Interface to Ameriflux Data Services
-Version: 0.1.0
+Title: Interface to AmeriFlux Data Services
+Version: 1.0.0
 Authors@R: c(
              person(
                family = "Chu",
@@ -15,8 +15,8 @@ Authors@R: c(
                email = "koen.hufkens@gmail.com",
                role = c("ctb"),
                comment = c(ORCID = "0000-0002-5070-8109")))
-Description: Programmatic interface to the Ameriflux database (<https://ameriflux.lbl.gov/>).
-    Provides query and data summary tools.
+Description: Programmatic interface to the AmeriFlux database (<https://ameriflux.lbl.gov/>).
+    Provides query, download, and data summary tools.
 License: BSD_3_clause + file LICENSE
 Encoding: UTF-8
 LazyData: true

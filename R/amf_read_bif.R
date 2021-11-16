@@ -21,7 +21,7 @@
 #' \dontrun{
 #' # read the BADM BIF file, using an example data file
 #' bif <- amf_read_bif(file = system.file("extdata",
-#'                                        "AMF_AA-Flx_BIF_20201218.xlsx",
+#'                                        "AMF_AA-Flx_BIF_CCBY4_20201218.xlsx",
 #'                                         package = "amerifluxr"))
 #'}
 

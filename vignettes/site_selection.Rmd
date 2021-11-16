@@ -21,11 +21,25 @@ library(data.table)
 library(pander)
 ```
 
-amerifluxr is a programmatic interface to the [AmeriFlux](https://ameriflux.lbl.gov/). This vignette demonstrates examples to query a list of target sites based on sites' general information and availability of metadata and data.    
+amerifluxr is a programmatic interface to the 
+[AmeriFlux](https://ameriflux.lbl.gov/). This vignette
+demonstrates examples to query a list of target sites 
+based on sites' general information and availability 
+of metadata and data. See [README](index.html#use) for
+data download examples. A companion vignette for 
+[Data import](data_import.html) is available as well.     
 
 ## Get a site list with general info
 
-A full list of AmeriFlux sites with general info can be obtained using the amf_site_info() function. Convert the site list to a data.table for easier manipulation.
+AmeriFlux data are organized by individual sites. 
+Typically, data query begins with site search and selection.
+A full list of AmeriFlux sites with general info can be
+obtained using the amf_site_info() function. 
+
+Convert the site list to a data.table for easier 
+manipulation. Also see 
+[link](https://ameriflux.lbl.gov/data/badm/badm-standards/) 
+for variable definition. 
 
 ```{r echo=TRUE, results = "asis"}
 # get a full list of sites with general info
@@ -36,7 +50,35 @@ pander::pandoc.table(sites_dt[c(1:3), ])
 
 ```
 
-Select sites based on general info, e.g., IGBP, data availability, geo-location. 
+The site list provides a quick summary of all 
+registered sites and sites with available data.
+
+It's often important to understand the data use 
+policy under which the data are shared. In 2021, 
+the AmeriFlux community moved to the AmeriFlux 
+CC-BY-4.0 License. Most site PIs now share their
+sites’ data under the CC-BY-4.0 license. Data for
+some sites are shared under the historical AmeriFlux
+data-sharing policy, now called the AmeriFlux Legacy
+Data Policy. 
+
+Check [link](https://ameriflux.lbl.gov/data/data-policy/#data-use)
+for data use policy and attribution guidelines.
+
+```{r results = "asis"}
+# total number of registered sites
+pander::pandoc.table(sites_dt[, .N])
+
+# total number of sites with available data
+pander::pandoc.table(sites_dt[!is.na(DATA_START), .N])
+
+# get number of sites with available data, grouped by data use policy
+pander::pandoc.table(sites_dt[!is.na(DATA_START), .N, by = .(DATA_POLICY)])
+
+```
+
+Further group sites based on 
+[IGBP](https://ameriflux.lbl.gov/data/badm/badm-standards/IGBP). 
 
 ```{r results = "asis"}
 # get a summary table of sites grouped by IGBP
@@ -45,49 +87,95 @@ pander::pandoc.table(sites_dt[, .N, by = "IGBP"])
 # get a summary table of sites with available data, & grouped by IGBP
 pander::pandoc.table(sites_dt[!is.na(DATA_START), .N, by = "IGBP"])
 
-# get a list of cropland and grassland sites with available data, located within 30-50 degree N in latitude
+# get a summary table of sites with available data, 
+#  & grouped by data use policy & IGBP
+pander::pandoc.table(sites_dt[!is.na(DATA_START), .N, by = .(IGBP, DATA_POLICY)])
+
+```
+
+Once decided, users can query a target site list 
+based on the desired criteria, e.g., IGBP, data 
+availability, data policy, geolocation. 
+
+```{r results = "asis"}
+
+# get a list of cropland and grassland sites with available data,
+#  shared under CC-BY-4.0 data policy,
+#  located within 30-50 degree N in latitude,
+# returned a site list with site ID, name, data starting/ending year
 crop_ls <- sites_dt[IGBP %in% c("CRO", "GRA") &
-                                           !is.na(DATA_START) &
-                                           LOCATION_LAT > 30 &
-                                           LOCATION_LAT < 50,
-                                         .(SITE_ID, SITE_NAME, DATA_START, DATA_END)]
-pander::pandoc.table(crop_ls[c(1:10), ])
+                      !is.na(DATA_START) &
+                      LOCATION_LAT > 30 &
+                      LOCATION_LAT < 50 &
+                      DATA_POLICY == "CCBY4.0",
+                    .(SITE_ID, SITE_NAME, DATA_START, DATA_END)]
+pander::pandoc.table(crop_ls[c(1:10),])
 
 ```
 
 ## Get metadata availability
 
-In some cases, users may want to know if certain types of metadata are available for the selected sites. The amf_list_metadata() function provides a quick summary of metadata availability before actually downloading the data & metadata through AmeriFlux. By default, amf_list_metadata() returns a full site list with the available entries (i.e., counts) for all BADM groups. Check [AmeriFlux webpage](https://ameriflux.lbl.gov/data/badm/badm-basics/) for definitions of BADM groups.     
+In some cases, users may want to know if certain 
+types of metadata are available for the selected 
+sites. The amf_list_metadata() function provides 
+a quick summary of metadata availability before 
+actually downloading the data and metadata. 
+
+By default, amf_list_metadata() returns a full site
+list with the available entries (i.e., counts) 
+for all BADM groups. Check 
+[AmeriFlux webpage](https://ameriflux.lbl.gov/data/badm/badm-basics/)
+for definitions of all BADM groups.     
 
 ```{r results = "asis"}
 metadata_aval <- data.table::as.data.table(amf_list_metadata())
 pander::pandoc.table(metadata_aval[c(1:3), c(1:10)])
 ```
 
-The site_set parameter of the amf_list_metadata() can be used to subset the sites of interest.
+The site_set parameter of the amf_list_metadata()
+can be used to subset the sites of interest.
 
 ```{r results = "asis"}
 metadata_aval_sub <- as.data.table(amf_list_metadata(site_set = crop_ls$SITE_ID))
 
-# down-select cropland & grassland sites based on the interested BADM group, e.g., canopy height (GRP_HEIGHTC)
+# down-select cropland & grassland sites by interested BADM group,
+#  e.g., canopy height (GRP_HEIGHTC)
 crop_ls2 <- metadata_aval_sub[GRP_HEIGHTC > 0, .(SITE_ID, GRP_HEIGHTC)][order(-GRP_HEIGHTC)]
 pander::pandoc.table(crop_ls2[c(1:10), ])
 ```
 
 ## Get data availability
 
-In addition, users can use amf_list_data() function to query the availability of specific variables in the data. The amf_list_data() functions provide a quick summary of variable availability (per site/year) before downloading the data through AmeriFlux. By default, amf_list_data() returns a full site list of variable availability (per year) for all variables. The site_set parameter of amf_list_data() can be used to subset the sites of interest. 
+In addition, users can use amf_list_data() to 
+query the availability of specific variables 
+in the data (i.e., flux/met data, so-called BASE
+data product). The amf_list_data() provides a quick
+summary of variable availability (per site/year)
+before downloading the data.
+
+By default, amf_list_data() returns a full site 
+list of variable availability (data percentages 
+per year) for all variables. The site_set parameter 
+of amf_list_data() can be used to subset the sites 
+of interest. 
 
 ```{r results = "asis"}
 data_aval <- data.table::as.data.table(amf_list_data(site_set = crop_ls2$SITE_ID))
 pander::pandoc.table(data_aval[c(1:10), ])
 ```
 
-The variable availability can be used to subset sites that have certain variables in specific years. The BASENAME column in the variable availability indicates the variable's base name (i.e., ignoring position qualifier), and can be used to get a coarse-level variable availability. See [AmeriFlux website](https://ameriflux.lbl.gov/data/aboutdata/data-variables/) for definitions of base names and qualifiers.
+The variable availability can be used to subset
+sites that have certain variables in specific 
+years. The BASENAME column indicates the variable's
+base name (i.e., ignoring position qualifier), and
+can be used to get a coarse-level variable availability. 
+
+See [AmeriFlux website](https://ameriflux.lbl.gov/data/aboutdata/data-variables/)
+for definitions of base names and qualifiers.
 
 ```{r results = "asis"}
 # down-select cropland & grassland sites based on the available wind speed (WS) and 
-# friction velocity (USTAR) data in 2015-2018
+# friction velocity (USTAR) data in 2015-2018, regardless their qualifiers
 data_aval_sub <- data_aval[data_aval$BASENAME %in% c("WS","USTAR"),
                            .(SITE_ID, BASENAME, Y2015, Y2016, Y2017, Y2018)]
 
@@ -96,24 +184,38 @@ data_aval_sub <- data_aval_sub[, lapply(.SD, mean),
                                by = .(SITE_ID),
                                .SDcols = c("Y2015", "Y2016", "Y2017", "Y2018")]
 
-# sub-select sites that have WS and USTAR data during any periods of 2015-2018
-crop_ls3 <- data_aval_sub[(Y2015 + Y2016 + Y2017 + Y2018) > 0]
+# sub-select sites that have WS and USTAR data for > 75%
+#  during 2015-2018
+crop_ls3 <- data_aval_sub[(Y2015 + Y2016 + Y2017 + Y2018) / 4 > 0.75]
 pander::pandoc.table(crop_ls3)
 
 ```
 
-Last, sometimes users would look for sites with multiple measurements of similar variables (e.g., multilevel wind speed). The VARIABLE column in the variable availability can be used to get a fine-level variable availability.
+Last, sometimes users would look for sites with 
+multiple measurements of similar variables (e.g.,
+multilevel wind speed, soil temperature). The 
+VARIABLE column in the variable availability can
+be used to get a fine-level variable availability.
 
 ```{r results = "asis"}
-# down-select cropland & grassland sites based on the available wind speed (WS) data,
+# down-select cropland & grassland sites by available wind speed (WS) data,
 #  mean availability of WS during 2015-2018
 data_aval_sub2 <- data_aval[data_aval$BASENAME %in% c("WS"),
                             .(SITE_ID, VARIABLE, Y2015_2018 = (Y2015 + Y2016 + Y2017 + Y2018)/4)]
 
-# calculate number of WS variables per site, for sites that have any WS data during 2015-2018
+# calculate number of WS variables per site, for sites that 
+#  have any WS data during 2015-2018
 data_aval_sub2 <- data_aval_sub2[Y2015_2018 > 0, .(.N, Y2015_2018 = mean(Y2015_2018)), .(SITE_ID)]
 pander::pandoc.table(crop_ls4 <- data_aval_sub2[N > 1, ])
 
+# return a list of sites with multiple WS variables
+pander::pandoc.table(crop_ls4_aval <- data_aval[data_aval$SITE_ID %in% crop_ls4$SITE_ID &
+                                                  data_aval$BASENAME == "WS",
+                                                .(SITE_ID, VARIABLE, Y2015, Y2016, Y2017, Y2018)])
+  
 ```
 
+Once having a target site list, users can download
+these sites' data and metadata using the site IDs. 
+See [README](index.html#use) for data download examples.
 

@@ -236,7 +236,7 @@ amf_download_base <- function(user_id,
           "\"],\"intended_use\":\"",
           intended_use_cat(intended_use = intended_use),
           "\",\"description\":\"",
-          paste0("[amerifluxr download] ", intended_use_text),
+          paste0(intended_use_text, " [amerifluxr download]"),
           "\",\"is_test\":\"",
           ifelse(is_test, "true", ""),
           "\"}"

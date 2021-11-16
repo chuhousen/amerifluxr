@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">amerifluxr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -104,11 +104,12 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/chuhousen/amerifluxr">amerifluxr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://rapporter.github.io/pander">pander</a></span><span class="op">)</span></code></pre></div>
-<p>amerifluxr is a programmatic interface to the <a href="https://ameriflux.lbl.gov/">AmeriFlux</a>. This vignette demonstrates examples to query a list of target sites based on sites’ general information and availability of metadata and data.</p>
+<p>amerifluxr is a programmatic interface to the <a href="https://ameriflux.lbl.gov/">AmeriFlux</a>. This vignette demonstrates examples to query a list of target sites based on sites’ general information and availability of metadata and data. See <a href="index.html#use">README</a> for data download examples. A companion vignette for <a href="data_import.html">Data import</a> is available as well.</p>
 <div id="get-a-site-list-with-general-info" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-a-site-list-with-general-info" class="anchor"></a>Get a site list with general info</h2>
-<p>A full list of AmeriFlux sites with general info can be obtained using the amf_site_info() function. Convert the site list to a data.table for easier manipulation.</p>
+<p>AmeriFlux data are organized by individual sites. Typically, data query begins with site search and selection. A full list of AmeriFlux sites with general info can be obtained using the amf_site_info() function.</p>
+<p>Convert the site list to a data.table for easier manipulation. Also see <a href="https://ameriflux.lbl.gov/data/badm/badm-standards/">link</a> for variable definition.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># get a full list of sites with general info</span>
 <span class="va">sites</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/amf_site_info.html">amf_site_info</a></span><span class="op">(</span><span class="op">)</span>
@@ -259,8 +260,54 @@
 </tr>
 </tbody>
 </table>
-<p>Select sites based on general info, e.g., IGBP, data availability, geo-location.</p>
+<p>The site list provides a quick summary of all registered sites and sites with available data.</p>
+<p>It’s often important to understand the data use policy under which the data are shared. In 2021, the AmeriFlux community moved to the AmeriFlux CC-BY-4.0 License. Most site PIs now share their sites’ data under the CC-BY-4.0 license. Data for some sites are shared under the historical AmeriFlux data-sharing policy, now called the AmeriFlux Legacy Data Policy.</p>
+<p>Check <a href="https://ameriflux.lbl.gov/data/data-policy/#data-use">link</a> for data use policy and attribution guidelines.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># total number of registered sites</span>
+<span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">sites_dt</span><span class="op">[</span>, <span class="va">.N</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<colgroup><col width="8%"></colgroup>
+<tbody><tr class="odd">
+<td align="center">558</td>
+</tr></tbody>
+</table>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co"># total number of sites with available data</span>
+<span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">sites_dt</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">DATA_START</span><span class="op">)</span>, <span class="va">.N</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<colgroup><col width="8%"></colgroup>
+<tbody><tr class="odd">
+<td align="center">410</td>
+</tr></tbody>
+</table>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co"># get number of sites with available data, grouped by data use policy</span>
+<span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">sites_dt</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">DATA_START</span><span class="op">)</span>, <span class="va">.N</span>, by <span class="op">=</span> <span class="fu">.</span><span class="op">(</span><span class="va">DATA_POLICY</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="19%">
+<col width="8%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">DATA_POLICY</th>
+<th align="center">N</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">CCBY4.0</td>
+<td align="center">305</td>
+</tr>
+<tr class="even">
+<td align="center">LEGACY</td>
+<td align="center">105</td>
+</tr>
+</tbody>
+</table>
+<p>Further group sites based on <a href="https://ameriflux.lbl.gov/data/badm/badm-standards/IGBP">IGBP</a>.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># get a summary table of sites grouped by IGBP</span>
 <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">sites_dt</span><span class="op">[</span>, <span class="va">.N</span>, by <span class="op">=</span> <span class="st">"IGBP"</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -343,7 +390,7 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># get a summary table of sites with available data, &amp; grouped by IGBP</span>
 <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">sites_dt</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">DATA_START</span><span class="op">)</span>, <span class="va">.N</span>, by <span class="op">=</span> <span class="st">"IGBP"</span><span class="op">]</span><span class="op">)</span></code></pre></div>
@@ -427,19 +474,183 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="co"># get a list of cropland and grassland sites with available data, located within 30-50 degree N in latitude</span>
+<span class="co"># get a summary table of sites with available data, </span>
+<span class="co">#  &amp; grouped by data use policy &amp; IGBP</span>
+<span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">sites_dt</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">DATA_START</span><span class="op">)</span>, <span class="va">.N</span>, by <span class="op">=</span> <span class="fu">.</span><span class="op">(</span><span class="va">IGBP</span>, <span class="va">DATA_POLICY</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="9%">
+<col width="19%">
+<col width="6%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">IGBP</th>
+<th align="center">DATA_POLICY</th>
+<th align="center">N</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">WET</td>
+<td align="center">CCBY4.0</td>
+<td align="center">34</td>
+</tr>
+<tr class="even">
+<td align="center">DNF</td>
+<td align="center">CCBY4.0</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">WSA</td>
+<td align="center">CCBY4.0</td>
+<td align="center">5</td>
+</tr>
+<tr class="even">
+<td align="center">EBF</td>
+<td align="center">LEGACY</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center">ENF</td>
+<td align="center">CCBY4.0</td>
+<td align="center">68</td>
+</tr>
+<tr class="even">
+<td align="center">DBF</td>
+<td align="center">CCBY4.0</td>
+<td align="center">48</td>
+</tr>
+<tr class="odd">
+<td align="center">WET</td>
+<td align="center">LEGACY</td>
+<td align="center">16</td>
+</tr>
+<tr class="even">
+<td align="center">MF</td>
+<td align="center">CCBY4.0</td>
+<td align="center">7</td>
+</tr>
+<tr class="odd">
+<td align="center">CRO</td>
+<td align="center">CCBY4.0</td>
+<td align="center">49</td>
+</tr>
+<tr class="even">
+<td align="center">MF</td>
+<td align="center">LEGACY</td>
+<td align="center">5</td>
+</tr>
+<tr class="odd">
+<td align="center">ENF</td>
+<td align="center">LEGACY</td>
+<td align="center">25</td>
+</tr>
+<tr class="even">
+<td align="center">GRA</td>
+<td align="center">LEGACY</td>
+<td align="center">15</td>
+</tr>
+<tr class="odd">
+<td align="center">GRA</td>
+<td align="center">CCBY4.0</td>
+<td align="center">46</td>
+</tr>
+<tr class="even">
+<td align="center">OSH</td>
+<td align="center">LEGACY</td>
+<td align="center">9</td>
+</tr>
+<tr class="odd">
+<td align="center">OSH</td>
+<td align="center">CCBY4.0</td>
+<td align="center">22</td>
+</tr>
+<tr class="even">
+<td align="center">CRO</td>
+<td align="center">LEGACY</td>
+<td align="center">14</td>
+</tr>
+<tr class="odd">
+<td align="center">CSH</td>
+<td align="center">LEGACY</td>
+<td align="center">5</td>
+</tr>
+<tr class="even">
+<td align="center">WSA</td>
+<td align="center">LEGACY</td>
+<td align="center">2</td>
+</tr>
+<tr class="odd">
+<td align="center">EBF</td>
+<td align="center">CCBY4.0</td>
+<td align="center">2</td>
+</tr>
+<tr class="even">
+<td align="center">BSV</td>
+<td align="center">CCBY4.0</td>
+<td align="center">2</td>
+</tr>
+<tr class="odd">
+<td align="center">BSV</td>
+<td align="center">LEGACY</td>
+<td align="center">2</td>
+</tr>
+<tr class="even">
+<td align="center">DBF</td>
+<td align="center">LEGACY</td>
+<td align="center">6</td>
+</tr>
+<tr class="odd">
+<td align="center">CSH</td>
+<td align="center">CCBY4.0</td>
+<td align="center">6</td>
+</tr>
+<tr class="even">
+<td align="center">CVM</td>
+<td align="center">CCBY4.0</td>
+<td align="center">2</td>
+</tr>
+<tr class="odd">
+<td align="center">SAV</td>
+<td align="center">CCBY4.0</td>
+<td align="center">6</td>
+</tr>
+<tr class="even">
+<td align="center">WAT</td>
+<td align="center">CCBY4.0</td>
+<td align="center">6</td>
+</tr>
+<tr class="odd">
+<td align="center">URB</td>
+<td align="center">LEGACY</td>
+<td align="center">2</td>
+</tr>
+<tr class="even">
+<td align="center">SNO</td>
+<td align="center">CCBY4.0</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<p>Once decided, users can query a target site list based on the desired criteria, e.g., IGBP, data availability, data policy, geolocation.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co"># get a list of cropland and grassland sites with available data,</span>
+<span class="co">#  shared under CC-BY-4.0 data policy,</span>
+<span class="co">#  located within 30-50 degree N in latitude,</span>
+<span class="co"># returned a site list with site ID, name, data starting/ending year</span>
 <span class="va">crop_ls</span> <span class="op">&lt;-</span> <span class="va">sites_dt</span><span class="op">[</span><span class="va">IGBP</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CRO"</span>, <span class="st">"GRA"</span><span class="op">)</span> <span class="op">&amp;</span>
-                                           <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">DATA_START</span><span class="op">)</span> <span class="op">&amp;</span>
-                                           <span class="va">LOCATION_LAT</span> <span class="op">&gt;</span> <span class="fl">30</span> <span class="op">&amp;</span>
-                                           <span class="va">LOCATION_LAT</span> <span class="op">&lt;</span> <span class="fl">50</span>,
-                                         <span class="fu">.</span><span class="op">(</span><span class="va">SITE_ID</span>, <span class="va">SITE_NAME</span>, <span class="va">DATA_START</span>, <span class="va">DATA_END</span><span class="op">)</span><span class="op">]</span>
-<span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">crop_ls</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
+                      <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">DATA_START</span><span class="op">)</span> <span class="op">&amp;</span>
+                      <span class="va">LOCATION_LAT</span> <span class="op">&gt;</span> <span class="fl">30</span> <span class="op">&amp;</span>
+                      <span class="va">LOCATION_LAT</span> <span class="op">&lt;</span> <span class="fl">50</span> <span class="op">&amp;</span>
+                      <span class="va">DATA_POLICY</span> <span class="op">==</span> <span class="st">"CCBY4.0"</span>,
+                    <span class="fu">.</span><span class="op">(</span><span class="va">SITE_ID</span>, <span class="va">SITE_NAME</span>, <span class="va">DATA_START</span>, <span class="va">DATA_END</span><span class="op">)</span><span class="op">]</span>
+<span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">crop_ls</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>,<span class="op">]</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="13%">
-<col width="45%">
+<col width="41%">
 <col width="18%">
 <col width="18%">
 </colgroup>
@@ -457,58 +668,58 @@
 <td align="center">2021</td>
 </tr>
 <tr class="even">
-<td align="center">CA-Let</td>
-<td align="center">Alberta - Mixed Grass Prairie</td>
-<td align="center">1998</td>
-<td align="center">2008</td>
-</tr>
-<tr class="odd">
 <td align="center">US-A32</td>
 <td align="center">ARM-SGP Medford hay pasture</td>
 <td align="center">2015</td>
 <td align="center">2017</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="center">US-A74</td>
 <td align="center">ARM SGP milo field</td>
 <td align="center">2015</td>
 <td align="center">2017</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="center">US-AR1</td>
 <td align="center">ARM USDA UNL OSU Woodward Switchgrass 1</td>
 <td align="center">2009</td>
 <td align="center">2012</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="center">US-AR2</td>
 <td align="center">ARM USDA UNL OSU Woodward Switchgrass 2</td>
 <td align="center">2009</td>
 <td align="center">2012</td>
 </tr>
-<tr class="odd">
-<td align="center">US-ARb</td>
-<td align="center">ARM Southern Great Plains burn site- Lamont</td>
-<td align="center">2005</td>
-<td align="center">2006</td>
-</tr>
 <tr class="even">
-<td align="center">US-ARc</td>
-<td align="center">ARM Southern Great Plains control site- Lamont</td>
-<td align="center">2005</td>
-<td align="center">2006</td>
-</tr>
-<tr class="odd">
 <td align="center">US-ARM</td>
 <td align="center">ARM Southern Great Plains site- Lamont</td>
 <td align="center">2003</td>
 <td align="center">2021</td>
 </tr>
+<tr class="odd">
+<td align="center">US-Bi1</td>
+<td align="center">Bouldin Island Alfalfa</td>
+<td align="center">2016</td>
+<td align="center">2021</td>
+</tr>
 <tr class="even">
-<td align="center">US-Aud</td>
-<td align="center">Audubon Research Ranch</td>
-<td align="center">2002</td>
-<td align="center">2011</td>
+<td align="center">US-Bi2</td>
+<td align="center">Bouldin Island corn</td>
+<td align="center">2017</td>
+<td align="center">2021</td>
+</tr>
+<tr class="odd">
+<td align="center">US-BMM</td>
+<td align="center">Bangtail Mountain Meadow</td>
+<td align="center">2016</td>
+<td align="center">2019</td>
+</tr>
+<tr class="even">
+<td align="center">US-Bo1</td>
+<td align="center">Bondville</td>
+<td align="center">1996</td>
+<td align="center">2008</td>
 </tr>
 </tbody>
 </table>
@@ -516,8 +727,9 @@
 <div id="get-metadata-availability" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-metadata-availability" class="anchor"></a>Get metadata availability</h2>
-<p>In some cases, users may want to know if certain types of metadata are available for the selected sites. The amf_list_metadata() function provides a quick summary of metadata availability before actually downloading the data &amp; metadata through AmeriFlux. By default, amf_list_metadata() returns a full site list with the available entries (i.e., counts) for all BADM groups. Check <a href="https://ameriflux.lbl.gov/data/badm/badm-basics/">AmeriFlux webpage</a> for definitions of BADM groups.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<p>In some cases, users may want to know if certain types of metadata are available for the selected sites. The amf_list_metadata() function provides a quick summary of metadata availability before actually downloading the data and metadata.</p>
+<p>By default, amf_list_metadata() returns a full site list with the available entries (i.e., counts) for all BADM groups. Check <a href="https://ameriflux.lbl.gov/data/badm/badm-basics/">AmeriFlux webpage</a> for definitions of all BADM groups.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">metadata_aval</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html">as.data.table</a></span><span class="op">(</span><span class="fu"><a href="../reference/amf_list_metadata.html">amf_list_metadata</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">metadata_aval</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -600,10 +812,11 @@
 </tbody>
 </table>
 <p>The site_set parameter of the amf_list_metadata() can be used to subset the sites of interest.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">metadata_aval_sub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html">as.data.table</a></span><span class="op">(</span><span class="fu"><a href="../reference/amf_list_metadata.html">amf_list_metadata</a></span><span class="op">(</span>site_set <span class="op">=</span> <span class="va">crop_ls</span><span class="op">$</span><span class="va">SITE_ID</span><span class="op">)</span><span class="op">)</span>
 
-<span class="co"># down-select cropland &amp; grassland sites based on the interested BADM group, e.g., canopy height (GRP_HEIGHTC)</span>
+<span class="co"># down-select cropland &amp; grassland sites by interested BADM group,</span>
+<span class="co">#  e.g., canopy height (GRP_HEIGHTC)</span>
 <span class="va">crop_ls2</span> <span class="op">&lt;-</span> <span class="va">metadata_aval_sub</span><span class="op">[</span><span class="va">GRP_HEIGHTC</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="fu">.</span><span class="op">(</span><span class="va">SITE_ID</span>, <span class="va">GRP_HEIGHTC</span><span class="op">)</span><span class="op">]</span><span class="op">[</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="va">GRP_HEIGHTC</span><span class="op">)</span><span class="op">]</span>
 <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">crop_ls2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -641,20 +854,20 @@
 <td align="center">112</td>
 </tr>
 <tr class="odd">
-<td align="center">US-IB2</td>
-<td align="center">105</td>
-</tr>
-<tr class="even">
 <td align="center">US-Var</td>
 <td align="center">105</td>
-</tr>
-<tr class="odd">
-<td align="center">US-Shd</td>
-<td align="center">84</td>
 </tr>
 <tr class="even">
 <td align="center">US-Snd</td>
 <td align="center">70</td>
+</tr>
+<tr class="odd">
+<td align="center">US-Bi2</td>
+<td align="center">54</td>
+</tr>
+<tr class="even">
+<td align="center">US-ARM</td>
+<td align="center">45</td>
 </tr>
 </tbody>
 </table>
@@ -662,16 +875,17 @@
 <div id="get-data-availability" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-data-availability" class="anchor"></a>Get data availability</h2>
-<p>In addition, users can use amf_list_data() function to query the availability of specific variables in the data. The amf_list_data() functions provide a quick summary of variable availability (per site/year) before downloading the data through AmeriFlux. By default, amf_list_data() returns a full site list of variable availability (per year) for all variables. The site_set parameter of amf_list_data() can be used to subset the sites of interest.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<p>In addition, users can use amf_list_data() to query the availability of specific variables in the data (i.e., flux/met data, so-called BASE data product). The amf_list_data() provides a quick summary of variable availability (per site/year) before downloading the data.</p>
+<p>By default, amf_list_data() returns a full site list of variable availability (data percentages per year) for all variables. The site_set parameter of amf_list_data() can be used to subset the sites of interest.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data_aval</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html">as.data.table</a></span><span class="op">(</span><span class="fu"><a href="../reference/amf_list_data.html">amf_list_data</a></span><span class="op">(</span>site_set <span class="op">=</span> <span class="va">crop_ls2</span><span class="op">$</span><span class="va">SITE_ID</span><span class="op">)</span><span class="op">)</span>
 <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">data_aval</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <caption>Table continues below</caption>
 <colgroup>
 <col width="12%">
-<col width="15%">
-<col width="15%">
+<col width="14%">
+<col width="14%">
 <col width="16%">
 <col width="10%">
 <col width="10%">
@@ -690,7 +904,7 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="center">CA-Let</td>
+<td align="center">US-AR1</td>
 <td align="center">CO2</td>
 <td align="center">CO2</td>
 <td align="center">FALSE</td>
@@ -700,9 +914,9 @@
 <td align="center">0</td>
 </tr>
 <tr class="even">
-<td align="center">CA-Let</td>
-<td align="center">G_1_1_1</td>
-<td align="center">G</td>
+<td align="center">US-AR1</td>
+<td align="center">FC</td>
+<td align="center">FC</td>
 <td align="center">FALSE</td>
 <td align="center">0</td>
 <td align="center">0</td>
@@ -710,8 +924,8 @@
 <td align="center">0</td>
 </tr>
 <tr class="odd">
-<td align="center">CA-Let</td>
-<td align="center">G_1_1_2</td>
+<td align="center">US-AR1</td>
+<td align="center">G</td>
 <td align="center">G</td>
 <td align="center">FALSE</td>
 <td align="center">0</td>
@@ -720,27 +934,7 @@
 <td align="center">0</td>
 </tr>
 <tr class="even">
-<td align="center">CA-Let</td>
-<td align="center">G_1_1_3</td>
-<td align="center">G</td>
-<td align="center">FALSE</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-</tr>
-<tr class="odd">
-<td align="center">CA-Let</td>
-<td align="center">G_1_1_4</td>
-<td align="center">G</td>
-<td align="center">FALSE</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-</tr>
-<tr class="even">
-<td align="center">CA-Let</td>
+<td align="center">US-AR1</td>
 <td align="center">H</td>
 <td align="center">H</td>
 <td align="center">FALSE</td>
@@ -750,7 +944,7 @@
 <td align="center">0</td>
 </tr>
 <tr class="odd">
-<td align="center">CA-Let</td>
+<td align="center">US-AR1</td>
 <td align="center">H2O</td>
 <td align="center">H2O</td>
 <td align="center">FALSE</td>
@@ -760,7 +954,7 @@
 <td align="center">0</td>
 </tr>
 <tr class="even">
-<td align="center">CA-Let</td>
+<td align="center">US-AR1</td>
 <td align="center">LE</td>
 <td align="center">LE</td>
 <td align="center">FALSE</td>
@@ -770,9 +964,9 @@
 <td align="center">0</td>
 </tr>
 <tr class="odd">
-<td align="center">CA-Let</td>
-<td align="center">MO_LENGTH</td>
-<td align="center">MO_LENGTH</td>
+<td align="center">US-AR1</td>
+<td align="center">LW_IN</td>
+<td align="center">LW_IN</td>
 <td align="center">FALSE</td>
 <td align="center">0</td>
 <td align="center">0</td>
@@ -780,9 +974,29 @@
 <td align="center">0</td>
 </tr>
 <tr class="even">
-<td align="center">CA-Let</td>
-<td align="center">NEE_PI</td>
-<td align="center">NEE</td>
+<td align="center">US-AR1</td>
+<td align="center">LW_OUT</td>
+<td align="center">LW_OUT</td>
+<td align="center">FALSE</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">US-AR1</td>
+<td align="center">NETRAD</td>
+<td align="center">NETRAD</td>
+<td align="center">FALSE</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">US-AR1</td>
+<td align="center">P</td>
+<td align="center">P</td>
 <td align="center">FALSE</td>
 <td align="center">0</td>
 <td align="center">0</td>
@@ -798,11 +1012,12 @@
 <col width="10%">
 <col width="10%">
 <col width="10%">
-<col width="11%">
-<col width="11%">
-<col width="11%">
-<col width="11%">
-<col width="11%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
 </colgroup>
 <thead><tr class="header">
 <th align="center">Y1994</th>
@@ -814,6 +1029,7 @@
 <th align="center">Y2000</th>
 <th align="center">Y2001</th>
 <th align="center">Y2002</th>
+<th align="center">Y2003</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -821,35 +1037,15 @@
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
-<td align="center">0.4426</td>
-<td align="center">0.8072</td>
-<td align="center">0.8735</td>
-<td align="center">0.9502</td>
-<td align="center">0.9189</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
 </tr>
 <tr class="even">
 <td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0.5163</td>
-<td align="center">0.9894</td>
-<td align="center">0.9665</td>
-<td align="center">0.9944</td>
-<td align="center">0.983</td>
-</tr>
-<tr class="odd">
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0.5163</td>
-<td align="center">0.9894</td>
-<td align="center">0.9666</td>
-<td align="center">0.9944</td>
-<td align="center">0.983</td>
-</tr>
-<tr class="even">
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
@@ -870,79 +1066,108 @@
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
+<td align="center">0</td>
 </tr>
 <tr class="even">
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
-<td align="center">0.4398</td>
-<td align="center">0.8318</td>
-<td align="center">0.8799</td>
-<td align="center">0.948</td>
-<td align="center">0.9216</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
 </tr>
 <tr class="odd">
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
-<td align="center">0.4426</td>
-<td align="center">0.8072</td>
-<td align="center">0.8753</td>
-<td align="center">0.9502</td>
-<td align="center">0.9182</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
 </tr>
 <tr class="even">
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
-<td align="center">0.4405</td>
-<td align="center">0.7624</td>
-<td align="center">0.864</td>
-<td align="center">0.9429</td>
-<td align="center">0.9102</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
 </tr>
 <tr class="odd">
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
-<td align="center">0.4416</td>
-<td align="center">0.8336</td>
-<td align="center">0.8815</td>
-<td align="center">0.955</td>
-<td align="center">0.9229</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
 </tr>
 <tr class="even">
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
-<td align="center">0.4404</td>
-<td align="center">0.7568</td>
-<td align="center">0.864</td>
-<td align="center">0.9429</td>
-<td align="center">0.911</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
 </tr>
 </tbody>
 </table>
 <table class="table">
 <caption>Table continues below</caption>
 <colgroup>
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
 <col width="11%">
 <col width="11%">
-<col width="14%">
 <col width="11%">
 <col width="11%">
-<col width="11%">
-<col width="9%">
-<col width="9%">
-<col width="9%">
 </colgroup>
 <thead><tr class="header">
-<th align="center">Y2003</th>
 <th align="center">Y2004</th>
 <th align="center">Y2005</th>
 <th align="center">Y2006</th>
@@ -951,135 +1176,134 @@
 <th align="center">Y2009</th>
 <th align="center">Y2010</th>
 <th align="center">Y2011</th>
+<th align="center">Y2012</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="center">0.9108</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0.5905</td>
+<td align="center">0.9866</td>
+<td align="center">0.9941</td>
+<td align="center">0.6654</td>
+</tr>
+<tr class="even">
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0.6082</td>
+<td align="center">0.976</td>
+<td align="center">0.9886</td>
+<td align="center">0.6621</td>
+</tr>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0.6421</td>
+<td align="center">0.9965</td>
+<td align="center">0.9999</td>
+<td align="center">0.9961</td>
+</tr>
+<tr class="even">
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0.6123</td>
+<td align="center">0.9867</td>
+<td align="center">0.9938</td>
+<td align="center">0.6666</td>
+</tr>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0.6092</td>
+<td align="center">0.971</td>
 <td align="center">0.9792</td>
-<td align="center">0.9225</td>
-<td align="center">0.9756</td>
-<td align="center">0.9905</td>
-<td align="center">0.246</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-</tr>
-<tr class="even">
-<td align="center">0.9638</td>
-<td align="center">1</td>
-<td align="center">0.992</td>
-<td align="center">0.9916</td>
-<td align="center">1</td>
-<td align="center">0.2485</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-</tr>
-<tr class="odd">
-<td align="center">0.9638</td>
-<td align="center">1</td>
-<td align="center">0.992</td>
-<td align="center">0.9916</td>
-<td align="center">1</td>
-<td align="center">0.2485</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
+<td align="center">0.6633</td>
 </tr>
 <tr class="even">
 <td align="center">0</td>
 <td align="center">0</td>
-<td align="center">5.708e-05</td>
-<td align="center">0.9916</td>
-<td align="center">1</td>
-<td align="center">0.2485</td>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
+<td align="center">0.6101</td>
+<td align="center">0.9816</td>
+<td align="center">0.9936</td>
+<td align="center">0.6647</td>
 </tr>
 <tr class="odd">
 <td align="center">0</td>
 <td align="center">0</td>
-<td align="center">5.708e-05</td>
-<td align="center">0.9916</td>
-<td align="center">1</td>
-<td align="center">0.2485</td>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
+<td align="center">0.6416</td>
+<td align="center">0.9965</td>
+<td align="center">0.9999</td>
+<td align="center">0.9961</td>
 </tr>
 <tr class="even">
-<td align="center">0.8836</td>
-<td align="center">0.9607</td>
-<td align="center">0.9879</td>
-<td align="center">0.9756</td>
-<td align="center">0.9811</td>
-<td align="center">0.2456</td>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0.6416</td>
+<td align="center">0.9965</td>
+<td align="center">0.9999</td>
+<td align="center">0.9961</td>
 </tr>
 <tr class="odd">
-<td align="center">0.912</td>
-<td align="center">0.9797</td>
-<td align="center">0.9913</td>
-<td align="center">0.9756</td>
-<td align="center">0.9912</td>
-<td align="center">0.246</td>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0.5447</td>
+<td align="center">0.9964</td>
+<td align="center">0.9996</td>
+<td align="center">0.996</td>
 </tr>
 <tr class="even">
-<td align="center">0.8811</td>
-<td align="center">0.9574</td>
-<td align="center">0.988</td>
-<td align="center">0.9701</td>
-<td align="center">0.9811</td>
-<td align="center">0.2456</td>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
-</tr>
-<tr class="odd">
-<td align="center">0.886</td>
-<td align="center">0.9623</td>
-<td align="center">0.9878</td>
-<td align="center">0.9756</td>
-<td align="center">0.9864</td>
-<td align="center">0.2455</td>
 <td align="center">0</td>
 <td align="center">0</td>
-<td align="center">0</td>
-</tr>
-<tr class="even">
-<td align="center">0.8807</td>
-<td align="center">0.9573</td>
-<td align="center">0.9881</td>
-<td align="center">0.9698</td>
-<td align="center">0.9811</td>
-<td align="center">0.2455</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
+<td align="center">0.6422</td>
+<td align="center">0.9965</td>
+<td align="center">0.9999</td>
+<td align="center">0.9961</td>
 </tr>
 </tbody>
 </table>
 <table class="table">
 <colgroup>
-<col width="10%">
-<col width="10%">
-<col width="10%">
-<col width="10%">
-<col width="10%">
-<col width="10%">
-<col width="10%">
-<col width="10%">
-<col width="10%">
-<col width="10%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
 </colgroup>
 <thead><tr class="header">
-<th align="center">Y2012</th>
 <th align="center">Y2013</th>
 <th align="center">Y2014</th>
 <th align="center">Y2015</th>
@@ -1101,10 +1325,8 @@
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
-<td align="center">0</td>
 </tr>
 <tr class="even">
-<td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
@@ -1125,10 +1347,8 @@
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
-<td align="center">0</td>
 </tr>
 <tr class="even">
-<td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
@@ -1149,10 +1369,8 @@
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
-<td align="center">0</td>
 </tr>
 <tr class="even">
-<td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
@@ -1173,10 +1391,8 @@
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
-<td align="center">0</td>
 </tr>
 <tr class="even">
-<td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
@@ -1197,10 +1413,8 @@
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
-<td align="center">0</td>
 </tr>
 <tr class="even">
-<td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
@@ -1213,10 +1427,11 @@
 </tr>
 </tbody>
 </table>
-<p>The variable availability can be used to subset sites that have certain variables in specific years. The BASENAME column in the variable availability indicates the variable’s base name (i.e., ignoring position qualifier), and can be used to get a coarse-level variable availability. See <a href="https://ameriflux.lbl.gov/data/aboutdata/data-variables/">AmeriFlux website</a> for definitions of base names and qualifiers.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<p>The variable availability can be used to subset sites that have certain variables in specific years. The BASENAME column indicates the variable’s base name (i.e., ignoring position qualifier), and can be used to get a coarse-level variable availability.</p>
+<p>See <a href="https://ameriflux.lbl.gov/data/aboutdata/data-variables/">AmeriFlux website</a> for definitions of base names and qualifiers.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># down-select cropland &amp; grassland sites based on the available wind speed (WS) and </span>
-<span class="co"># friction velocity (USTAR) data in 2015-2018</span>
+<span class="co"># friction velocity (USTAR) data in 2015-2018, regardless their qualifiers</span>
 <span class="va">data_aval_sub</span> <span class="op">&lt;-</span> <span class="va">data_aval</span><span class="op">[</span><span class="va">data_aval</span><span class="op">$</span><span class="va">BASENAME</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WS"</span>,<span class="st">"USTAR"</span><span class="op">)</span>,
                            <span class="fu">.</span><span class="op">(</span><span class="va">SITE_ID</span>, <span class="va">BASENAME</span>, <span class="va">Y2015</span>, <span class="va">Y2016</span>, <span class="va">Y2017</span>, <span class="va">Y2018</span><span class="op">)</span><span class="op">]</span>
 
@@ -1225,8 +1440,9 @@
                                by <span class="op">=</span> <span class="fu">.</span><span class="op">(</span><span class="va">SITE_ID</span><span class="op">)</span>,
                                .SDcols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Y2015"</span>, <span class="st">"Y2016"</span>, <span class="st">"Y2017"</span>, <span class="st">"Y2018"</span><span class="op">)</span><span class="op">]</span>
 
-<span class="co"># sub-select sites that have WS and USTAR data during any periods of 2015-2018</span>
-<span class="va">crop_ls3</span> <span class="op">&lt;-</span> <span class="va">data_aval_sub</span><span class="op">[</span><span class="op">(</span><span class="va">Y2015</span> <span class="op">+</span> <span class="va">Y2016</span> <span class="op">+</span> <span class="va">Y2017</span> <span class="op">+</span> <span class="va">Y2018</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span>
+<span class="co"># sub-select sites that have WS and USTAR data for &gt; 75%</span>
+<span class="co">#  during 2015-2018</span>
+<span class="va">crop_ls3</span> <span class="op">&lt;-</span> <span class="va">data_aval_sub</span><span class="op">[</span><span class="op">(</span><span class="va">Y2015</span> <span class="op">+</span> <span class="va">Y2016</span> <span class="op">+</span> <span class="va">Y2017</span> <span class="op">+</span> <span class="va">Y2018</span><span class="op">)</span> <span class="op">/</span> <span class="fl">4</span> <span class="op">&gt;</span> <span class="fl">0.75</span><span class="op">]</span>
 <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">crop_ls3</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <colgroup>
@@ -1252,46 +1468,18 @@
 <td align="center">0.9826</td>
 </tr>
 <tr class="even">
-<td align="center">US-Bi1</td>
-<td align="center">0</td>
-<td align="center">0.3851</td>
-<td align="center">0.9999</td>
-<td align="center">1</td>
-</tr>
-<tr class="odd">
-<td align="center">US-Bi2</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0.6472</td>
-<td align="center">0.9943</td>
-</tr>
-<tr class="even">
-<td align="center">US-IB2</td>
-<td align="center">0.9258</td>
-<td align="center">0.9971</td>
-<td align="center">0.9815</td>
-<td align="center">0.9805</td>
-</tr>
-<tr class="odd">
 <td align="center">US-Ne1</td>
 <td align="center">0.77</td>
 <td align="center">0.7861</td>
 <td align="center">0.756</td>
 <td align="center">0.7167</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="center">US-Ne2</td>
 <td align="center">0.7636</td>
 <td align="center">0.7878</td>
 <td align="center">0.7594</td>
 <td align="center">0.7442</td>
-</tr>
-<tr class="odd">
-<td align="center">US-Ne3</td>
-<td align="center">0.65</td>
-<td align="center">0.7643</td>
-<td align="center">0.7759</td>
-<td align="center">0.7739</td>
 </tr>
 <tr class="even">
 <td align="center">US-SRG</td>
@@ -1308,20 +1496,13 @@
 <td align="center">0.4005</td>
 </tr>
 <tr class="even">
-<td align="center">US-Twt</td>
-<td align="center">0.9957</td>
-<td align="center">0.966</td>
-<td align="center">0.2345</td>
-<td align="center">0</td>
-</tr>
-<tr class="odd">
 <td align="center">US-Var</td>
 <td align="center">0.9983</td>
 <td align="center">1</td>
 <td align="center">0.9455</td>
 <td align="center">1</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="center">US-Wkg</td>
 <td align="center">0.9973</td>
 <td align="center">0.9909</td>
@@ -1330,14 +1511,15 @@
 </tr>
 </tbody>
 </table>
-<p>Last, sometimes users would look for sites with multiple measurements of similar variables (e.g., multilevel wind speed). The VARIABLE column in the variable availability can be used to get a fine-level variable availability.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># down-select cropland &amp; grassland sites based on the available wind speed (WS) data,</span>
+<p>Last, sometimes users would look for sites with multiple measurements of similar variables (e.g., multilevel wind speed, soil temperature). The VARIABLE column in the variable availability can be used to get a fine-level variable availability.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># down-select cropland &amp; grassland sites by available wind speed (WS) data,</span>
 <span class="co">#  mean availability of WS during 2015-2018</span>
 <span class="va">data_aval_sub2</span> <span class="op">&lt;-</span> <span class="va">data_aval</span><span class="op">[</span><span class="va">data_aval</span><span class="op">$</span><span class="va">BASENAME</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WS"</span><span class="op">)</span>,
                             <span class="fu">.</span><span class="op">(</span><span class="va">SITE_ID</span>, <span class="va">VARIABLE</span>, Y2015_2018 <span class="op">=</span> <span class="op">(</span><span class="va">Y2015</span> <span class="op">+</span> <span class="va">Y2016</span> <span class="op">+</span> <span class="va">Y2017</span> <span class="op">+</span> <span class="va">Y2018</span><span class="op">)</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span><span class="op">]</span>
 
-<span class="co"># calculate number of WS variables per site, for sites that have any WS data during 2015-2018</span>
+<span class="co"># calculate number of WS variables per site, for sites that </span>
+<span class="co">#  have any WS data during 2015-2018</span>
 <span class="va">data_aval_sub2</span> <span class="op">&lt;-</span> <span class="va">data_aval_sub2</span><span class="op">[</span><span class="va">Y2015_2018</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="fu">.</span><span class="op">(</span><span class="va">.N</span>, Y2015_2018 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Y2015_2018</span><span class="op">)</span><span class="op">)</span>, <span class="fu">.</span><span class="op">(</span><span class="va">SITE_ID</span><span class="op">)</span><span class="op">]</span>
 <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">crop_ls4</span> <span class="op">&lt;-</span> <span class="va">data_aval_sub2</span><span class="op">[</span><span class="va">N</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -1379,6 +1561,169 @@
 </tr>
 </tbody>
 </table>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co"># return a list of sites with multiple WS variables</span>
+<span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">crop_ls4_aval</span> <span class="op">&lt;-</span> <span class="va">data_aval</span><span class="op">[</span><span class="va">data_aval</span><span class="op">$</span><span class="va">SITE_ID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">crop_ls4</span><span class="op">$</span><span class="va">SITE_ID</span> <span class="op">&amp;</span>
+                                                  <span class="va">data_aval</span><span class="op">$</span><span class="va">BASENAME</span> <span class="op">==</span> <span class="st">"WS"</span>,
+                                                <span class="fu">.</span><span class="op">(</span><span class="va">SITE_ID</span>, <span class="va">VARIABLE</span>, <span class="va">Y2015</span>, <span class="va">Y2016</span>, <span class="va">Y2017</span>, <span class="va">Y2018</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="13%">
+<col width="15%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">SITE_ID</th>
+<th align="center">VARIABLE</th>
+<th align="center">Y2015</th>
+<th align="center">Y2016</th>
+<th align="center">Y2017</th>
+<th align="center">Y2018</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">US-ARM</td>
+<td align="center">WS_1_1_1</td>
+<td align="center">0.5807</td>
+<td align="center">0.9917</td>
+<td align="center">0.9888</td>
+<td align="center">0.9832</td>
+</tr>
+<tr class="even">
+<td align="center">US-ARM</td>
+<td align="center">WS_1_2_1</td>
+<td align="center">0.5785</td>
+<td align="center">0.9854</td>
+<td align="center">0.985</td>
+<td align="center">0.9839</td>
+</tr>
+<tr class="odd">
+<td align="center">US-ARM</td>
+<td align="center">WS_1_3_1</td>
+<td align="center">0.5656</td>
+<td align="center">0.9778</td>
+<td align="center">0.9241</td>
+<td align="center">0.9743</td>
+</tr>
+<tr class="even">
+<td align="center">US-Ne1</td>
+<td align="center">WS_1_1_1</td>
+<td align="center">0.3371</td>
+<td align="center">0.2353</td>
+<td align="center">0.3507</td>
+<td align="center">0.3699</td>
+</tr>
+<tr class="odd">
+<td align="center">US-Ne1</td>
+<td align="center">WS_1_2_1</td>
+<td align="center">0.9719</td>
+<td align="center">0.9512</td>
+<td align="center">0.8829</td>
+<td align="center">0.8158</td>
+</tr>
+<tr class="even">
+<td align="center">US-Ne1</td>
+<td align="center">WS_1_3_1</td>
+<td align="center">0.9677</td>
+<td align="center">0.9796</td>
+<td align="center">0.9</td>
+<td align="center">0.7745</td>
+</tr>
+<tr class="odd">
+<td align="center">US-Ne1</td>
+<td align="center">WS_2_1_1</td>
+<td align="center">0.6629</td>
+<td align="center">0.7647</td>
+<td align="center">0.6493</td>
+<td align="center">0.6301</td>
+</tr>
+<tr class="even">
+<td align="center">US-Ne2</td>
+<td align="center">WS_1_1_1</td>
+<td align="center">0.3401</td>
+<td align="center">0</td>
+<td align="center">0.3395</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">US-Ne2</td>
+<td align="center">WS_1_2_1</td>
+<td align="center">0.9705</td>
+<td align="center">0.9738</td>
+<td align="center">0.8905</td>
+<td align="center">0.8274</td>
+</tr>
+<tr class="even">
+<td align="center">US-Ne2</td>
+<td align="center">WS_1_3_1</td>
+<td align="center">0.9058</td>
+<td align="center">0.9671</td>
+<td align="center">0.9098</td>
+<td align="center">0.8992</td>
+</tr>
+<tr class="odd">
+<td align="center">US-Ne2</td>
+<td align="center">WS_2_1_1</td>
+<td align="center">0.6599</td>
+<td align="center">1</td>
+<td align="center">0.6605</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">US-Ne3</td>
+<td align="center">WS_1_1_1</td>
+<td align="center">0.3428</td>
+<td align="center">0</td>
+<td align="center">0.3453</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">US-Ne3</td>
+<td align="center">WS_1_2_1</td>
+<td align="center">0.9812</td>
+<td align="center">0.9915</td>
+<td align="center">0.9709</td>
+<td align="center">0.9509</td>
+</tr>
+<tr class="even">
+<td align="center">US-Ne3</td>
+<td align="center">WS_1_3_1</td>
+<td align="center">0.9473</td>
+<td align="center">0.9752</td>
+<td align="center">0.9131</td>
+<td align="center">0.9293</td>
+</tr>
+<tr class="odd">
+<td align="center">US-Ne3</td>
+<td align="center">WS_2_1_1</td>
+<td align="center">0.6572</td>
+<td align="center">1</td>
+<td align="center">0.6547</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">US-Wkg</td>
+<td align="center">WS_1_1_1</td>
+<td align="center">0.9962</td>
+<td align="center">0.9864</td>
+<td align="center">0.995</td>
+<td align="center">0.9772</td>
+</tr>
+<tr class="odd">
+<td align="center">US-Wkg</td>
+<td align="center">WS_1_2_1</td>
+<td align="center">0.9995</td>
+<td align="center">1</td>
+<td align="center">0.9993</td>
+<td align="center">0.9999</td>
+</tr>
+</tbody>
+</table>
+<p>Once having a target site list, users can download these sites’ data and metadata using the site IDs. See <a href="index.html#use">README</a> for data download examples.</p>
 </div>
   </div>
 

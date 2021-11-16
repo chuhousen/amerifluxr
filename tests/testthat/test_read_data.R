@@ -4,7 +4,7 @@ test_that("check read bif function", {
   skip_on_cran()
 
   bif <- amf_read_bif(file = system.file("extdata",
-                                         "AMF_AA-Flx_BIF_20201218.xlsx",
+                                         "AMF_AA-Flx_BIF_CCBY4_20201218.xlsx",
                                          package = "amerifluxr"))
   expect_is(bif, "data.frame")
   expect_true("SITE_ID" %in% colnames(bif))
@@ -20,7 +20,7 @@ test_that("check extract badm function", {
   skip_on_cran()
 
   bif2 <- amf_read_bif(file = system.file("extdata",
-                                         "AMF_AA-Flx_BIF_20201218.xlsx",
+                                         "AMF_AA-Flx_BIF_CCBY4_20201218.xlsx",
                                          package = "amerifluxr"))
   bif_out1 <- amf_extract_badm(bif_data = bif2,
                               select_group = "GRP_LOCATION")
@@ -54,7 +54,7 @@ test_that("check read base function", {
   expect_error(amf_read_base())
   expect_error(amf_read_base(file = "test_not_work.csv"))
   expect_error(amf_read_base(file = system.file("extdata",
-                                                "AMF_AA-Flx_BIF_20201218.xlsx",
+                                                "AMF_AA-Flx_BIF_CCBY4_20201218.xlsx",
                                                 package = "amerifluxr")))
 
 })
@@ -132,7 +132,7 @@ test_that("Check basename parse function", {
   expect_equal(sum(basename_out$is_replicate_SD), 6)
   expect_equal(sum(basename_out$is_replicate_number), 6)
   expect_equal(sum(basename_out$is_quadruplet), 6)
-  expect_equal(sum(basename_out$is_PI_provide), 3)
+  expect_equal(sum(basename_out$is_pi_provide), 3)
 
   ## check error return
   expect_error(amf_parse_basename())
