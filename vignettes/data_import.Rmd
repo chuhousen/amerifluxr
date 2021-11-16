@@ -29,8 +29,7 @@ is available as well.
 ## Download data
 
 AmeriFlux data and metadata can be downloaded using 
-amf_download_base() and amf_download_bif(). See 
-[README](index.html#use) for data download examples. Users
+amf_download_base() and amf_download_bif(). Users
 will need to create a personal AmeriFlux account 
 [here](https://ameriflux-data.lbl.gov/Pages/RequestAccount.aspx)
 before download. 
