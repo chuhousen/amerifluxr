@@ -4,8 +4,10 @@ test_that("check donwload data function", {
   skip_on_cran()
 
   ## get secret log-in user name and email
+  #   Use Git repository secrets
   user <- system("echo $MY_USER", intern = TRUE)
   email <- system("echo $MY_EMAIL", intern = TRUE)
+  #   Use local env when testing locally
   if (user == "" | user == "$MY_USER") {
     user <- Sys.getenv("MY_USER")
     email <- Sys.getenv("MY_EMAIL")
