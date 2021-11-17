@@ -13,43 +13,82 @@ test_that("check donwload data function", {
     email <- Sys.getenv("MY_EMAIL")
   }
 
+  #### tests without valid user & email
+  ## test error when invalid input in policy agreement
+  local({
+    # override the menu function to force expected choice
+    local_mock(
+      menu = function(choices, title = NULL)
+        2
+    )
+
+    expect_error(
+      amf_download_base(
+        user_id = "test_not_work",
+        user_email = "test_not_work$mail.com",
+        site_id = "US-CRT",
+        data_product = "BASE-BADM",
+        data_policy = "CCBY4.0",
+        intended_use = "other",
+        intended_use_text = "testing download",
+        out_dir = tempdir(),
+        verbose = FALSE
+      )
+    )
+
+    expect_error(
+      amf_download_bif(
+        user_id = "test_not_work",
+        user_email = "test_not_work$mail.com",
+        data_policy = "CCBY4.0",
+        intended_use = "other",
+        intended_use_text = "testing download",
+        out_dir = tempdir(),
+        site_w_data = FALSE,
+        verbose = FALSE
+      )
+    )
+  })
+
+  #### tests with valid user & email
+  local({
+    # override the menu function to force expected choice
+    local_mock(
+      menu = function(choices, title = NULL)
+        1
+    )
+
+    ## test error and warning return
+    # test invalid user id and email
+    expect_error(
+      amf_download_base(
+        user_id = "test_not_work",
+        user_email = "test_not_work$mail.com",
+        site_id = "US-CRT",
+        data_product = "BASE-BADM",
+        data_policy = "CCBY4.0",
+        intended_use = "other",
+        intended_use_text = "testing download",
+        out_dir = tempdir(),
+        verbose = FALSE
+      )
+    )
+
+    expect_error(
+      amf_download_bif(
+        user_id = "test_not_work",
+        user_email = "test_not_work$mail.com",
+        data_policy = "CCBY4.0",
+        intended_use = "other",
+        intended_use_text = "testing download",
+        out_dir = tempdir(),
+        verbose = FALSE
+      )
+    )
+  })
+
+  ## tests with valid user & email
   if (user != "" & user != "$MY_USER") {
-    ## test error when invalid input in policy agreement
-    local({
-      # override the menu function to force expected choice
-      local_mock(
-        menu = function(choices, title = NULL)
-          2
-      )
-
-      expect_error(
-        amf_download_base(
-          user_id = user,
-          user_email = email,
-          site_id = "US-CRT",
-          data_product = "BASE-BADM",
-          data_policy = "CCBY4.0",
-          intended_use = "other",
-          intended_use_text = "testing download",
-          out_dir = tempdir(),
-          verbose = FALSE
-        )
-      )
-
-      expect_error(
-        amf_download_bif(
-          user_id = user,
-          user_email = email,
-          data_policy = "CCBY4.0",
-          intended_use = "other",
-          intended_use_text = "testing download",
-          out_dir = tempdir(),
-          site_w_data = FALSE,
-          verbose = FALSE
-        )
-      )
-    })
-
     ## test when valid input in policy agreement
     local({
       # override the menu function to force expected choice
@@ -57,6 +96,18 @@ test_that("check donwload data function", {
         menu = function(choices, title = NULL)
           1
       )
+
+      expect_output(amf_download_base(
+        user_id = user,
+        user_email = email,
+        site_id = "US-CRT",
+        data_product = "BASE-BADM",
+        data_policy = "CCBY4.0",
+        intended_use = "other",
+        intended_use_text = "testing download",
+        out_dir = tempdir(),
+        verbose = FALSE
+      ))
 
       ## test for valid download file
       base_out <- amf_download_base(
@@ -97,33 +148,6 @@ test_that("check donwload data function", {
       expect_gt(nrow(bif), 0)
 
       ## test error and warning return
-      # test invalid user id and email
-      expect_error(
-        amf_download_base(
-          user_id = "test_not_work",
-          user_email = "test_not_work$mail.com",
-          site_id = "US-CRT",
-          data_product = "BASE-BADM",
-          data_policy = "CCBY4.0",
-          intended_use = "other",
-          intended_use_text = "testing download",
-          out_dir = tempdir(),
-          verbose = FALSE
-        )
-      )
-
-      expect_error(
-        amf_download_bif(
-          user_id = "test_not_work",
-          user_email = "test_not_work$mail.com",
-          data_policy = "CCBY4.0",
-          intended_use = "other",
-          intended_use_text = "testing download",
-          out_dir = tempdir(),
-          verbose = FALSE
-        )
-      )
-
       # test invalid data policy
       expect_error(
         amf_download_base(
