@@ -205,6 +205,17 @@ test_that("check donwload data function", {
         verbose = FALSE
       ))
 
+      expect_output(amf_download_bif(
+        user_id = user,
+        user_email = email,
+        data_policy = "LEGACY",
+        intended_use = "other",
+        intended_use_text = "testing download",
+        out_dir = tempdir(),
+        site_w_data = FALSE,
+        verbose = FALSE
+      ))
+
       ## test for valid download file
       base_out <- amf_download_base(
         user_id = user,
