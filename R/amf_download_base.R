@@ -110,7 +110,7 @@ amf_download_base <- function(user_id,
     }
   }
   if(length(site_id) == 0){
-    stop("Download failed, no valid Site ID in site_id...")
+    stop("No valid Site ID in site_id...")
   }
 
   ## obtain formal intended use category
@@ -129,12 +129,13 @@ amf_download_base <- function(user_id,
 
   if(is.null(intended_use_cat(intended_use = intended_use))){
     stop("Invalid intended_use input...")
-
   }
 
   # check if out_dir reachable
-  if(!dir.exists(out_dir))
+  if(!dir.exists(out_dir)){
     stop("out_dir not valid...")
+  }
+
 
   if (data_policy == "CCBY4.0") {
     cat("Data use guidlines for AmeriFlux CC-BY-4.0 Data Policy:\n",

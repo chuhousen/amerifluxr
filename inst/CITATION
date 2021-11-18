@@ -1,0 +1,14 @@
+citHeader("To cite amerifluxr in publications use:")
+
+citEntry(
+  entry    = "Misc",
+  title    = "The amerifluxr package: An interface with AmeriFlux data services",
+  author   = personList(as.person("Housen Chu"),
+                        as.person("Koen Hufkens")),
+  year     = "2021",
+  doi      = "10.11578/dc.20210730.2",
+  url      = "https://chuhousen.github.io/amerifluxr/",
+  textVersion = paste("Chu and Hufkens (2021).",
+                      "The amerifluxr package: An interface with AmeriFlux data services,",
+                      "v1.0.0. https://doi.org/10.11578/dc.20210730.2")
+)
