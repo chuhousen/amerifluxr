@@ -40,7 +40,7 @@ test_that("check donwload data function", {
       amf_download_bif(
         user_id = "test_not_work",
         user_email = "test_not_work$mail.com",
-        data_policy = "CCBY4.0",
+        data_policy = "LEGACY",
         intended_use = "other",
         intended_use_text = "testing download",
         out_dir = tempdir(),
@@ -78,7 +78,7 @@ test_that("check donwload data function", {
       amf_download_bif(
         user_id = "test_not_work",
         user_email = "test_not_work$mail.com",
-        data_policy = "CCBY4.0",
+        data_policy = "LEGACY",
         intended_use = "other",
         intended_use_text = "testing download",
         out_dir = tempdir(),
@@ -102,7 +102,7 @@ test_that("check donwload data function", {
         user_email = email,
         site_id = "US-CRT",
         data_product = "BASE-BADM",
-        data_policy = "CCBY4.0",
+        data_policy = "LEGACY",
         intended_use = "other",
         intended_use_text = "testing download",
         out_dir = tempdir(),
@@ -132,7 +132,7 @@ test_that("check donwload data function", {
       bif_out <- amf_download_bif(
         user_id = user,
         user_email = email,
-        data_policy = "CCBY4.0",
+        data_policy = "LEGACY",
         intended_use = "other",
         intended_use_text = "testing download",
         out_dir = tempdir(),
@@ -194,7 +194,7 @@ test_that("check donwload data function", {
         amf_download_bif(
           user_id = user,
           user_email = email,
-          data_policy = "CCBY4.0",
+          data_policy = "LEGACY",
           intended_use = "test_not_working",
           intended_use_text = "testing download",
           out_dir = tempdir(),
@@ -224,7 +224,7 @@ test_that("check donwload data function", {
           user_email = email,
           site_id = c("US-CRT", "US-Crt", "UScrt"),
           data_product = "BASE-BADM",
-          data_policy = "CCBY4.0",
+          data_policy = "LEGACY",
           intended_use = "other",
           intended_use_text = "testing download",
           out_dir = tempdir(),
