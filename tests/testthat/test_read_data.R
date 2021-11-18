@@ -1,7 +1,7 @@
 context("test amerifluxr read data functions")
 
 test_that("check read bif function", {
-  skip_on_cran()
+  #skip_on_cran()
 
   bif <- amf_read_bif(file = system.file("extdata",
                                          "AMF_AA-Flx_BIF_CCBY4_20201218.xlsx",
@@ -14,10 +14,14 @@ test_that("check read bif function", {
 
   ## check error return
   expect_error(amf_read_bif())
+  expect_error(amf_read_bif(system.file("extdata",
+                                        "AMF_US-CRT_BASE_HH_2-5.csv",
+                                        package = "amerifluxr")))
+
 })
 
 test_that("check extract badm function", {
-  skip_on_cran()
+  #skip_on_cran()
 
   bif2 <- amf_read_bif(file = system.file("extdata",
                                          "AMF_AA-Flx_BIF_CCBY4_20201218.xlsx",
@@ -34,8 +38,9 @@ test_that("check extract badm function", {
 
 })
 
+
 test_that("check read base function", {
-  skip_on_cran()
+  #skip_on_cran()
 
   base <- amf_read_base(
     file = system.file("extdata",
@@ -53,10 +58,23 @@ test_that("check read base function", {
   ## check error return
   expect_error(amf_read_base())
   expect_error(amf_read_base(file = "test_not_work.csv"))
-  expect_error(amf_read_base(file = system.file("extdata",
-                                                "AMF_AA-Flx_BIF_CCBY4_20201218.xlsx",
-                                                package = "amerifluxr")))
-
+  expect_error(amf_read_base(
+    file = system.file("extdata",
+                       "AMF_AA-Flx_BIF_CCBY4_20201218.xlsx",
+                       package = "amerifluxr")
+  ))
+  expect_error(amf_read_base(
+    file = system.file("extdata",
+                       "AMF_US-CRT_BASE-BADM_2-5.zip",
+                       package = "amerifluxr"),
+    unzip = FALSE
+  ))
+  expect_error(amf_read_base(
+    file = system.file("extdata",
+                       "AMF_US-CRT_BASE_HH_2-5.csv",
+                       package = "amerifluxr"),
+    unzip = TRUE
+  ))
 })
 
 test_that("check filter base function", {

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Lists Ameriflux sites — amf_sites • amerifluxr</title>
+<title>Lists AmeriFlux sites — amf_sites • amerifluxr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Lists Ameriflux sites — amf_sites" />
-<meta property="og:description" content="Lists available site (names) and meta-data" />
+<meta property="og:title" content="Lists AmeriFlux sites — amf_sites" />
+<meta property="og:description" content="Lists available site (names) and basic meta-data" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -131,13 +131,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Lists Ameriflux sites</h1>
+    <h1>Lists AmeriFlux sites</h1>
     <small class="dont-index">Source: <a href='https://github.com/chuhousen/amerifluxr/blob/master/R/helper_functions.R'><code>R/helper_functions.R</code></a></small>
     <div class="hidden name"><code>amf_sites.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Lists available site (names) and meta-data</p>
+    <p>Lists available site (names) and basic meta-data</p>
     </div>
 
     <pre class="usage"><span class='fu'>amf_sites</span><span class='op'>(</span><span class='op'>)</span></pre>
@@ -145,7 +145,27 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>list of ameriflux sites</p>
+    <p>A data frame containing the following columns.
+See AmeriFlux BADM standard <a href='https://ameriflux.lbl.gov/data/badm/'>https://ameriflux.lbl.gov/data/badm/</a>
+for detailed explanation.</p><ul>
+<li><p>SITE_ID - Six character site identifier (CC-Sss)</p></li>
+<li><p>SITE_NAME - Site name (free text)</p></li>
+<li><p>COUNTRY - Country (free text)</p></li>
+<li><p>STATE - State (free text)</p></li>
+<li><p>IGBP - Vegetation type based on the IGBP definition (character)</p></li>
+<li><p>URL_AMERIFLUX - Site web site URL, maintained by AmeriFlux (URL)</p></li>
+<li><p>TOWER_BEGAN - The starting year of flux measurement (YYYY)</p></li>
+<li><p>TOWER_END - The ending year of flux measurement (YYYY), NA if still active or unspecified</p></li>
+<li><p>LOCATION_LAT - Latitude of the site (decimal deg ref WGS84)</p></li>
+<li><p>LOCATION_LONG - Longitude of the site (decimal deg ref WGS84)</p></li>
+<li><p>LOCATION_ELEV - Elevation of the site above sea level (m)</p></li>
+<li><p>CLIMATE_KOEPPEN - Koppen climate classification (character)</p></li>
+<li><p>MAT - Long-term mean annual average air temperature (degree C)</p></li>
+<li><p>MAP - Long-term mean annual average precipitation (mm)</p></li>
+<li><p>DATA_POLICY - LEGACY / CCBY4.0 (character)</p></li>
+</ul>
+
+<p>list of AmeriFlux sites</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
