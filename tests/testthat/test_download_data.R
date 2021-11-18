@@ -50,7 +50,7 @@ test_that("check donwload data function", {
     )
   })
 
-  #### tests with valid user & email
+  #### tests without valid user & email
   local({
     # override the menu function to force expected choice
     local_mock(
@@ -62,7 +62,21 @@ test_that("check donwload data function", {
     # test invalid user id and email
     expect_error(
       amf_download_base(
-        user_id = "test_not_work",
+        user_id = 1234,
+        user_email = "test_not_work$mail.com",
+        site_id = "US-CRT",
+        data_product = "BASE-BADM",
+        data_policy = "CCBY4.0",
+        intended_use = "other",
+        intended_use_text = "testing download",
+        out_dir = tempdir(),
+        verbose = FALSE
+      )
+    )
+
+    expect_error(
+      amf_download_base(
+        user_id = "test",
         user_email = "test_not_work$mail.com",
         site_id = "US-CRT",
         data_product = "BASE-BADM",
@@ -76,7 +90,19 @@ test_that("check donwload data function", {
 
     expect_error(
       amf_download_bif(
-        user_id = "test_not_work",
+        user_id = c(1234, 56),
+        user_email = "test@mail.com",
+        data_policy = "LEGACY",
+        intended_use = "other",
+        intended_use_text = "testing download",
+        out_dir = tempdir(),
+        verbose = FALSE
+      )
+    )
+
+    expect_error(
+      amf_download_bif(
+        user_id = "test",
         user_email = "test_not_work$mail.com",
         data_policy = "LEGACY",
         intended_use = "other",
@@ -85,6 +111,76 @@ test_that("check donwload data function", {
         verbose = FALSE
       )
     )
+
+    # test invalid data policy
+    expect_error(
+      amf_download_base(
+        user_id = "test",
+        user_email = "test@mail.com",
+        site_id = "US-CRT",
+        data_product = "BASE-BADM",
+        data_policy = "test_not_working",
+        intended_use = "other",
+        intended_use_text = "testing download",
+        out_dir = tempdir(),
+        verbose = FALSE
+      )
+    )
+
+    expect_error(
+      amf_download_bif(
+        user_id = "test",
+        user_email = "test@mail.com",
+        data_policy = "test_not_working",
+        intended_use = "other",
+        intended_use_text = "testing download",
+        out_dir = tempdir(),
+        verbose = FALSE
+      )
+    )
+
+    # test invalid intended_use
+    expect_error(
+      amf_download_base(
+        user_id = "test",
+        user_email = "test@mail.com",
+        site_id = "US-CRT",
+        data_product = "BASE-BADM",
+        data_policy = "CCBY4.0",
+        intended_use = "test_not_working",
+        intended_use_text = "testing download",
+        out_dir = tempdir(),
+        verbose = FALSE
+      )
+    )
+
+    expect_error(
+      amf_download_bif(
+        user_id = "test",
+        user_email = "test@mail.com",
+        data_policy = "LEGACY",
+        intended_use = "test_not_working",
+        intended_use_text = "testing download",
+        out_dir = tempdir(),
+        verbose = FALSE
+      )
+    )
+
+    ## test all invalid site ID
+    expect_error(
+      amf_download_base(
+        user_id = "test",
+        user_email = "test@mail.com",
+        site_id = "US-Crt",
+        data_product = "BASE-BADM",
+        data_policy = "CCBY4.0",
+        intended_use = "other",
+        intended_use_text = "testing download",
+        out_dir = tempdir(),
+        verbose = FALSE
+      )
+    )
+
   })
 
   ## tests with valid user & email
@@ -147,76 +243,6 @@ test_that("check donwload data function", {
       expect_true("DATAVALUE" %in% colnames(bif))
       expect_gt(nrow(bif), 0)
 
-      ## test error and warning return
-      # test invalid data policy
-      expect_error(
-        amf_download_base(
-          user_id = user,
-          user_email = email,
-          site_id = "US-CRT",
-          data_product = "BASE-BADM",
-          data_policy = "test_not_working",
-          intended_use = "other",
-          intended_use_text = "testing download",
-          out_dir = tempdir(),
-          verbose = FALSE
-        )
-      )
-
-      expect_error(
-        amf_download_bif(
-          user_id = user,
-          user_email = email,
-          data_policy = "test_not_working",
-          intended_use = "other",
-          intended_use_text = "testing download",
-          out_dir = tempdir(),
-          verbose = FALSE
-        )
-      )
-
-      # test invalid intended_use
-      expect_error(
-        amf_download_base(
-          user_id = user,
-          user_email = email,
-          site_id = "US-CRT",
-          data_product = "BASE-BADM",
-          data_policy = "CCBY4.0",
-          intended_use = "test_not_working",
-          intended_use_text = "testing download",
-          out_dir = tempdir(),
-          verbose = FALSE
-        )
-      )
-
-      expect_error(
-        amf_download_bif(
-          user_id = user,
-          user_email = email,
-          data_policy = "LEGACY",
-          intended_use = "test_not_working",
-          intended_use_text = "testing download",
-          out_dir = tempdir(),
-          verbose = FALSE
-        )
-      )
-
-      ## test all invalid site ID
-      expect_error(
-        amf_download_base(
-          user_id = user,
-          user_email = email,
-          site_id = "US-Crt",
-          data_product = "BASE-BADM",
-          data_policy = "CCBY4.0",
-          intended_use = "other",
-          intended_use_text = "testing download",
-          out_dir = tempdir(),
-          verbose = FALSE
-        )
-      )
-
       ## test warning return when some invalid site ID
       expect_warning(
         amf_download_base(
@@ -231,6 +257,7 @@ test_that("check donwload data function", {
           verbose = FALSE
         )
       )
+
       # test file return when some invalid site ID
       base_out2 <- suppressWarnings((
         amf_download_base(

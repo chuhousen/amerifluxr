@@ -26,7 +26,6 @@
 #'}
 
 amf_read_bif <- function(file) {
-
   # stop if missing file parameter
   if (missing(file)) {
     stop('File not specified...')
@@ -37,11 +36,21 @@ amf_read_bif <- function(file) {
     stop('File not found...')
   }
 
+  # check if file extension valid
+  if (tools::file_ext(file) != "xlsx") {
+    stop('File extention not valid...')
+  }
+
   # read in BIF excel file
   bif_data <- readxl::read_excel(file,
                                  sheet = 1,
                                  col_names = TRUE,
                                  na = "-9999")
+
+  if (!all(c("GROUP_ID", "VARIABLE_GROUP", "DATAVALUE", "SITE_ID")
+           %in% colnames(bif_data))) {
+    stop('Unrecognized variables in file...')
+  }
 
   bif_data$GROUP_ID <- as.character(bif_data$GROUP_ID)
   bif_data$VARIABLE_GROUP <- as.character(bif_data$VARIABLE_GROUP)

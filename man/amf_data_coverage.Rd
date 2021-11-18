@@ -14,8 +14,13 @@ Currently, only "BASE-BADM" is supported.}
 Currently, "CCBY4.0" and "LEGACY" are supported.}
 }
 \value{
-Ameriflux data coverage
+AmeriFlux data coverage
+\itemize{
+  \item SITE_ID - Six character site identifier (CC-Sss)
+  \item URL -  Site page link (url)
+  \item publish_years - List of data available years (YYYY)
+ }
 }
 \description{
-Ameriflux data coverage statistics
+AmeriFlux data coverage statistics
 }

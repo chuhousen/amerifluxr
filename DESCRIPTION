@@ -29,7 +29,8 @@ Imports:
     jsonlite,
     memoise,
     RCurl,
-    readxl
+    readxl,
+    tools
 RoxygenNote: 7.1.2
 Suggests: 
     knitr,

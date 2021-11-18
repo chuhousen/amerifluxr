@@ -74,6 +74,45 @@ amf_download_base <- function(user_id,
                               intended_use_text,
                               out_dir = tempdir(),
                               verbose = TRUE) {
+
+  ## check all inputs valid
+  if (!is.character(user_id) |
+      length(user_id) != 1) {
+    stop('user_id should be a string...')
+  }
+
+  if (!is.character(user_email) |
+      length(user_email) != 1 |
+      !grepl("@", user_email)) {
+    stop('user_email not a valid email...')
+  }
+
+  # check if site_id are valid site ID
+  check_id <- amf_check_site_id(site_id)
+  ## for multiple site ids
+  if(length(site_id) > 1){
+    if (any(!check_id)) {
+      warning(paste(
+        paste(site_id[which(!check_id)], collapse = ", "),
+        "not valid AmeriFlux Site ID"
+      ))
+      site_id <- site_id[which(check_id)]
+
+    }
+  } else if (length(site_id) == 1){
+    ## for single site id, need to work exception for AA-Flx, AA-Net
+    if (check_id | site_id == "AA-Flx" | site_id == "AA-Net") {
+      site_id <- site_id
+
+    }else{
+      site_id <- NULL
+
+    }
+  }
+  if(length(site_id) == 0){
+    stop("Download failed, no valid Site ID in site_id...")
+  }
+
   ## obtain formal intended use category
   intended_use_cat <- function(intended_use) {
     intended_use_verbse <- switch(
@@ -90,9 +129,12 @@ amf_download_base <- function(user_id,
 
   if(is.null(intended_use_cat(intended_use = intended_use))){
     stop("Invalid intended_use input...")
-    output_zip_file <- NULL
 
   }
+
+  # check if out_dir reachable
+  if(!dir.exists(out_dir))
+    stop("out_dir not valid...")
 
   if (data_policy == "CCBY4.0") {
     cat("Data use guidlines for AmeriFlux CC-BY-4.0 Data Policy:\n",
@@ -177,7 +219,8 @@ amf_download_base <- function(user_id,
     agree_policy <- utils::menu(c("YES", "NO"), title = prompt) == 1
 
   } else {
-    stop("Need to specify a data policy before proceed")
+    stop("Need to specify a valid data policy before proceed...")
+
   }
 
   if (agree_policy) {
@@ -188,135 +231,104 @@ amf_download_base <- function(user_id,
     is_test <- TRUE
     #############################################################
 
-    # check if site_id are valid site ID
-    check_id <- amf_check_site_id(site_id)
-
-    ## for multiple site ids
-    if(length(site_id) > 1){
-      if (any(!check_id)) {
-        warning(paste(
-          paste(site_id[which(!check_id)], collapse = ", "),
-          "not valid AmeriFlux Site ID"
-        ))
-        site_id <- site_id[which(check_id)]
-
-      }
-    } else if (length(site_id) == 1){
-      ## for single site id, need to work exception for AA-Flx, AA-Net
-      if (check_id | site_id == "AA-Flx" | site_id == "AA-Net") {
-        site_id <- site_id
-
-      }else{
-        site_id <- NULL
-
-      }
+    ## prepare a list of site id for json query
+    if (length(site_id) > 1) {
+      site_id_txt <- paste0(site_id, collapse = "\", \"")
+    } else{
+      site_id_txt <- site_id
     }
 
-    if (length(site_id) > 0) {
-      ## prepare a list of site id for json query
-      if (length(site_id) > 1) {
-        site_id_txt <- paste0(site_id, collapse = "\", \"")
-      } else{
-        site_id_txt <- site_id
+    ## payload for download web service
+    json_query <-
+      paste0(
+        "{\"user_id\":\"",
+        user_id,
+        "\",\"user_email\":\"",
+        user_email,
+        "\",\"data_product\":\"",
+        data_product,
+        "\",\"data_policy\":\"",
+        data_policy,
+        "\",\"site_ids\":[\"",
+        site_id_txt,
+        "\"],\"intended_use\":\"",
+        intended_use_cat(intended_use = intended_use),
+        "\",\"description\":\"",
+        paste0(intended_use_text, " [amerifluxr download]"),
+        "\",\"is_test\":\"",
+        ifelse(is_test, "true", ""),
+        "\"}"
+      )
+
+    result <-
+      httr::POST(
+        amf_server("data_download"),
+        body = json_query,
+        encode = "json",
+        httr::add_headers(`Content-Type` = "application/json")
+      )
+
+    # check if FTP returns correctly
+    if (result$status_code == 200) {
+      ## get a list of fpt url
+      link <- httr::content(result)
+      ftplink <- NULL
+      if (length(link$data_urls) > 0) {
+        for (i in seq_len(length(link$data_urls))) {
+          ftplink <- c(ftplink,
+                       link$data_urls[[i]]$url)
+        }
       }
 
-      ## payload for download web service
-      json_query <-
-        paste0(
-          "{\"user_id\":\"",
-          user_id,
-          "\",\"user_email\":\"",
-          user_email,
-          "\",\"data_product\":\"",
-          data_product,
-          "\",\"data_policy\":\"",
-          data_policy,
-          "\",\"site_ids\":[\"",
-          site_id_txt,
-          "\"],\"intended_use\":\"",
-          intended_use_cat(intended_use = intended_use),
-          "\",\"description\":\"",
-          paste0(intended_use_text, " [amerifluxr download]"),
-          "\",\"is_test\":\"",
-          ifelse(is_test, "true", ""),
-          "\"}"
-        )
+      ## check if any site_id has no data
+      if (is.null(ftplink)) {
+        stop(paste0("Cannot find data from ", site_id))
+      }
 
-      result <-
-        httr::POST(
-          amf_server("data_download"),
-          body = json_query,
-          encode = "json",
-          httr::add_headers(`Content-Type` = "application/json")
-        )
-
-      # check if FTP returns correctly
-      if (result$status_code == 200) {
-        ## get a list of fpt url
-        link <- httr::content(result)
-        ftplink <- NULL
-        if (length(link$data_urls) > 0) {
-          for (i in seq_len(length(link$data_urls))) {
-            ftplink <- c(ftplink,
-                         link$data_urls[[i]]$url)
-          }
+      # avoid downloading fluxnet_bif for now
+      if (length(site_id) == 1) {
+        if (site_id == "AA-Flx" &
+            data_policy == "CCBY4.0" &
+            length(ftplink) > 1) {
+          ftplink <- ftplink[-grep("FLUXNET-BIF", ftplink)]
         }
+      }
 
-        ## check if any site_id has no data
-        if (is.null(ftplink)) {
-          stop(paste0("Cannot find data from ", site_id))
-        }
+      # get zip file names
+      outfname <- strsplit(ftplink, c("/"))
+      outfname <- sapply(outfname,  utils::tail, n = 1)
+      outfname <-
+        substr(outfname,
+               1,
+               sapply(outfname, regexpr, pattern = "?=", fixed = TRUE) - 1)
 
-        # avoid downloading fluxnet_bif for now
-        if (length(site_id) == 1) {
-          if (site_id == "AA-Flx" &
-              data_policy == "CCBY4.0" &
-              length(ftplink) > 1) {
-            ftplink <- ftplink[-grep("FLUXNET-BIF", ftplink)]
-          }
-        }
+      ## check if any site_id has no data
+      if (length(outfname) < length(site_id)) {
+        miss_site_id <-
+          site_id[which(!site_id %in% substr(outfname, 5, 10))]
+        warning(paste0("Cannot find data from ", miss_site_id))
+      }
 
-        # get zip file names
-        outfname <- strsplit(ftplink, c("/"))
-        outfname <- sapply(outfname,  utils::tail, n = 1)
-        outfname <-
-          substr(outfname,
-                 1,
-                 sapply(outfname, regexpr, pattern = "?=", fixed = TRUE) - 1)
+      ## download sequentially
+      output_zip_file <- file.path(out_dir, outfname)
+      for (ii in seq_len(length(ftplink))) {
+        utils::download.file(ftplink[ii],
+                             output_zip_file[ii],
+                             mode = "wb",
+                             quiet = !verbose)
+      }
 
-        ## check if any site_id has no data
-        if (length(outfname) < length(site_id)) {
-          miss_site_id <-
-            site_id[which(!site_id %in% substr(outfname, 5, 10))]
-          warning(paste0("Cannot find data from ", miss_site_id))
-        }
-
-        ## download sequentially
-        output_zip_file <- file.path(out_dir, outfname)
-        for (ii in seq_len(length(ftplink))) {
-          utils::download.file(ftplink[ii],
-                               output_zip_file[ii],
-                               mode = "wb",
-                               quiet = !verbose)
-        }
-
-        ## check if downloaded files exist
-        miss_download <- which(!sapply(output_zip_file, file.exists))
-        if (length(miss_download) > 0) {
-          warning(paste("Cannot download",
-                        output_zip_file[miss_download],
-                        "from",
-                        ftplink[miss_download]))
-        }
-
-      } else{
-        stop("Data download fails, timeout or server error...")
-
-        output_zip_file <- NULL
+      ## check if downloaded files exist
+      miss_download <- which(!sapply(output_zip_file, file.exists))
+      if (length(miss_download) > 0) {
+        warning(paste("Cannot download",
+                      output_zip_file[miss_download],
+                      "from",
+                      ftplink[miss_download]))
       }
 
     } else{
-      stop("Download failed, no valid Site ID in site_id")
+      stop("Data download fails, timeout or server error...")
 
       output_zip_file <- NULL
     }

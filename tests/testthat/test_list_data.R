@@ -61,4 +61,8 @@ test_that("check variable info function", {
   expect_true("Variable" %in% colnames(amf_var_info_out))
   expect_true("Height" %in% colnames(amf_var_info_out))
   expect_gt(nrow(amf_var_info_out), 0)
+
+  # check error return
+  expect_error(amf_var_info(out_dir = "test_not_working",
+                            verbose = FALSE))
 })

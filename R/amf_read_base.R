@@ -45,11 +45,9 @@
 #'                       parse_timestamp = FALSE)
 #'}
 
-amf_read_base <- function(
-  file,
-  unzip = TRUE,
-  parse_timestamp = FALSE) {
-
+amf_read_base <- function(file,
+                          unzip = TRUE,
+                          parse_timestamp = FALSE) {
   # stop if missing file parameter
   if (missing(file)) {
     stop('File not specified...')
@@ -61,6 +59,11 @@ amf_read_base <- function(
   }
 
   if (unzip) {
+    # check if file extension valid
+    if (tools::file_ext(file) != "zip") {
+      stop('File extention not valid...')
+    }
+
     ## specify the BASE files under zip to be grabbed
     file_grab <- unzip(file, list = TRUE)[, "Name"]
     case_ls <-
@@ -87,10 +90,13 @@ amf_read_base <- function(
     }
 
   } else{
+    # check if file extension valid
+    if (tools::file_ext(file) != "csv") {
+      stop('File extention not valid...')
+    }
+
     case_ls <-
-      basename(file)[
-        which(substr(basename(file) , start = 12, stop = 15) == "BASE")
-        ]
+      basename(file)[which(substr(basename(file) , start = 12, stop = 15) == "BASE")]
 
     if (length(case_ls) != 1) {
       stop('Can not find BASE file...')
@@ -115,7 +121,6 @@ amf_read_base <- function(
   ##############################################################################
   # Parse TIMESTAMP
   if (parse_timestamp) {
-
     # determine time stamp resolution
     if (res %in% c("HH", "HR")) {
       # minutes per time step
@@ -159,16 +164,12 @@ amf_read_base <- function(
           data1,
           stringsAsFactors = FALSE
         )
-
       }
 
     } else{
       stop('Can not parse time stamp...')
 
     }
-
   }
-
- return(data1)
-
+  return(data1)
 }

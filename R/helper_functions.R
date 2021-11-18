@@ -1,9 +1,30 @@
 
-#' Lists Ameriflux sites
+#' Lists AmeriFlux sites
 #'
-#' Lists available site (names) and meta-data
+#' Lists available site (names) and basic meta-data
 #'
-#' @return list of ameriflux sites
+#' @return A data frame containing the following columns.
+#' See AmeriFlux BADM standard \url{https://ameriflux.lbl.gov/data/badm/}
+#' for detailed explanation.
+#' \itemize{
+#'   \item SITE_ID - Six character site identifier (CC-Sss)
+#'   \item SITE_NAME - Site name (free text)
+#'   \item COUNTRY - Country (free text)
+#'   \item STATE - State (free text)
+#'   \item IGBP - Vegetation type based on the IGBP definition (character)
+#'   \item URL_AMERIFLUX - Site web site URL, maintained by AmeriFlux (URL)
+#'   \item TOWER_BEGAN - The starting year of flux measurement (YYYY)
+#'   \item TOWER_END - The ending year of flux measurement (YYYY), NA if still active or unspecified
+#'   \item LOCATION_LAT - Latitude of the site (decimal deg ref WGS84)
+#'   \item LOCATION_LONG - Longitude of the site (decimal deg ref WGS84)
+#'   \item LOCATION_ELEV - Elevation of the site above sea level (m)
+#'   \item CLIMATE_KOEPPEN - Koppen climate classification (character)
+#'   \item MAT - Long-term mean annual average air temperature (degree C)
+#'   \item MAP - Long-term mean annual average precipitation (mm)
+#'   \item DATA_POLICY - LEGACY / CCBY4.0 (character)
+#' }
+#'
+#' @return list of AmeriFlux sites
 #' @export
 
 amf_sites <- memoise::memoise(function(){
@@ -44,7 +65,7 @@ amf_sites <- memoise::memoise(function(){
 })
 
 
-#' Check valid Ameriflux site ID
+#' Check valid AmeriFlux site ID
 #'
 #' Check if the character is a valid AmeriFlux site ID (CC-Sss)
 #'
@@ -69,14 +90,19 @@ amf_check_site_id <- memoise::memoise(function(x){
 
 #' Returns a list of data coverage
 #'
-#' Ameriflux data coverage statistics
+#' AmeriFlux data coverage statistics
 #'
 #' @param data_product Data product (string).
 #'  Currently, only "BASE-BADM" is supported.
 #' @param data_policy Data policy (string).
 #'  Currently, "CCBY4.0" and "LEGACY" are supported.
 #'
-#' @return Ameriflux data coverage
+#' @return AmeriFlux data coverage
+#' \itemize{
+#'   \item SITE_ID - Six character site identifier (CC-Sss)
+#'   \item URL -  Site page link (url)
+#'   \item publish_years - List of data available years (YYYY)
+#'  }
 #' @export
 
 amf_data_coverage <- memoise::memoise(
@@ -86,7 +112,7 @@ amf_data_coverage <- memoise::memoise(
     ){
 
   # web service returning a full site list with
-  # most-updated data available years in AmeriFlux BASE dataset
+  # most-updated data available years in AmeriFlux BASE data set
     df <-
       jsonlite::fromJSON(paste0(amf_server("data_year"), "/", data_product, "/", data_policy),
                          flatten = TRUE)

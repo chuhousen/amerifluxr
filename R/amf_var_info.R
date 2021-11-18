@@ -29,6 +29,10 @@
 amf_var_info <- function(out_dir = tempdir(),
                          verbose = TRUE) {
 
+  # check if out_dir reachable
+  if(!dir.exists(out_dir))
+    stop("out_dir not valid...")
+
   # Get a list of hosted data files
   filenames <- RCurl::getURL(
     amf_server("var_info"),

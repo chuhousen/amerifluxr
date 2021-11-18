@@ -2,7 +2,7 @@
 % Please edit documentation in R/helper_functions.R
 \name{amf_check_site_id}
 \alias{amf_check_site_id}
-\title{Check valid Ameriflux site ID}
+\title{Check valid AmeriFlux site ID}
 \usage{
 amf_check_site_id(x)
 }
