@@ -17,6 +17,8 @@
 ^contact\.md$
 ^cran-comments\.md$
 ^review-notes\.md$
+vignettes/\.build\.timestamp
+Rplot001.jpg
 
 # Stuff
 ^.*\.Rproj$
