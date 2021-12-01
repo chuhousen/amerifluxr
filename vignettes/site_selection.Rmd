@@ -3,16 +3,19 @@ title: "Site selection"
 author: "Housen Chu"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Site selection}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+ %\VignetteIndexEntry{Site selection}
+ %\VignetteEncoding{UTF-8}
+ %\VignetteEngine{knitr::rmarkdown}
 ---
 
-```{r, include = FALSE}
+```{r, echo = FALSE, include = FALSE, message = FALSE}
 knitr::opts_chunk$set(
+  warning = FALSE,
   collapse = TRUE,
+  dpi = 120,
   comment = "#>"
 )
+
 ```
 
 ```{r setup, warning = FALSE}
@@ -187,6 +190,23 @@ data_aval_sub <- data_aval_sub[, lapply(.SD, mean),
 #  during 2015-2018
 crop_ls3 <- data_aval_sub[(Y2015 + Y2016 + Y2017 + Y2018) / 4 > 0.75]
 pander::pandoc.table(crop_ls3)
+
+```
+
+Additionally, users can use amf_plot_datayear()
+for visualizing the data availability in an interactive
+figure. However, it is strongly advised to subset
+the sites, variables, and/or years for faster processing 
+and better visualization.
+
+```{r}
+amf_plot_datayear(
+  site_set = crop_ls3$SITE_ID,
+  var_set = "WS",
+  nonfilled_only = TRUE,
+  year_set = c(2015:2018),
+  save_plot = FALSE
+)
 
 ```
 

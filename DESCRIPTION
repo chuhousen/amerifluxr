@@ -30,7 +30,9 @@ Imports:
     memoise,
     RCurl,
     readxl,
-    tools
+    tools,
+    heatmaply,
+    htmlwidgets
 RoxygenNote: 7.1.2
 Suggests: 
     knitr,
