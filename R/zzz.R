@@ -48,6 +48,9 @@ amf_server <- function(endpoint = "sitemap"){
     "data_variable" = file.path(
       git_base_url,
       "AMF_AA-Flx_BASE_VARIABLE-AVAILABILITY_LATEST.csv"),
+    "data_summary" = file.path(
+      git_base_url,
+      "AMF_AA-Flx_BASE_VARIABLE-SUMMARY_LATEST.csv"),
     "bif_group" = file.path(
       git_base_url,
       "AMF_AA-Net_BIF_LEGACY_VARIABLE-GROUP-AVAILABILITY_LATEST.csv"),
