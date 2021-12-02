@@ -190,9 +190,7 @@ amf_plot_datayear <- function(data_aval = NULL,
                                           "\\",
                                           filename_prefix,
                                           "var_year_available.html"))
-  }else{
-    p
   }
 
-
+  return(p)
 }

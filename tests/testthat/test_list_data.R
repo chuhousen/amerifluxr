@@ -18,26 +18,32 @@ test_that("check data availibility function", {
 test_that("check plot data availibility function", {
   skip_on_cran()
 
-  amf_plot_datayear(site_set = "US-CRT",
+  p1 <- amf_plot_datayear(site_set = "US-CRT",
                     nonfilled_only = FALSE,
-                    save_plot = TRUE,
-                    filename_prefix = "TEST1_")
-  expect_gt(length(
-    list.files(tempdir(), pattern = "TEST1_var_year_available.html")), 0)
+                    save_plot = FALSE)
+  expect_is(p1, "plotly")
 
-  amf_plot_datayear(var_set = "FCH4",
+  p2 <- amf_plot_datayear(var_set = "FCH4",
                     nonfilled_only = FALSE,
-                    save_plot = TRUE,
-                    filename_prefix = "TEST2_")
-  expect_gt(length(
-    list.files(tempdir(), pattern = "TEST2_var_year_available.html")), 0)
+                    save_plot = FALSE)
+  expect_is(p2, "plotly")
 
-  amf_plot_datayear(var_set = "FCH4",
-                    nonfilled_only = FALSE,
-                    save_plot = FALSE,
-                    filename_prefix = "TEST3_")
-  expect_equal(length(
-    list.files(tempdir(), pattern = "TEST3_var_year_available.html")), 0)
+  p3 <- amf_plot_datayear(site_set = c("US-CRT", "US-WPT"),
+                          nonfilled_only = FALSE,
+                          save_plot = FALSE)
+  expect_is(p3, "plotly")
+
+  p4 <- amf_plot_datayear(var_set = c("FCH4", "WTD"),
+                          nonfilled_only = TRUE,
+                          save_plot = FALSE)
+  expect_is(p4, "plotly")
+
+  p5 <- amf_plot_datayear(var_set = c("FCH4", "WTD"),
+                          year_set = c(2015:2018),
+                          nonfilled_only = TRUE,
+                          save_plot = FALSE)
+  expect_is(p5, "plotly")
+
 
   ## check error & warning return
   expect_error(amf_plot_datayear())
