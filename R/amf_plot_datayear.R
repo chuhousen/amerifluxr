@@ -19,8 +19,8 @@
 #' @param site_set a scalar or vector of character specifying the target
 #' AmeriFlux Site ID (CC-Sss). If not specified, it returns all sites.
 #' @param var_set a scalar or vector of character specifying the target
-#' variables as in basename. See AmeriFlux page
-#' \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/#base}
+#' variables as in basename. See AmeriFlux
+#' page\url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/#base}
 #' for a list of variable names. If not specified, it returns all variables.
 #' @param nonfilled_only logical, whether only showing non-filled variables,
 #'  or both non- and gap-filled variables (default = TRUE)
@@ -69,6 +69,11 @@ amf_plot_datayear <- function(data_aval = NULL,
     stop("out_dir not valid...")
   }
 
+  # check either site_set or var_set exist
+  if (is.null(site_set) & is.null(var_set)){
+    stop("Specify either site_set or var_set...")
+  }
+
   # subset interested sites
   if (!is.null(site_set)) {
     check_id <- amerifluxr::amf_check_site_id(site_set)
@@ -107,14 +112,12 @@ amf_plot_datayear <- function(data_aval = NULL,
   } else{
     # check if var_set are valid variable names
     check_var <- var_set %in% FP_var
-    if (any(!check_var)) {
+    if (all(!check_var)) {
+      stop("No valid variable in var_set...")
+    } else if (any(!check_var) & !all(!check_var)) {
       warning(paste(paste(var_set[which(!check_var)], collapse = ", "),
                     "not valid variable names"))
       var_set <- var_set[which(check_var)]
-
-    }
-    if (length(var_set) == 0) {
-      stop("No valid variable in var_set...")
     }
   }
 
@@ -139,14 +142,12 @@ amf_plot_datayear <- function(data_aval = NULL,
   } else{
     # check if year_set are valid years
     check_year <- year_set %in% year_ava
-    if (any(!check_year)) {
+    if (all(!check_year)) {
+      stop("No valid year in year set")
+    } else if (any(!check_year) & ! all(!check_year)) {
       warning(paste(paste(year_set[which(!check_year)], collapse = ", "),
                     "have no data..."))
       year_set <- year_set[which(check_year)]
-
-    }
-    if (length(year_set) == 0) {
-      stop("No valid year in year_set...")
     }
   }
   # subset years
@@ -186,11 +187,10 @@ amf_plot_datayear <- function(data_aval = NULL,
   if(save_plot){
     htmlwidgets::saveWidget(p,
                             file = paste0(out_dir,
+                                          "\\",
                                           filename_prefix,
                                           "var_year_available.html"))
-  }else{
-    p
   }
 
-
+  return(p)
 }
