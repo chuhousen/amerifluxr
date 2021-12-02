@@ -202,10 +202,9 @@ and better visualization.
 ```{r}
 amf_plot_datayear(
   site_set = crop_ls3$SITE_ID,
-  var_set = "WS",
+  var_set = c("WS", "USTAR"),
   nonfilled_only = TRUE,
-  year_set = c(2015:2018),
-  save_plot = FALSE
+  year_set = c(2015:2018)
 )
 
 ```

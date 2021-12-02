@@ -19,37 +19,29 @@ test_that("check plot data availibility function", {
   skip_on_cran()
 
   p1 <- amf_plot_datayear(site_set = "US-CRT",
-                    nonfilled_only = FALSE,
-                    save_plot = FALSE)
+                    nonfilled_only = FALSE)
   expect_is(p1, "plotly")
 
   p2 <- amf_plot_datayear(var_set = "FCH4",
-                    nonfilled_only = FALSE,
-                    save_plot = FALSE)
+                    nonfilled_only = FALSE)
   expect_is(p2, "plotly")
 
   p3 <- amf_plot_datayear(site_set = c("US-CRT", "US-WPT"),
-                          nonfilled_only = FALSE,
-                          save_plot = FALSE)
+                          nonfilled_only = FALSE)
   expect_is(p3, "plotly")
 
   p4 <- amf_plot_datayear(var_set = c("FCH4", "WTD"),
-                          nonfilled_only = TRUE,
-                          save_plot = FALSE)
+                          nonfilled_only = TRUE)
   expect_is(p4, "plotly")
 
   p5 <- amf_plot_datayear(var_set = c("FCH4", "WTD"),
                           year_set = c(2015:2018),
-                          nonfilled_only = TRUE,
-                          save_plot = FALSE)
+                          nonfilled_only = TRUE)
   expect_is(p5, "plotly")
 
 
   ## check error & warning return
   expect_error(amf_plot_datayear())
-  expect_error(amf_plot_datayear(site_set = "US-CRT",
-                                 out_dir = "test_not_working",
-                                 save_plot = TRUE))
   expect_error(amf_plot_datayear(site_set = c("us-crt", "US-crt", "USCRT")))
   expect_warning(amf_plot_datayear(site_set = c("us-crt", "US-CRT", "USCRT")))
   expect_error(amf_plot_datayear(site_set = "US-CRT",

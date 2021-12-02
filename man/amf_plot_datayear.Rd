@@ -9,10 +9,7 @@ amf_plot_datayear(
   site_set = NULL,
   var_set = NULL,
   nonfilled_only = TRUE,
-  year_set = NULL,
-  save_plot = FALSE,
-  out_dir = tempdir(),
-  filename_prefix = NULL
+  year_set = NULL
 )
 }
 \arguments{
@@ -40,14 +37,6 @@ or both non- and gap-filled variables (default = TRUE)}
 
 \item{year_set}{a scalar or vector of integers. If not specified,
 it plots only years with any available data in selected sites and variables}
-
-\item{save_plot}{logical, whether to save the plot as a html file, or
-return via default R plot viewer.}
-
-\item{out_dir}{output directory (default = tempdir())}
-
-\item{filename_prefix}{optional, a scalar of character used as the
-prefix in the file name of output figure (...var_year_available.html)}
 }
 \description{
 This function visualizes the BASE data availability for
@@ -59,18 +48,17 @@ visualization.
 \examples{
 \dontrun{
 # plot data availability for all variables at a single site
-#  in all years, don't save figure.
+#  in all years
 amf_plot_datayear(site_set = "US-CRT",
-                  nonfilled_only = FALSE,
-                  save_plot = FALSE)
+                  nonfilled_only = FALSE)
 
 # plot data availability for non-filled FCH4 and WTD at all
-#  sites in all years, save figure.
+#  sites in all years
 amf_plot_datayear(var_set = c("FCH4", "WTD"),
                   nonfilled_only = TRUE)
 
 # plot data availability for non-filled FCH4 at all sites
-#  in 2018-2020, save figure
+#  in 2018-2020
 amf_plot_datayear(var_set = "FCH4",
                   year_set = c(2018:2020),
                   nonfilled_only = TRUE)
