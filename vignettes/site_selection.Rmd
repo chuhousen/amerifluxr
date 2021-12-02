@@ -12,7 +12,7 @@ vignette: >
 knitr::opts_chunk$set(
   warning = FALSE,
   collapse = TRUE,
-  dpi = 120,
+  dpi = 100,
   comment = "#>"
 )
 
@@ -91,7 +91,7 @@ pander::pandoc.table(sites_dt[!is.na(DATA_START), .N, by = "IGBP"])
 
 # get a summary table of sites with available data, 
 #  & grouped by data use policy & IGBP
-pander::pandoc.table(sites_dt[!is.na(DATA_START), .N, by = .(IGBP, DATA_POLICY)])
+pander::pandoc.table(sites_dt[!is.na(DATA_START), .N, by = .(IGBP, DATA_POLICY)][order(IGBP)])
 
 ```
 
@@ -130,6 +130,7 @@ for all BADM groups. Check
 for definitions of all BADM groups.     
 
 ```{r results = "asis"}
+# get data availability for selected sites
 metadata_aval <- data.table::as.data.table(amf_list_metadata())
 pander::pandoc.table(metadata_aval[c(1:3), c(1:10)])
 ```
@@ -148,11 +149,11 @@ pander::pandoc.table(crop_ls2[c(1:10), ])
 
 ## Get data availability
 
-In addition, users can use amf_list_data() to 
-query the availability of specific variables 
-in the data (i.e., flux/met data, so-called BASE
-data product). The amf_list_data() provides a quick
-summary of variable availability (per site/year)
+Users can use amf_list_data() to query the 
+availability of specific variables in the data
+(i.e., flux/met data, so-called BASE data product).
+The amf_list_data() provides a quick summary 
+of variable availability (per site/year)
 before downloading the data.
 
 By default, amf_list_data() returns a full site 
@@ -162,6 +163,7 @@ of amf_list_data() can be used to subset the sites
 of interest. 
 
 ```{r results = "asis"}
+# get data availability for selected sites
 data_aval <- data.table::as.data.table(amf_list_data(site_set = crop_ls2$SITE_ID))
 pander::pandoc.table(data_aval[c(1:10), ])
 ```
@@ -193,22 +195,6 @@ pander::pandoc.table(crop_ls3)
 
 ```
 
-Additionally, users can use amf_plot_datayear()
-for visualizing the data availability in an interactive
-figure. However, it is strongly advised to subset
-the sites, variables, and/or years for faster processing 
-and better visualization.
-
-```{r}
-amf_plot_datayear(
-  site_set = crop_ls3$SITE_ID,
-  var_set = c("WS", "USTAR"),
-  nonfilled_only = TRUE,
-  year_set = c(2015:2018)
-)
-
-```
-
 Last, sometimes users would look for sites with 
 multiple measurements of similar variables (e.g.,
 multilevel wind speed, soil temperature). The 
@@ -216,6 +202,7 @@ VARIABLE column in the variable availability can
 be used to get a fine-level variable availability.
 
 ```{r results = "asis"}
+
 # down-select cropland & grassland sites by available wind speed (WS) data,
 #  mean availability of WS during 2015-2018
 data_aval_sub2 <- data_aval[data_aval$BASENAME %in% c("WS"),
@@ -226,11 +213,73 @@ data_aval_sub2 <- data_aval[data_aval$BASENAME %in% c("WS"),
 data_aval_sub2 <- data_aval_sub2[Y2015_2018 > 0, .(.N, Y2015_2018 = mean(Y2015_2018)), .(SITE_ID)]
 pander::pandoc.table(crop_ls4 <- data_aval_sub2[N > 1, ])
 
-# return a list of sites with multiple WS variables
-pander::pandoc.table(crop_ls4_aval <- data_aval[data_aval$SITE_ID %in% crop_ls4$SITE_ID &
-                                                  data_aval$BASENAME == "WS",
-                                                .(SITE_ID, VARIABLE, Y2015, Y2016, Y2017, Y2018)])
-  
+```
+
+A companion function amf_plot_datayear() can be used 
+for visualizing the data availability in an interactive
+figure. However, it is strongly advised to subset
+the sites, variables, and/or years for faster processing 
+and better visualization.
+
+```{r}
+# plot data availability for WS & USTAR
+#  for selected sites in 2015-2018
+amf_plot_datayear(
+  site_set = crop_ls4$SITE_ID,
+  var_set = c("WS", "USTAR"),
+  nonfilled_only = TRUE,
+  year_set = c(2015:2018)
+)
+
+```
+
+## Get data summary
+
+In addition, users can use amf_summarize_data() to 
+query the summary statistics of specific variables 
+in the BASE data. The amf_summarize_data() provides
+summary statistics for each variable (e.g., percentiles)
+before downloading the data.
+
+By default, amf_summarize_data() returns variable 
+summary (selected percentiles) for all variables
+and sites. The site_set and var_set parameters 
+can be used to subset the sites or variables of 
+interest. 
+
+```{r results = "asis"}
+## get data summary for selected sites & variables
+data_sum <- amf_summarize_data(site_set = crop_ls3$SITE_ID,
+                     var_set = c("WS", "USTAR"))
+pander::pandoc.table(data_sum[c(1:10), ])
+
+```
+
+Alternatively, a companion function 
+amf_plot_datasummary() provides interactive 
+visualization to the data summary.
+
+```{r}
+
+## plot data summary of USTAR for selected sites, 
+amf_plot_datasummary(
+  site_set = crop_ls3$SITE_ID,
+  var_set = c("USTAR")
+)
+
+```
+
+
+```{r}
+
+## plot data summary of WS for selected sites, 
+#  including clustering information
+amf_plot_datasummary(
+  site_set = crop_ls3$SITE_ID,
+  var_set = c("WS"),
+  show_cluster = TRUE
+)
+
 ```
 
 Once having a target site list, users can download
