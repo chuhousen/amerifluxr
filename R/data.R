@@ -7,45 +7,45 @@
 #' variable definitions and details.
 #'
 #' \itemize{
-#'   \item{TIMESTAMP_START}{ISO timestamp start of averaging period (YYYYMMDDHHMM)}
-#'   \item{TIMESTAMP_END}{ISO timestamp end of averaging period (YYYYMMDDHHMM)}
-#'   \item{CO2}{Carbon Dioxide (CO2) mole fraction in wet air (µmolCO2 mol-1)}
-#'   \item{H2O}{Water (H2O) vapor in mole fraction of wet air (mmolH2O mol-1)}
-#'   \item{FC}{Carbon Dioxide (CO2) turbulent flux (µmolCO2 m-2 s-1)}
-#'   \item{NEE_PI}{Net Ecosystem Exchange (µmolCO2 m-2 s-1)}
-#'   \item{CH4}{Methane (CH4) mole fraction in wet air (nmolCH4 mol-1)}
-#'   \item{FCH4}{Methane (CH4) turbulent flux (nmolCH4 m-2 s-1)}
-#'   \item{H}{Sensible heat turbulent flux (W m-2)}
-#'   \item{LE}{Latent heat turbulent flux (W m-2)}
-#'   \item{G_1_1_1}{Soil heat flux at horizontal location #1 (W m-2)}
-#'   \item{G_2_1_1}{Soil heat flux at horizontal location #2 (W m-2)}
-#'   \item{WD}{Wind direction (Decimal degrees)}
-#'   \item{WS}{Wind speed (m s-1)}
-#'   \item{USTAR}{Friction velocity (m s-1)}
-#'   \item{ZL}{data value}
-#'   \item{MO_LENGTH}{Monin-Obukhov Stability parameter (nondimensional)}
-#'   \item{W_SIGMA}{Standard deviation of vertical velocity fluctuations (m s-1)}
-#'   \item{V_SIGMA}{Standard deviation of lateral velocity fluctuations (m s-1)}
-#'   \item{U_SIGMA}{Standard deviation of along-wind velocity fluctuations (m s-1)}
-#'   \item{T_SONIC}{Sonic temperature (deg C)}
-#'   \item{T_SONIC_SIGMA}{Standard deviation of sonic temperature (deg C)}
-#'   \item{PA}{Atmospheric pressure (kPa)}
-#'   \item{RH}{Relative humidity (\%)}
-#'   \item{TA}{Air temperature (deg C)}
-#'   \item{TS_1_1_1}{Soil temperature at horizontal location #1 (deg C)}
-#'   \item{TS_2_1_1}{Soil temperature at horizontal location #2 (deg C)}
-#'   \item{WTD}{Water table depth (m)}
-#'   \item{SWC}{Soil water content (\%)}
-#'   \item{NETRAD}{Net radiation (W m-2)}
-#'   \item{PPFD_IN}{Photosynthetic photon flux density, incoming (µmolPhoton m-2 s-1)}
-#'   \item{SW_IN}{Shortwave radiation, incoming (W m-2)}
-#'   \item{SW_OUT}{Shortwave radiation, outgoing (W m-2)}
-#'   \item{LW_IN}{Longwave radiation, incoming (W m-2)}
-#'   \item{LW_OUT}{Longwave radiation, outgoing (W m-2)}
-#'   \item{P}{Rainfall (mm)}
+#'   \item TIMESTAMP_START - ISO timestamp start of averaging period (YYYYMMDDHHMM)
+#'   \item TIMESTAMP_END - ISO timestamp end of averaging period (YYYYMMDDHHMM)
+#'   \item CO2 - Carbon Dioxide (CO2) mole fraction in wet air (µmolCO2 mol-1)
+#'   \item H2O - Water (H2O) vapor in mole fraction of wet air (mmolH2O mol-1)
+#'   \item FC - Carbon Dioxide (CO2) turbulent flux (µmolCO2 m-2 s-1)
+#'   \item NEE_PI - Net Ecosystem Exchange (µmolCO2 m-2 s-1)
+#'   \item CH4 - Methane (CH4) mole fraction in wet air (nmolCH4 mol-1)
+#'   \item FCH4 - Methane (CH4) turbulent flux (nmolCH4 m-2 s-1)
+#'   \item H - Sensible heat turbulent flux (W m-2)
+#'   \item LE - Latent heat turbulent flux (W m-2)
+#'   \item G_1_1_1 - Soil heat flux at horizontal location #1 (W m-2)
+#'   \item G_2_1_1 - Soil heat flux at horizontal location #2 (W m-2)
+#'   \item WD - Wind direction (Decimal degrees)
+#'   \item WS - Wind speed (m s-1)
+#'   \item USTAR - Friction velocity (m s-1)
+#'   \item ZL - data value
+#'   \item MO_LENGTH - Monin-Obukhov Stability parameter (nondimensional)
+#'   \item W_SIGMA - Standard deviation of vertical velocity fluctuations (m s-1)
+#'   \item V_SIGMA - Standard deviation of lateral velocity fluctuations (m s-1)
+#'   \item U_SIGMA - Standard deviation of along-wind velocity fluctuations (m s-1)
+#'   \item T_SONIC - Sonic temperature (deg C)
+#'   \item T_SONIC_SIGMA - Standard deviation of sonic temperature (deg C)
+#'   \item PA - Atmospheric pressure (kPa)
+#'   \item RH - Relative humidity (\%)
+#'   \item TA - Air temperature (deg C)
+#'   \item TS_1_1_1 - Soil temperature at horizontal location #1 (deg C)
+#'   \item TS_2_1_1 - Soil temperature at horizontal location #2 (deg C)
+#'   \item WTD - Water table depth (m)
+#'   \item SWC - Soil water content (\%)
+#'   \item NETRAD - Net radiation (W m-2)
+#'   \item PPFD_IN - Photosynthetic photon flux density, incoming (µmolPhoton m-2 s-1)
+#'   \item SW_IN - Shortwave radiation, incoming (W m-2)
+#'   \item SW_OUT - Shortwave radiation, outgoing (W m-2)
+#'   \item LW_IN - Longwave radiation, incoming (W m-2)
+#'   \item LW_OUT - Longwave radiation, outgoing (W m-2)
+#'   \item P - Rainfall (mm)
 #' }
 #'
-#' @format A data frame with 52608 rows and 36 variables
+#' @format A data frame with 336 rows and 36 variables
 #' @source \url{https://ameriflux.lbl.gov/}
 "amf_base"
 
@@ -60,11 +60,11 @@
 #' for details.
 #'
 #' \itemize{
-#'   \item{SITE_ID}{6 digit AmeriFlux site ID (CC-Sss)}
-#'   \item{GROUP_ID}{A unique identifier for data entries belonging to the same instance of a reported variable group}
-#'   \item{VARIABLE_GROUP}{Define a set of variables that are reported together}
-#'   \item{VARIABLE}{Variable names}
-#'   \item{DATAVALUE}{Data value}
+#'   \item SITE_ID - 6 digit AmeriFlux site ID (CC-Sss)
+#'   \item GROUP_ID - A unique identifier for data entries belonging to the same instance of a reported variable group
+#'   \item VARIABLE_GROUP - Define a set of variables that are reported together
+#'   \item VARIABLE - Variable names
+#'   \item DATAVALUE - Data value
 #' }
 #'
 #' @format A data frame with 443 rows and 5 variables
