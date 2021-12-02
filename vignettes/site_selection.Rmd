@@ -12,7 +12,7 @@ vignette: >
 knitr::opts_chunk$set(
   warning = FALSE,
   collapse = TRUE,
-  dpi = 100,
+  dpi = 120,
   comment = "#>"
 )
 
@@ -221,7 +221,8 @@ figure. However, it is strongly advised to subset
 the sites, variables, and/or years for faster processing 
 and better visualization.
 
-```{r}
+```{r eval = FALSE}
+#### not evaluated so to reduce vignette size
 # plot data availability for WS & USTAR
 #  for selected sites in 2015-2018
 amf_plot_datayear(
@@ -259,8 +260,8 @@ Alternatively, a companion function
 amf_plot_datasummary() provides interactive 
 visualization to the data summary.
 
-```{r}
-
+```{r eval = FALSE}
+#### not evaluated so to reduce vignette size
 ## plot data summary of USTAR for selected sites, 
 amf_plot_datasummary(
   site_set = crop_ls3$SITE_ID,
@@ -270,8 +271,8 @@ amf_plot_datasummary(
 ```
 
 
-```{r}
-
+```{r eval = FALSE}
+#### not evaluated so to reduce vignette size
 ## plot data summary of WS for selected sites, 
 #  including clustering information
 amf_plot_datasummary(

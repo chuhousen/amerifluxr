@@ -24,11 +24,11 @@ for details.
 }
 \details{
 \itemize{
-  \item{SITE_ID}{6 digit AmeriFlux site ID (CC-Sss)}
-  \item{GROUP_ID}{A unique identifier for data entries belonging to the same instance of a reported variable group}
-  \item{VARIABLE_GROUP}{Define a set of variables that are reported together}
-  \item{VARIABLE}{Variable names}
-  \item{DATAVALUE}{Data value}
+  \item SITE_ID - 6 digit AmeriFlux site ID (CC-Sss)
+  \item GROUP_ID - A unique identifier for data entries belonging to the same instance of a reported variable group
+  \item VARIABLE_GROUP - Define a set of variables that are reported together
+  \item VARIABLE - Variable names
+  \item DATAVALUE - Data value
 }
 }
 \keyword{datasets}
