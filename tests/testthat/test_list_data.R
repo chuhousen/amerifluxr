@@ -15,6 +15,53 @@ test_that("check data availibility function", {
   expect_error(amf_list_data(site_set = c("us-crt", "US-crt", "USCRT")))
 })
 
+test_that("check plot data availibility function", {
+  skip_on_cran()
+
+  amf_plot_datayear(site_set = "US-CRT",
+                    nonfilled_only = FALSE,
+                    save_plot = TRUE,
+                    filename_prefix = "TEST1_")
+  expect_gt(length(
+    list.files(tempdir(), pattern = "TEST1_var_year_available.html")), 0)
+
+  amf_plot_datayear(var_set = "FCH4",
+                    nonfilled_only = FALSE,
+                    save_plot = TRUE,
+                    filename_prefix = "TEST2_")
+  expect_gt(length(
+    list.files(tempdir(), pattern = "TEST2_var_year_available.html")), 0)
+
+  amf_plot_datayear(var_set = "FCH4",
+                    nonfilled_only = FALSE,
+                    save_plot = FALSE,
+                    filename_prefix = "TEST3_")
+  expect_equal(length(
+    list.files(tempdir(), pattern = "TEST3_var_year_available.html")), 0)
+
+  ## check error & warning return
+  expect_error(amf_plot_datayear())
+  expect_error(amf_plot_datayear(site_set = "US-CRT",
+                                 out_dir = "test_not_working",
+                                 save_plot = TRUE))
+  expect_error(amf_plot_datayear(site_set = c("us-crt", "US-crt", "USCRT")))
+  expect_warning(amf_plot_datayear(site_set = c("us-crt", "US-CRT", "USCRT")))
+  expect_error(amf_plot_datayear(site_set = "US-CRT",
+                                 data_aval = system.file("extdata",
+                                                         "AMF_US-CRT_BASE_HH_2-5.csv",
+                                                         package = "amerifluxr")))
+  expect_error(amf_plot_datayear(var_set = c("fch4", "fc", "le")))
+  expect_warning(amf_plot_datayear(var_set = c("fch4", "FC", "le")))
+  expect_error(amf_plot_datayear(site_set = "US-CRT",
+                                 year_set = c(1950:1960)))
+  expect_warning(amf_plot_datayear(site_set = "US-CRT",
+                                   year_set = c(2009:2012)))
+  # test warning bcf too many site-variables
+  expect_warning(amf_plot_datayear(var_set = "TS"))
+
+})
+
+
 test_that("check metadata availibility function", {
   skip_on_cran()
 

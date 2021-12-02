@@ -31,8 +31,8 @@ amf_plot_datayear(
 AmeriFlux Site ID (CC-Sss). If not specified, it returns all sites.}
 
 \item{var_set}{a scalar or vector of character specifying the target
-variables as in basename. See AmeriFlux page
-\url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/#base}
+variables as in basename. See AmeriFlux
+page\url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/#base}
 for a list of variable names. If not specified, it returns all variables.}
 
 \item{nonfilled_only}{logical, whether only showing non-filled variables,
