@@ -31,7 +31,8 @@ Imports:
     RCurl,
     readxl,
     tools,
-    heatmaply
+    heatmaply,
+    remotes
 RoxygenNote: 7.1.2
 Suggests: 
     knitr,

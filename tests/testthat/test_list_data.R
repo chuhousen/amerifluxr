@@ -13,52 +13,27 @@ test_that("check data availibility function", {
   ## check error & warning return
   expect_warning(amf_list_data(site_set = c("us-crt", "US-CRT", "USCRT")))
   expect_error(amf_list_data(site_set = c("us-crt", "US-crt", "USCRT")))
+
 })
 
-test_that("check plot data availibility function", {
+test_that("check data summary function", {
   skip_on_cran()
 
-  p1 <- amf_plot_datayear(site_set = "US-CRT",
-                    nonfilled_only = FALSE)
-  expect_is(p1, "plotly")
-
-  p2 <- amf_plot_datayear(var_set = "FCH4",
-                    nonfilled_only = FALSE)
-  expect_is(p2, "plotly")
-
-  p3 <- amf_plot_datayear(site_set = c("US-CRT", "US-WPT"),
-                          nonfilled_only = FALSE)
-  expect_is(p3, "plotly")
-
-  p4 <- amf_plot_datayear(var_set = c("FCH4", "WTD"),
-                          nonfilled_only = TRUE)
-  expect_is(p4, "plotly")
-
-  p5 <- amf_plot_datayear(var_set = c("FCH4", "WTD"),
-                          year_set = c(2015:2018),
-                          nonfilled_only = TRUE)
-  expect_is(p5, "plotly")
-
+  amf_summarize_data_out <- amf_summarize_data()
+  expect_is(amf_summarize_data_out, "data.frame")
+  expect_true("SITE_ID" %in% colnames(amf_summarize_data_out))
+  expect_true("VARIABLE" %in% colnames(amf_summarize_data_out))
+  expect_true("BASENAME" %in% colnames(amf_summarize_data_out))
+  expect_true("GAP_FILLED" %in% colnames(amf_summarize_data_out))
+  expect_gt(nrow(amf_summarize_data_out), 0)
 
   ## check error & warning return
-  expect_error(amf_plot_datayear())
-  expect_error(amf_plot_datayear(site_set = c("us-crt", "US-crt", "USCRT")))
-  expect_warning(amf_plot_datayear(site_set = c("us-crt", "US-CRT", "USCRT")))
-  expect_error(amf_plot_datayear(site_set = "US-CRT",
-                                 data_aval = system.file("extdata",
-                                                         "AMF_US-CRT_BASE_HH_2-5.csv",
-                                                         package = "amerifluxr")))
-  expect_error(amf_plot_datayear(var_set = c("fch4", "fc", "le")))
-  expect_warning(amf_plot_datayear(var_set = c("fch4", "FC", "le")))
-  expect_error(amf_plot_datayear(site_set = "US-CRT",
-                                 year_set = c(1950:1960)))
-  expect_warning(amf_plot_datayear(site_set = "US-CRT",
-                                   year_set = c(2009:2012)))
-  # test warning bcf too many site-variables
-  expect_warning(amf_plot_datayear(var_set = "TS"))
+  expect_warning(amf_summarize_data(site_set = c("us-crt", "US-CRT", "USCRT")))
+  expect_error(amf_summarize_data(site_set = c("us-crt", "US-crt", "USCRT")))
+  expect_error(amf_summarize_data(var_set = c("fch4", "fc", "le")))
+  expect_warning(amf_summarize_data(var_set = c("fch4", "FC", "le")))
 
 })
-
 
 test_that("check metadata availibility function", {
   skip_on_cran()
@@ -71,10 +46,14 @@ test_that("check metadata availibility function", {
   expect_gt(nrow(amf_list_metadata_out), 0)
 
   ## check error & warning return
-  expect_warning(amf_list_metadata(site_set = c("us-crt", "US-CRT", "USCRT"),
-                                   group_only = TRUE))
-  expect_error(amf_list_metadata(site_set = c("us-crt", "US-crt", "USCRT"),
-                                 group_only = TRUE))
+  expect_warning(amf_list_metadata(
+    site_set = c("us-crt", "US-CRT", "USCRT"),
+    group_only = TRUE
+  ))
+  expect_error(amf_list_metadata(
+    site_set = c("us-crt", "US-crt", "USCRT"),
+    group_only = TRUE
+  ))
 
   amf_list_metadata_out2 <- amf_list_metadata(group_only = FALSE)
   expect_is(amf_list_metadata_out2, "data.frame")
@@ -84,10 +63,14 @@ test_that("check metadata availibility function", {
   expect_gt(nrow(amf_list_metadata_out2), 0)
 
   ## check error & warning return
-  expect_warning(amf_list_metadata(site_set = c("us-crt", "US-CRT", "USCRT"),
-                                   group_only = FALSE))
-  expect_error(amf_list_metadata(site_set = c("us-crt", "US-crt", "USCRT"),
-                                 group_only = FALSE))
+  expect_warning(amf_list_metadata(
+    site_set = c("us-crt", "US-CRT", "USCRT"),
+    group_only = FALSE
+  ))
+  expect_error(amf_list_metadata(
+    site_set = c("us-crt", "US-crt", "USCRT"),
+    group_only = FALSE
+  ))
 })
 
 test_that("check variable info function", {
