@@ -114,11 +114,11 @@ amf_filter_base <- function(data_in,
         var.low <- var.low - loose_filter * abs(var.upp - var.low)
       }
 
-      if (!is.na(var.upp)) {
+      if (!is.na(var.upp) & is.numeric(data_in[, l])) {
         data_in[which(data_in[, l] > var.upp), l] <- NA
       }
 
-      if (!is.na(var.low)) {
+      if (!is.na(var.low) & is.numeric(data_in[, l])) {
         data_in[which(data_in[, l] < var.low), l] <- NA
       }
     }
