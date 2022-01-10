@@ -31,8 +31,7 @@ Imports:
     RCurl,
     readxl,
     tools,
-    heatmaply,
-    remotes
+    heatmaply
 RoxygenNote: 7.1.2
 Suggests: 
     knitr,
@@ -42,5 +41,6 @@ Suggests:
     testthat,
     covr,
     qpdf,
-    mockr
+    mockr,
+    remotes
 VignetteBuilder: knitr

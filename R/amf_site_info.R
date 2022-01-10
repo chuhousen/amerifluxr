@@ -35,7 +35,8 @@
 #'
 #' ## End(Not run)
 #' }
-amf_site_info <- function(){
+amf_site_info <- memoise::memoise(
+  function(){
 
     # grab meta-data, data is memoised
     # second calls should be fast (as from memory)
@@ -70,4 +71,4 @@ amf_site_info <- function(){
 
     # return site info
     return(sites)
-}
+})
