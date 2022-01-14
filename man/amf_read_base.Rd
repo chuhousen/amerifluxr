@@ -10,7 +10,8 @@ amf_read_base(file, unzip = TRUE, parse_timestamp = FALSE)
 \item{file}{a BASE data file, either in a zipped file or a comma-separate
 value (csv) file}
 
-\item{unzip}{whether to unzip. Set TRUE if reading from a zipped file}
+\item{unzip}{whether to unzip. The default is TRUE. Set FALSE if reading
+from a previously unzipped csv file.}
 
 \item{parse_timestamp}{whether to parse the timestamp. Set TRUE to parse
 and add timekeeping columns.}
@@ -28,6 +29,8 @@ added in the returned data frame:
   \item DOY - Day of the year (DDD)
   \item HOUR - Hour of the day (HH), based on the middle time of the interval
   \item MINUTE - Minute of the hour (mm), based on the middle time of the interval
+  \item TIMESTAMP - An object of class "POSIXlt" in the UTC time zone,
+  based on the middle time of the interval
 }
 }
 \description{

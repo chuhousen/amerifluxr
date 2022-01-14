@@ -4,11 +4,16 @@
 \alias{amf_list_data}
 \title{Get BASE data variable availability}
 \usage{
-amf_list_data(site_set = NULL)
+amf_list_data(site_set = NULL, var_set = NULL)
 }
 \arguments{
 \item{site_set}{a scalar or vector of character specifying the target
 AmeriFlux Site ID (CC-Sss). If not specified, it returns all sites.}
+
+\item{var_set}{a scalar or vector of character specifying the target
+variables as in basename. See AmeriFlux
+page\url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/#base}
+for a list of variable names. If not specified, it returns all variables.}
 }
 \value{
 A data frame of variable-specific data availability (per year)
@@ -37,6 +42,9 @@ data_aval <- amf_list_data()
 
 # obtain the data variable availability for selected sites
 data_aval <- amf_list_data(site_set = c("US-CRT","US-WPT"))
+
+# obtain the data variable availability for selected variables
+data_aval <- amf_list_data(var_set = c("FCH4", "WTD"))
 
 }
 }

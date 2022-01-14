@@ -138,7 +138,7 @@ amf_download_base <- function(user_id,
 
 
   if (data_policy == "CCBY4.0") {
-    cat("Data use guidlines for AmeriFlux CC-BY-4.0 Data Policy:\n",
+    cat("Data use guidelines for AmeriFlux CC-BY-4.0 Data Policy:\n",
         fill = TRUE)
     cat(
       paste0(
@@ -228,8 +228,9 @@ amf_download_base <- function(user_id,
 
     #############################################################
     #  inform API this is a download test
-    #  this is used only while code developments, to be removed
-    is_test <- TRUE
+    #  this is used only while code developments
+    is_test <- FALSE
+
     #############################################################
 
     ## prepare a list of site id for json query
