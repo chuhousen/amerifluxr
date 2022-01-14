@@ -146,7 +146,7 @@ selected AmeriFlux sites. See AmeriFlux page
 about the variable naming.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>amf_list_data</span><span class='op'>(</span>site_set <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>amf_list_data</span><span class='op'>(</span>site_set <span class='op'>=</span> <span class='cn'>NULL</span>, var_set <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -155,6 +155,13 @@ about the variable naming.</p>
       <th>site_set</th>
       <td><p>a scalar or vector of character specifying the target
 AmeriFlux Site ID (CC-Sss). If not specified, it returns all sites.</p></td>
+    </tr>
+    <tr>
+      <th>var_set</th>
+      <td><p>a scalar or vector of character specifying the target
+variables as in basename. See AmeriFlux
+page<a href='https://ameriflux.lbl.gov/data/aboutdata/data-variables/#base'>https://ameriflux.lbl.gov/data/aboutdata/data-variables/#base</a>
+for a list of variable names. If not specified, it returns all variables.</p></td>
     </tr>
     </table>
 
@@ -180,6 +187,9 @@ AmeriFlux Site ID (CC-Sss). If not specified, it returns all sites.</p></td>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># obtain the data variable availability for selected sites</span></span>
 <span class='r-in'><span class='va'>data_aval</span> <span class='op'>&lt;-</span> <span class='fu'>amf_list_data</span><span class='op'>(</span>site_set <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"US-CRT"</span>,<span class='st'>"US-WPT"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># obtain the data variable availability for selected variables</span></span>
+<span class='r-in'><span class='va'>data_aval</span> <span class='op'>&lt;-</span> <span class='fu'>amf_list_data</span><span class='op'>(</span>var_set <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"FCH4"</span>, <span class='st'>"WTD"</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='op'>}</span></span>
 </pre>

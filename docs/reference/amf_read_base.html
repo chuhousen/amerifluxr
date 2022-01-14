@@ -160,7 +160,8 @@ value (csv) file</p></td>
     </tr>
     <tr>
       <th>unzip</th>
-      <td><p>whether to unzip. Set TRUE if reading from a zipped file</p></td>
+      <td><p>whether to unzip. The default is TRUE. Set FALSE if reading
+from a previously unzipped csv file.</p></td>
     </tr>
     <tr>
       <th>parse_timestamp</th>
@@ -182,6 +183,8 @@ added in the returned data frame:</p><ul>
 <li><p>DOY - Day of the year (DDD)</p></li>
 <li><p>HOUR - Hour of the day (HH), based on the middle time of the interval</p></li>
 <li><p>MINUTE - Minute of the hour (mm), based on the middle time of the interval</p></li>
+<li><p>TIMESTAMP - An object of class "POSIXlt" in the UTC time zone,
+  based on the middle time of the interval</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
