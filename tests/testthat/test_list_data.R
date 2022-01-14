@@ -14,6 +14,10 @@ test_that("check data availibility function", {
   expect_warning(amf_list_data(site_set = c("us-crt", "US-CRT", "USCRT")))
   expect_error(amf_list_data(site_set = c("us-crt", "US-crt", "USCRT")))
 
+  ## check error & warning return
+  expect_warning(amf_list_data(var_set = c("fch4", "FC", "le")))
+  expect_error(amf_list_data(var_set = c("fch3", "fc2", "le2")))
+
 })
 
 test_that("check data summary function", {

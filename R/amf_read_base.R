@@ -8,7 +8,8 @@
 #'
 #' @param file a BASE data file, either in a zipped file or a comma-separate
 #'  value (csv) file
-#' @param unzip whether to unzip. Set TRUE if reading from a zipped file
+#' @param unzip whether to unzip. The default is TRUE. Set FALSE if reading
+#' from a previously unzipped csv file.
 #' @param parse_timestamp whether to parse the timestamp. Set TRUE to parse
 #'  and add timekeeping columns.
 #'
@@ -24,6 +25,8 @@
 #'   \item DOY - Day of the year (DDD)
 #'   \item HOUR - Hour of the day (HH), based on the middle time of the interval
 #'   \item MINUTE - Minute of the hour (mm), based on the middle time of the interval
+#'   \item TIMESTAMP - An object of class "POSIXlt" in the UTC time zone,
+#'   based on the middle time of the interval
 #' }
 #' @seealso amf_variables
 #' @export
@@ -130,22 +133,22 @@ amf_read_base <- function(file,
       if (length(which(colnames(data1) == "TIMESTAMP_START")) == 1) {
         TIMESTAMP <-
           strptime(data1$TIMESTAMP_START,
-                   format = "%Y%m%d%H%M",
-                   tz = "UTC")
+                     format = "%Y%m%d%H%M",
+                     tz = "GMT")
         TIMESTAMP <-
           strptime(TIMESTAMP + 0.5 * hr * 60,
-                   format = "%Y-%m-%d %H:%M:%S",
-                   tz = "UTC")
+                     format = "%Y-%m-%d %H:%M:%S",
+                     tz = "GMT")
 
       } else if (length(which(colnames(data1) == "TIMESTAMP_END")) == 1) {
         TIMESTAMP <-
           strptime(data1$TIMESTAMP_END,
-                   format = "%Y%m%d%H%M",
-                   tz = "UTC")
+                     format = "%Y%m%d%H%M",
+                     tz = "GMT")
         TIMESTAMP <-
           strptime(TIMESTAMP - 0.5 * hr * 60,
-                   format = "%Y-%m-%d %H:%M:%S",
-                   tz = "UTC")
+                     format = "%Y-%m-%d %H:%M:%S",
+                     tz = "GMT")
 
       } else{
         stop("Can not find TIMESTAMP columns...")
@@ -161,6 +164,7 @@ amf_read_base <- function(file,
           DOY = TIMESTAMP$yday + 1,
           HOUR = TIMESTAMP$hour,
           MINUTE = TIMESTAMP$min,
+          TIMESTAMP = as.POSIXct(TIMESTAMP),
           data1,
           stringsAsFactors = FALSE
         )

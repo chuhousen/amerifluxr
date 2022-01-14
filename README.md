@@ -190,3 +190,6 @@ acknowledged in the site data DOI on
 This package was supported in part by funding provided to the
 AmeriFlux Management Project by the U.S. Department of Energy’s
 Office of Science under Contract No. DE-AC0205CH11231.
+We also thank Adam Young, Minkyu Moon, Erica Orcutt, Manuel Helbig
+for testing the package and providing valuable feedback.
+
