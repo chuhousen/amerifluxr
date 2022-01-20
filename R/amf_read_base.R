@@ -72,10 +72,28 @@ amf_read_base <- function(file,
     case_ls <-
       file_grab[which(substr(file_grab, start = 12, stop = 15) == "BASE")]
 
-    if (length(case_ls) != 1) {
+    if (length(case_ls) == 0) {
       stop('Can not find BASE file...')
 
-    } else{
+    } else if(length(case_ls) > 1) {
+      warning('Multiple BASE files, read HH resolution by default...')
+      case_ls <- case_ls[which(substr(case_ls, start = 17, stop = 18) == "HH")]
+
+      res <- substr(case_ls, start = 17, stop = 18)
+
+      ## read BASE
+      data1 <-
+        utils::read.table(
+          unz(file,
+              case_ls),
+          na = c("-9999"),
+          header = TRUE,
+          sep = ",",
+          skip = 2,
+          stringsAsFactors = FALSE
+        )
+
+    } else {
       # get file resolution
       res <- substr(case_ls, start = 17, stop = 18)
 
