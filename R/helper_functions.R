@@ -153,9 +153,11 @@ amf_variables <- function(){
   # get a list of FP (Flux-Processing) standard variables
   variables <- jsonlite::fromJSON(amf_server("variables"),  flatten=TRUE)
 
-  variables <- rbind.data.frame(variables,
-                                c("TIMESTAMP_START", "YYYYMMDDHHMM", NA, NA),
-                                c("TIMESTAMP_END", "YYYYMMDDHHMM", NA, NA))
+  variables <- variables[order(variables$Type), ]
+  variables <-
+    variables[c(which(variables$Type == "TIMEKEEPING"),
+                which(variables$Type != "TIMEKEEPING")),
+              c("Name", "Description", "Units", "Min", "Max")]
 
   variables$Min <- as.numeric(as.character(variables$Min))
   variables$Max <- as.numeric(as.character(variables$Max))

@@ -29,8 +29,6 @@ amf_server <- function(endpoint = "sitemap"){
   # base urls
   base_url <- "https://amfcdn.lbl.gov/"
   api_url <- file.path(base_url, "api/v1")
-  base_url_old <- "https://ameriflux-data.lbl.gov/"
-  api_url_old <- file.path(base_url_old, "AmeriFlux/SiteSearch.svc")
   var_info_url <- "ftp://ftp.fluxdata.org/.ameriflux_downloads/measurement_height/"
 
   # github link for intermediate data summary
@@ -43,7 +41,7 @@ amf_server <- function(endpoint = "sitemap"){
     "site_ccby4" = file.path(api_url, "site_availability/AmeriFlux/BIF/CCBY4.0"),
     "data_year" = file.path(api_url, "data_availability/AmeriFlux"),
     "data_download" = file.path(api_url, "data_download"),
-    "variables" = file.path(api_url_old, "fpinVarLimits"),
+    "variables" = file.path(api_url, "fp_var?limits=True"),
     "var_info" = var_info_url,
     "data_variable" = file.path(
       git_base_url,
