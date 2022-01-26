@@ -138,6 +138,7 @@
 <code class="sourceCode R"><span class="va">floc1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/amf_download_bif.html">amf_download_bif</a></span><span class="op">(</span>user_id <span class="op">=</span> <span class="st">"my_user"</span>,
                           user_email <span class="op">=</span> <span class="st">"my_email@mail.com"</span>,
                           data_policy <span class="op">=</span> <span class="st">"CCBY4.0"</span>,
+                          agree_policy <span class="op">=</span> <span class="cn">TRUE</span>,
                           intended_use <span class="op">=</span> <span class="st">"synthesis"</span>,
                           intended_use_text <span class="op">=</span> <span class="st">"obtain AmeriFlux sites' geolocation, IGBP, and climate classification"</span>,
                           out_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
@@ -166,22 +167,26 @@
 <td>“CCBY4.0” or “LEGACY”. AmeriFlux data are shared under two tiers of licenses as chosen by site’s PI.</td>
 </tr>
 <tr class="even">
+<td>agree_policy</td>
+<td>Acknowledge you read and agree to the AmeriFlux Data use policy</td>
+</tr>
+<tr class="odd">
 <td>intended_use</td>
 <td>The intended use category. It needs to be “synthesis”, “model”, “remote_sensing”,“other_research”, “education”, or “other”</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>intended_use_text</td>
 <td>Brief description of intended use.This will be recorded in the data download log and emailed to site’s PI.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>out_dir</td>
 <td>Output directory for downloaded data, default to tempdir()</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>verbose</td>
 <td>Show feedback on download progress</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>site_w_data</td>
 <td>Logical, download all registered sites (FALSE) or only sites with available BASE data (TRUE)</td>
 </tr>
@@ -202,6 +207,7 @@
                            site_id <span class="op">=</span> <span class="st">"US-CRT"</span>,
                            data_product <span class="op">=</span> <span class="st">"BASE-BADM"</span>,
                            data_policy <span class="op">=</span> <span class="st">"CCBY4.0"</span>,
+                           agree_policy <span class="op">=</span> <span class="cn">TRUE</span>,
                            intended_use <span class="op">=</span> <span class="st">"remote_sensing"</span>,
                            intended_use_text <span class="op">=</span> <span class="st">"validate the model of GPP estimation"</span>,
                            verbose <span class="op">=</span> <span class="cn">TRUE</span>,
@@ -237,18 +243,22 @@
 <td>“CCBY4.0” or “LEGACY”. AmeriFlux data are shared under two tiers of licenses as chosen by site’s PI.</td>
 </tr>
 <tr class="even">
+<td>agree_policy</td>
+<td>Acknowledge you read and agree to the AmeriFlux Data use policy</td>
+</tr>
+<tr class="odd">
 <td>intended_use</td>
 <td>The intended use category. It needs to be “synthesis”, “model”, “remote_sensing”,“other_research”, “education”, or “other”</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>intended_use_text</td>
 <td>Brief description of intended use.This will be recorded in the data download log and emailed to site’s PI.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>out_dir</td>
 <td>Output directory for downloaded data, default to tempdir()</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>verbose</td>
 <td>Show feedback on download progress</td>
 </tr>
@@ -290,6 +300,7 @@
                   site_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"US-CRT"</span>, <span class="st">"US-WPT"</span>, <span class="st">"US-Oho"</span><span class="op">)</span>,
                   data_product <span class="op">=</span> <span class="st">"BASE-BADM"</span>,
                   data_policy <span class="op">=</span> <span class="st">"CCBY4.0"</span>,
+                  agree_policy <span class="op">=</span> <span class="cn">TRUE</span>,
                   intended_use <span class="op">=</span> <span class="st">"model"</span>,
                   intended_use_text <span class="op">=</span> <span class="st">"Data-driven modeling, for training models and cross-validation"</span>,
                   verbose <span class="op">=</span> <span class="cn">TRUE</span>,
