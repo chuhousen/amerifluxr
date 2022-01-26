@@ -10,6 +10,7 @@ amf_download_base(
   site_id,
   data_product = "BASE-BADM",
   data_policy,
+  agree_policy,
   intended_use,
   intended_use_text,
   out_dir = tempdir(),
@@ -32,6 +33,9 @@ supported and used as default. (character)}
 \url{https://ameriflux.lbl.gov/data/data-policy/#data-use} for data use
 guidelines under each license. Note: Data use policy
 selected affects which sites’ data are available for download.}
+
+\item{agree_policy}{Acknowledge you read and agree to the AmeriFlux
+Data use policy (TRUE/FALSE)}
 
 \item{intended_use}{The intended use category. Currently, it needs to be one
 of the followings:
@@ -74,6 +78,7 @@ amf_download_base(user_id = "test",
  site_id = "US-CRT",
  data_product = "BASE-BADM",
  data_policy = "CCBY4.0",
+ agree_policy = TRUE,
  intended_use = "other",
  intended_use_text = "testing download",
  out_dir = tempdir())
@@ -86,6 +91,7 @@ file.ls <- amf_download_base(user_id = "test",
  site_id = c("US-CRT", "US-WPT", "US-Oho"),
  data_product = "BASE-BADM",
  data_policy = "LEGACY",
+ agree_policy = TRUE,
  intended_use = "other",
  intended_use_text = "testing download",
  out_dir = tempdir())

@@ -65,6 +65,7 @@ For details about BADM data files, see AmeriFlux
 floc1 <- amf_download_bif(user_id = "my_user",
                           user_email = "my_email@mail.com",
                           data_policy = "CCBY4.0",
+                          agree_policy = TRUE,
                           intended_use = "synthesis",
                           intended_use_text = "obtain AmeriFlux sites' geolocation, IGBP, and climate classification",
                           out_dir = tempdir(),
@@ -78,6 +79,7 @@ floc1 <- amf_download_bif(user_id = "my_user",
 | user_id            | AmeriFlux account username                                                                                                      |
 | user_email         | AmeriFlux account user email                                                                                                    |
 | data_policy        | "CCBY4.0" or "LEGACY". AmeriFlux data are shared under two tiers of licenses as chosen by site's PI.                            |
+| agree_policy       | Acknowledge you read and agree to the AmeriFlux Data use policy                                                                 |  
 | intended_use       | The intended use category. It needs to be "synthesis", "model", "remote_sensing","other_research", "education", or "other"      |
 | intended_use_text  | Brief description of intended use.This will be recorded in the data download log and emailed to site's PI.                      |
 | out_dir            | Output directory for downloaded data, default to tempdir()                                                                      |
@@ -112,6 +114,7 @@ floc2 <- amf_download_base(user_id = "my_user",
                            site_id = "US-CRT",
                            data_product = "BASE-BADM",
                            data_policy = "CCBY4.0",
+                           agree_policy = TRUE,
                            intended_use = "remote_sensing",
                            intended_use_text = "validate the model of GPP estimation",
                            verbose = TRUE,
@@ -127,6 +130,7 @@ floc2 <- amf_download_base(user_id = "my_user",
 | site_id            | A scalar or vector of character specifying the AmeriFlux Site ID (CC-Sss)                                                       |
 | data_product       | AmeriFlux data product. Currently, only "BASE-BADM" is currently supported and used as default.                                 |
 | data_policy        | "CCBY4.0" or "LEGACY". AmeriFlux data are shared under two tiers of licenses as chosen by site's PI.                            |
+| agree_policy       | Acknowledge you read and agree to the AmeriFlux Data use policy                                                                 |  
 | intended_use       | The intended use category. It needs to be "synthesis", "model", "remote_sensing","other_research", "education", or "other"      |
 | intended_use_text  | Brief description of intended use.This will be recorded in the data download log and emailed to site's PI.                      |
 | out_dir            | Output directory for downloaded data, default to tempdir()                                                                      |
@@ -161,6 +165,7 @@ amf_download_base(user_id = "my_user",
                   site_id = c("US-CRT", "US-WPT", "US-Oho"),
                   data_product = "BASE-BADM",
                   data_policy = "CCBY4.0",
+                  agree_policy = TRUE,
                   intended_use = "model",
                   intended_use_text = "Data-driven modeling, for training models and cross-validation",
                   verbose = TRUE,

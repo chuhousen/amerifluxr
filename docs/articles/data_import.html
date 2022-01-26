@@ -116,6 +116,7 @@
   site_id <span class="op">=</span> <span class="st">"US-CRT"</span>,
   data_product <span class="op">=</span> <span class="st">"BASE-BADM"</span>,
   data_policy <span class="op">=</span> <span class="st">"CCBY4.0"</span>,
+  agree_policy <span class="op">=</span> <span class="cn">TRUE</span>,
   intended_use <span class="op">=</span> <span class="st">"other"</span>,
   intended_use_text <span class="op">=</span> <span class="st">"amerifluxr package demonstration"</span>,
   verbose <span class="op">=</span> <span class="cn">TRUE</span>,
@@ -129,6 +130,7 @@
   user_id <span class="op">=</span> <span class="st">"my_user"</span>,
   user_email <span class="op">=</span> <span class="st">"my_email@mail.com"</span>,
   data_policy <span class="op">=</span> <span class="st">"CCBY4.0"</span>,
+  agree_policy <span class="op">=</span> <span class="cn">TRUE</span>,
   intended_use <span class="op">=</span> <span class="st">"other"</span>,
   intended_use_text <span class="op">=</span> <span class="st">"amerifluxr package demonstration"</span>,
   out_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
@@ -501,90 +503,143 @@
 <span class="va">FP_ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/amf_variables.html">amf_variables</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span><span class="va">FP_ls</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">11</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <table class="table">
+<caption>Table continues below</caption>
 <colgroup>
-<col width="12%">
-<col width="25%">
-<col width="25%">
-<col width="9%">
 <col width="11%">
+<col width="18%">
+<col width="40%">
+<col width="22%">
+<col width="7%">
 </colgroup>
 <thead><tr class="header">
 <th align="center"> </th>
 <th align="center">Name</th>
+<th align="center">Description</th>
 <th align="center">Units</th>
 <th align="center">Min</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>8</strong></td>
+<td align="center">DBH</td>
+<td align="center">Diameter of tree measured at breast height (1.3m) with continuous dendrometers</td>
+<td align="center">cm</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>9</strong></td>
+<td align="center">LEAF_WET</td>
+<td align="center">Leaf wetness, range 0-100</td>
+<td align="center">%</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>10</strong></td>
+<td align="center">SAP_DT</td>
+<td align="center">Difference of probes temperature for sapflow measurements</td>
+<td align="center">deg C</td>
+<td align="center">-10</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>11</strong></td>
+<td align="center">SAP_FLOW</td>
+<td align="center">Sap flow</td>
+<td align="center">mmolH2O m-2 s-1</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>12</strong></td>
+<td align="center">T_BOLE</td>
+<td align="center">Bole temperature</td>
+<td align="center">deg C</td>
+<td align="center">-50</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>13</strong></td>
+<td align="center">T_CANOPY</td>
+<td align="center">Temperature of the canopy and/or surface underneath the sensor</td>
+<td align="center">deg C</td>
+<td align="center">-50</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>14</strong></td>
+<td align="center">FETCH_70</td>
+<td align="center">Distance at which cross-wind integrated footprint cumulative probability is 70%</td>
+<td align="center">m</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>15</strong></td>
+<td align="center">FETCH_80</td>
+<td align="center">Distance at which cross-wind integrated footprint cumulative probability is 80%</td>
+<td align="center">m</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>16</strong></td>
+<td align="center">FETCH_90</td>
+<td align="center">Distance at which cross-wind integrated footprint cumulative probability is 90%</td>
+<td align="center">m</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>17</strong></td>
+<td align="center">FETCH_FILTER</td>
+<td align="center">Footprint quality flag (i.e., 0, 1): 0 and 1 indicate data measured when wind coming from direction that should be discarded and kept, respectively</td>
+<td align="center">nondimensional</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<colgroup>
+<col width="12%">
+<col width="12%">
+</colgroup>
+<thead><tr class="header">
+<th align="center"> </th>
 <th align="center">Max</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>11</strong></td>
-<td align="center">D_SNOW</td>
-<td align="center">cm</td>
-<td align="center">0</td>
+<td align="center"><strong>8</strong></td>
 <td align="center">500</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>12</strong></td>
-<td align="center">DBH</td>
-<td align="center">cm</td>
-<td align="center">0</td>
-<td align="center">500</td>
+<td align="center"><strong>9</strong></td>
+<td align="center">100</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>13</strong></td>
-<td align="center">DO</td>
-<td align="center">Âµmol L-1</td>
-<td align="center">0</td>
+<td align="center"><strong>10</strong></td>
+<td align="center">10</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>11</strong></td>
 <td align="center">NA</td>
 </tr>
+<tr class="odd">
+<td align="center"><strong>12</strong></td>
+<td align="center">60</td>
+</tr>
 <tr class="even">
+<td align="center"><strong>13</strong></td>
+<td align="center">60</td>
+</tr>
+<tr class="odd">
 <td align="center"><strong>14</strong></td>
-<td align="center">FAPAR</td>
-<td align="center">%</td>
-<td align="center">0</td>
-<td align="center">100</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>15</strong></td>
-<td align="center">FC</td>
-<td align="center">ÂµmolCO2 m-2 s-1</td>
-<td align="center">-100</td>
-<td align="center">100</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>16</strong></td>
-<td align="center">FC_SSITC_TEST</td>
-<td align="center">nondimensional</td>
-<td align="center">0</td>
-<td align="center">2</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>17</strong></td>
-<td align="center">FCH4</td>
-<td align="center">nmolCH4 m-2 s-1</td>
-<td align="center">-500</td>
-<td align="center">4000</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>18</strong></td>
-<td align="center">FCH4_SSITC_TEST</td>
-<td align="center">nondimensional</td>
-<td align="center">0</td>
-<td align="center">2</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>19</strong></td>
-<td align="center">FETCH_70</td>
-<td align="center">m</td>
-<td align="center">0</td>
 <td align="center">10000</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>20</strong></td>
-<td align="center">FETCH_80</td>
-<td align="center">m</td>
-<td align="center">0</td>
+<td align="center"><strong>15</strong></td>
 <td align="center">12000</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>16</strong></td>
+<td align="center">15000</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>17</strong></td>
+<td align="center">1</td>
 </tr>
 </tbody>
 </table>

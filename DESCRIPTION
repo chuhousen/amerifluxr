@@ -25,22 +25,22 @@ BugReports: https://github.com/chuhousen/amerifluxr/issues
 Depends:
     R (>= 3.6)
 Imports:
+    heatmaply,
     httr,
     jsonlite,
     memoise,
     RCurl,
     readxl,
-    tools,
-    heatmaply
+    tools
 RoxygenNote: 7.1.2
 Suggests: 
-    knitr,
-    rmarkdown,
-    data.table,
-    pander,
-    testthat,
     covr,
+    data.table,
+    knitr,
+    pander,
     qpdf,
-    mockr,
-    remotes
+    remotes,
+    rmarkdown,
+    testthat,
+    mockr
 VignetteBuilder: knitr

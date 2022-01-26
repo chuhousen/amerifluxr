@@ -8,6 +8,7 @@ amf_download_bif(
   user_id,
   user_email,
   data_policy,
+  agree_policy,
   intended_use,
   intended_use_text,
   out_dir = tempdir(),
@@ -25,6 +26,9 @@ two tiers of licenses as chosen by site's PI. See
 \url{https://ameriflux.lbl.gov/data/data-policy/#data-use} for data use
 guidelines under each license. Note: Data use policy
 selected affects which sites’ data are available for download.}
+
+\item{agree_policy}{Acknowledge you read and agree to the AmeriFlux
+Data use policy (TRUE/FALSE)}
 
 \item{intended_use}{The intended use category. Currently, it needs to be one
 of the followings:
@@ -68,6 +72,7 @@ For details about BADM data files, see AmeriFlux web page
 amf_download_bif(user_id = "test",
   user_email = "test@mail.com",
   data_policy = "CCBY4.0",
+  agree_policy = TRUE,
   intended_use = "other",
   intended_use_text = "testing download",
   out_dir = tempdir(),
@@ -77,6 +82,7 @@ amf_download_bif(user_id = "test",
 amf_download_bif(user_id = "test",
   user_email = "test@mail.com",
   data_policy = "LEGACY",
+  agree_policy = TRUE,
   intended_use = "other",
   intended_use_text = "testing download",
   out_dir = tempdir(),
