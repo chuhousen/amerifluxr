@@ -12,7 +12,6 @@
 #^LICENSE$
 ^LICENSE\.md$
 ^CODE_OF_CONDUCT\.md$
-^NEWS\.md$
 ^README\.md$
 ^contact\.md$
 ^cran-comments\.md$
