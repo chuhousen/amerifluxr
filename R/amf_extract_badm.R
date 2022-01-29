@@ -15,7 +15,7 @@
 #' \itemize{
 #'   \item GROUP_ID - A unique identifier for data belonging to the same instance of a reported variable group
 #'   \item SITE_ID - Six character site identifier (CC-Sss)
-#'   \item VALUE - Values for all available VARIABLEs in the selected group
+#'   \item VALUE - Values for all available VARIABLES in the selected group
 #'   \item ...
 #' }
 #' @export

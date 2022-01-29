@@ -12,7 +12,7 @@ amf_var_info(out_dir = tempdir(), verbose = TRUE)
 \item{verbose}{Show feedback on download progress (TRUE/FALSE)}
 }
 \value{
-A data frame of measurement height data for all avaiable AmeriFlux sites
+A data frame of measurement height data for all available AmeriFlux sites
 #' \itemize{
   \item Site_ID - Six character site identifier (CC-Sss)
   \item Variable - Variable name of the data included in the BASE file

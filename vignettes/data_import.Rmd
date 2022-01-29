@@ -59,7 +59,7 @@ The downloaded file is a zipped file saved in tempdir()
 which contains a BASE data file (e.g., 
 AMF\_\{SITE_ID\}\_BASE\_\{RESOLUTION\}\_\{VERSION\}\.csv, 
 RESOLUTION = HH (half-hourly) or HR (hourly)) and a 
-medata file (aka BADM data product, e.g., 
+metadata file (aka BADM data product, e.g., 
 AMF\_\{SITE_ID\}\_BIF\_\{VERSION\}\.xlsx). The 
 amf_download_base() also returns the file path to the 
 downloaded file, which can be used later to read the 
