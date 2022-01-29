@@ -5,7 +5,7 @@
 
 An R programmatic interface for querying, downloading, and handling [AmeriFlux](https://ameriflux.lbl.gov/) data and metadata.  
 
-## Insallation
+## Installation
 
 ### Stable release
 
@@ -186,7 +186,7 @@ AmeriFlux, and parse and clean data for further use.
 
 Chu, Housen, and Hufkens, Koen. "amerifluxr v1.0.0." Computer software. May 10, 2021. https://github.com/chuhousen/amerifluxr. https://doi.org/10.11578/dc.20210730.2.
 
-## Acknowledgements
+## Acknowledgement
 
 We thank the AmeriFlux site teams for sharing their data and 
 metadata with the network. Funding for these flux sites is 

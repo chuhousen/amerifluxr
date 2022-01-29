@@ -7,7 +7,7 @@
 #' @param out_dir output directory  (default = tempdir())
 #' @param verbose Show feedback on download progress (TRUE/FALSE)
 #'
-#' @return A data frame of measurement height data for all avaiable AmeriFlux sites
+#' @return A data frame of measurement height data for all available AmeriFlux sites
 #' #' \itemize{
 #'   \item Site_ID - Six character site identifier (CC-Sss)
 #'   \item Variable - Variable name of the data included in the BASE file
