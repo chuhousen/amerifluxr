@@ -1,3 +1,5 @@
+This is our first submission for the amerifluxr package.
+
 I have read and agree to the the CRAN policies at
 http://cran.r-project.org/web/packages/policies.html
 
@@ -15,4 +17,11 @@ http://cran.r-project.org/web/packages/policies.html
 
 ## local / GitHub-CI R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 notes
+
+There was 1 NOTE:
+
+r-hub Windows Server 2022, R-devel, 64 bit
+* Found the following files/directories: 'lastMiKTeXException'
+
+* I have tried my best effort but still can't replicate it locally. 
