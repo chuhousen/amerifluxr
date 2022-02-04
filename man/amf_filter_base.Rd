@@ -2,7 +2,7 @@
 % Please edit documentation in R/amf_filter_base.R
 \name{amf_filter_base}
 \alias{amf_filter_base}
-\title{Filter AmeriFlux BASE data product based on plausible range}
+\title{Filter AmeriFlux BASE data based on plausible range}
 \usage{
 amf_filter_base(
   data_in,
@@ -24,7 +24,7 @@ import from \code{\link{amf_read_base}}.}
  If not specified, use \code{\link{amf_variables}} by default.}
 
 \item{basename_decode}{A data frame with at least two columns:
-#' \itemize{
+\itemize{
   \item variable_name: actual variable name
   \item basename: variable base name
  }
@@ -34,14 +34,13 @@ import from \code{\link{amf_read_base}}.}
 for filtering. Set it to 0 if not used. The default is 0.05.}
 }
 \value{
-A data frame similar to data_in, with out-of-range data points
- being filtered out
+A data frame similar to \code{data_in}, filtering out off-range points
 }
 \description{
-The function filters BASE data product based on the expected
+The function filters BASE data based on the expected
 plausible ranges specified for each variable. See AmeriFlux web site
-\url{https://ameriflux.lbl.gov/data/data-processing-pipelines/data-qaqc/physical-range-module/}
-for description of physical ranges.
+\url{https://ameriflux.lbl.gov/data/data-processing-pipelines/data-qaqc/}
+for description of the plausible ranges.
 }
 \examples{
 \dontrun{
@@ -58,7 +57,4 @@ base_f <- amf_filter_base(data_in = base)
 # filter data, using default physical range without buffer
 base_f <- amf_filter_base(data_in = base, loose_filter = 0)
 }
-}
-\seealso{
-amf_read_base, amf_var_info, amf_parse_basename
 }

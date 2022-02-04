@@ -6,17 +6,17 @@
 #' for details about BASE data product. Use \code{\link{amf_variables}}
 #' to get a list of standard variable names and units.
 #'
-#' @param file a BASE data file, either in a zipped file or a comma-separate
+#' @param file A BASE data file, either in a zipped file or a comma-separate
 #'  value (csv) file
-#' @param unzip whether to unzip. The default is TRUE. Set FALSE if reading
-#' from a previously unzipped csv file.
-#' @param parse_timestamp whether to parse the timestamp. Set TRUE to parse
-#'  and add timekeeping columns.
+#' @param unzip Logical, whether to unzip. The default is TRUE. Set FALSE if
+#'  reading from a previously unzipped csv file.
+#' @param parse_timestamp Logical, whether to parse the time stamp. Set TRUE
+#'  to parse and add timekeeping columns.
 #'
 #' @return A data frame containing data. See AmeriFlux website
 #'  \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/}
 #' for details about file format, variable definition, units, and convention.
-#' If parse_timestamp = TRUE, the following six time-keeping columns are
+#' If \code{parse_timestamp} = TRUE, the following six time-keeping columns are
 #' added in the returned data frame:
 #' \itemize{
 #'   \item YEAR - Year (YYYY)
@@ -28,11 +28,10 @@
 #'   \item TIMESTAMP - An object of class "POSIXlt" in the UTC time zone,
 #'   based on the middle time of the interval
 #' }
-#' @seealso amf_variables
+#' @seealso \code{\link{amf_parse_basename}}, \code{\link{amf_filter_base}}
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' # read the BASE from a zip file, using the example data file
 #' base <- amf_read_base(file = system.file("extdata",
 #'                                          "AMF_US-CRT_BASE-BADM_2-5.zip",
@@ -46,7 +45,6 @@
 #'                                           package = "amerifluxr"),
 #'                       unzip = FALSE,
 #'                       parse_timestamp = FALSE)
-#'}
 
 amf_read_base <- function(file,
                           unzip = TRUE,

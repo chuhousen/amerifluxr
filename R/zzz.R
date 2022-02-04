@@ -19,7 +19,7 @@ Numextract <- function(string) {
   )))
 }
 
-# Return Ameriflux server endpoints
+# Return AmeriFlux server endpoints
 #
 # These functions are not exported and "blind"
 # but are accessible through :::

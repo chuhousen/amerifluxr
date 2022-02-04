@@ -16,19 +16,18 @@
 #'   \item ...
 #'  }
 #'  If not specified, use \code{\link{amf_list_data}} by default.
-#' @param site_set a scalar or vector of character specifying the target
+#' @param site_set A scalar or vector of character specifying the target
 #' AmeriFlux Site ID (CC-Sss). If not specified, it returns all sites.
-#' @param var_set a scalar or vector of character specifying the target
+#' @param var_set A scalar or vector of character specifying the target
 #' variables as in basename. See AmeriFlux
 #' page\url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/#base}
 #' for a list of variable names. If not specified, it returns all variables.
-#' @param nonfilled_only logical, whether only showing non-filled variables,
-#'  or both non- and gap-filled variables (default = TRUE)
-#' @param year_set a scalar or vector of integers. If not specified,
+#' @param nonfilled_only Logical, whether only showing non-filled variables,
+#'  or both non- and gap-filled variables. The default is TRUE.
+#' @param year_set A scalar or vector of integers. If not specified,
 #' it plots only years with any available data in selected sites and variables
-#'
-#' @seealso amf_list_data
-#'
+#' @return An object of class 'plotly' created by \code{\link[heatmaply]{heatmaply}}
+#' @seealso \code{\link{amf_list_data}}, \code{\link[heatmaply]{heatmaply}}
 #' @export
 #'
 #' @examples

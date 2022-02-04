@@ -111,6 +111,7 @@ test_that("check filter base function", {
 
 
 test_that("Check basename parse function", {
+  skip_on_cran()
 
   ## a list of testing names
   test_name <- c("CO2", "CO2_PI_1", "CO2_1_N", "CO2_1_SD", "CO2_1_1_1",

@@ -7,9 +7,10 @@
 #' @param bif_data A data frame consists of 5 columns: SITE_ID, GROUP_ID,
 #' VARIABLE_GROUP, VARIABLE, DATAVALUE, imported from function
 #' \code{\link{amf_read_bif}}.
-#' @param select_group A string, selected from VARIABLE_GROUP in the bif_data
+#' @param select_group A string (character), selected from VARIABLE_GROUP
+#'  in the \code{bif_data}
 #'
-#' @seealso amf_read_bif
+#' @seealso \code{\link{amf_read_bif}}
 #'
 #' @return A data frame of re-structured BADM data with the following columns:
 #' \itemize{
@@ -21,10 +22,9 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' # read the BADM BIF file, using an example data file
 #' bif <- amf_read_bif(file = system.file("extdata",
-#'                                        "AMF_AA-Flx_BIF_20201218.xlsx",
+#'                                        "AMF_AA-Flx_BIF_CCBY4_20201218.xlsx",
 #'                                         package = "amerifluxr"))
 #'
 #' # get a list of valid VARIALBE_GROUP
@@ -33,8 +33,6 @@
 #' # extract the selected VARIALBE_GROUP
 #' amf_extract_badm(bif_data = bif, select_group = "GRP_FLUX_MEASUREMENTS")
 #' amf_extract_badm(bif_data = bif, select_group = "GRP_IGBP")
-#'}
-
 
 amf_extract_badm <- function(bif_data,
                              select_group) {

@@ -7,9 +7,9 @@
 #'
 #' @param var_name A vector of variable names (character) to be parsed
 #' @param FP_ls A vector of standard variable names. If not specified,
-#'  use \code{\link{amf_variables}} to get the latest list.
-#' @param gapfill_postfix Expected suffixes appended to variable being
-#'  gap-filled. The default is "_PI_F".
+#'  use \code{\link{amf_variables}} by default to get the latest list.
+#' @param gapfill_postfix A scalar of expected suffix (character)
+#' appended to a variable that is gap-filled. The default is "_PI_F".
 #'
 #' @return A data frame containing the parsed results for all variables in var_name:
 #' \itemize{
@@ -36,7 +36,7 @@
 #'   \item is_quadruplet - is this a quadruplet, e.g., _1_1_1
 #' }
 #' @export
-#' @seealso amf_read_base, amf_variables, amf_data_aval, amf_var_info
+#' @seealso \code{\link{amf_variables}}
 #' @examples
 #' \dontrun{
 #' # read the BASE from a csv file

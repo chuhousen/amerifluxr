@@ -17,8 +17,8 @@ amf_bif
 The BADM file provides a description, general background, geo-location,
 relevant publications and references for the site. The BADM files also
 list what is measured at the site (this list may include chamber, gradient
-or other eddy covariance measurements that are a superset of the data
-available in AmeriFlux). Also see AmeriFlux webpage
+or other eddy covariance measurements that are a super-set of the data
+available in AmeriFlux). Also see AmeriFlux web page
 \url{https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/}
 for details.
 }

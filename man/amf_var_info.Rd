@@ -7,9 +7,9 @@
 amf_var_info(out_dir = tempdir(), verbose = TRUE)
 }
 \arguments{
-\item{out_dir}{output directory  (default = tempdir())}
+\item{out_dir}{The output directory  (default = tempdir())}
 
-\item{verbose}{Show feedback on download progress (TRUE/FALSE)}
+\item{verbose}{Logical, whether to show feedback on download progress (TRUE/FALSE)}
 }
 \value{
 A data frame of measurement height data for all available AmeriFlux sites

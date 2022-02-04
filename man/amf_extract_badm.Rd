@@ -11,7 +11,8 @@ amf_extract_badm(bif_data, select_group)
 VARIABLE_GROUP, VARIABLE, DATAVALUE, imported from function
 \code{\link{amf_read_bif}}.}
 
-\item{select_group}{A string, selected from VARIABLE_GROUP in the bif_data}
+\item{select_group}{A string (character), selected from VARIABLE_GROUP
+in the \code{bif_data}}
 }
 \value{
 A data frame of re-structured BADM data with the following columns:
@@ -28,10 +29,9 @@ from the imported BADM (BIF) file. Use function \code{\link{amf_read_bif}}
 to import BADM (BIF) file.
 }
 \examples{
-\dontrun{
 # read the BADM BIF file, using an example data file
 bif <- amf_read_bif(file = system.file("extdata",
-                                       "AMF_AA-Flx_BIF_20201218.xlsx",
+                                       "AMF_AA-Flx_BIF_CCBY4_20201218.xlsx",
                                         package = "amerifluxr"))
 
 # get a list of valid VARIALBE_GROUP
@@ -41,7 +41,6 @@ unique(bif$VARIABLE_GROUP)
 amf_extract_badm(bif_data = bif, select_group = "GRP_FLUX_MEASUREMENTS")
 amf_extract_badm(bif_data = bif, select_group = "GRP_IGBP")
 }
-}
 \seealso{
-amf_read_bif
+\code{\link{amf_read_bif}}
 }

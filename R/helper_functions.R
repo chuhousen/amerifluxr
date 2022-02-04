@@ -24,9 +24,15 @@
 #'   \item DATA_POLICY - LEGACY / CCBY4.0 (character)
 #' }
 #'
-#' @return list of AmeriFlux sites
 #' @export
-
+#'
+#' @examples
+#' \dontrun{
+#' # download a list of sites and basic info
+#' sites <- amf_sites()
+#'
+#'}
+#'
 amf_sites <- memoise::memoise(function(){
   # web service returning a full site list with basic site general info
   df <- jsonlite::fromJSON(
@@ -69,11 +75,18 @@ amf_sites <- memoise::memoise(function(){
 #'
 #' Check if the character is a valid AmeriFlux site ID (CC-Sss)
 #'
-#' @param x vector or scalar of characters
+#' @param x A vector or scalar of characters
 #'
 #' @return logical vector or scalar
 #' @export
-
+#'
+#' @examples
+#' \dontrun{
+#' # Check if valid site ID
+#' check_id <- amf_check_site_id(c("US-CRT", "US-crt", "USCRT"))
+#'
+#'}
+#'
 amf_check_site_id <- memoise::memoise(function(x){
   # web service returning a full site list with basic site general info
   df <- jsonlite::fromJSON(
@@ -92,10 +105,10 @@ amf_check_site_id <- memoise::memoise(function(x){
 #'
 #' AmeriFlux data coverage statistics
 #'
-#' @param data_product Data product (string).
+#' @param data_product A scalar of character specifying the data product
 #'  Currently, only "BASE-BADM" is supported.
-#' @param data_policy Data policy (string).
-#'  Currently, "CCBY4.0" and "LEGACY" are supported.
+#' @param data_policy A scalar of character specifying the data policy
+#'  Currently, "CCBY4.0" and "LEGACY" are supported. The default is "CCBY4.0".
 #'
 #' @return AmeriFlux data coverage
 #' \itemize{
@@ -104,7 +117,16 @@ amf_check_site_id <- memoise::memoise(function(x){
 #'   \item publish_years - List of data available years (YYYY)
 #'  }
 #' @export
-
+#'
+#' @examples
+#' \dontrun{
+#' # download the variable availability
+#' data_year <- amf_data_coverage()
+#'
+#' # download variable availability for LEGACY policy
+#' data_year <- amf_data_coverage(data_policy = "LEGACY")
+#' }
+#'
 amf_data_coverage <- memoise::memoise(
   function(
     data_product = "BASE-BADM",

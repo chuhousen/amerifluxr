@@ -27,9 +27,15 @@ for detailed explanation.
   \item MAP - Long-term mean annual average precipitation (mm)
   \item DATA_POLICY - LEGACY / CCBY4.0 (character)
 }
-
-list of AmeriFlux sites
 }
 \description{
 Lists available site (names) and basic meta-data
+}
+\examples{
+\dontrun{
+# download a list of sites and basic info
+sites <- amf_sites()
+
+}
+
 }

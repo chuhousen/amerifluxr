@@ -4,8 +4,8 @@
 #' AmeriFlux BASE data product. See AmeriFlux page
 #' \url{https://ameriflux.lbl.gov/data/measurement-height/} for details.
 #'
-#' @param out_dir output directory  (default = tempdir())
-#' @param verbose Show feedback on download progress (TRUE/FALSE)
+#' @param out_dir The output directory  (default = tempdir())
+#' @param verbose Logical, whether to show feedback on download progress (TRUE/FALSE)
 #'
 #' @return A data frame of measurement height data for all available AmeriFlux sites
 #' #' \itemize{
@@ -55,7 +55,8 @@ amf_var_info <- function(out_dir = tempdir(),
     utils::download.file(
       paste0(amf_server("var_info"), "/", latest),
       file.path(out_dir, latest),
-      quiet = !verbose
+      quiet = !verbose,
+      method = "libcurl"
       )
 
     var_info <- utils::read.csv(

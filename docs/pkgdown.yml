@@ -1,8 +1,8 @@
 pandoc: 2.11.2
-pkgdown: 1.6.1
+pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   data_import: data_import.html
   site_selection: site_selection.html
-last_built: 2022-01-26T21:09Z
+last_built: 2022-02-04T22:27Z
 

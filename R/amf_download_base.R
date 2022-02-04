@@ -34,11 +34,11 @@
 #'  }
 #' @param intended_use_text Enter a brief description of intended use. This will
 #' be recorded in the data download log and emailed to
-#' site's PI (free text).
+#' site's PI (character).
 #' @param out_dir Output directory for downloaded data, default tempdir()
 #' @param verbose Show feedback on download progress (TRUE/FALSE)
 #'
-#' @return A vector of download filenames on the local drive
+#' @return A vector of download file names on the local drive
 #'
 #' @export
 #' @examples

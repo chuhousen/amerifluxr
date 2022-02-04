@@ -43,7 +43,7 @@ of the followings:
 
 \item{intended_use_text}{Enter a brief description of intended use.
 This will be recorded in the data download log and emailed to
-site's PI (free text).}
+site's PI (character).}
 
 \item{out_dir}{Output directory for downloaded data, default tempdir()}
 
@@ -53,7 +53,7 @@ site's PI (free text).}
 or only sites with available BASE data (TRUE)}
 }
 \value{
-A vector of download filenames on the local drive
+A vector of download file names on the local drive
 }
 \description{
 This function downloads all AmeriFlux sites' BADM
@@ -92,5 +92,5 @@ amf_download_bif(user_id = "test",
 
 }
 \seealso{
-amf_download_base
+\code{\link{amf_download_base}}
 }

@@ -10,10 +10,10 @@ amf_parse_basename(var_name, FP_ls = NULL, gapfill_postfix = "_PI_F")
 \item{var_name}{A vector of variable names (character) to be parsed}
 
 \item{FP_ls}{A vector of standard variable names. If not specified,
-use \code{\link{amf_variables}} to get the latest list.}
+use \code{\link{amf_variables}} by default to get the latest list.}
 
-\item{gapfill_postfix}{Expected suffixes appended to variable being
-gap-filled. The default is "_PI_F".}
+\item{gapfill_postfix}{A scalar of expected suffix (character)
+appended to a variable that is gap-filled. The default is "_PI_F".}
 }
 \value{
 A data frame containing the parsed results for all variables in var_name:
@@ -61,5 +61,5 @@ basename_decode <- amf_parse_basename(var_name = colnames(base))
 }
 }
 \seealso{
-amf_read_base, amf_variables, amf_data_aval, amf_var_info
+\code{\link{amf_variables}}
 }

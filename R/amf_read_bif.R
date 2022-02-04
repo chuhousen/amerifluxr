@@ -3,7 +3,7 @@
 #' @description This function read in the BADM data file formatted in BADM
 #' Interchange Format (BIF).
 #'
-#' @param file a BADM data file
+#' @param file A BADM data file
 #'
 #' @return A data frame containing the following 5 columns.
 #' See AmeriFlux website
@@ -18,12 +18,10 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' # read the BADM BIF file, using an example data file
 #' bif <- amf_read_bif(file = system.file("extdata",
 #'                                        "AMF_AA-Flx_BIF_CCBY4_20201218.xlsx",
 #'                                         package = "amerifluxr"))
-#'}
 
 amf_read_bif <- function(file) {
   # stop if missing file parameter

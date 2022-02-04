@@ -7,7 +7,7 @@
 amf_read_bif(file)
 }
 \arguments{
-\item{file}{a BADM data file}
+\item{file}{A BADM data file}
 }
 \value{
 A data frame containing the following 5 columns.
@@ -26,10 +26,8 @@ This function read in the BADM data file formatted in BADM
 Interchange Format (BIF).
 }
 \examples{
-\dontrun{
 # read the BADM BIF file, using an example data file
 bif <- amf_read_bif(file = system.file("extdata",
                                        "AMF_AA-Flx_BIF_CCBY4_20201218.xlsx",
                                         package = "amerifluxr"))
-}
 }
