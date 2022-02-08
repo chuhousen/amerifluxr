@@ -21,7 +21,8 @@ variable definitions and details.
 }
 \details{
 \itemize{
-  \item TIMESTAMP_START - ISO timestamp start of averaging period (YYYYMMDDHHMM)
+  \item TIMESTAMP_START - ISO timestamp start of averaging period
+  (YYYYMMDDHHMM)
   \item TIMESTAMP_END - ISO timestamp end of averaging period (YYYYMMDDHHMM)
   \item CO2 - Carbon Dioxide (CO2) mole fraction in wet air (µmolCO2 mol-1)
   \item H2O - Water (H2O) vapor in mole fraction of wet air (mmolH2O mol-1)
@@ -38,9 +39,12 @@ variable definitions and details.
   \item USTAR - Friction velocity (m s-1)
   \item ZL - data value
   \item MO_LENGTH - Monin-Obukhov Stability parameter (nondimensional)
-  \item W_SIGMA - Standard deviation of vertical velocity fluctuations (m s-1)
-  \item V_SIGMA - Standard deviation of lateral velocity fluctuations (m s-1)
-  \item U_SIGMA - Standard deviation of along-wind velocity fluctuations (m s-1)
+  \item W_SIGMA - Standard deviation of vertical velocity fluctuations
+   (m s-1)
+  \item V_SIGMA - Standard deviation of lateral velocity fluctuations
+  (m s-1)
+  \item U_SIGMA - Standard deviation of along-wind velocity fluctuations
+  (m s-1)
   \item T_SONIC - Sonic temperature (deg C)
   \item T_SONIC_SIGMA - Standard deviation of sonic temperature (deg C)
   \item PA - Atmospheric pressure (kPa)
@@ -51,7 +55,8 @@ variable definitions and details.
   \item WTD - Water table depth (m)
   \item SWC - Soil water content (\%)
   \item NETRAD - Net radiation (W m-2)
-  \item PPFD_IN - Photosynthetic photon flux density, incoming (µmolPhoton m-2 s-1)
+  \item PPFD_IN - Photosynthetic photon flux density, incoming
+  (µmolPhoton m-2 s-1)
   \item SW_IN - Shortwave radiation, incoming (W m-2)
   \item SW_OUT - Shortwave radiation, outgoing (W m-2)
   \item LW_IN - Longwave radiation, incoming (W m-2)

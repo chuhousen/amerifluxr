@@ -18,7 +18,8 @@ for detailed explanation.
   \item IGBP - Vegetation type based on the IGBP definition (character)
   \item URL_AMERIFLUX - Site web site URL, maintained by AmeriFlux (URL)
   \item TOWER_BEGAN - The starting year of flux measurement (YYYY)
-  \item TOWER_END - The ending year of flux measurement (YYYY), NA if still active or unspecified
+  \item TOWER_END - The ending year of flux measurement (YYYY), NA if still
+   active or unspecified
   \item LOCATION_LAT - Latitude of the site (decimal deg ref WGS84)
   \item LOCATION_LONG - Longitude of the site (decimal deg ref WGS84)
   \item LOCATION_ELEV - Elevation of the site above sea level (m)
@@ -27,9 +28,15 @@ for detailed explanation.
   \item MAP - Long-term mean annual average precipitation (mm)
   \item DATA_POLICY - LEGACY / CCBY4.0 (character)
 }
-
-list of AmeriFlux sites
 }
 \description{
 Lists available site (names) and basic meta-data
+}
+\examples{
+\dontrun{
+# download a list of sites and basic info
+sites <- amf_sites()
+
+}
+
 }

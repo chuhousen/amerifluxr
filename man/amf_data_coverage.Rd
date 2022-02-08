@@ -7,11 +7,11 @@
 amf_data_coverage(data_product = "BASE-BADM", data_policy = "CCBY4.0")
 }
 \arguments{
-\item{data_product}{Data product (string).
+\item{data_product}{A scalar of character specifying the data product
 Currently, only "BASE-BADM" is supported.}
 
-\item{data_policy}{Data policy (string).
-Currently, "CCBY4.0" and "LEGACY" are supported.}
+\item{data_policy}{A scalar of character specifying the data policy
+Currently, "CCBY4.0" and "LEGACY" are supported. The default is "CCBY4.0".}
 }
 \value{
 AmeriFlux data coverage
@@ -23,4 +23,14 @@ AmeriFlux data coverage
 }
 \description{
 AmeriFlux data coverage statistics
+}
+\examples{
+\dontrun{
+# download the variable availability
+data_year <- amf_data_coverage()
+
+# download variable availability for LEGACY policy
+data_year <- amf_data_coverage(data_policy = "LEGACY")
+}
+
 }

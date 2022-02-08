@@ -24,19 +24,22 @@ amf_plot_datayear(
  }
  If not specified, use \code{\link{amf_list_data}} by default.}
 
-\item{site_set}{a scalar or vector of character specifying the target
+\item{site_set}{A scalar or vector of character specifying the target
 AmeriFlux Site ID (CC-Sss). If not specified, it returns all sites.}
 
-\item{var_set}{a scalar or vector of character specifying the target
+\item{var_set}{A scalar or vector of character specifying the target
 variables as in basename. See AmeriFlux
 page\url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/#base}
 for a list of variable names. If not specified, it returns all variables.}
 
-\item{nonfilled_only}{logical, whether only showing non-filled variables,
-or both non- and gap-filled variables (default = TRUE)}
+\item{nonfilled_only}{Logical, whether only showing non-filled variables,
+or both non- and gap-filled variables. The default is TRUE.}
 
-\item{year_set}{a scalar or vector of integers. If not specified,
+\item{year_set}{A scalar or vector of integers. If not specified,
 it plots only years with any available data in selected sites and variables}
+}
+\value{
+An object of class 'plotly' from \code{\link[heatmaply]{heatmaply}}
 }
 \description{
 This function visualizes the BASE data availability for
@@ -65,5 +68,5 @@ amf_plot_datayear(var_set = "FCH4",
 }
 }
 \seealso{
-amf_list_data
+\code{\link{amf_list_data}}, \code{\link[heatmaply]{heatmaply}}
 }

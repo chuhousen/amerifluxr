@@ -7,10 +7,10 @@
 amf_list_data(site_set = NULL, var_set = NULL)
 }
 \arguments{
-\item{site_set}{a scalar or vector of character specifying the target
+\item{site_set}{A scalar or vector of character specifying the target
 AmeriFlux Site ID (CC-Sss). If not specified, it returns all sites.}
 
-\item{var_set}{a scalar or vector of character specifying the target
+\item{var_set}{A scalar or vector of character specifying the target
 variables as in basename. See AmeriFlux
 page\url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/#base}
 for a list of variable names. If not specified, it returns all variables.}

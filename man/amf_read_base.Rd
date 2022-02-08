@@ -7,20 +7,20 @@
 amf_read_base(file, unzip = TRUE, parse_timestamp = FALSE)
 }
 \arguments{
-\item{file}{a BASE data file, either in a zipped file or a comma-separate
+\item{file}{A BASE data file, either in a zipped file or a comma-separate
 value (csv) file}
 
-\item{unzip}{whether to unzip. The default is TRUE. Set FALSE if reading
-from a previously unzipped csv file.}
+\item{unzip}{Logical, whether to unzip. The default is TRUE. Set FALSE if
+reading from a previously unzipped csv file.}
 
-\item{parse_timestamp}{whether to parse the timestamp. Set TRUE to parse
-and add timekeeping columns.}
+\item{parse_timestamp}{Logical, whether to parse the time stamp. Set TRUE
+to parse and add timekeeping columns.}
 }
 \value{
 A data frame containing data. See AmeriFlux website
  \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/}
 for details about file format, variable definition, units, and convention.
-If parse_timestamp = TRUE, the following six time-keeping columns are
+If \code{parse_timestamp} = TRUE, the following six time-keeping columns are
 added in the returned data frame:
 \itemize{
   \item YEAR - Year (YYYY)
@@ -28,7 +28,8 @@ added in the returned data frame:
   \item DAY - Day of the month (DD)
   \item DOY - Day of the year (DDD)
   \item HOUR - Hour of the day (HH), based on the middle time of the interval
-  \item MINUTE - Minute of the hour (mm), based on the middle time of the interval
+  \item MINUTE - Minute of the hour (mm), based on the middle time of the
+  interval
   \item TIMESTAMP - An object of class "POSIXlt" in the UTC time zone,
   based on the middle time of the interval
 }
@@ -41,7 +42,6 @@ for details about BASE data product. Use \code{\link{amf_variables}}
 to get a list of standard variable names and units.
 }
 \examples{
-\dontrun{
 # read the BASE from a zip file, using the example data file
 base <- amf_read_base(file = system.file("extdata",
                                          "AMF_US-CRT_BASE-BADM_2-5.zip",
@@ -56,7 +56,6 @@ base <- amf_read_base(file = system.file("extdata",
                       unzip = FALSE,
                       parse_timestamp = FALSE)
 }
-}
 \seealso{
-amf_variables
+\code{\link{amf_parse_basename}}, \code{\link{amf_filter_base}}
 }

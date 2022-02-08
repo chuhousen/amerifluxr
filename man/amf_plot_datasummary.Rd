@@ -34,13 +34,16 @@ page\url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/#base}
 for a list of variable names. If not specified, it returns all variables.}
 
 \item{nonfilled_only}{Logical, whether only showing non-filled variables,
-or both non- and gap-filled variables (default = TRUE)}
+or both non- and gap-filled variables. The default is TRUE.}
 
 \item{show_cluster}{Logical, whether showing clustering (dendrogram) of
 site-variables. The default is FALSE.}
 
 \item{scale}{Logical, whether the values should be centered and scaled
 among site-variables. The default is FALSE.}
+}
+\value{
+An object of class 'plotly' from \code{\link[heatmaply]{heatmaply}}
 }
 \description{
 This function visualizes the BASE data summary for
@@ -76,5 +79,5 @@ amf_plot_datasummary(site_set = sites$SITE_ID,
 }
 }
 \seealso{
-amf_summarize_data
+\code{\link{amf_summarize_data}}, \code{\link[heatmaply]{heatmaply}}
 }

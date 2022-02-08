@@ -10,34 +10,44 @@ amf_parse_basename(var_name, FP_ls = NULL, gapfill_postfix = "_PI_F")
 \item{var_name}{A vector of variable names (character) to be parsed}
 
 \item{FP_ls}{A vector of standard variable names. If not specified,
-use \code{\link{amf_variables}} to get the latest list.}
+use \code{\link{amf_variables}} by default to get the latest list.}
 
-\item{gapfill_postfix}{Expected suffixes appended to variable being
-gap-filled. The default is "_PI_F".}
+\item{gapfill_postfix}{A scalar of expected suffix (character)
+appended to a variable that is gap-filled. The default is "_PI_F".}
 }
 \value{
-A data frame containing the parsed results for all variables in var_name:
+A data frame containing the parsed results for all variables in
+\code{var_name}:
 \itemize{
   \item variable_name - original variable name
   \item basename - associated basename, w/o qualifier
   \item qualifier_gf - qualifier associated with gap-filling
-  \item qualifier_pi - qualifier associated with PI version, excluding gap-filling
+  \item qualifier_pi - qualifier associated with PI version, excluding
+   gap-filling
   \item qualifier_pos - qualifier associated with position
-  \item qualifier_ag - qualifier associated with layer-aggregation, e.g., _N, _SD
+  \item qualifier_ag - qualifier associated with layer-aggregation,
+  e.g., _N, _SD
   \item layer_index - layer index provided, if any
   \item H_index - H index provided, if any
   \item V_index - V index provided, if any
   \item R_index - R index provided, if any
-  \item is_correct_basename - is the parsed basename recognized in FP-Standard
+  \item is_correct_basename - is the parsed basename recognized in
+  FP-Standard
   \item is_pi_provide - is this a PI provided variable e.g., _PI
   \item is_gapfill - is this a gap-filled variable, _PF_F or _F
-  \item is_fetch - is this a fetch quantile variable, e.g., FETCH_70...FETCH_90
-  \item is_layer_aggregated - is this a layer-integrated var, i.e., _#
-  \item is_layer_SD - is this a standard deviation of layer-integrated var, i.e., spatial variability
-  \item is_layer_number - is this a number of samples of layer-integrated var, i.e., spatial variability
-  \item is_replicate_aggregated - is this a replicate-averaged var, e.g., _1_1_A
-  \item is_replicate_SD - is this a standard deviation of replicate-averaged var, e.g., _1_1_A_SD
-  \item is_replicate_number - is this a number of samples of replicate-averaged var, e.g., _1_1_A_N
+  \item is_fetch - is this a fetch quantile variable, e.g., FETCH_70...
+  \item is_layer_aggregated - is this a layer-integrated variable,
+  i.e., _#
+  \item is_layer_SD - is this a standard deviation of layer-integrated
+  variable, i.e., spatial variability
+  \item is_layer_number - is this a number of samples of layer-integrated
+  variable, i.e., spatial variability
+  \item is_replicate_aggregated - is this a replicate-averaged variable,
+   e.g., _1_1_A
+  \item is_replicate_SD - is this a standard deviation of replicate-averaged
+   variable, e.g., _1_1_A_SD
+  \item is_replicate_number - is this a number of samples of
+  replicate-averaged variable, e.g., _1_1_A_N
   \item is_quadruplet - is this a quadruplet, e.g., _1_1_1
 }
 }
@@ -61,5 +71,5 @@ basename_decode <- amf_parse_basename(var_name = colnames(base))
 }
 }
 \seealso{
-amf_read_base, amf_variables, amf_data_aval, amf_var_info
+\code{\link{amf_variables}}
 }

@@ -7,36 +7,46 @@
 #'
 #' @param var_name A vector of variable names (character) to be parsed
 #' @param FP_ls A vector of standard variable names. If not specified,
-#'  use \code{\link{amf_variables}} to get the latest list.
-#' @param gapfill_postfix Expected suffixes appended to variable being
-#'  gap-filled. The default is "_PI_F".
+#'  use \code{\link{amf_variables}} by default to get the latest list.
+#' @param gapfill_postfix A scalar of expected suffix (character)
+#' appended to a variable that is gap-filled. The default is "_PI_F".
 #'
-#' @return A data frame containing the parsed results for all variables in var_name:
+#' @return A data frame containing the parsed results for all variables in
+#' \code{var_name}:
 #' \itemize{
 #'   \item variable_name - original variable name
 #'   \item basename - associated basename, w/o qualifier
 #'   \item qualifier_gf - qualifier associated with gap-filling
-#'   \item qualifier_pi - qualifier associated with PI version, excluding gap-filling
+#'   \item qualifier_pi - qualifier associated with PI version, excluding
+#'    gap-filling
 #'   \item qualifier_pos - qualifier associated with position
-#'   \item qualifier_ag - qualifier associated with layer-aggregation, e.g., _N, _SD
+#'   \item qualifier_ag - qualifier associated with layer-aggregation,
+#'   e.g., _N, _SD
 #'   \item layer_index - layer index provided, if any
 #'   \item H_index - H index provided, if any
 #'   \item V_index - V index provided, if any
 #'   \item R_index - R index provided, if any
-#'   \item is_correct_basename - is the parsed basename recognized in FP-Standard
+#'   \item is_correct_basename - is the parsed basename recognized in
+#'   FP-Standard
 #'   \item is_pi_provide - is this a PI provided variable e.g., _PI
 #'   \item is_gapfill - is this a gap-filled variable, _PF_F or _F
-#'   \item is_fetch - is this a fetch quantile variable, e.g., FETCH_70...FETCH_90
-#'   \item is_layer_aggregated - is this a layer-integrated var, i.e., _#
-#'   \item is_layer_SD - is this a standard deviation of layer-integrated var, i.e., spatial variability
-#'   \item is_layer_number - is this a number of samples of layer-integrated var, i.e., spatial variability
-#'   \item is_replicate_aggregated - is this a replicate-averaged var, e.g., _1_1_A
-#'   \item is_replicate_SD - is this a standard deviation of replicate-averaged var, e.g., _1_1_A_SD
-#'   \item is_replicate_number - is this a number of samples of replicate-averaged var, e.g., _1_1_A_N
+#'   \item is_fetch - is this a fetch quantile variable, e.g., FETCH_70...
+#'   \item is_layer_aggregated - is this a layer-integrated variable,
+#'   i.e., _#
+#'   \item is_layer_SD - is this a standard deviation of layer-integrated
+#'   variable, i.e., spatial variability
+#'   \item is_layer_number - is this a number of samples of layer-integrated
+#'   variable, i.e., spatial variability
+#'   \item is_replicate_aggregated - is this a replicate-averaged variable,
+#'    e.g., _1_1_A
+#'   \item is_replicate_SD - is this a standard deviation of replicate-averaged
+#'    variable, e.g., _1_1_A_SD
+#'   \item is_replicate_number - is this a number of samples of
+#'   replicate-averaged variable, e.g., _1_1_A_N
 #'   \item is_quadruplet - is this a quadruplet, e.g., _1_1_1
 #' }
 #' @export
-#' @seealso amf_read_base, amf_variables, amf_data_aval, amf_var_info
+#' @seealso \code{\link{amf_variables}}
 #' @examples
 #' \dontrun{
 #' # read the BASE from a csv file
@@ -58,68 +68,74 @@ amf_parse_basename <- function(
 
   # stop if missing var_name parameter
   if (missing(var_name)) {
-    stop('var_name not specified...')
+    stop("var_name not specified...")
   }
 
   # stop if var_name parameter not character
   if (!is.character(var_name)) {
-    stop('var_name not recognized...')
+    stop("var_name not recognized...")
   }
 
   # IF FP_ls not specified, use amf_variables() by default
-  if(is.null(FP_ls)){
+  if (is.null(FP_ls)) {
     FP_ls <- amerifluxr::amf_variables()[, c("Name")]
   }
 
   # stop if FP_ls parameter not character
   if (!is.character(FP_ls)) {
-    stop('FP_ls not recognized...')
+    stop("FP_ls not recognized...")
   }
 
   if (!length(FP_ls) > 1) {
-    stop('FP_ls not recognized...')
+    stop("FP_ls not recognized...")
   }
 
   # a data frame for parsing results
   basename_decode <- data.frame(
-    variable_name = var_name,   # original variable name
-    working_names = NA,         # working variable name, dropped in output
-    basename = NA,              # associated basename, w/o qualifier
-    qualifier_gf = NA,          # qualifier associated with gap-filling
-    qualifier_pi = NA,          # qualifier associated with PI version, excluding gap-filling
-    qualifier_pos = NA,         # qualifier associated with position
-    qualifier_ag = NA,          # qualifier associated with layer-aggregation, e.g., _N, _SD
-    layer_index = NA,           # layer index provided, if any
-    H_index = NA,               # H index provided, if any
-    V_index = NA,               # V index provided, if any
-    R_index = NA,               # R index provided, if any
-    is_correct_basename = NA,   # is the parsed basename recognized in FP-Standard
-    is_pi_provide = NA,         # is this a PI provided variable e.g., _PI
-    is_gapfill = NA,            # is this a gap-filled variable, _PF_F or _F
-    is_fetch = NA,              # is this a fetch quantile variable, e.g., FETCH_70...FETCH_90
-    is_layer_aggregated = NA,   # is this a layer-integrated var, i.e., _#
-    is_layer_SD = NA,           # is this a standard deviation of layer-integrated var, i.e., spatial variability
-    is_layer_number = NA,       # is this a number of samples of layer-integrated var, i.e., spatial variability
-    is_replicate_aggregated = NA,  # is this a replicate-averaged var, i.e., _<H>_<V>_A
-    is_replicate_SD = NA,       # is this a standard deviation of replicate-averaged var, i.e., _<H>_<V>_A_SD
-    is_replicate_number = NA,   # is this a number of samples of replicate-averaged var, i.e., _<H>_<V>_A_N
-    is_quadruplet = NA,         # is this a quadruplet, i.e., _<H>_<V>_<R>
+    variable_name = var_name,
+    working_names = NA,
+    basename = NA,
+    qualifier_gf = NA,
+    qualifier_pi = NA,
+    qualifier_pos = NA,
+    qualifier_ag = NA,
+    layer_index = NA,
+    H_index = NA,
+    V_index = NA,
+    R_index = NA,
+    is_correct_basename = NA,
+    is_pi_provide = NA,
+    is_gapfill = NA,
+    is_fetch = NA,
+    is_layer_aggregated = NA,
+    is_layer_SD = NA,
+    is_layer_number = NA,
+    is_replicate_aggregated = NA,
+    is_replicate_SD = NA,
+    is_replicate_number = NA,
+    is_quadruplet = NA,
     stringsAsFactors = FALSE
     )
 
   #####################################################################
   ## locate gap-filled variables
-  basename_decode$is_gapfill <- grepl(paste0("(", gapfill_postfix, "$|", gapfill_postfix, "_)"),
-                                      basename_decode$variable_name,
-                                      perl = TRUE)
+  basename_decode$is_gapfill <-
+    grepl(
+      paste0("(", gapfill_postfix, "$|", gapfill_postfix, "_)"),
+      basename_decode$variable_name,
+      perl = TRUE
+    )
   basename_decode$qualifier_gf <- ifelse(basename_decode$is_gapfill,
                                          gapfill_postfix,
                                          NA)
-  basename_decode$working_names <- ifelse(basename_decode$is_gapfill,
-                                          sub(gapfill_postfix,
-                                              "",
-                                              basename_decode$variable_name),
-                                          basename_decode$variable_name)
+  basename_decode$working_names <-
+    ifelse(
+      basename_decode$is_gapfill,
+      sub(gapfill_postfix,
+          "",
+          basename_decode$variable_name),
+      basename_decode$variable_name
+    )
 
   ## locate PI provided (_PI) variables
   basename_decode$is_pi_provide <- grepl("_PI",
@@ -321,12 +337,15 @@ amf_parse_basename <- function(
 
   basename_decode$qualifier_pos <- ifelse(
     basename_decode$is_layer_aggregated,
-    substr(basename_decode$working_names,
-           start = regexpr("_[[:digit:]]+",
-                           basename_decode$working_names,
-                           perl = TRUE) + ifelse(basename_decode$is_fetch, 3, 0),
-           stop = nchar(basename_decode$working_names)),
-    basename_decode$qualifier_pos)
+    substr(
+      basename_decode$working_names,
+      start = regexpr("_[[:digit:]]+",
+                      basename_decode$working_names,
+                      perl = TRUE) + ifelse(basename_decode$is_fetch, 3, 0),
+      stop = nchar(basename_decode$working_names)
+    ),
+    basename_decode$qualifier_pos
+  )
 
   # parse position qualifier
   for (i7 in seq_len(nrow(basename_decode))) {

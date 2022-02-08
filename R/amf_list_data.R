@@ -5,9 +5,9 @@
 #' \url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/} for details
 #' about the variable naming.
 #'
-#' @param site_set a scalar or vector of character specifying the target
+#' @param site_set A scalar or vector of character specifying the target
 #' AmeriFlux Site ID (CC-Sss). If not specified, it returns all sites.
-#' @param var_set a scalar or vector of character specifying the target
+#' @param var_set A scalar or vector of character specifying the target
 #' variables as in basename. See AmeriFlux
 #' page\url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/#base}
 #' for a list of variable names. If not specified, it returns all variables.
@@ -46,7 +46,7 @@ amf_list_data <- function(site_set = NULL,
     # get latest data variable availability
     data_aval <- utils::read.csv(
       amf_server("data_variable"),
-      header = T,
+      header = TRUE,
       skip = 1,
       stringsAsFactors = FALSE
     )

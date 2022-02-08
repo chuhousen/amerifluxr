@@ -7,11 +7,19 @@
 amf_check_site_id(x)
 }
 \arguments{
-\item{x}{vector or scalar of characters}
+\item{x}{A vector or scalar of characters}
 }
 \value{
 logical vector or scalar
 }
 \description{
 Check if the character is a valid AmeriFlux site ID (CC-Sss)
+}
+\examples{
+\dontrun{
+# Check if valid site ID
+check_id <- amf_check_site_id(c("US-CRT", "US-crt", "USCRT"))
+
+}
+
 }

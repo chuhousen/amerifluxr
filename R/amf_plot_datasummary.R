@@ -23,14 +23,13 @@
 #' page\url{https://ameriflux.lbl.gov/data/aboutdata/data-variables/#base}
 #' for a list of variable names. If not specified, it returns all variables.
 #' @param nonfilled_only Logical, whether only showing non-filled variables,
-#'  or both non- and gap-filled variables (default = TRUE)
+#'  or both non- and gap-filled variables. The default is TRUE.
 #' @param show_cluster Logical, whether showing clustering (dendrogram) of
 #'  site-variables. The default is FALSE.
 #' @param scale Logical, whether the values should be centered and scaled
 #' among site-variables. The default is FALSE.
-#'
-#' @seealso amf_summarize_data
-#'
+#' @return An object of class 'plotly' from \code{\link[heatmaply]{heatmaply}}
+#' @seealso \code{\link{amf_summarize_data}}, \code{\link[heatmaply]{heatmaply}}
 #' @export
 #'
 #' @examples
@@ -114,14 +113,15 @@ amf_plot_datasummary <- function(data_sum = NULL,
 
   # check if the default columns exist
   if (!is.data.frame(data_sum)) {
-    stop('data_sum format unrecognized...')
-  } else if (sum(c("SITE_ID", "VARIABLE", "BASENAME", "GAP_FILLED") %in% colnames(data_sum)) != 4) {
-    stop('data_sum format unrecognized...')
+    stop("data_sum format unrecognized...")
+  } else if (sum(c("SITE_ID", "VARIABLE", "BASENAME", "GAP_FILLED") %in%
+                 colnames(data_sum)) != 4) {
+    stop("data_sum format unrecognized...")
   }
 
   # subset gap-/non-filled
   if (nonfilled_only)
-    data_sum <- data_sum[!data_sum$GAP_FILLED,]
+    data_sum <- data_sum[!data_sum$GAP_FILLED, ]
 
   ## If unspecified, obtain year_set from all available years
   data_sum_viz <- data_sum[, 5:ncol(data_sum)]
@@ -136,7 +136,7 @@ amf_plot_datasummary <- function(data_sum = NULL,
 
   p <- heatmaply::heatmaply(
     data_sum_viz,
-    dendrogram = ifelse(show_cluster, "row", "none") ,
+    dendrogram = ifelse(show_cluster, "row", "none"),
     xlab = "",
     ylab = "",
     main = "",

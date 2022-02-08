@@ -1,14 +1,14 @@
 #' Get metadata availability
 #'
-#' @description This function obtains the metadata (i.e., BADM) availability for
-#' all or selected AmeriFlux sites. See AmeriFlux page
+#' @description This function obtains the metadata (i.e., BADM) availability
+#' for all or selected AmeriFlux sites. See AmeriFlux page
 #' \url{https://ameriflux.lbl.gov/data/badm/} for details about the BADM.
 #'
-#' @param site_set a scalar or vector of character specifying the target AmeriFlux
-#'  Site ID (CC-Sss). If not specified, it returns all sites.
-#' @param group_only logical. Should it return availability for BADM variable
-#'  groups or variables? BADM Groups contain Variables that describe related
-#'  metadata or an observation with related metadata.
+#' @param site_set A scalar or vector of character specifying the target
+#' AmeriFlux Site ID (CC-Sss). If not specified, it returns all sites.
+#' @param group_only Logical (TRUE/FALSE). Should it return availability for
+#'  BADM variable groups or variables? BADM Groups contain Variables that
+#'  describe related metadata or an observation with related metadata.
 #'
 #' @return A data frame of data variable availability (per year) for selected
 #'  AmeriFlux sites. The first column contains the SITE ID. The remaining
@@ -57,11 +57,11 @@ amf_list_metadata <- function(site_set = NULL,
         ))
         site_set <- site_set[which(check_id)]
         metadata_aval <-
-          metadata_aval[metadata_aval$SITE_ID %in% site_set,]
+          metadata_aval[metadata_aval$SITE_ID %in% site_set, ]
 
       } else if (!any(!check_id)) {
         metadata_aval <-
-          metadata_aval[metadata_aval$SITE_ID %in% site_set,]
+          metadata_aval[metadata_aval$SITE_ID %in% site_set, ]
 
       } else{
         stop("Download failed, no valid Site ID in site_set")

@@ -48,16 +48,15 @@ of the followings:
   \item "other"
 }}
 
-\item{intended_use_text}{Enter a brief description of intended use. This will
-be recorded in the data download log and emailed to
-site's PI (free text).}
+\item{intended_use_text}{Enter a brief description of intended use. This
+will be recorded in the download log and emailed to site's PI (character).}
 
 \item{out_dir}{Output directory for downloaded data, default tempdir()}
 
 \item{verbose}{Show feedback on download progress (TRUE/FALSE)}
 }
 \value{
-A vector of download filenames on the local drive
+A vector of download file names on the local drive
 }
 \description{
 This function downloads AmeriFlux BASE and BADM data files.
