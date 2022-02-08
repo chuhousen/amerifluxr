@@ -49,7 +49,7 @@ amf_summarize_data <- function(site_set = NULL,
     # get latest data summary
     data_sum <- utils::read.csv(
       amf_server("data_summary"),
-      header = T,
+      header = TRUE,
       skip = 1,
       stringsAsFactors = FALSE
     )

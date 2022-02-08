@@ -16,11 +16,10 @@ test_that("check endpoint function", {
 
 test_that("check na.max na.min function", {
 
-  expect_equal(na.max(c(1:10)), 10)
-  expect_equal(na.max(c(1:10, NA)), 10)
-  expect_equal(na.max(c(NA, NA)), NA)
-  expect_equal(na.min(c(1:10)), 1)
-  expect_equal(na.min(c(1:10, NA)), 1)
-  expect_equal(na.min(c(NA, NA)), NA)
+  expect_equal(na_max(c(1:10)), 10)
+  expect_equal(na_max(c(1:10, NA)), 10)
+  expect_equal(na_max(c(NA, NA)), NA)
+  expect_equal(na_min(c(1:10)), 1)
+  expect_equal(na_min(c(1:10, NA)), 1)
+  expect_equal(na_min(c(NA, NA)), NA)
 })
-

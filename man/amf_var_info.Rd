@@ -9,20 +9,21 @@ amf_var_info(out_dir = tempdir(), verbose = TRUE)
 \arguments{
 \item{out_dir}{The output directory  (default = tempdir())}
 
-\item{verbose}{Logical, whether to show feedback on download progress (TRUE/FALSE)}
+\item{verbose}{Logical, whether to show download progress (TRUE/FALSE)}
 }
 \value{
-A data frame of measurement height data for all available AmeriFlux sites
+A data frame of measurement height data for all AmeriFlux sites
 #' \itemize{
   \item Site_ID - Six character site identifier (CC-Sss)
   \item Variable - Variable name of the data included in the BASE file
   \item Start_Date - Date when the information first applies
   \item Height - Distance above the ground surface in meters
   \item Instrument_Model - Instrument model used to collect the data variable
-  \item Instrument_Model2 - A second instrument model used to collect the data variable
+  \item Instrument_Model2 - A second instrument model used to collect
+   the data variable
   \item Comment - Additional information provided by the site team
-  \item BASE_Version - The most recent BASE data product version number for which the
-   information applies
+  \item BASE_Version - The most recent BASE data product version number for
+  which the information applies
   }
 }
 \description{

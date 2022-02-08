@@ -20,6 +20,9 @@ Below is suggested by CRAN, but not changed. A brief explanation is included.
     speeds and downloads could be low due to network latency and therefore hard
     to stick to the < 5 sec limit. We refer to the unit tests on github actions
     for test coverage.  
+
+In addition, I check the package using 'goodpractice' and 'lintr packages, and
+fix the style format as extensive as possible.
   
 ## Test environments, local, GitHub-CI and r-hub
 

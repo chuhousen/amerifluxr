@@ -32,9 +32,8 @@
 #'   "\item "education" (i.e., Education (Teacher or Student))
 #'    \item "other"
 #'  }
-#' @param intended_use_text Enter a brief description of intended use. This will
-#' be recorded in the data download log and emailed to
-#' site's PI (character).
+#' @param intended_use_text Enter a brief description of intended use. This
+#' will be recorded in the download log and emailed to site's PI (character).
 #' @param out_dir Output directory for downloaded data, default tempdir()
 #' @param verbose Show feedback on download progress (TRUE/FALSE)
 #'
@@ -83,19 +82,19 @@ amf_download_base <- function(user_id,
   ## check all inputs valid
   if (!is.character(user_id) |
       length(user_id) != 1) {
-    stop('user_id should be a string...')
+    stop("user_id should be a string...")
   }
 
   if (!is.character(user_email) |
       length(user_email) != 1 |
       !grepl("@", user_email)) {
-    stop('user_email not a valid email...')
+    stop("user_email not a valid email...")
   }
 
   # check if site_id are valid site ID
   check_id <- amf_check_site_id(site_id)
   ## for multiple site ids
-  if(length(site_id) > 1){
+  if (length(site_id) > 1) {
     if (any(!check_id)) {
       warning(paste(
         paste(site_id[which(!check_id)], collapse = ", "),
@@ -104,7 +103,7 @@ amf_download_base <- function(user_id,
       site_id <- site_id[which(check_id)]
 
     }
-  } else if (length(site_id) == 1){
+  } else if (length(site_id) == 1) {
     ## for single site id, need to work exception for AA-Flx, AA-Net
     if (check_id | site_id == "AA-Flx" | site_id == "AA-Net") {
       site_id <- site_id
@@ -114,7 +113,7 @@ amf_download_base <- function(user_id,
 
     }
   }
-  if(length(site_id) == 0){
+  if (length(site_id) == 0) {
     stop("No valid Site ID in site_id...")
   }
 
@@ -132,18 +131,18 @@ amf_download_base <- function(user_id,
     return(intended_use_verbse)
   }
 
-  if(is.null(intended_use_cat(intended_use = intended_use))){
+  if (is.null(intended_use_cat(intended_use = intended_use))) {
     stop("Invalid intended_use input...")
   }
 
   # check if out_dir reachable
-  if(!dir.exists(out_dir)){
+  if (!dir.exists(out_dir)) {
     stop("out_dir not valid...")
   }
 
   # prompt for data policy agreement
   if (data_policy == "CCBY4.0") {
-    if (verbose){
+    if (verbose) {
       cat("Data use guidelines for AmeriFlux CC-BY-4.0 Data Policy:\n",
           fill = TRUE)
       cat(
@@ -176,7 +175,7 @@ amf_download_base <- function(user_id,
       )
     }
   } else if (data_policy == "LEGACY") {
-    if (verbose){
+    if (verbose) {
       cat("Data use guidelines for AmeriFlux LEGACY License:\n",
           fill = TRUE)
       cat(
@@ -297,11 +296,16 @@ amf_download_base <- function(user_id,
 
       # get zip file names
       outfname <- strsplit(ftplink, c("/"))
-      outfname <- sapply(outfname,  utils::tail, n = 1)
+      outfname <- unlist(lapply(outfname,  utils::tail, n = 1))
       outfname <-
         substr(outfname,
                1,
-               sapply(outfname, regexpr, pattern = "?=", fixed = TRUE) - 1)
+               unlist(lapply(
+                 outfname,
+                 regexpr,
+                 pattern = "?=",
+                 fixed = TRUE
+               )) - 1)
 
       ## check if any site_id has no data
       if (length(outfname) < length(site_id)) {
@@ -320,7 +324,7 @@ amf_download_base <- function(user_id,
       }
 
       ## check if downloaded files exist
-      miss_download <- which(!sapply(output_zip_file, file.exists))
+      miss_download <- which(!unlist(lapply(output_zip_file, file.exists)))
       if (length(miss_download) > 0) {
         warning(paste("Cannot download",
                       output_zip_file[miss_download],

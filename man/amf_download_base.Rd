@@ -48,9 +48,8 @@ of the followings:
   \item "other"
 }}
 
-\item{intended_use_text}{Enter a brief description of intended use. This will
-be recorded in the data download log and emailed to
-site's PI (character).}
+\item{intended_use_text}{Enter a brief description of intended use. This
+will be recorded in the download log and emailed to site's PI (character).}
 
 \item{out_dir}{Output directory for downloaded data, default tempdir()}
 

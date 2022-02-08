@@ -20,7 +20,8 @@ test_that("Check site id check function", {
   expect_true(!amf_check_site_id("USCRT"))
 
   amf_sites_out <- amf_sites()
-  expect_equal(sum(amf_check_site_id(amf_sites_out$SITE_ID)), nrow(amf_sites_out))
+  expect_equal(sum(amf_check_site_id(amf_sites_out$SITE_ID)),
+               nrow(amf_sites_out))
 
 })
 

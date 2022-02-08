@@ -26,7 +26,7 @@
 #'  or both non- and gap-filled variables. The default is TRUE.
 #' @param year_set A scalar or vector of integers. If not specified,
 #' it plots only years with any available data in selected sites and variables
-#' @return An object of class 'plotly' created by \code{\link[heatmaply]{heatmaply}}
+#' @return An object of class 'plotly' from \code{\link[heatmaply]{heatmaply}}
 #' @seealso \code{\link{amf_list_data}}, \code{\link[heatmaply]{heatmaply}}
 #' @export
 #'
@@ -55,7 +55,7 @@ amf_plot_datayear <- function(data_aval = NULL,
                               year_set = NULL) {
 
   # check either site_set or var_set exist
-  if (is.null(site_set) & is.null(var_set)){
+  if (is.null(site_set) & is.null(var_set)) {
     stop("Specify either site_set or var_set...")
   }
 
@@ -84,9 +84,10 @@ amf_plot_datayear <- function(data_aval = NULL,
 
   # check if the default columns exist
   if (!is.data.frame(data_aval)) {
-    stop('data_aval format unrecognized...')
-  } else if (sum(c("SITE_ID", "VARIABLE", "BASENAME", "GAP_FILLED") %in% colnames(data_aval)) != 4) {
-    stop('data_aval format unrecognized...')
+    stop("data_aval format unrecognized...")
+  } else if (sum(c("SITE_ID", "VARIABLE", "BASENAME", "GAP_FILLED")
+                 %in% colnames(data_aval)) != 4) {
+    stop("data_aval format unrecognized...")
   }
 
   # If unspecified, obtain var_set through amf_variables()
@@ -107,9 +108,9 @@ amf_plot_datayear <- function(data_aval = NULL,
   }
 
   #### subset data_aval
-  var_year <- data_aval[data_aval$BASENAME %in% var_set,]
+  var_year <- data_aval[data_aval$BASENAME %in% var_set, ]
   if (nonfilled_only)
-    var_year <- var_year[!var_year$GAP_FILLED,]
+    var_year <- var_year[!var_year$GAP_FILLED, ]
 
   ## If unspecified, obtain year_set from all available years
   var_year_viz <- var_year[, 5:ncol(var_year)]
@@ -118,7 +119,8 @@ amf_plot_datayear <- function(data_aval = NULL,
 
   #  return years with any available data
   year_ava <-
-    as.numeric(gsub("Y", "", colnames(var_year_viz[, apply(var_year_viz, 2, sum) > 0])))
+    as.numeric(gsub("Y", "", colnames(var_year_viz[, apply(
+      var_year_viz, 2, sum) > 0])))
 
   if (is.null(year_set)) {
     year_set <- year_ava
@@ -141,7 +143,7 @@ amf_plot_datayear <- function(data_aval = NULL,
   var_year_viz <-
     var_year_viz[apply(var_year_viz, 1, sum) > 0, ]
 
-  if(nrow(var_year_viz) > 500)
+  if (nrow(var_year_viz) > 500)
     warning(
       "Too many site-variables, consider subseting either..."
     )

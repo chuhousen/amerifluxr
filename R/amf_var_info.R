@@ -5,19 +5,20 @@
 #' \url{https://ameriflux.lbl.gov/data/measurement-height/} for details.
 #'
 #' @param out_dir The output directory  (default = tempdir())
-#' @param verbose Logical, whether to show feedback on download progress (TRUE/FALSE)
+#' @param verbose Logical, whether to show download progress (TRUE/FALSE)
 #'
-#' @return A data frame of measurement height data for all available AmeriFlux sites
+#' @return A data frame of measurement height data for all AmeriFlux sites
 #' #' \itemize{
 #'   \item Site_ID - Six character site identifier (CC-Sss)
 #'   \item Variable - Variable name of the data included in the BASE file
 #'   \item Start_Date - Date when the information first applies
 #'   \item Height - Distance above the ground surface in meters
 #'   \item Instrument_Model - Instrument model used to collect the data variable
-#'   \item Instrument_Model2 - A second instrument model used to collect the data variable
+#'   \item Instrument_Model2 - A second instrument model used to collect
+#'    the data variable
 #'   \item Comment - Additional information provided by the site team
-#'   \item BASE_Version - The most recent BASE data product version number for which the
-#'    information applies
+#'   \item BASE_Version - The most recent BASE data product version number for
+#'   which the information applies
 #'   }
 #' @export
 #' @examples
@@ -30,7 +31,7 @@ amf_var_info <- function(out_dir = tempdir(),
                          verbose = TRUE) {
 
   # check if out_dir reachable
-  if(!dir.exists(out_dir))
+  if (!dir.exists(out_dir))
     stop("out_dir not valid...")
 
   # Get a list of hosted data files
@@ -47,8 +48,6 @@ amf_var_info <- function(out_dir = tempdir(),
 
     # get the latest version of measurement height data
     time_ls <- as.numeric(substr(filenames, start = 24, stop = 31))
-    var_info_ver <- time_ls[which(time_ls == max(time_ls))]
-
     latest <- filenames[which(time_ls == max(time_ls))]
 
     # download data to designated output directory
@@ -60,7 +59,8 @@ amf_var_info <- function(out_dir = tempdir(),
       )
 
     var_info <- utils::read.csv(
-      file.path(out_dir, latest), header = T,
+      file.path(out_dir, latest),
+      header = TRUE,
       na.strings = c(""),
       stringsAsFactors = FALSE
       )

@@ -46,7 +46,7 @@ amf_list_data <- function(site_set = NULL,
     # get latest data variable availability
     data_aval <- utils::read.csv(
       amf_server("data_variable"),
-      header = T,
+      header = TRUE,
       skip = 1,
       stringsAsFactors = FALSE
     )

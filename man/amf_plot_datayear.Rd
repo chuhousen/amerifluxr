@@ -39,7 +39,7 @@ or both non- and gap-filled variables. The default is TRUE.}
 it plots only years with any available data in selected sites and variables}
 }
 \value{
-An object of class 'plotly' created by \code{\link[heatmaply]{heatmaply}}
+An object of class 'plotly' from \code{\link[heatmaply]{heatmaply}}
 }
 \description{
 This function visualizes the BASE data availability for

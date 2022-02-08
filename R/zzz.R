@@ -1,13 +1,13 @@
 # Blind functions called at startup
 
-# na.max and na.min functions to return
+# na_max and na_min functions to return
 # max and min values where not Inf is returned
 # but NA
-na.max <- function(x) {
+na_max <- function(x) {
   ifelse(any(!is.na(x)), max(x, na.rm = TRUE), NA)
 }
 
-na.min <- function(x) {
+na_min <- function(x) {
   ifelse(any(!is.na(x)), min(x, na.rm = TRUE), NA)
 }
 
@@ -24,21 +24,24 @@ Numextract <- function(string) {
 # These functions are not exported and "blind"
 # but are accessible through :::
 
-amf_server <- function(endpoint = "sitemap"){
+amf_server <- function(endpoint = "sitemap") {
 
   # base urls
   base_url <- "https://amfcdn.lbl.gov/"
   api_url <- file.path(base_url, "api/v1")
-  var_info_url <- "ftp://ftp.fluxdata.org/.ameriflux_downloads/measurement_height/"
+  var_info_url <-
+    "ftp://ftp.fluxdata.org/.ameriflux_downloads/measurement_height/"
 
   # github link for intermediate data summary
-  git_base_url <- "https://raw.githubusercontent.com/chuhousen/amerifluxr/master/data-summary"
+  git_base_url <-
+    "https://raw.githubusercontent.com/chuhousen/amerifluxr/master/data-summary"
 
   # what to return
   url <- switch(
     endpoint,
     "sitemap" = file.path(api_url, "site_display/AmeriFlux"),
-    "site_ccby4" = file.path(api_url, "site_availability/AmeriFlux/BIF/CCBY4.0"),
+    "site_ccby4" = file.path(api_url,
+                             "site_availability/AmeriFlux/BIF/CCBY4.0"),
     "data_year" = file.path(api_url, "data_availability/AmeriFlux"),
     "data_download" = file.path(api_url, "data_download"),
     "variables" = file.path(api_url, "fp_var?limits=True"),

@@ -7,12 +7,12 @@
 amf_list_metadata(site_set = NULL, group_only = TRUE)
 }
 \arguments{
-\item{site_set}{A scalar or vector of character specifying the target AmeriFlux
-Site ID (CC-Sss). If not specified, it returns all sites.}
+\item{site_set}{A scalar or vector of character specifying the target
+AmeriFlux Site ID (CC-Sss). If not specified, it returns all sites.}
 
 \item{group_only}{Logical (TRUE/FALSE). Should it return availability for
-BADM variable groups or variables? BADM Groups contain Variables that describe
-related metadata or an observation with related metadata.}
+BADM variable groups or variables? BADM Groups contain Variables that
+describe related metadata or an observation with related metadata.}
 }
 \value{
 A data frame of data variable availability (per year) for selected
@@ -25,8 +25,8 @@ A data frame of data variable availability (per year) for selected
   }
 }
 \description{
-This function obtains the metadata (i.e., BADM) availability for
-all or selected AmeriFlux sites. See AmeriFlux page
+This function obtains the metadata (i.e., BADM) availability
+for all or selected AmeriFlux sites. See AmeriFlux page
 \url{https://ameriflux.lbl.gov/data/badm/} for details about the BADM.
 }
 \examples{

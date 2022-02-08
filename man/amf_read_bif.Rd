@@ -12,10 +12,12 @@ amf_read_bif(file)
 \value{
 A data frame containing the following 5 columns.
 See AmeriFlux website
- \url{https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/} for details.
+ \url{https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/} for
+ details.
 \itemize{
   \item SITE_ID - Six character site identifier (CC-Sss)
-  \item GROUP_ID - A unique identifier for data belonging to the same instance of a reported variable group
+  \item GROUP_ID - A unique identifier for data belonging to the same
+  instance of a reported variable group
   \item VARIABLE_GROUP - A set of variables that are reported together
   \item VARIABLE - The variable name
   \item DATAVALUE - The reported value of a variable

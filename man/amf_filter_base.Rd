@@ -30,11 +30,11 @@ import from \code{\link{amf_read_base}}.}
  }
  If not specified, use \code{\link{amf_parse_basename}} by default.}
 
-\item{loose_filter}{A number in ratio (0-1) used to adjust the physical range
-for filtering. Set it to 0 if not used. The default is 0.05.}
+\item{loose_filter}{A number in ratio (0-1) used to adjust the physical
+range for filtering. Set it to 0 if not used. The default is 0.05.}
 }
 \value{
-A data frame similar to \code{data_in}, filtering out off-range points
+A data frame similar to \code{data_in} filtered out off-range points
 }
 \description{
 The function filters BASE data based on the expected

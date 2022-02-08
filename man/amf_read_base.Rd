@@ -28,7 +28,8 @@ added in the returned data frame:
   \item DAY - Day of the month (DD)
   \item DOY - Day of the year (DDD)
   \item HOUR - Hour of the day (HH), based on the middle time of the interval
-  \item MINUTE - Minute of the hour (mm), based on the middle time of the interval
+  \item MINUTE - Minute of the hour (mm), based on the middle time of the
+  interval
   \item TIMESTAMP - An object of class "POSIXlt" in the UTC time zone,
   based on the middle time of the interval
 }

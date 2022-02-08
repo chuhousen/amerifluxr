@@ -69,8 +69,10 @@ test_that("check plot data summary function", {
 
   ## check error & warning return
   expect_error(amf_plot_datasummary())
-  expect_error(amf_plot_datasummary(site_set = c("us-crt", "US-crt", "USCRT")))
-  expect_warning(amf_plot_datasummary(site_set = c("us-crt", "US-CRT", "USCRT")))
+  expect_error(amf_plot_datasummary(site_set =
+                                      c("us-crt", "US-crt", "USCRT")))
+  expect_warning(amf_plot_datasummary(site_set =
+                                        c("us-crt", "US-CRT", "USCRT")))
   expect_error(amf_plot_datasummary(
     site_set = "US-CRT",
     data_sum = system.file("extdata",

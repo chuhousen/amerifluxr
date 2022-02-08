@@ -28,7 +28,7 @@
 #'  site-variables. The default is FALSE.
 #' @param scale Logical, whether the values should be centered and scaled
 #' among site-variables. The default is FALSE.
-#' @return An object of class 'plotly' created by \code{\link[heatmaply]{heatmaply}}
+#' @return An object of class 'plotly' from \code{\link[heatmaply]{heatmaply}}
 #' @seealso \code{\link{amf_summarize_data}}, \code{\link[heatmaply]{heatmaply}}
 #' @export
 #'
@@ -113,14 +113,15 @@ amf_plot_datasummary <- function(data_sum = NULL,
 
   # check if the default columns exist
   if (!is.data.frame(data_sum)) {
-    stop('data_sum format unrecognized...')
-  } else if (sum(c("SITE_ID", "VARIABLE", "BASENAME", "GAP_FILLED") %in% colnames(data_sum)) != 4) {
-    stop('data_sum format unrecognized...')
+    stop("data_sum format unrecognized...")
+  } else if (sum(c("SITE_ID", "VARIABLE", "BASENAME", "GAP_FILLED") %in%
+                 colnames(data_sum)) != 4) {
+    stop("data_sum format unrecognized...")
   }
 
   # subset gap-/non-filled
   if (nonfilled_only)
-    data_sum <- data_sum[!data_sum$GAP_FILLED,]
+    data_sum <- data_sum[!data_sum$GAP_FILLED, ]
 
   ## If unspecified, obtain year_set from all available years
   data_sum_viz <- data_sum[, 5:ncol(data_sum)]
@@ -135,7 +136,7 @@ amf_plot_datasummary <- function(data_sum = NULL,
 
   p <- heatmaply::heatmaply(
     data_sum_viz,
-    dendrogram = ifelse(show_cluster, "row", "none") ,
+    dendrogram = ifelse(show_cluster, "row", "none"),
     xlab = "",
     ylab = "",
     main = "",

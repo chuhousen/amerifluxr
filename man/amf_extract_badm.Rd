@@ -17,7 +17,8 @@ in the \code{bif_data}}
 \value{
 A data frame of re-structured BADM data with the following columns:
 \itemize{
-  \item GROUP_ID - A unique identifier for data belonging to the same instance of a reported variable group
+  \item GROUP_ID - A unique identifier for data belonging to the same
+  instance of a reported variable group
   \item SITE_ID - Six character site identifier (CC-Sss)
   \item VALUE - Values for all available VARIABLES in the selected group
   \item ...

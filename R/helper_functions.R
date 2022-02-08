@@ -14,7 +14,8 @@
 #'   \item IGBP - Vegetation type based on the IGBP definition (character)
 #'   \item URL_AMERIFLUX - Site web site URL, maintained by AmeriFlux (URL)
 #'   \item TOWER_BEGAN - The starting year of flux measurement (YYYY)
-#'   \item TOWER_END - The ending year of flux measurement (YYYY), NA if still active or unspecified
+#'   \item TOWER_END - The ending year of flux measurement (YYYY), NA if still
+#'    active or unspecified
 #'   \item LOCATION_LAT - Latitude of the site (decimal deg ref WGS84)
 #'   \item LOCATION_LONG - Longitude of the site (decimal deg ref WGS84)
 #'   \item LOCATION_ELEV - Elevation of the site above sea level (m)
@@ -33,7 +34,7 @@
 #'
 #'}
 #'
-amf_sites <- memoise::memoise(function(){
+amf_sites <- memoise::memoise(function() {
   # web service returning a full site list with basic site general info
   df <- jsonlite::fromJSON(
     amf_server("sitemap"),
@@ -42,17 +43,17 @@ amf_sites <- memoise::memoise(function(){
   )
 
   # merge info of data policy
-  site.ccby4 <- jsonlite::fromJSON(
+  site_ccby4 <- jsonlite::fromJSON(
     amf_server("site_ccby4"),
     flatten = TRUE,
     simplifyDataFrame = TRUE
   )[, 1]
 
   df$DATA_POLICY <- "LEGACY"
-  df$DATA_POLICY[which(df$SITE_ID %in% site.ccby4)] <- "CCBY4.0"
+  df$DATA_POLICY[which(df$SITE_ID %in% site_ccby4)] <- "CCBY4.0"
 
   # order by site id
-  df <- df[order(df$SITE_ID),]
+  df <- df[order(df$SITE_ID), ]
 
   # rename columns
   colnames(df)[which(names(df) == "GRP_LOCATION.LOCATION_LAT")] <-
@@ -87,7 +88,7 @@ amf_sites <- memoise::memoise(function(){
 #'
 #'}
 #'
-amf_check_site_id <- memoise::memoise(function(x){
+amf_check_site_id <- memoise::memoise(function(x) {
   # web service returning a full site list with basic site general info
   df <- jsonlite::fromJSON(
     amf_server("sitemap"),
@@ -131,12 +132,13 @@ amf_data_coverage <- memoise::memoise(
   function(
     data_product = "BASE-BADM",
     data_policy = "CCBY4.0"
-    ){
+    ) {
 
   # web service returning a full site list with
   # most-updated data available years in AmeriFlux BASE data set
     df <-
-      jsonlite::fromJSON(paste0(amf_server("data_year"), "/", data_product, "/", data_policy),
+      jsonlite::fromJSON(paste0(amf_server("data_year"),
+                                "/", data_product, "/", data_policy),
                          flatten = TRUE)
 
   # order by site id
@@ -170,10 +172,10 @@ amf_data_coverage <- memoise::memoise(
 #' FP_ls <- amf_variables()
 #'}
 
-amf_variables <- function(){
+amf_variables <- function() {
 
   # get a list of FP (Flux-Processing) standard variables
-  variables <- jsonlite::fromJSON(amf_server("variables"),  flatten=TRUE)
+  variables <- jsonlite::fromJSON(amf_server("variables"),  flatten = TRUE)
 
   variables <- variables[order(variables$Type), ]
   variables <-

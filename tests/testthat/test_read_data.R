@@ -1,7 +1,6 @@
 context("test amerifluxr read data functions")
 
 test_that("check read bif function", {
-  #skip_on_cran()
 
   bif <- amf_read_bif(file = system.file("extdata",
                                          "AMF_AA-Flx_BIF_CCBY4_20201218.xlsx",
@@ -21,7 +20,6 @@ test_that("check read bif function", {
 })
 
 test_that("check extract badm function", {
-  #skip_on_cran()
 
   bif2 <- amf_read_bif(file = system.file("extdata",
                                          "AMF_AA-Flx_BIF_CCBY4_20201218.xlsx",
@@ -40,7 +38,6 @@ test_that("check extract badm function", {
 
 
 test_that("check read base function", {
-  #skip_on_cran()
 
   base <- amf_read_base(
     file = system.file("extdata",
@@ -126,7 +123,8 @@ test_that("Check basename parse function", {
                  "FETCH_80_PI_F_1_1_1", "FETCH_80_PI_F_1_1_A",
                  "FETCH_80_PI_F_1_1_A_SD", "FETCH_80_PI_F_1_1_A_N",
                  "FC_SSITC_TEST", "FC_SSITC_TEST_PI_1", "FC_SSITC_TEST_1_N",
-                 "FC_SSITC_TEST_1_SD", "FC_SSITC_TEST_1_1_1", "FC_SSITC_TEST_1_1_A",
+                 "FC_SSITC_TEST_1_SD", "FC_SSITC_TEST_1_1_1",
+                 "FC_SSITC_TEST_1_1_A",
                  "FC_SSITC_TEST_1_1_A_SD", "FC_SSITC_TEST_1_1_A_N",
                  "FC_SSITC_TEST_PI_F", "FC_SSITC_TEST_PI_F_1",
                  "FC_SSITC_TEST_PI_F_1_N", "FC_SSITC_TEST_PI_F_1_SD",
@@ -137,7 +135,8 @@ test_that("Check basename parse function", {
 
   expect_is(basename_out, "data.frame")
   expect_equal(nrow(basename_out), length(test_name))
-  expect_equal(sum(test_name %in% basename_out$variable_name), length(test_name))
+  expect_equal(sum(test_name %in% basename_out$variable_name),
+               length(test_name))
   expect_equal(sum(basename_out$basename == "CO2"), 16)
   expect_equal(sum(basename_out$basename == "FETCH_80"), 16)
   expect_equal(sum(basename_out$basename == "FC_SSITC_TEST"), 16)

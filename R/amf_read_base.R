@@ -24,7 +24,8 @@
 #'   \item DAY - Day of the month (DD)
 #'   \item DOY - Day of the year (DDD)
 #'   \item HOUR - Hour of the day (HH), based on the middle time of the interval
-#'   \item MINUTE - Minute of the hour (mm), based on the middle time of the interval
+#'   \item MINUTE - Minute of the hour (mm), based on the middle time of the
+#'   interval
 #'   \item TIMESTAMP - An object of class "POSIXlt" in the UTC time zone,
 #'   based on the middle time of the interval
 #' }
@@ -51,18 +52,18 @@ amf_read_base <- function(file,
                           parse_timestamp = FALSE) {
   # stop if missing file parameter
   if (missing(file)) {
-    stop('File not specified...')
+    stop("File not specified...")
   }
 
   # check if the file exists
   if (!file.exists(file)) {
-    stop('File not found...')
+    stop("File not found...")
   }
 
   if (unzip) {
     # check if file extension valid
     if (tools::file_ext(file) != "zip") {
-      stop('File extention not valid...')
+      stop("File extention not valid...")
     }
 
     ## specify the BASE files under zip to be grabbed
@@ -71,10 +72,10 @@ amf_read_base <- function(file,
       file_grab[which(substr(file_grab, start = 12, stop = 15) == "BASE")]
 
     if (length(case_ls) == 0) {
-      stop('Can not find BASE file...')
+      stop("Can not find BASE file...")
 
-    } else if(length(case_ls) > 1) {
-      warning('Multiple BASE files, read HH resolution by default...')
+    } else if (length(case_ls) > 1) {
+      warning("Multiple BASE files, read HH resolution by default...")
       case_ls <- case_ls[which(substr(case_ls, start = 17, stop = 18) == "HH")]
 
       res <- substr(case_ls, start = 17, stop = 18)
@@ -111,14 +112,15 @@ amf_read_base <- function(file,
   } else{
     # check if file extension valid
     if (tools::file_ext(file) != "csv") {
-      stop('File extention not valid...')
+      stop("File extention not valid...")
     }
 
     case_ls <-
-      basename(file)[which(substr(basename(file) , start = 12, stop = 15) == "BASE")]
+      basename(file)[which(substr(basename(file),
+                                  start = 12, stop = 15) == "BASE")]
 
     if (length(case_ls) != 1) {
-      stop('Can not find BASE file...')
+      stop("Can not find BASE file...")
 
     } else{
       # get file resolution
@@ -187,7 +189,7 @@ amf_read_base <- function(file,
       }
 
     } else{
-      stop('Can not parse time stamp...')
+      stop("Can not parse time stamp...")
 
     }
   }

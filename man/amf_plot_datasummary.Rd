@@ -43,7 +43,7 @@ site-variables. The default is FALSE.}
 among site-variables. The default is FALSE.}
 }
 \value{
-An object of class 'plotly' created by \code{\link[heatmaply]{heatmaply}}
+An object of class 'plotly' from \code{\link[heatmaply]{heatmaply}}
 }
 \description{
 This function visualizes the BASE data summary for
