@@ -10,3 +10,5 @@ miscellaneous
 /doc/
 /Meta/
 Rplot001.jpg
+^CRAN-RELEASE$
+^CRAN-SUBMISSION$

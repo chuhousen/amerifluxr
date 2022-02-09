@@ -2,6 +2,8 @@
 
 [![R-CMD-check](https://github.com/chuhousen/amerifluxr/workflows/R-CMD-check/badge.svg)](https://github.com/chuhousen/amerifluxr/actions)
 [![codecov](https://codecov.io/gh/chuhousen/amerifluxr/branch/master/graph/badge.svg)](https://codecov.io/gh/chuhousen/amerifluxr)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/amerifluxr)](https://cran.r-project.org/package=amerifluxr)
+![CRAN\_Downloads](https://cranlogs.r-pkg.org/badges/grand-total/amerifluxr)
 
 An R programmatic interface for querying, downloading, and handling [AmeriFlux](https://ameriflux.lbl.gov/) data and metadata.  
 
@@ -9,7 +11,12 @@ An R programmatic interface for querying, downloading, and handling [AmeriFlux](
 
 ### Stable release
 
-Coming up soon!!
+To install the current stable release use a CRAN repository:
+
+``` r
+install.packages("amerifluxr")
+library("amerifluxr")
+```
 
 ### Development release
 
