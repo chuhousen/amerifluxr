@@ -52,7 +52,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -92,7 +92,7 @@
 <div class="section level1">
 <div class="page-header"><h1 id="amerifluxr-">amerifluxr <img src="reference/figures/logo.png" align="right" height="138.5"><a class="anchor" aria-label="anchor" href="#amerifluxr-"></a>
 </h1></div>
-
+<p><a href="https://github.com/chuhousen/amerifluxr/actions" class="external-link"><img src="https://github.com/chuhousen/amerifluxr/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a> <a href="https://codecov.io/gh/chuhousen/amerifluxr" class="external-link"><img src="https://codecov.io/gh/chuhousen/amerifluxr/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://cran.r-project.org/package=amerifluxr" class="external-link"><img src="https://www.r-pkg.org/badges/version/amerifluxr" alt="CRAN_Status_Badge"></a> <img src="https://cranlogs.r-pkg.org/badges/grand-total/amerifluxr" alt="CRAN_Downloads"></p>
 <p>An R programmatic interface for querying, downloading, and handling <a href="https://ameriflux.lbl.gov/" class="external-link">AmeriFlux</a> data and metadata.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -102,22 +102,22 @@
 </h3>
 <p>To install the current stable release use a CRAN repository:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"amerifluxr"</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/chuhousen/amerifluxr" class="external-link">"amerifluxr"</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"amerifluxr"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/chuhousen/amerifluxr" class="external-link">"amerifluxr"</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="development-release">Development release<a class="anchor" aria-label="anchor" href="#development-release"></a>
 </h3>
 <p>To install the development releases of the package run the following commands:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">}</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"chuhousen/amerifluxr"</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/chuhousen/amerifluxr" class="external-link">"amerifluxr"</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">}</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"chuhousen/amerifluxr"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/chuhousen/amerifluxr" class="external-link">"amerifluxr"</a></span><span class="op">)</span></span></code></pre></div>
 <p>Vignettes are not rendered by default, if you want to include additional documentation please use:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">}</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"chuhousen/amerifluxr"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/chuhousen/amerifluxr" class="external-link">"amerifluxr"</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">}</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"chuhousen/amerifluxr"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/chuhousen/amerifluxr" class="external-link">"amerifluxr"</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -128,7 +128,7 @@
 </h3>
 <p>This function obtains the latest AmeriFlux site list and sites’ general info through the AmeriFlux web service.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">site</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/amf_site_info.html">amf_site_info</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">site</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/amf_site_info.html">amf_site_info</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="download-all-site-metadata">Download all-site metadata<a class="anchor" aria-label="anchor" href="#download-all-site-metadata"></a>
@@ -137,15 +137,15 @@
 <p>The following downloads a single file containing all AmeriFlux sites’ metadata (i.e., BADM data product) for sites under the CC-BY-4.0 data use policy. The downloaded file is a Excel file saved to tempdir() (e.g., AMF_{SITES}_BIF_{POLICY}_{VERSION}.xlsx, SITES = AA-Net (all registered sites) or AA-Flx (all sites with flux/met data available); POLICY = CCBY4 (shared under AmeriFlux CC-BY-4.0 data use policy) or LEGACY (shared under AmeriFlux Legacy data use policy)).</p>
 <p>For details about BADM data files, see AmeriFlux <a href="https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/" class="external-link">web page</a>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">floc1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/amf_download_bif.html">amf_download_bif</a></span><span class="op">(</span>user_id <span class="op">=</span> <span class="st">"my_user"</span>,
-                          user_email <span class="op">=</span> <span class="st">"my_email@mail.com"</span>,
-                          data_policy <span class="op">=</span> <span class="st">"CCBY4.0"</span>,
-                          agree_policy <span class="op">=</span> <span class="cn">TRUE</span>,
-                          intended_use <span class="op">=</span> <span class="st">"synthesis"</span>,
-                          intended_use_text <span class="op">=</span> <span class="st">"obtain AmeriFlux sites' geolocation, IGBP, and climate classification"</span>,
-                          out_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
-                          verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-                          site_w_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">floc1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/amf_download_bif.html">amf_download_bif</a></span><span class="op">(</span>user_id <span class="op">=</span> <span class="st">"my_user"</span>,</span>
+<span>                          user_email <span class="op">=</span> <span class="st">"my_email@mail.com"</span>,</span>
+<span>                          data_policy <span class="op">=</span> <span class="st">"CCBY4.0"</span>,</span>
+<span>                          agree_policy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                          intended_use <span class="op">=</span> <span class="st">"synthesis"</span>,</span>
+<span>                          intended_use_text <span class="op">=</span> <span class="st">"obtain AmeriFlux sites' geolocation, IGBP, and climate classification"</span>,</span>
+<span>                          out_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                          verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                          site_w_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="12%">
@@ -196,7 +196,7 @@
 </table>
 <p>The amf_download_bif() returns the full file path to the downloaded file, which can be used to read the file into R.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bif</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/amf_read_bif.html">amf_read_bif</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">floc1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">bif</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/amf_read_bif.html">amf_read_bif</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">floc1</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="download-single-site-fluxmet-data">Download single-site flux/met data<a class="anchor" aria-label="anchor" href="#download-single-site-fluxmet-data"></a>
@@ -204,16 +204,16 @@
 <p>The following downloads AmeriFlux flux/met data (aka BASE data product) from a single site. For details about BASE data files, see AmeriFlux <a href="https://ameriflux.lbl.gov/data/data-processing-pipelines/base-publish/" class="external-link">BASE data</a> page.</p>
 <p>The downloaded file is a zipped file saved in tempdir() (e.g., AMF_{SITE_ID}_BASE-BADM_{VERSION}.zip), which contains a BASE data file (e.g., AMF_{SITE_ID}_BASE_{RESOLUTION}_{VERSION}.csv, RESOLUTION = HH (half-hourly) or HR (hourly)) and a BADM data file (e.g., AMF_{SITE_ID}_BIF_{VERSION}.xlsx). The BADM data file is a site subset of the all-site BADM downloaded through amf_download_bif().</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">floc2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/amf_download_base.html">amf_download_base</a></span><span class="op">(</span>user_id <span class="op">=</span> <span class="st">"my_user"</span>,
-                           user_email <span class="op">=</span> <span class="st">"my_email@mail.com"</span>,
-                           site_id <span class="op">=</span> <span class="st">"US-CRT"</span>,
-                           data_product <span class="op">=</span> <span class="st">"BASE-BADM"</span>,
-                           data_policy <span class="op">=</span> <span class="st">"CCBY4.0"</span>,
-                           agree_policy <span class="op">=</span> <span class="cn">TRUE</span>,
-                           intended_use <span class="op">=</span> <span class="st">"remote_sensing"</span>,
-                           intended_use_text <span class="op">=</span> <span class="st">"validate the model of GPP estimation"</span>,
-                           verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-                           out_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">floc2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/amf_download_base.html">amf_download_base</a></span><span class="op">(</span>user_id <span class="op">=</span> <span class="st">"my_user"</span>,</span>
+<span>                           user_email <span class="op">=</span> <span class="st">"my_email@mail.com"</span>,</span>
+<span>                           site_id <span class="op">=</span> <span class="st">"US-CRT"</span>,</span>
+<span>                           data_product <span class="op">=</span> <span class="st">"BASE-BADM"</span>,</span>
+<span>                           data_policy <span class="op">=</span> <span class="st">"CCBY4.0"</span>,</span>
+<span>                           agree_policy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                           intended_use <span class="op">=</span> <span class="st">"remote_sensing"</span>,</span>
+<span>                           intended_use_text <span class="op">=</span> <span class="st">"validate the model of GPP estimation"</span>,</span>
+<span>                           verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                           out_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="12%">
@@ -268,10 +268,14 @@
 </table>
 <p>The amf_download_base() returns the full file path to the downloaded file, which can be used to read the file into R.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">base</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/amf_read_base.html">amf_read_base</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">floc2</span>,
-                      unzip <span class="op">=</span> <span class="cn">TRUE</span>,
-                      parse_timestamp <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">base</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/amf_read_base.html">amf_read_base</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">floc2</span>,</span>
+<span>                      unzip <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                      parse_timestamp <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
+<colgroup>
+<col width="12%">
+<col width="87%">
+</colgroup>
 <thead><tr class="header">
 <th>Parameter</th>
 <th>Description</th>
@@ -297,16 +301,16 @@
 </h3>
 <p>The following downloads AmeriFlux flux/met data from multiple sites. The downloaded files are organized by sites, with one zipped file for each site, similar to single-site download.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/amf_download_base.html">amf_download_base</a></span><span class="op">(</span>user_id <span class="op">=</span> <span class="st">"my_user"</span>,
-                  user_email <span class="op">=</span> <span class="st">"my_email@mail.com"</span>,
-                  site_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"US-CRT"</span>, <span class="st">"US-WPT"</span>, <span class="st">"US-Oho"</span><span class="op">)</span>,
-                  data_product <span class="op">=</span> <span class="st">"BASE-BADM"</span>,
-                  data_policy <span class="op">=</span> <span class="st">"CCBY4.0"</span>,
-                  agree_policy <span class="op">=</span> <span class="cn">TRUE</span>,
-                  intended_use <span class="op">=</span> <span class="st">"model"</span>,
-                  intended_use_text <span class="op">=</span> <span class="st">"Data-driven modeling, for training models and cross-validation"</span>,
-                  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-                  out_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/amf_download_base.html">amf_download_base</a></span><span class="op">(</span>user_id <span class="op">=</span> <span class="st">"my_user"</span>,</span>
+<span>                  user_email <span class="op">=</span> <span class="st">"my_email@mail.com"</span>,</span>
+<span>                  site_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"US-CRT"</span>, <span class="st">"US-WPT"</span>, <span class="st">"US-Oho"</span><span class="op">)</span>,</span>
+<span>                  data_product <span class="op">=</span> <span class="st">"BASE-BADM"</span>,</span>
+<span>                  data_policy <span class="op">=</span> <span class="st">"CCBY4.0"</span>,</span>
+<span>                  agree_policy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                  intended_use <span class="op">=</span> <span class="st">"model"</span>,</span>
+<span>                  intended_use_text <span class="op">=</span> <span class="st">"Data-driven modeling, for training models and cross-validation"</span>,</span>
+<span>                  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                  out_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="additional-functionalities">Additional functionalities<a class="anchor" aria-label="anchor" href="#additional-functionalities"></a>
@@ -370,14 +374,7 @@
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://github.com/chuhousen/amerifluxr/actions" class="external-link"><img src="https://github.com/chuhousen/amerifluxr/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://codecov.io/gh/chuhousen/amerifluxr" class="external-link"><img src="https://codecov.io/gh/chuhousen/amerifluxr/branch/master/graph/badge.svg" alt="codecov"></a></li>
-<li><a href="https://cran.r-project.org/package=amerifluxr" class="external-link"><img src="https://www.r-pkg.org/badges/version/amerifluxr" alt="CRAN_Status_Badge"></a></li>
-</ul>
-</div>
+
 
   </div>
 </div>
@@ -390,7 +387,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

@@ -29,7 +29,7 @@ details of variable naming and qualifiers."><meta property="og:image" content="/
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -72,23 +72,30 @@ details of variable naming and qualifiers.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">amf_parse_basename</span><span class="op">(</span><span class="va">var_name</span>, FP_ls <span class="op">=</span> <span class="cn">NULL</span>, gapfill_postfix <span class="op">=</span> <span class="st">"_PI_F"</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">amf_parse_basename</span><span class="op">(</span><span class="va">var_name</span>, FP_ls <span class="op">=</span> <span class="cn">NULL</span>, gapfill_postfix <span class="op">=</span> <span class="st">"_PI_F"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>var_name</dt>
 <dd><p>A vector of variable names (character) to be parsed</p></dd>
+
+
 <dt>FP_ls</dt>
 <dd><p>A vector of standard variable names. If not specified,
 use <code><a href="amf_variables.html">amf_variables</a></code> by default to get the latest list.</p></dd>
+
+
 <dt>gapfill_postfix</dt>
 <dd><p>A scalar of expected suffix (character)
 appended to a variable that is gap-filled. The default is "_PI_F".</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A data frame containing the parsed results for all variables in
+    
+
+<p>A data frame containing the parsed results for all variables in
 <code>var_name</code>:</p><ul><li><p>variable_name - original variable name</p></li>
 <li><p>basename - associated basename, w/o qualifier</p></li>
 <li><p>qualifier_gf - qualifier associated with gap-filling</p></li>
@@ -127,17 +134,17 @@ appended to a variable that is gap-filled. The default is "_PI_F".</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># read the BASE from a csv file</span></span>
-<span class="r-in"><span class="va">base</span> <span class="op">&lt;-</span> <span class="fu"><a href="amf_read_base.html">amf_read_base</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span>
-<span class="r-in">                                         <span class="st">"AMF_US-CRT_BASE_HH_2-5.csv"</span>,</span>
-<span class="r-in">                                          package <span class="op">=</span> <span class="st">"amerifluxr"</span><span class="op">)</span>,</span>
-<span class="r-in">                      unzip <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">                      parse_timestamp <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># parse variable names/qualifiers</span></span>
-<span class="r-in"><span class="va">basename_decode</span> <span class="op">&lt;-</span> <span class="fu">amf_parse_basename</span><span class="op">(</span>var_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">base</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># read the BASE from a csv file</span></span></span>
+<span class="r-in"><span><span class="va">base</span> <span class="op">&lt;-</span> <span class="fu"><a href="amf_read_base.html">amf_read_base</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span></span>
+<span class="r-in"><span>                                         <span class="st">"AMF_US-CRT_BASE_HH_2-5.csv"</span>,</span></span>
+<span class="r-in"><span>                                          package <span class="op">=</span> <span class="st">"amerifluxr"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                      unzip <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>                      parse_timestamp <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># parse variable names/qualifiers</span></span></span>
+<span class="r-in"><span><span class="va">basename_decode</span> <span class="op">&lt;-</span> <span class="fu">amf_parse_basename</span><span class="op">(</span>var_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">base</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -152,7 +159,7 @@ appended to a variable that is gap-filled. The default is "_PI_F".</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

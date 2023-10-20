@@ -28,7 +28,7 @@ to import BADM (BIF) file."><meta property="og:image" content="/logo.png"><!-- m
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -70,7 +70,7 @@ to import BADM (BIF) file.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">amf_extract_badm</span><span class="op">(</span><span class="va">bif_data</span>, <span class="va">select_group</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">amf_extract_badm</span><span class="op">(</span><span class="va">bif_data</span>, <span class="va">select_group</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -79,13 +79,18 @@ to import BADM (BIF) file.</p>
 <dd><p>A data frame consists of 5 columns: SITE_ID, GROUP_ID,
 VARIABLE_GROUP, VARIABLE, DATAVALUE, imported from function
 <code><a href="amf_read_bif.html">amf_read_bif</a></code>.</p></dd>
+
+
 <dt>select_group</dt>
 <dd><p>A string (character), selected from VARIABLE_GROUP
 in the <code>bif_data</code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A data frame of re-structured BADM data with the following columns:</p><ul><li><p>GROUP_ID - A unique identifier for data belonging to the same
+    
+
+<p>A data frame of re-structured BADM data with the following columns:</p><ul><li><p>GROUP_ID - A unique identifier for data belonging to the same
   instance of a reported variable group</p></li>
 <li><p>SITE_ID - Six character site identifier (CC-Sss)</p></li>
 <li><p>VALUE - Values for all available VARIABLES in the selected group</p></li>
@@ -98,13 +103,13 @@ in the <code>bif_data</code></p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># read the BADM BIF file, using an example data file</span></span>
-<span class="r-in"><span class="va">bif</span> <span class="op">&lt;-</span> <span class="fu"><a href="amf_read_bif.html">amf_read_bif</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span>
-<span class="r-in">                                       <span class="st">"AMF_AA-Flx_BIF_CCBY4_20201218.xlsx"</span>,</span>
-<span class="r-in">                                        package <span class="op">=</span> <span class="st">"amerifluxr"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># get a list of valid VARIALBE_GROUP</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">bif</span><span class="op">$</span><span class="va">VARIABLE_GROUP</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># read the BADM BIF file, using an example data file</span></span></span>
+<span class="r-in"><span><span class="va">bif</span> <span class="op">&lt;-</span> <span class="fu"><a href="amf_read_bif.html">amf_read_bif</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span></span>
+<span class="r-in"><span>                                       <span class="st">"AMF_AA-Flx_BIF_CCBY4_20201218.xlsx"</span>,</span></span>
+<span class="r-in"><span>                                        package <span class="op">=</span> <span class="st">"amerifluxr"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># get a list of valid VARIALBE_GROUP</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">bif</span><span class="op">$</span><span class="va">VARIABLE_GROUP</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "GRP_ACKNOWLEDGEMENT"     "GRP_CLIM_AVG"           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [3] "GRP_COUNTRY"             "GRP_DOI"                </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "GRP_DOI_CONTRIBUTOR"     "GRP_DOI_ORGANIZATION"   </span>
@@ -122,9 +127,9 @@ in the <code>bif_data</code></p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [29] "GRP_NEP"                 "GRP_RESEARCH_TOPIC"     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [31] "GRP_SA"                  "GRP_SOIL_CHEM"          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [33] "GRP_SOIL_CLASSIFICATION" "GRP_SPP_O"              </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># extract the selected VARIALBE_GROUP</span></span>
-<span class="r-in"><span class="fu">amf_extract_badm</span><span class="op">(</span>bif_data <span class="op">=</span> <span class="va">bif</span>, select_group <span class="op">=</span> <span class="st">"GRP_FLUX_MEASUREMENTS"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># extract the selected VARIALBE_GROUP</span></span></span>
+<span class="r-in"><span><span class="fu">amf_extract_badm</span><span class="op">(</span>bif_data <span class="op">=</span> <span class="va">bif</span>, select_group <span class="op">=</span> <span class="st">"GRP_FLUX_MEASUREMENTS"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    GROUP_ID SITE_ID FLUX_MEASUREMENTS_METHOD FLUX_MEASUREMENTS_VARIABLE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5     12767  US-CRT          Eddy Covariance                        CO2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6     12782  US-CRT          Eddy Covariance                        H2O</span>
@@ -161,7 +166,7 @@ in the <code>bif_data</code></p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2          Continuous operation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3          Continuous operation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4          Continuous operation</span>
-<span class="r-in"><span class="fu">amf_extract_badm</span><span class="op">(</span>bif_data <span class="op">=</span> <span class="va">bif</span>, select_group <span class="op">=</span> <span class="st">"GRP_IGBP"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">amf_extract_badm</span><span class="op">(</span>bif_data <span class="op">=</span> <span class="va">bif</span>, select_group <span class="op">=</span> <span class="st">"GRP_IGBP"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   GROUP_ID SITE_ID IGBP</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2    12768  US-CRT  CRO</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3    12792  US-Oho  DBF</span>
@@ -180,7 +185,7 @@ in the <code>bif_data</code></p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

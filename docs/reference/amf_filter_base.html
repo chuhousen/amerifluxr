@@ -29,7 +29,7 @@ for description of the plausible ranges."><meta property="og:image" content="/lo
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -72,12 +72,12 @@ for description of the plausible ranges.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">amf_filter_base</span><span class="op">(</span>
-  <span class="va">data_in</span>,
-  limit_ls <span class="op">=</span> <span class="cn">NULL</span>,
-  basename_decode <span class="op">=</span> <span class="cn">NULL</span>,
-  loose_filter <span class="op">=</span> <span class="fl">0.05</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">amf_filter_base</span><span class="op">(</span></span>
+<span>  <span class="va">data_in</span>,</span>
+<span>  limit_ls <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  basename_decode <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  loose_filter <span class="op">=</span> <span class="fl">0.05</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -85,40 +85,49 @@ for description of the plausible ranges.</p>
     <dl><dt>data_in</dt>
 <dd><p>A data frame containing BASE data, e.g.,
 import from <code><a href="amf_read_base.html">amf_read_base</a></code>.</p></dd>
+
+
 <dt>limit_ls</dt>
 <dd><p>A data frame with at least three columns:</p><ul><li><p>Name: variable base name</p></li>
 <li><p>Min: expected lower bound</p></li>
 <li><p>Max: expected upper bound</p></li>
 </ul><p>If not specified, use <code><a href="amf_variables.html">amf_variables</a></code> by default.</p></dd>
+
+
 <dt>basename_decode</dt>
 <dd><p>A data frame with at least two columns:</p><ul><li><p>variable_name: actual variable name</p></li>
 <li><p>basename: variable base name</p></li>
 </ul><p>If not specified, use <code><a href="amf_parse_basename.html">amf_parse_basename</a></code> by default.</p></dd>
+
+
 <dt>loose_filter</dt>
 <dd><p>A number in ratio (0-1) used to adjust the physical
 range for filtering. Set it to 0 if not used. The default is 0.05.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A data frame similar to <code>data_in</code> filtered out off-range points</p>
+    
+
+<p>A data frame similar to <code>data_in</code> filtered out off-range points</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># read the BASE from a csv file</span></span>
-<span class="r-in"><span class="va">base</span> <span class="op">&lt;-</span> <span class="fu"><a href="amf_read_base.html">amf_read_base</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span>
-<span class="r-in">                                         <span class="st">"AMF_US-CRT_BASE_HH_2-5.csv"</span>,</span>
-<span class="r-in">                                          package <span class="op">=</span> <span class="st">"amerifluxr"</span><span class="op">)</span>,</span>
-<span class="r-in">                      unzip <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">                      parse_timestamp <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># filter data, using default physical range +/- 5% buffer</span></span>
-<span class="r-in"><span class="va">base_f</span> <span class="op">&lt;-</span> <span class="fu">amf_filter_base</span><span class="op">(</span>data_in <span class="op">=</span> <span class="va">base</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># filter data, using default physical range without buffer</span></span>
-<span class="r-in"><span class="va">base_f</span> <span class="op">&lt;-</span> <span class="fu">amf_filter_base</span><span class="op">(</span>data_in <span class="op">=</span> <span class="va">base</span>, loose_filter <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># read the BASE from a csv file</span></span></span>
+<span class="r-in"><span><span class="va">base</span> <span class="op">&lt;-</span> <span class="fu"><a href="amf_read_base.html">amf_read_base</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span></span>
+<span class="r-in"><span>                                         <span class="st">"AMF_US-CRT_BASE_HH_2-5.csv"</span>,</span></span>
+<span class="r-in"><span>                                          package <span class="op">=</span> <span class="st">"amerifluxr"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                      unzip <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>                      parse_timestamp <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># filter data, using default physical range +/- 5% buffer</span></span></span>
+<span class="r-in"><span><span class="va">base_f</span> <span class="op">&lt;-</span> <span class="fu">amf_filter_base</span><span class="op">(</span>data_in <span class="op">=</span> <span class="va">base</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># filter data, using default physical range without buffer</span></span></span>
+<span class="r-in"><span><span class="va">base_f</span> <span class="op">&lt;-</span> <span class="fu">amf_filter_base</span><span class="op">(</span>data_in <span class="op">=</span> <span class="va">base</span>, loose_filter <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -133,7 +142,7 @@ range for filtering. Set it to 0 if not used. The default is 0.05.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
