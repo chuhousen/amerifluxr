@@ -27,7 +27,7 @@ Interchange Format (BIF)."><meta property="og:image" content="/logo.png"><!-- ma
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -68,19 +68,23 @@ Interchange Format (BIF).</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">amf_read_bif</span><span class="op">(</span><span class="va">file</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">amf_read_bif</span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>file</dt>
 <dd><p>A BADM data file</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A data frame containing the following 5 columns.
-See AmeriFlux website
-<a href="https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/" class="external-link">https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/</a> for
+    
+
+<p>A data frame containing the following 5 columns.
+See AmeriFlux website</p>
+<p></p>
+<p><a href="https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/" class="external-link">https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/</a> for
  details.</p><ul><li><p>SITE_ID - Six character site identifier (CC-Sss)</p></li>
 <li><p>GROUP_ID - A unique identifier for data belonging to the same
   instance of a reported variable group</p></li>
@@ -91,10 +95,10 @@ See AmeriFlux website
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># read the BADM BIF file, using an example data file</span></span>
-<span class="r-in"><span class="va">bif</span> <span class="op">&lt;-</span> <span class="fu">amf_read_bif</span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span>
-<span class="r-in">                                       <span class="st">"AMF_AA-Flx_BIF_CCBY4_20201218.xlsx"</span>,</span>
-<span class="r-in">                                        package <span class="op">=</span> <span class="st">"amerifluxr"</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># read the BADM BIF file, using an example data file</span></span></span>
+<span class="r-in"><span><span class="va">bif</span> <span class="op">&lt;-</span> <span class="fu">amf_read_bif</span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span></span>
+<span class="r-in"><span>                                       <span class="st">"AMF_AA-Flx_BIF_CCBY4_20201218.xlsx"</span>,</span></span>
+<span class="r-in"><span>                                        package <span class="op">=</span> <span class="st">"amerifluxr"</span><span class="op">)</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -109,7 +113,7 @@ See AmeriFlux website
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

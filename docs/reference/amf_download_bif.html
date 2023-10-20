@@ -32,7 +32,7 @@ https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/."><meta property="og
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -78,34 +78,42 @@ Register an account through the link
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">amf_download_bif</span><span class="op">(</span>
-  <span class="va">user_id</span>,
-  <span class="va">user_email</span>,
-  <span class="va">data_policy</span>,
-  <span class="va">agree_policy</span>,
-  <span class="va">intended_use</span>,
-  <span class="va">intended_use_text</span>,
-  out_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  site_w_data <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">amf_download_bif</span><span class="op">(</span></span>
+<span>  <span class="va">user_id</span>,</span>
+<span>  <span class="va">user_email</span>,</span>
+<span>  <span class="va">data_policy</span>,</span>
+<span>  <span class="va">agree_policy</span>,</span>
+<span>  <span class="va">intended_use</span>,</span>
+<span>  <span class="va">intended_use_text</span>,</span>
+<span>  out_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  site_w_data <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>user_id</dt>
 <dd><p>AmeriFlux account username (character)</p></dd>
+
+
 <dt>user_email</dt>
 <dd><p>AmeriFlux account user email (character)</p></dd>
+
+
 <dt>data_policy</dt>
 <dd><p>"CCBY4.0" or "LEGACY". AmeriFlux data are shared under
 two tiers of licenses as chosen by site's PI. See
 <a href="https://ameriflux.lbl.gov/data/data-policy/#data-use" class="external-link">https://ameriflux.lbl.gov/data/data-policy/#data-use</a> for data use
 guidelines under each license. Note: Data use policy
 selected affects which sites’ data are available for download.</p></dd>
+
+
 <dt>agree_policy</dt>
 <dd><p>Acknowledge you read and agree to the AmeriFlux
 Data use policy (TRUE/FALSE)</p></dd>
+
+
 <dt>intended_use</dt>
 <dd><p>The intended use category. Currently, it needs to be one
 of the followings:</p><ul><li><p>"synthesis" (i.e., Multi-site synthesis)</p></li>
@@ -116,21 +124,32 @@ of the followings:</p><ul><li><p>"synthesis" (i.e., Multi-site synthesis)</p></l
 <li><p>"education" (i.e., Education (Teacher or Student))</p></li>
 <li><p>"other"</p></li>
 </ul></dd>
+
+
 <dt>intended_use_text</dt>
 <dd><p>Enter a brief description of intended use.
 This will be recorded in the data download log and emailed to
 site's PI (character).</p></dd>
+
+
 <dt>out_dir</dt>
 <dd><p>Output directory for downloaded data, default tempdir()</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Show feedback on download progress (TRUE/FALSE)</p></dd>
+
+
 <dt>site_w_data</dt>
 <dd><p>Logical, download all registered sites (FALSE)
 or only sites with available BASE data (TRUE)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A vector of download file names on the local drive</p>
+    
+
+<p>A vector of download file names on the local drive</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -139,30 +158,30 @@ or only sites with available BASE data (TRUE)</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co">## Download all sites with BASE data, under CCBY4.0 policy</span></span>
-<span class="r-in"><span class="fu">amf_download_bif</span><span class="op">(</span>user_id <span class="op">=</span> <span class="st">"test"</span>,</span>
-<span class="r-in">  user_email <span class="op">=</span> <span class="st">"test@mail.com"</span>,</span>
-<span class="r-in">  data_policy <span class="op">=</span> <span class="st">"CCBY4.0"</span>,</span>
-<span class="r-in">  agree_policy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">  intended_use <span class="op">=</span> <span class="st">"other"</span>,</span>
-<span class="r-in">  intended_use_text <span class="op">=</span> <span class="st">"testing download"</span>,</span>
-<span class="r-in">  out_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">  site_w_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Download all registered sites, under LEGACY policy</span></span>
-<span class="r-in"><span class="fu">amf_download_bif</span><span class="op">(</span>user_id <span class="op">=</span> <span class="st">"test"</span>,</span>
-<span class="r-in">  user_email <span class="op">=</span> <span class="st">"test@mail.com"</span>,</span>
-<span class="r-in">  data_policy <span class="op">=</span> <span class="st">"LEGACY"</span>,</span>
-<span class="r-in">  agree_policy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">  intended_use <span class="op">=</span> <span class="st">"other"</span>,</span>
-<span class="r-in">  intended_use_text <span class="op">=</span> <span class="st">"testing download"</span>,</span>
-<span class="r-in">  out_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">  site_w_data <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co">## Download all sites with BASE data, under CCBY4.0 policy</span></span></span>
+<span class="r-in"><span><span class="fu">amf_download_bif</span><span class="op">(</span>user_id <span class="op">=</span> <span class="st">"test"</span>,</span></span>
+<span class="r-in"><span>  user_email <span class="op">=</span> <span class="st">"test@mail.com"</span>,</span></span>
+<span class="r-in"><span>  data_policy <span class="op">=</span> <span class="st">"CCBY4.0"</span>,</span></span>
+<span class="r-in"><span>  agree_policy <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  intended_use <span class="op">=</span> <span class="st">"other"</span>,</span></span>
+<span class="r-in"><span>  intended_use_text <span class="op">=</span> <span class="st">"testing download"</span>,</span></span>
+<span class="r-in"><span>  out_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  site_w_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Download all registered sites, under LEGACY policy</span></span></span>
+<span class="r-in"><span><span class="fu">amf_download_bif</span><span class="op">(</span>user_id <span class="op">=</span> <span class="st">"test"</span>,</span></span>
+<span class="r-in"><span>  user_email <span class="op">=</span> <span class="st">"test@mail.com"</span>,</span></span>
+<span class="r-in"><span>  data_policy <span class="op">=</span> <span class="st">"LEGACY"</span>,</span></span>
+<span class="r-in"><span>  agree_policy <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  intended_use <span class="op">=</span> <span class="st">"other"</span>,</span></span>
+<span class="r-in"><span>  intended_use_text <span class="op">=</span> <span class="st">"testing download"</span>,</span></span>
+<span class="r-in"><span>  out_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  site_w_data <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -177,7 +196,7 @@ or only sites with available BASE data (TRUE)</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

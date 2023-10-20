@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -66,7 +66,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">amf_data_coverage</span><span class="op">(</span>data_product <span class="op">=</span> <span class="st">"BASE-BADM"</span>, data_policy <span class="op">=</span> <span class="st">"CCBY4.0"</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">amf_data_coverage</span><span class="op">(</span>data_product <span class="op">=</span> <span class="st">"BASE-BADM"</span>, data_policy <span class="op">=</span> <span class="st">"CCBY4.0"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -74,27 +74,32 @@
     <dl><dt>data_product</dt>
 <dd><p>A scalar of character specifying the data product
 Currently, only "BASE-BADM" is supported.</p></dd>
+
+
 <dt>data_policy</dt>
 <dd><p>A scalar of character specifying the data policy
 Currently, "CCBY4.0" and "LEGACY" are supported. The default is "CCBY4.0".</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>AmeriFlux data coverage</p><ul><li><p>SITE_ID - Six character site identifier (CC-Sss)</p></li>
+    
+
+<p>AmeriFlux data coverage</p><ul><li><p>SITE_ID - Six character site identifier (CC-Sss)</p></li>
 <li><p>URL -  Site page link (url)</p></li>
 <li><p>publish_years - List of data available years (YYYY)</p></li>
 </ul></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># download the variable availability</span></span>
-<span class="r-in"><span class="va">data_year</span> <span class="op">&lt;-</span> <span class="fu">amf_data_coverage</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># download variable availability for LEGACY policy</span></span>
-<span class="r-in"><span class="va">data_year</span> <span class="op">&lt;-</span> <span class="fu">amf_data_coverage</span><span class="op">(</span>data_policy <span class="op">=</span> <span class="st">"LEGACY"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># download the variable availability</span></span></span>
+<span class="r-in"><span><span class="va">data_year</span> <span class="op">&lt;-</span> <span class="fu">amf_data_coverage</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># download variable availability for LEGACY policy</span></span></span>
+<span class="r-in"><span><span class="va">data_year</span> <span class="op">&lt;-</span> <span class="fu">amf_data_coverage</span><span class="op">(</span>data_policy <span class="op">=</span> <span class="st">"LEGACY"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -109,7 +114,7 @@ Currently, "CCBY4.0" and "LEGACY" are supported. The default is "CCBY4.0".</p></
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

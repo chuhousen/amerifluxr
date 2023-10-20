@@ -28,7 +28,7 @@ https://ameriflux.lbl.gov/data/badm/ for details about the BADM."><meta property
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -70,7 +70,7 @@ for all or selected AmeriFlux sites. See AmeriFlux page
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">amf_list_metadata</span><span class="op">(</span>site_set <span class="op">=</span> <span class="cn">NULL</span>, group_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">amf_list_metadata</span><span class="op">(</span>site_set <span class="op">=</span> <span class="cn">NULL</span>, group_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -78,14 +78,19 @@ for all or selected AmeriFlux sites. See AmeriFlux page
     <dl><dt>site_set</dt>
 <dd><p>A scalar or vector of character specifying the target
 AmeriFlux Site ID (CC-Sss). If not specified, it returns all sites.</p></dd>
+
+
 <dt>group_only</dt>
 <dd><p>Logical (TRUE/FALSE). Should it return availability for
 BADM variable groups or variables? BADM Groups contain Variables that
 describe related metadata or an observation with related metadata.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A data frame of data variable availability (per year) for selected
+    
+
+<p>A data frame of data variable availability (per year) for selected
  AmeriFlux sites. The first column contains the SITE ID. The remaining
  columns contains the number of entries for a variable or a variable group,
  with column names specifying the BADM variable or group names.</p><ul><li><p>Site_ID - Six character site identifier (CC-Sss)</p></li>
@@ -94,14 +99,14 @@ describe related metadata or an observation with related metadata.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># obtain the metadata availability for all sites, at variable group levels</span></span>
-<span class="r-in"><span class="va">metadata_aval</span> <span class="op">&lt;-</span> <span class="fu">amf_list_metadata</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># obtain the metadata availability for selected sites, at variable levels</span></span>
-<span class="r-in"><span class="va">metadata_aval</span> <span class="op">&lt;-</span> <span class="fu">amf_list_metadata</span><span class="op">(</span>site_set <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"US-CRT"</span>,<span class="st">"US-WPT"</span><span class="op">)</span>,</span>
-<span class="r-in">group_only <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># obtain the metadata availability for all sites, at variable group levels</span></span></span>
+<span class="r-in"><span><span class="va">metadata_aval</span> <span class="op">&lt;-</span> <span class="fu">amf_list_metadata</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># obtain the metadata availability for selected sites, at variable levels</span></span></span>
+<span class="r-in"><span><span class="va">metadata_aval</span> <span class="op">&lt;-</span> <span class="fu">amf_list_metadata</span><span class="op">(</span>site_set <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"US-CRT"</span>,<span class="st">"US-WPT"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>group_only <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -116,7 +121,7 @@ describe related metadata or an observation with related metadata.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
