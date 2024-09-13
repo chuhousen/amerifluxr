@@ -1,7 +1,7 @@
 # amerifluxr <img src='man/figures/logo.png' align="right" height="138.5" />
 
 [![R-CMD-check](https://github.com/chuhousen/amerifluxr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/chuhousen/amerifluxr/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/chuhousen/amerifluxr/branch/master/graph/badge.svg)](https://codecov.io/gh/chuhousen/amerifluxr)
+ [![Codecov test coverage](https://codecov.io/gh/chuhousen/amerifluxr/graph/badge.svg)](https://app.codecov.io/gh/chuhousen/amerifluxr)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/amerifluxr)](https://cran.r-project.org/package=amerifluxr)
 ![CRAN\_Downloads](https://cranlogs.r-pkg.org/badges/grand-total/amerifluxr)
 
