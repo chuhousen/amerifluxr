@@ -53,7 +53,7 @@ site <- amf_site_info()
 
 Access to AmeriFlux data requires creating an AmeriFlux account first.
 Register an account through the
-[link](https://ameriflux-data.lbl.gov/Pages/RequestAccount.aspx).
+[link](https://https://amfcdn.lbl.gov/create).
 
 The following downloads a single file containing all AmeriFlux sites'
 metadata (i.e., BADM data product) for sites under the CC-BY-4.0 data 
